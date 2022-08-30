@@ -1,0 +1,441 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* PC , 테블릿 가로 (해상도 768px ~ 1023px)*/
+@media all and (min-width:768px) and (max-width:1023px) { /*스타일입력*/}
+
+/* 테블릿 세로 (해상도 768px ~ 1023px)*/
+@media all and (min-width:768px) and (max-width:1023px) { /*스타일입력*/}
+
+/* 모바일 가로, 테블릿 세로 (해상도 480px ~ 767px)*/
+@media all and (min-width:480px) and (max-width:767px) { /*스타일입력*/}
+
+/* 모바일 가로, 테블릿 세로 (해상도 ~ 479px)*/
+@media all and (max-width:479px) { /*스타일입력*/}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    box-sizing: border-box;
+    font-family: 'NanumSquareRound', sans-serif;
+    
+}
+
+
+/*상단바*/
+a {
+    text-decoration: none;
+  }
+  
+  li {
+    list-style-type: none;
+    color: white;
+  }
+  
+  .hbody {
+    background-color: #1D2c31;
+    width: 100%;
+  }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    color: white;
+  }
+  
+  .title {
+    font-size: 2em;
+  }
+  
+  .title > a {
+    color: white;
+  }
+
+body{
+    background-color: #d1d6de;
+}
+ul#menu button{
+    width: 120%; height: 25px;
+    background: white;
+    color: #41515e;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.sidebar{
+    position: absolute;
+    width: 15%;
+    height: 100%;
+    left: 0;
+    background: #41515e;
+}
+.sidebar .text{
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 125px;
+    text-align: center;
+    background: #41515e;
+    letter-spacing: 1px;
+}
+nav ul{
+    background: #41515e;
+    height: 100%;
+    width: 100%;
+    list-style: none;
+}
+nav ul li{
+    line-height: 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+nav ul li a{
+    position: relative;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    padding-left: 10%;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    border-left: 3px solid transparent;
+}
+nav ul li a:hover{
+    color: white;
+    background: #35454b;
+    border-left-color: white;
+}
+nav ul ul{
+    position: static;
+    display: none;
+}
+/*사이드 바*/
+nav ul .one-show.show{
+    display: block;   
+}
+nav ul .two-show.show2{
+    display: block;   
+}
+nav ul .three-show.show3{
+    display: block;   
+}
+nav ul .four-show.show4{
+    display: block;   
+}
+nav ul .five-show.show5{
+    display: block;   
+}
+nav ul .six-show.show6{
+    display: block;   
+}
+/*사이드 바 끝*/
+
+nav ul ul li{
+    line-height: 42px;
+    border-bottom: none;
+}
+nav ul ul li a{
+    font-size: 15px;
+    color: white;
+    padding-left: 50px;
+}
+nav ul li.active ul li a{
+    color: white;
+    background: #41515e;
+    border-left-color: transparent;
+}
+nav ul ul li a:hover{
+    color: white!important;
+    background: #35454b!important;
+}
+nav ul li a div{
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    transition: transform 0.4s;
+}
+nav ul li a div.rotate{
+    transform: translateY(-50%) rotate(-180deg);
+}
+
+/* 스크롤바 css */
+#scrollBar { 
+  height: 100%;
+  overflow-y: scroll;
+}
+#scrollBar::-webkit-scrollbar {
+    width: 12px;  /* 스크롤바의 너비 */
+}
+#scrollBar::-webkit-scrollbar-thumb {
+    height: 100%; /* 스크롤바의 길이 */
+    background: #35454b; /* 스크롤바의 색상 */
+    border-radius: 15px;
+}
+#scrollBar::-webkit-scrollbar-track {
+    background: #41515e  /*스크롤바 뒷 배경 색상*/
+}
+/* 아이콘 */
+.fa-regular{
+    margin: 12px;
+}
+li a i.fa-solid{
+    margin: 13px;
+}
+/* 그래프 차트 */
+.wrapper{
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: 49% 49%;
+    grid-template-rows: 50% 50%;
+    padding-left: 15%;
+
+}
+/*건들지말기*/
+.wrapper div.produc{
+    background-color: white;
+    border: 7px solid #d1d6de;
+    border-radius: 20px;
+    width: 100%;
+    height: 440px;
+}
+
+/* 그래프 간격 */
+span.graph:nth-of-type(1){left: 70px;}
+span.graph:nth-of-type(2){left: 180px;}
+span.graph:nth-of-type(3){left: 290px;}
+span.graph:nth-of-type(4){left: 410px;}
+
+span.all_gra:nth-of-type(1){left: 70px;}
+span.all_gra:nth-of-type(2){left: 180px;}
+span.all_gra:nth-of-type(3){left: 290px;}
+span.all_gra:nth-of-type(4){left: 410px;}
+
+div.line{
+    border: 1px solid gray;
+    width: 0.1%;
+    height: 100%;
+    margin-top: 20px;
+    margin-left: 335px;
+}
+
+span.graph_re:nth-of-type(1){left: 0px;}
+span.graph_re:nth-of-type(2){left: 65px;}
+span.graph_re:nth-of-type(3){left: 130px;}
+span.graph_re:nth-of-type(4){left: 195px;}
+span.graph_re:nth-of-type(5){left: 310px;}
+span.graph_re:nth-of-type(6){left: 375px;}
+span.graph_re:nth-of-type(7){left: 440px;}
+span.graph_re:nth-of-type(8){left: 505px;}
+
+.wrapper div.graph{
+    position: relative;
+    margin: 20px 67px;
+    height: 300px;
+}
+.wrapper div.produc span{
+    position: absolute;
+    z-index: 1;
+    background: #166cea;
+    margin: -10% 8%;
+    font-size: 15px;
+    text-align: center;
+    line-height: 3em;
+    color: #fff;
+    display: inline-block;
+    width: 60px;
+    bottom: 0;
+}
+
+.wrapper div.produc div.all{
+    position: absolute;
+    z-index: 2;
+    background: gray;
+    margin: -10% 8%;
+    line-height: 3em;
+    display: inline-block;
+    width: 60px;
+    bottom: 0;
+}
+/* @charset "UTF-8";
+section calendar */
+
+.sec_cal {
+    font-family: "NotoSansR";
+}
+
+.sec_cal .cal_nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 78px;
+}
+
+.sec_cal .cal_nav .year-month {
+    width: 170px;
+    text-align: center;
+    line-height: 1;
+}
+
+.sec_cal .cal_nav .nav {
+    display: flex;
+    border: 1px solid #333333;
+    border-radius: 5px;
+}
+
+.sec_cal .cal_nav .go-prev,
+.sec_cal .cal_nav .go-next {
+    display: block;
+    width: 50px;
+    height: 78px;
+    font-size: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sec_cal .cal_nav .go-prev::before,
+.sec_cal .cal_nav .go-next::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #000;
+    border-width: 3px 3px 0 0;
+    transition: border 0.1s;
+}
+
+.sec_cal .cal_nav .go-prev:hover::before,
+.sec_cal .cal_nav .go-next:hover::before {
+    border-color: #166cea;
+    ;
+}
+
+.sec_cal .cal_nav .go-prev::before {
+    transform: rotate(-135deg);
+}
+
+.sec_cal .cal_nav .go-next::before {
+    transform: rotate(45deg);
+}
+
+.sec_cal .cal_wrap {
+    padding-top: 5px;
+    position: relative;
+    margin: 0 auto;
+    width: 550px;
+}
+
+.sec_cal .cal_wrap .days {
+    display: flex;
+}
+
+.sec_cal .cal_wrap::after {
+    top: 368px;
+}
+
+.sec_cal .cal_wrap .day {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% / 7);
+    text-align: left;
+    color: #999;
+    font-size: 12px;
+    text-align: center;
+    border-radius:5px
+}
+
+.current.today {background: rgb(242 242 242);}
+
+.sec_cal .cal_wrap .dates {
+    display: flex;
+    flex-flow: wrap;
+    height: 290px;
+}
+
+.sec_cal .cal_wrap .day:nth-child(7n -1) {
+    color: #3c6ffa;
+}
+
+.sec_cal .cal_wrap .day:nth-child(7n) {
+    color: #ed2a61;
+}
+
+.sec_cal .cal_wrap .day.disable {
+    color: #ddd;
+}
+
+.weather span{
+	width: 10%;
+	height: 10%;
+	background: #166cea;
+}
+
+.wrapper div.product{
+    background-color: white;
+    border: 3px solid #d1d6de;
+    border-radius: 20px;
+    width: 100%;
+    height: 300px;
+}
+.produce{
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 8% 32% 32%;
+    padding-left: 15%;
+}
+
+.user_wrapper{
+    margin-top: auto;
+    /* display: grid;
+    grid-template-columns: 70%;
+    grid-template-rows: 8% 32% 32%; */
+    padding-left: 3%;
+}
+
+.wrapper div.menu{
+    background-color: white;
+    /* border: 7px solid #d1d6de; */
+    width: 100%;
+    height: 70px;
+    line-height: 70px;
+    padding-left: 1%;
+}
+
+#m-booked-vertical-one-prime-58590{
+	width: 50%;
+	text-align: left;
+}
+
+.wrapper div.add {
+    background-color: white;
+    border: 7px solid #d1d6de;
+    width: 100%;
+    height: 150px;
+}
+
+.wrapper div.produc_tab{
+    background-color: white;
+    border: 7px solid #d1d6de;
+    border-radius: 20px;
+    width: 100%;
+    height: 300px;
+}
+
+

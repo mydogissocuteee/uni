@@ -1,0 +1,334 @@
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    box-sizing: border-box;
+    font-family: 'NanumSquareRound';
+    
+}
+/*상단바*/
+a {
+    text-decoration: none;
+  }
+  
+  li {
+    list-style-type: none;
+    color: white;
+  }
+  
+  .hbody {
+    background-color: #1D2c31;
+    width: 100%;
+  }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    color: white;
+  }
+  
+  .title {
+    font-size: 2em;
+  }
+  
+  .title > a {
+    color: white;
+  }
+
+body{
+    background-color: #d1d6de;
+}
+ul#menu button{
+    width: 120%; height: 25px;
+    background: white;
+    color: #41515e;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.sidebar{
+    position: absolute;
+    width: 15%;
+    height: 100%;
+    left: 0;
+    background: #41515e;
+}
+.sidebar .text{
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 125px;
+    text-align: center;
+    background: #41515e;
+    letter-spacing: 1px;
+}
+nav ul{
+    background: #41515e;
+    height: 100%;
+    width: 100%;
+    list-style: none;
+}
+nav ul li{
+    line-height: 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+nav ul li a{
+    position: relative;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    padding-left: 10%;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    border-left: 3px solid transparent;
+}
+nav ul li a:hover{
+    color: white;
+    background: #35454b;
+    border-left-color: white;
+}
+nav ul ul{
+    position: static;
+    display: none;
+}
+/*사이드 바*/
+nav ul .one-show.show{
+    display: block;   
+}
+nav ul .two-show.show2{
+    display: block;   
+}
+nav ul .three-show.show3{
+    display: block;   
+}
+nav ul .four-show.show4{
+    display: block;   
+}
+nav ul .five-show.show5{
+    display: block;   
+}
+nav ul .six-show.show6{
+    display: block;   
+}
+/*사이드 바 끝*/
+
+nav ul ul li{
+    line-height: 42px;
+    border-bottom: none;
+}
+nav ul ul li a{
+    font-size: 15px;
+    color: white;
+    padding-left: 80px;
+}
+nav ul li.active ul li a{
+    color: white;
+    background: #41515e;
+    border-left-color: transparent;
+}
+nav ul ul li a:hover{
+    color: white!important;
+    background: #35454b!important;
+}
+nav ul li a div{
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    transition: transform 0.4s;
+}
+nav ul li a div.rotate{
+    transform: translateY(-50%) rotate(-180deg);
+}
+
+/* 사이드 스크롤바 css */
+#scrollBar { 
+  height: 100%;
+  overflow-y: scroll;
+}
+#scrollBar::-webkit-scrollbar {
+    width: 12px;  /* 스크롤바의 너비 */
+}
+#scrollBar::-webkit-scrollbar-thumb {
+    height: 100%; /* 스크롤바의 길이 */
+    background: #35454b; /* 스크롤바의 색상 */
+    border-radius: 15px;
+}
+#scrollBar::-webkit-scrollbar-track {
+    background: #41515e  /*스크롤바 뒷 배경 색상*/
+}
+/* 아이콘 */
+.fa-regular{
+    margin: 12px;
+}
+li a i.fa-solid{
+    margin: 13px;
+}
+div#usertitle{
+    margin-left: 21px;
+    margin-top: 16px;
+    font-weight: bold;
+    font-size: 22px;
+    color: #4d4d4d;
+}
+/*제품관리 체크 테이블 css*/
+.finproduc-btn1{
+    width: 139px;
+    height: 35px;
+    font-size: 1em;
+    margin-top: 73px;
+    margin-left: 495px; 
+    color: white;
+    background-color: #5dba8e;
+    border: #5dba8e;
+    border-radius: 6px;
+}
+.table-boardered{
+    background-color: white;
+    border-color: #3c6ffa;
+    border-radius: 5px;
+    margin-left: 16%;
+    margin-top: 0.4%;
+    width: 330px;
+}
+.num {
+    text-align: center;
+}
+tr td.num {
+    padding: 13px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1em;
+    color: #4d4d4d;
+}
+tr td.num, td.col-user2, td.col-user3{
+    border-bottom: 1px solid #E6E6E6;
+
+}
+tr td.col-user2, td.col-user3{
+    border-bottom: 1px solid #E6E6E6;
+    border-left: 1px solid #E6E6E6;
+
+}
+.col-user1 {
+    padding: 13px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1.1em;
+    color: #4d4d4d;
+}
+.col-user2 {
+    padding: 13px;
+    text-align: left;
+    font-weight: bolder;
+    font-size: 1em;
+    color: #4d4d4d;
+}
+.col-user3{
+    text-align: center;
+}
+.btn-danger:hover {
+    background-color: #b9b9b9;
+    color: black;
+    border: 2px solid black;
+}   
+.btn-primary:hover {
+    background-color: #166cea;
+    color: white;
+    border: 2px solid #166cea;
+}
+.btn-danger:hover {
+    background-color: #166cea;
+    color: white;
+    border: 2px solid #166cea;
+} 
+.btn-danger, .btn-primary{
+    height: 27px;
+    width: 70px;
+    color: gray;
+    background-color: white;
+    border-color: #d1d6de;
+    border-radius: 7px;
+    margin-right: 6px;
+}
+
+/*등록된 회원 리스트 css*/
+table.fin-table{
+    width: 100%;
+    height: 200px;
+    border-spacing: 16px 6px;
+    border-collapse: collapse;
+}
+section.fin-list{
+    width: 65%;
+    background-color: white;
+    border-collapse: collapse;
+    border-radius: 10px;
+    height: 492px; 
+    margin-left: 33.9%; 
+    margin-top: -707px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+section.fin-list tr th {
+    padding: 10px;
+    color: #999;
+    border-bottom: 1px solid #bbb;
+    padding: 10px;
+    height: 70px;
+}
+.menu, .code_name{
+    width: 20%;
+}
+.code_cont{
+    width: 50%;
+}
+.fin-delete{
+    width: 10%;
+}
+section.fin-list tr td {
+    padding: 1%;
+    text-align: center;
+    height: 70px;
+
+}
+.fin-delete{
+    background-color: white;
+    width: 30%;
+    height: 50%;
+    border-radius: 7px;
+}
+.fin-delete:hover {
+    background-color: white;
+    color: white;
+    border: 2px solid #166cea;
+} 
+ /* 회원리스트 스크롤바 css */
+.fin-list { 
+    height: 100%;
+}
+.fin-list::-webkit-scrollbar {
+      width: 12px;  /* 스크롤바의 너비 */
+}
+.fin-list::-webkit-scrollbar-thumb{
+    height: 17%;
+    background-color: #b9b9b9;
+    /* 스크롤바 둥글게 설정    */
+    border-radius: 10px;    
+}
+.fin-list::-webkit-scrollbar-track{
+    background-color: rgba(0,0,0,0);
+}

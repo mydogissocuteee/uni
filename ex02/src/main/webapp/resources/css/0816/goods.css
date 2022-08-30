@@ -1,0 +1,318 @@
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* PC , 테블릿 가로 (해상도 768px ~ 1023px)*/
+@media all and (min-width:768px) and (max-width:1023px) { /*스타일입력*/}
+
+/* 테블릿 세로 (해상도 768px ~ 1023px)*/
+@media all and (min-width:768px) and (max-width:1023px) { /*스타일입력*/}
+
+/* 모바일 가로, 테블릿 세로 (해상도 480px ~ 767px)*/
+@media all and (min-width:480px) and (max-width:767px) { /*스타일입력*/}
+
+/* 모바일 가로, 테블릿 세로 (해상도 ~ 479px)*/
+@media all and (max-width:479px) { /*스타일입력*/}
+
+*{
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    box-sizing: border-box;
+    font-family: 'NanumSquareRound';
+    
+}
+/*상단바*/
+a {
+    text-decoration: none;
+  }
+  
+  li {
+    list-style-type: none;
+    color: white;
+  }
+  
+  .hbody {
+    background-color: #1D2c31;
+    width: 100%;
+  }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    color: white;
+  }
+  
+  .title {
+    font-size: 2em;
+  }
+  
+  .title > a {
+    color: white;
+  }
+
+body{
+    background-color: #d1d6de;
+}
+ul#menu button{
+    width: 120%; height: 25px;
+    background: white;
+    color: #41515e;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.sidebar{
+    position: absolute;
+    width: 15%;
+    height: 100%;
+    left: 0;
+    background: #41515e;
+}
+.sidebar .text{
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 125px;
+    text-align: center;
+    background: #41515e;
+    letter-spacing: 1px;
+}
+nav ul{
+    background: #41515e;
+    height: 100%;
+    width: 100%;
+    list-style: none;
+}
+nav ul li{
+    line-height: 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+nav ul li a{
+    position: relative;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    padding-left: 10%;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    border-left: 3px solid transparent;
+}
+nav ul li a:hover{
+    color: white;
+    background: #35454b;
+    border-left-color: white;
+}
+nav ul ul{
+    position: static;
+    display: none;
+}
+/*사이드 바*/
+nav ul .one-show.show{
+    display: block;   
+}
+nav ul .two-show.show2{
+    display: block;   
+}
+nav ul .three-show.show3{
+    display: block;   
+}
+nav ul .four-show.show4{
+    display: block;   
+}
+nav ul .five-show.show5{
+    display: block;   
+}
+nav ul .six-show.show6{
+    display: block;   
+}
+/*사이드 바 끝*/
+
+nav ul ul li{
+    line-height: 42px;
+    border-bottom: none;
+}
+nav ul ul li a{
+    font-size: 15px;
+    color: white;
+    padding-left: 80px;
+}
+nav ul li.active ul li a{
+    color: white;
+    background: #41515e;
+    border-left-color: transparent;
+}
+nav ul ul li a:hover{
+    color: white!important;
+    background: #35454b!important;
+}
+nav ul li a div{
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    transition: transform 0.4s;
+}
+nav ul li a div.rotate{
+    transform: translateY(-50%) rotate(-180deg);
+}
+
+/* 스크롤바 css */
+#scrollBar { 
+  height: 100%;
+  overflow-y: scroll;
+}
+#scrollBar::-webkit-scrollbar {
+    width: 12px;  /* 스크롤바의 너비 */
+}
+#scrollBar::-webkit-scrollbar-thumb {
+    height: 100%; /* 스크롤바의 길이 */
+    background: #35454b; /* 스크롤바의 색상 */
+    border-radius: 15px;
+}
+#scrollBar::-webkit-scrollbar-track {
+    background: #41515e  /*스크롤바 뒷 배경 색상*/
+}
+/* 아이콘 */
+.fa-regular{
+    margin: 12px;
+}
+li a i.fa-solid{
+    margin: 13px;
+}
+div#title{
+    margin-left: 21px;
+    margin-top: 16px;
+    font-weight: bold;
+    font-size: 22px;
+    color: #4d4d4d;
+}
+/*품목, 거래처 검색창*/
+.search {
+    width: 95%;
+  }
+  
+  .search2 {
+    width: 25%;
+    height: 58px;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    padding: 9px 33px;
+    font-size: 14px;
+
+  }
+  .search3 {
+    position : absolute;
+    width: 24px;
+    top: 15.8%;
+    left: 33%;
+    margin: 0;
+  }/*품목, 거래처 검색창 끝*/
+
+.goods-choice .goods-table{
+    background-color: white;
+    margin-top: -56px;
+    margin-left: 36.5%;
+    border-radius: 10px;
+    border: 1px solid #bbb;
+}
+
+.col-goods1 {
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    color: #4d4d4d;
+    }
+ 
+.col-goods2 {
+    text-align: left;
+    padding: 7px;
+    }
+
+.col-goods2 input{
+        width:400px;
+        height:30px;
+        font-size:15px;
+        margin-right: 10px;
+}
+
+button.reset-goods{
+    width: 70px; 
+    height: 25px;
+    background: #41515e;
+    color: white;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+button.submit-goods{
+    width: 70px; 
+    height: 25px;
+    background: #41515e;
+    color: white;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/*등록된 회원 리스트 css*/
+table.goodslist-table{
+    width: 100%;
+    height: 200px;
+    border-spacing: 16px 6px;
+    border-collapse: collapse;
+}
+section.goods-list{
+    width: 62.8%;
+    border: 1px solid #bbb;
+    background-color: white;
+    border-collapse: collapse;
+    border-radius: 10px;
+    height: 440px; 
+    margin-left: 36.5%; 
+    margin-top: 6px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+section.goods-list tr th {
+    padding: 10px;
+    color: #999;
+    border-bottom: 1px solid #bbb;
+    padding: 10px;
+    height: 70px;
+}
+section.goods-list tr td {
+    padding: 1%;
+    text-align: center;
+    height: 70px;
+
+}
+ 
+ /* 회원리스트 스크롤바 css */
+.goods-list { 
+    height: 100%;
+    overflow-y: scroll;
+}
+.goods-list::-webkit-scrollbar {
+      width: 12px;  /* 스크롤바의 너비 */
+}
+.goods-list::-webkit-scrollbar-thumb{
+    height: 17%;
+    background-color: #b9b9b9;
+    /* 스크롤바 둥글게 설정    */
+    border-radius: 10px;    
+}
+.goods-list::-webkit-scrollbar-track{
+    background-color: rgba(0,0,0,0);
+}
