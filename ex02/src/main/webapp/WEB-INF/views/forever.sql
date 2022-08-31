@@ -15,7 +15,7 @@ attachedFile varchar2(100),
 referenceImage varchar2(100)
 );
 
-DELETE FROM member_mes WHERE department='ds'
+DELETE FROM member_mes WHERE userid='dd'
 
 
 create sequence mes_seq;
@@ -192,6 +192,8 @@ DELETE FROM st_product WHERE product_num='60'
 select * from st_product
 select * from st_product where company='fourever' order by product_num
  
+ALTER TABLE st_product ADD PRIMARY KEY (product_num);
+
 --포에버 부자재
    insert into st_product values(
 st_product_seq.nextval, '건', '부자재', '30mL', '5000', '생산',
@@ -389,25 +391,22 @@ ct_production_labor_forever_seq.nextval, sysdate, 'D/E', '품질검사', 'K-5', 
 
 -- 작업지시 15
 create table ct_workorder (
-facilities_code varchar2(100), --설비코드
-facilities_name varchar2(100), --설비명
-operations_no varchar2(100), --작업수
-prd_schedule_year varchar2(100), --연
-prd_schedule_month varchar2(100), --월
-prd_schedule_day varchar2(100), --일
-product_id varchar2(100) not null, --품번
-product_name varchar2(100) not null, --품명
-work_order varchar2(100) not null, --작업순서
-planned_quantity varchar2(100) not null, --계획수량
-performance_quantity varchar2(100) not null, --실적수량
-remarks varchar2(100), --비고
-order_no varchar2(100), --작업지시번호
-order_detail_seq varchar2(100), --상세조회
+ord_schedule date,
+ord_code varchar2(100), --설비코드
+ord_name varchar2(100), --설비명
+ord_count varchar2(100), --작업수
+ord_product_id varchar2(100), --품번
+ord_product_name varchar2(100), --품명
+ord_work varchar2(100), --작업순서
+ord_planned_quantity varchar2(100), --계획수량
+ord_performance_quantity varchar2(100), --실적수량
+ord_remarks varchar2(100), --비고
+ord_order_no varchar2(100), --작업지시번호
 company varchar2(100) -- 회사
 );
 
 insert into ct_workorder values(
-'1-1', '조립', '5', '2022', '05', '06', '33', 'U',
+'2022-8-16', 'CR09', '조립', '33', 'U',
  'E', '8', '7', '', '1332', '', 'sy');
 
 drop table ct_workorder
@@ -439,10 +438,66 @@ pp_date date,
 pp_equipment_name varchar2(100),
 pp_equipment_code varchar2(100),
 pp_item_num varchar2(100),
-pp_item_name varchar2(100)
+pp_item_name varchar2(100),
 company varchar2(100)
 )
-
+drop table production_plan;
 create sequence pp_seq;
 
 select * from production_plan;
+
+insert into production_plan values(
+pp_seq.nextval, '2022-08-22', '선로','BL09', '', '박스','sy'
+);
+
+
+--자재발주
+create table materials_order(
+mat_num number, --발주번호
+mat_inputDate date, --입력일자
+mat_orderDate date, --발주일자
+mat_dueDate date, --납기일자
+mat_place varchar2(100),--납품장소
+mat_effectivedate date, --유효일자
+mat_conditions varchar2(100), --결제조건
+mat_address varchar2(100), --주소
+mat_charge varchar2(100), --담당자
+mat_contact varchar2(100), --연락처
+mat_request varchar2(100), --요청사항
+mat_amount varchar2(100), --총금액
+mat_productNum number, --품목번호
+company varchar2(100), --회사
+constraint fk_prdnum foreign key(mat_productNum) references st_product(product_num)
+);
+create sequence mat_seq;
+drop table materials_order;
+
+insert into materials_order (
+mat_num, 
+mat_orderDate, 
+mat_dueDate,
+company
+) 
+VALUES 
+(
+01,
+'2022-08-10',
+'2022-08-12',
+'fourever'
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

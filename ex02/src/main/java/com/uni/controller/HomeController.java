@@ -20,6 +20,7 @@ import com.uni.domain.GoodsVO;
 import com.uni.domain.MemberVO;
 import com.uni.domain.clientVO;
 import com.uni.domain.client_productionVO;
+import com.uni.domain.materials_orderVO;
 import com.uni.domain.productionPerformanceVO;
 import com.uni.domain.productionPlanVO;
 import com.uni.domain.workOrderVO;
@@ -132,31 +133,78 @@ public class HomeController {
 	public String mainjsp(HttpSession session) {
 		System.out.println("메인");
 		//사용자관리 가져오기
-		List<MemberVO> memberlist = boardmapper.userSelect(company);
-		session.setAttribute("memberlist", memberlist);
+		try {
+			List<MemberVO> memberlist = boardmapper.userSelect(company);
+			session.setAttribute("memberlist", memberlist);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		
 		
 		//거래처 관리
-		List<clientVO> clientlist = boardmapper.clientSelect(company);
-		session.setAttribute("clientlist", clientlist);
+		try {
+			List<clientVO> clientlist = boardmapper.clientSelect(company);
+			session.setAttribute("clientlist", clientlist);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		
 		//생산실적 조회
-		List<productionPerformanceVO> productionPerformancelist = boardmapper.productionPerformanceForever();
-		session.setAttribute("productionPerformancelist", productionPerformancelist);
+		try {
+			List<productionPerformanceVO> productionPerformancelist = boardmapper.productionPerformanceForever();
+			session.setAttribute("productionPerformancelist", productionPerformancelist);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		
 		// 작업지시 조회
-		List<workOrderVO> workOrderlist = boardmapper.workOrderSelect(company);
-		session.setAttribute("workOrderlist", workOrderlist);
+		try {
+			List<workOrderVO> workOrderlist = boardmapper.workOrderSelect(company);
+			session.setAttribute("workOrderlist", workOrderlist);
+			System.out.println(workOrderlist.get(0));
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		// 제품관리
+		try {
 		List<client_productionVO> client_productionlist = boardmapper.client_productionSelect(company);
 		session.setAttribute("client_productionlist", client_productionlist);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		//품목정보 가져오기
-		List<GoodsVO> goodslist = boardmapper.goodsSelect(company);
-		session.setAttribute("goodslist", goodslist);
+		try {
+			List<GoodsVO> goodslist = boardmapper.goodsSelect(company);
+			session.setAttribute("goodslist", goodslist);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
-		return "main0829_3";
+		
+		//생산계획 가져오기
+		try {
+			List<productionPlanVO> pplist = boardmapper.productionPlanSelect(company);
+			session.setAttribute("pplist", pplist);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		//자재발주 가져오기
+				try {
+					List<materials_orderVO> matordlist = boardmapper.materials_orderSelect(company);
+					session.setAttribute("matordlist", matordlist);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+		
+		
+		return "main0830";
 	}
 	@RequestMapping("/userjsp.do")
 	public String userjsp(HttpSession session) {
@@ -248,10 +296,13 @@ public class HomeController {
 	// 생산계획 입력
 	@RequestMapping("/productionPlanInsert.do")
 	public String productionPlanInsert(productionPlanVO vo) {
+		System.out.println("생산계획 입력되나요");
 		vo.setPp_item_name(company);
 		boardmapper.productionPlanInsert(vo);
 		System.out.println(vo.getPp_date());
-		
+		System.out.println(vo.getPp_equipment_code());
+		System.out.println(vo.getPp_item_name());
+		System.out.println(vo.getCompany());
 		return "redirect:/mainjsp.do";
 	}
 }

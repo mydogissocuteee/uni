@@ -12,6 +12,7 @@ import com.uni.domain.GoodsVO;
 import com.uni.domain.MemberVO;
 import com.uni.domain.clientVO;
 import com.uni.domain.client_productionVO;
+import com.uni.domain.materials_orderVO;
 import com.uni.domain.productionPerformanceVO;
 import com.uni.domain.productionPlanVO;
 import com.uni.domain.workOrderVO;
@@ -80,4 +81,11 @@ public interface BoardMapper {
 	// 생산계획
 	@Insert("insert into production_plan values(pp_seq.nextval, '${vo.pp_date}', '${vo.pp_equipment_name}', '${vo.pp_equipment_code}', '${vo.pp_item_num}', '${vo.pp_item_name}', '${vo.company}')")
 	public void productionPlanInsert(@Param("vo") productionPlanVO vo);
+	
+	@Select("select * from production_plan where company='${company}'")
+	public List<productionPlanVO> productionPlanSelect(@Param("company") String company);
+	
+	// 자재발주
+	@Select("select * from materials_order where company='${company}'")
+	public List<materials_orderVO> materials_orderSelect(@Param("company") String company);
 }

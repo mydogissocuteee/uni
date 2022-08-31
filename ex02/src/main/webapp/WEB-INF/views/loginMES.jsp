@@ -13,7 +13,7 @@
 </head>
 <body>
     <section class="login-form">
-        <img src="../resources/img/logo.png" width="100%" height="70px" style="margin-bottom: 50px;"/>
+        <img src="./resources/img/logo.png" width="100%" height="70px" style="margin-bottom: 50px;"/>
         <form action="loginMes.do" method="post">
             <div class="int-area">
                 <input type="text" name="userid" id="userid" autocomplete="off" required>
