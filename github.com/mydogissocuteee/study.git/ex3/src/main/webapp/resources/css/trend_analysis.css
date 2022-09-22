@@ -1,0 +1,377 @@
+@charset "EUC-KR";
+
+
+/* 占쏙옙占쎈영占쏙옙 */
+ @font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'NanumSquareRound';
+}
+
+.content{
+  overflow: auto;
+	height: 92vh;	
+}
+
+
+
+/* header css */
+.header{
+    width: 100%;
+    height: 8vh;
+}
+/* header 占쏙옙占쏙옙占� 占싸곤옙 css */
+.header_01{
+    display: flex;
+    align-items: center;
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    background-color: #F9D984;
+}
+
+.header_01 img{
+    margin-left: 1vw;
+    margin-right: 1vw;
+    height: 4vh;
+}
+.header_01 a{
+    color: white;
+    font-size: 2vh;
+}
+
+/* header 占쏙옙澍４占� 占싸곤옙 css */
+.header_02{
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    background-color: #F9D984;
+    display: flex;
+    align-items: center;
+    
+}
+.header_02 img{
+    height: 6vh;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* header 占싯삼옙창 css */
+.header_03{
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    background-color: #F9D984;
+    display: flex;
+    align-items: center;
+}
+.header_03 input{
+    display: flex;
+    width: 17vw;
+    height: 4vh;
+    margin: 0% 2% 0% 26%;
+    border: none;
+    border-radius: 6px;
+}
+.header_03 button{
+    border: none;
+    background-color: #F9D984;
+}
+.header_03 img{
+    height: 4vh;
+    margin-top: 5%;
+}
+
+/* 회占쏙옙占쏙옙占쏙옙 타占쏙옙틀 */
+.trend_title{
+    padding-top: 2vh;
+	display:flex;
+	width:100%;
+	flex-direction: column;
+}
+.trend_title a{
+	margin:0 auto;
+    font-weight: lighter;
+    color: #666666;
+    font-size: 1.5vw;
+    text-align:center;
+}
+
+.trend_title p{
+	margin: 0 auto;
+    font-weight: lighter;
+    color: #666666;
+    font-size: 1vw;
+    text-align: center;
+}
+
+.keyword_tb{
+	width:100%;
+	height:90px;
+	border-collapse: collapse; 
+}
+
+.keyword_tb tbody tr th {
+    font-size: 0.9vw;
+    width: 7vw;
+    white-space: nowrap;
+}
+
+.trend_top{
+	border: 1px solid #B0B0B0;
+	border-radius: 11px;
+}
+.graph_title_head{
+    height: auto;
+    position: relative;
+    text-align: center;
+    border-bottom: 1px solid #FFA216;
+}
+.graph_head{
+	padding:1vh;
+	text-align: center;
+    font-size: 1.2vw;
+    margin: 0 auto;
+} 
+
+.download_btn{
+	float:right;
+	border:none;
+    background-repeat: no-repeat;
+    background-color: white;
+    background-size:contain;
+    display :inline-block;
+}
+.graph_title{
+	color:#666666;
+	font-size:0.8vw;
+   padding-bottom: 1vh;
+  padding-left: 1vw;
+}
+
+input[type="radio"] {
+  margin-left: 0.8vw;
+  width : 0.8vw;
+}
+
+.search1 {
+	background-color:#fff;
+}
+.search1 td:first-child{
+    font-size: 1vw;
+	 border-radius: 10px 0 0 10px;
+     padding: 0.8vw;
+     width: 3vw;
+     text-align: center;
+}
+
+.search_name1{
+	text-align: center
+}
+.trend_search_img{
+	width: 3.5vw;
+}
+.keyword_td{
+	overflow:hidden;
+    font-size: 0.8vw;
+    white-space: nowrap;
+}
+
+.select_year,.select_year1{
+	width:5.5vw
+}
+.select_month,.select_month1{
+	width: 4vw;
+}
+=
+#month_btn,#three_month{
+	width: 4.5vw;
+}
+#one_year{
+	width: 4.5vw;
+}
+#분류1{
+  margin-left: 0.9vw;
+}
+#분류1, #분류2{
+  font-size: 0.8vw;
+}
+.trend_search{
+	border:none;
+	background-repeat: no-repeat;
+    background-color: white;
+    background-size:contain;
+    float: right;
+    margin-right: 0.1vw;
+}
+
+.trend_graph{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-row-gap: 3vh;
+}
+.trend_grid:nth-child(1){
+    grid-area: span 3 / span 2;
+}
+.trend_grid:nth-child(2){
+    grid-area: span 3 / span 2;
+}
+
+.trend_grid{
+  position: relative;
+}
+
+.trend_total_wrapp{
+    display: flex;
+    /* grid-template-rows: 20vh 50vh; */
+    /* grid-gap: 15px; */
+    height: 75vh;
+    width: 70vw;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    margin: 0 auto;
+    flex-flow: column;
+
+}
+/*  �듦� 洹몃���� ����  */
+.trend_bott{
+    margin-top: 1vh;
+}
+.graph_wrapp{
+	border: 1px solid #FFA216;
+	border-radius: 11px;
+    display: flex;
+    flex-direction: column;
+}
+ul, li {
+    list-style: none;
+  }
+  
+  .blind {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .vertical_chart_box {
+    position: relative;
+  }
+  
+  .keyword_td label {
+  display : inline-flex;
+  }
+  .vertical_chart_box .chart_box {
+    position: relative;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .vertical_chart_box .axis_y {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 20px;
+    height: 100%;
+    font-size: 12px;
+    color: #4a4a4a;
+  }
+  .vertical_chart_box .axis_y:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    background: #d3d3d3;
+  }
+  .vertical_chart_box .axis_x {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    margin: 0 auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding: 0;
+    box-sizing: border-box;
+    height: 15vh;
+    border-bottom: 1px solid #d3d3d3;
+  }
+  .vertical_chart_box .axis_x .item {
+    flex: 1;
+    position: relative;
+  }
+  .vertical_chart_box .axis_x .item .text_box {
+    position: absolute;
+    font-size: 1vw;
+    left: 50%;
+    text-align: center;
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+  }
+  .text_box_text{
+    font-size: 1vw;
+    color: #666666;
+  }
+
+  .vertical_chart_box .axis_x .item .text_box .time {
+    display: block;
+    margin-top: 3px;
+    font-size: 12px;
+    color: #999;
+  }
+  .vertical_chart_box .axis_x .graph {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-direction: column-reverse;
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    height: 100%;
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+  }
+  .vertical_chart_box .axis_x .graph .time {
+    display: block;
+    position: relative;
+
+    box-sizing: content-box;
+    width: 100%;
+    border-radius: 3px 3px 0 0;
+  }
+  .vertical_chart_box .axis_x .graph .time.data1 {
+    background: #FFA216;
+    z-index: 3;
+  }
+
+  .vertical_chart_box .axis_x button.graph {
+    border: 0;
+    width: 2vw;
+  }
+
+  .total_btn{
+    width: 10vh;
+    bottom: 7px;
+    right: 7px;
+    position:absolute;
+  }

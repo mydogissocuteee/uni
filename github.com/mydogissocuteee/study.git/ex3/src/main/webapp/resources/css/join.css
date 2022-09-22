@@ -1,0 +1,160 @@
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'NanumSquareRound';
+}
+
+/* 가로모드 모바일 디바이스 (가로 해상도가 768px 보다 작은 화면에 적용)  */
+@media (max-width: 767px) { 
+    .join{
+        width: 90%;
+    }
+} 
+ 
+/* 태블릿 디바이스 (가로 해상도가 992px 보다 작은 화면에 적용)  */
+@media (max-width: 991px) {
+    .join{
+        width: 80%;
+    }
+} 
+ 
+/* 테스크탑 (가로 해상도가 1200px 보다 작은 화면에 적용) */
+@media (max-width: 1199px) {
+    .join{
+        width: 70%;
+    }
+} 
+
+body{
+    overflow: auto;
+    width: 100vw;
+    height: 100vh;
+    background: transparent linear-gradient(180deg, #F9D984 0%, #FAC96E 100%) 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+.gongback{
+    width:100%;
+    height: 7vh;
+}
+
+.join_box{
+    margin: 0 auto;
+    width: 44%;
+    height: auto;
+    background: white;
+    border-radius: 20px;
+}
+.join_table{
+    width: auto;
+    margin-top: 1.5vh !important;
+    margin: 0 auto;
+}
+.check_btn{
+    width: 0.7vw;
+    background-color: transparent;
+    border: transparent;
+}
+.check_btn img{
+    width: 0.7vw;
+}
+
+.join_in::-webkit-input-placeholder{
+    text-align: left;
+    font-size: 1vh;
+}
+.join_inn::-webkit-input-placeholder{
+    text-align: left;
+    font-size: 1vh;
+}
+.join_table tr th i {
+    color: red;
+}
+
+.join_table tr th{
+    width: 20%;
+    height: 5vh;
+    font-size: 1vw;
+    text-align: left;
+}
+.road_name, .lot_num, .detail_address, .re_address{
+    width: 48%;
+
+}
+.join_table tr td{
+    vertical-align: middle;
+    width: 39%;
+    font-size: 1vw;
+    text-align: left;
+}
+
+.join_guide{
+    font-size: 0.5vw;
+}
+.join_box_title{
+    margin: 0 auto;
+    font-size: 1.5vw;
+    font-weight: bold;
+    color: #666666;
+    letter-spacing: 0.7vw;
+    padding-top: 2.3vh;
+    padding-bottom: 2.5vh;
+    text-align: center;
+    width: 90%;
+    border-bottom:1px solid #707070;
+}
+
+.join_in{
+    width: 14vw;
+    height: 3vh;
+}
+.join_inn{
+    width: 29vw;
+    height: 3vh;
+}
+.join_email{
+    width: 28vw;
+    height: 3vh;
+}
+.post_btn {
+    background-color: transparent;
+    border: transparent;
+    vertical-align: middle;
+}
+.post_btn img{
+    width: 5vw;
+    margin: 0 auto;
+    text-align: center;
+}
+.tell{
+    width: 3.8vw;
+    height: 3vh;
+}
+td.add_detail input{
+    width: 17vw;
+    height: 3vh;
+}
+.finish{
+    text-align: center;
+
+}
+.fin_check{
+    background-color: transparent;
+    border: transparent;
+    margin: 2vw 0 2vh 0;
+    width: 20vw;
+}
+.fin_check img{
+    width: 20vw;
+}
+a{
+    font-size: 1.3vh;
+}
+.tell::-webkit-input-placeholder{
+    text-align: center;
+}

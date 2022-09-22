@@ -1,0 +1,257 @@
+@charset "EUC-KR";
+
+
+/* ���뿵�� */
+ @font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'NanumSquareRound';
+}
+
+
+
+/* header css */
+.header{
+    width: 100%;
+    height: 8vh;
+}
+/* header ����� �ΰ� css */
+.header_01{
+    display: flex;
+    align-items: center;
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    background-color: #F9D984;
+}
+
+.header_01 img{
+    margin-left: 1vw;
+    margin-right: 1vw;
+    height: 4vh;
+}
+.header_01 a{
+    color: white;
+    font-size: 2vh;
+}
+
+/* header ��񿣴� �ΰ� css */
+.header_02{
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    background-color: #F9D984;
+    display: flex;
+    align-items: center;
+    
+}
+.header_02 img{
+    height: 6vh;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* header �˻�â css */
+.header_03{
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    background-color: #F9D984;
+    display: flex;
+    align-items: center;
+}
+.header_03 input{
+    display: flex;
+    width: 17vw;
+    height: 4vh;
+    margin: 0% 2% 0% 26%;
+    border: none;
+    border-radius: 6px;
+}
+.header_03 button{
+    border: none;
+    background-color: #F9D984;
+}
+.header_03 img{
+    height: 4vh;
+    margin-top: 5%;
+}
+
+/* ���� */
+.manu_total{
+    overflow: auto;
+	height: 92vh;	
+}
+
+.manu_head{
+	font-size: 2vw;
+    color: #666666;
+    padding: 1vh;
+    text-align: center;
+}
+
+.manu_wrapp{
+
+    height: 90%;
+	width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.manu_wrapp span{
+    font-size: 1.5vw;
+    color: #666666
+}
+
+.realTime_ranking{
+    width: 100%;
+    margin-top: 2vh;
+    display: grid;
+    grid-gap: 1%;
+    grid-template-columns: 19% 19% 19% 19% 19%;
+}
+
+.maching_text{
+    margin-top: 2vh;
+};
+
+
+
+
+.best_produc{
+    position: absolute;
+    background: white;
+    width: 200px;
+    top: 332px;
+    left: 120px;
+    height: 68px;
+    text-align:center;
+}
+
+
+
+.best {
+    display: grid;
+    grid-template-columns: 35% 35% 35%;
+    padding-left: 10%;
+}
+
+.b_img{
+	width:320px;
+	height: 400px;
+}
+
+.ranking_wrapper{
+    margin-top: 2vh;
+    height: auto;
+}
+.total_ranking {
+    width: 100%;
+    background-color: white;
+    height:50vh;
+    border: 1px solid #B0B0B0;
+	border-radius: 1vw;
+}
+
+.imtext {
+    position: absolute;
+    top:30px;
+    z-index:1;
+    color:white;
+    font-size:18px;
+    width:70px;
+    font-weight:bold;
+    background:#4d4d4d;
+}
+
+.ranking_head{
+	text-align: center;
+	font-weight: bold;
+	font-size: x-large; 
+	color: #666666; 
+	padding: 2%;
+}
+
+
+.detailed_ranking{
+	background:#b3b3b3;
+	padding:1px;
+	width:100px;
+	color: white;
+	border-radius: 5px;
+}
+
+
+.ranking_wrapp{
+	float: right;
+    margin-top: -30px;
+    margin-right: 12%;
+}
+.homeImg{
+	text-align:center;
+}
+.ranking_tr{
+    overflow-y: auto;
+	border-bottom: 1px solid #B0B0B0;
+}
+.ranking_last_td{
+	border:none;
+	text-align:center;
+    color: #666666;
+    font-size: 1vw;
+}
+.ranking_td{
+    border-bottom:1px solid #d1d6de;
+    text-align:center;
+    color: #666666;
+    font-size: 1vw;
+}
+
+.realTime_ranking button{
+    background-color: transparent;
+    border: transparent;
+    font-size: 0;
+    line-height: 0;
+}
+
+
+.realTime_ranking button img {
+    width: 100%;
+}
+
+.total_ranking th{
+	border-bottom:1px solid #d1d6de;
+	text-align:center;
+	color: #666666;
+	font-size: 1.3vw;
+}
+
+.rankPlus_btn{     
+	background-color: #f64575;
+    color: white;
+    width: 40%;
+    border-radius: 26px;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 1.2vw;
+}
+
+.rankMinus_btn{ 
+		background-color:#999999;
+        color: white;
+        width: 40%;
+        border-radius: 26px;
+        text-align:center;
+        margin:0 auto;
+        font-size: 1.2vw;
+}
+
+

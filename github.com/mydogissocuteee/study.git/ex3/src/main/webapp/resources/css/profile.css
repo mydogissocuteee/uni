@@ -1,0 +1,408 @@
+ @font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'NanumSquareRound';
+}
+
+/* header css */
+.header{
+    width: 100%;
+    height: 8vh;
+}
+/* header 사용자 로고 css */
+.header_01{
+    display: flex;
+    align-items: center;
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    background-color: #F9D984;
+}
+
+.header_01 img{
+    margin-left: 1vw;
+    margin-right: 1vw;
+    height: 4vh;
+}
+.header_01 a{
+    color: white;
+    font-size: 2vh;
+}
+
+/* header 비비엔다 로고 css */
+.header_02{
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    background-color: #F9D984;
+    display: flex;
+    align-items: center;
+    
+}
+.header_02 img{
+    height: 6vh;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* header 검색창 css */
+.header_03{
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    background-color: #F9D984;
+    display: flex;
+    align-items: center;
+}
+.header_03 input{
+    display: flex;
+    width: 17vw;
+    height: 4vh;
+    margin: 0% 2% 0% 26%;
+    border: none;
+    border-radius: 6px;
+}
+.header_03 button{
+    border: none;
+    background-color: #F9D984;
+}
+.header_03 img{
+    height: 4vh;
+    margin-top: 5%;
+}
+
+/* 헤더를 제외한 나머지 크기 */
+.content{
+	height: 92vh;	
+}
+
+/* 페이지 주제 */
+.profile_title{
+	display:flex;
+	align-items: center;
+	width:100%;
+	height:10vh;
+}
+.profile_title a{
+	margin:0 auto;
+    font-weight: lighter;
+    color: #666666;
+    font-size: 1.5vw;
+    text-align:center;
+}
+
+
+/* 페이지 주요 내용 */
+.profile_main{
+    align-items: center;
+	display: grid;
+    grid-template-columns: 32% 64%;
+    grid-gap: 15px;
+    height: auto;
+        width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile_right{
+    text-align: center;
+	display: grid;
+    height: auto;
+    background-color: #F9D984;
+    border-radius: 20px;
+    border: 1px solid #FFA216;
+    overflow: hidden;
+}
+
+.produc1,.produc2,.produc3{
+    margin-top: 1vh;
+	background-color: #F9D984;
+    border-radius: 1.3vw;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+}
+
+.produc3{
+    margin-bottom: 1vh;
+}
+
+.tb_img{
+    width: 20%;
+    vertical-align: middle;
+    align-items: center;
+}
+.situation{
+    text-align: left;
+    width: 70%;
+}
+
+.produc1 td,.produc2 td,.produc3 td{
+    background-color: white;
+	padding:0.3vw;
+}
+
+.produc1 tr:nth-child(2) td:nth-child(-n+2),.produc2 tr:nth-child(2) td:nth-child(-n+2),.produc3 tr:nth-child(2) td:nth-child(-n+2){
+    border-right: 1px solid #D4D4D4;
+}
+
+.produc1 tr:nth-child(2) td:nth-child(1),.produc2 tr:nth-child(2) td:nth-child(1),.produc3 tr:nth-child(2) td:nth-child(1){
+	width:25%
+	}
+.profile_tb{
+    background-color: white;
+   box-shadow: 0px 0px 6px #00000029;
+    border-radius: 1.3vw;
+    width: 100%;
+    border: 1.6vw;
+    height: 80%;
+    padding: 0.5vw;
+	}
+
+.situation a{
+	background-color: #ececec;
+    padding: 0.5vw;
+    font-size: 0.75vw;
+    border-radius: 5px;
+}
+
+.shipping_img{
+	height: 3.2vh;
+}
+.profile{
+	margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    box-shadow: 0px 0px 6px #00000029;
+    border-radius: 11px;
+    width: 80%;
+    padding: 1vw;
+    border-spacing: 0 0.4vw;
+}
+.profile tr:nth-child(n+4):nth-child(-n+9) td:nth-child(1),.profile tr:nth-child(5) td:nth-child(1) {
+	padding:0.35vw;
+	border-right:1px solid #00000029;
+    width: 50%;
+}
+.profile a{
+	font-size: 1vw;
+}
+.profileName_text{
+	font-size: 1.6vw;
+}
+.profile_td_st{
+	border-bottom:1px solid #00000029;
+}
+
+.set_btn{
+ border:none;
+ background-color: transparent;
+ font-size: 0;
+ line-height: 0;
+}
+
+.set_btn img{
+    width: 3vw;
+}
+
+
+.return_request_text{
+    text-decoration-line: underline; 
+    text-underline-position: under;
+    font-size: 1vw;
+}
+
+.td_vertical{
+	display:table-cell;
+	vertical-align: middle;
+}
+
+
+.my_producDetail pre, .my_producDetail a{
+    font-size:1.05vw;
+	font-weight: bold;
+}
+
+.my_producName pre,.my_producName a{
+	font-size:1.05vw;
+	font-weight: bold;
+}
+.my_producName span,.my_producName p{
+	font-size:1.05vw;
+	font-weight: bold;
+}
+.delivery_tracking_btn1,.delivery_tracking_btn2, .delivery_tracking_btn3{
+    border: transparent;
+    background-color: transparent;
+    font-size: 0;
+    line-height: 0;
+}
+
+.delivery_tracking_btn3 img{
+    width : 6.5vw;
+}
+
+.delivery_tracking_btn2 img{
+    width : 6.5vw;
+}
+
+.delivery_tracking_btn1 img{
+    width : 6.5vw;
+}
+
+.writeRv_btn,.delivery_tracking_btn3,.delivery_tracking_btn2,.delivery_tracking_btn1,.repurchase_btn{
+	width:6.5vw;
+}
+.produc_img {
+    vertical-align: middle;
+	    width: 9vw;
+	  }
+
+.delivery_modal_tb{
+    place-items: center;
+    margin: 0 auto;
+    height: 82%;
+    display: grid;
+    grid-template-columns: 0.5fr 0.8fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+	width: 90%;
+    background-color: white;
+}
+
+.delivery_grid_02, .delivery_grid_12, .delivery_grid_22, .delivery_grid_32, .delivery_grid_42{
+    width: 100%;
+}
+
+.delivery_grid_01, .delivery_grid_11, .delivery_grid_21, .delivery_grid_31, .delivery_grid_41{
+    width: 60%;
+}
+
+.delivery_grid_00, .delivery_grid_10, .delivery_grid_20, .delivery_grid_30, .delivery_grid_40{
+    width: 50%;
+}
+
+.line_st{
+    margin-left: 1.9vw;
+    position:absolute;
+}
+.line_st img{
+    width: 0.5vw;
+    height: 6vh;
+}
+/* ���â css */
+.modal{
+	overflow:hidden;
+}
+.delevery_produc{
+   	height: 100%;
+}
+
+    
+    .modal_body {
+      margin-left: auto;
+    background-color: white;
+    margin-right: auto;
+    width: 30%;
+    height: 85%;
+    box-shadow: 5px 10px 10px 1px rgb(0 0 0 / 30%);
+    position: fixed;
+    top: 3%;
+    left: 33%;
+}
+
+.request_btn{
+	border:none;
+    font-size: 0;
+    line-height: 0;
+    background-repeat: no-repeat;
+    background-color: white;
+    background-size:contain;
+    display :inline-block;
+}
+.request_btn2{
+	width: 3.5vw;
+}
+    .modal-dialog {
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .modal-open { padding-right: 0px !important; }
+    .modal { padding-right: 0px !important; }
+    
+ .paymentImg,.produceImg,.shipmentImg,.deliveryImg,.completedImg{
+	width: 75%;
+        margin-left: 3vw;
+}
+   .check{
+   margin-top:  -2.7vh;
+   }
+ .check,.circle{
+ 	position: relative;
+    width: 2.3vw;
+    z-index: 2000;
+    margin-top: -1.5vh;
+    margin-left: 1vw;
+ }
+ .line{
+     margin-top: -0.6vh;
+      z-index: 1000;
+ }
+ 
+ .modal_produc{
+    height: 15%;
+    margin: 0 auto;
+    width: 90%;
+    background-color: #F9D984;
+    border-radius: 3vh;
+    display: flex;
+    align-items: center;
+}
+.close{
+	float: right;
+    border: none;
+    font-size: 1.5vw;
+    background: white;
+    width: 1.5vw;
+}
+
+.modal_date{
+	color: #666666;
+    font-size: 2vh;
+}
+.modal_name{
+	font-weight: bolder;
+    font-size: 3vh;
+}
+.modal_price{
+	font-weight: bold;
+    font-size: 2vh;
+}
+
+.modal_content{
+    margin-top: 2%;
+    height: 93%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.profile_img{
+	width: 7vw;
+}
+.coupon_img, .service_img,.list_img,.point_img{
+	    width: 3vw;
+}
+
+.modal_header{
+    height: 5%;
+    text-align: center;
+    border-bottom: 1px solid #707070;
+    padding: 1vh;
+    font-size: 1.5vw;
+}

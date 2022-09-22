@@ -1,0 +1,101 @@
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'NanumSquareRound';
+}
+body{
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    background:transparent linear-gradient(180deg, #F9D984 0%, #FAC96E 100%) 0% 0% no-repeat padding-box;
+}
+.login_logo{
+    margin-top: 7vh;
+    text-align: center;
+}
+
+.login_logo img{
+    height: 20vh;
+}
+
+.login_top{
+    text-align: center;
+    font-size: 1.7vw;
+    font-weight: bold;
+    letter-spacing: 0.8vw;
+    color: #666666;
+    margin-top: 3vh;
+}
+
+.login{
+    width: 79%; 
+    height: 61px; 
+    font-size: 1.7vw;
+    margin-top: 3% !important;
+    margin: 0 auto;
+    border-color: #999999;
+}
+.password{
+    width: 79%; 
+    height: 61px; 
+    font-size: 1.7vw;
+    margin-top: 3% !important;
+    margin: 0 auto;
+    border-color: #999999;
+}
+
+input::placeholder{
+    padding-left: 1vw;
+}
+
+.detail{
+    width: 79%;
+    margin-top: 2%;
+}
+
+.detail input{
+    margin-right: 1%;
+}
+
+.detail a {
+    font-size: 1vw;
+}
+
+
+.sign{
+    font-size: 1vw;
+    float: right;
+}
+.input.login :focus{
+    border-color: #FBB553;
+    outline: none;
+}
+.login_button{
+    margin-top: 5%;
+    background-color: transparent;
+    border: transparent;
+    font-size: 0;
+    line-height: 0;
+}
+
+.login_button img{
+    width: 30vw;
+}
+
+.login_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 6vh !important;
+    margin: 0 auto;
+    background-color: white; 
+    width: 50vw; 
+    height: auto;
+    border-radius: 25px;
+}

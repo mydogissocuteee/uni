@@ -1,0 +1,312 @@
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'NanumSquareRound';
+}
+/* header css */
+.header{
+    width: 100%;
+    height: 8vh;
+}
+/* header 사용자 로고 css */
+.header_01{
+    display: flex;
+    align-items: center;
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    background-color: #F9D984;
+}
+
+.user_btn{
+    margin-left: 1vw;
+    margin-right: 1vw;
+    background-color: transparent;
+    border: transparent;
+    font-size: 0;
+    line-height: 0;
+}
+.header_01 img{
+    height: 4vh;
+}
+.header_01 a{
+    color: white;
+    font-size: 2vh;
+}
+
+/* header 비비엔다 로고 css */
+.header_02{
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    background-color: #F9D984;
+    display: flex;
+    align-items: center;
+    
+}
+.header_02 img{
+    height: 6vh;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* header 검색창 css */
+.header_03{
+    width: 33.33%;
+    height: 100%;
+    float: right;
+    background-color: #F9D984;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.header_03 input{
+    width: 17vw;
+    height: 4vh;
+    border: transparent;
+    border-radius: 6px;
+}
+.header_03 button{
+    margin-left: 1vw;
+    margin-right: 1vw;
+    float: right;
+    border: transparent;
+    background-color: transparent;
+    font-size: 0;
+    line-height: 0;
+}
+.header_03 img{
+    height: 4vh;
+    width: 100%;
+}
+
+/* 생산정보 시작 */
+.produc_main{
+    width: 100%;
+    height: auto;
+    background-color: white;
+}
+
+/* 회원정보 타이틀 */
+.produc_title{
+    display: flex;
+    align-items: center;
+    margin-top: 1vh;
+    width: 100%;
+    height: 10vh;
+}
+.produc_title a{
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.5vw;
+    font-weight:lighter;
+    color: #666666;
+}
+.rates{
+    width: 100%;
+    height: auto;
+}
+.progress{
+    width:32%;
+    height: auto;
+    float: left;
+}
+.arrow img{
+    width: 2%;
+    height: auto;
+    float: left;
+    display: flex;
+    justify-content: center;
+    margin-top: 40vh;
+}
+.p_title img{
+    height: 7vh;
+    width: 27vw;
+}
+.progress .p_title{
+    margin: 0 auto;
+    text-align: center;
+}
+.progress .p_rate{
+    width: 27vw;
+    height: 65vh;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px #666666;
+    display: flex;
+    margin-top: 3vh;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+.p_rate::-webkit-scrollbar{
+    width: 0.7vw;
+}
+.p_rate::-webkit-scrollbar-thumb{
+    background-color: #FFB316;
+    border-radius: 5vw;
+}
+
+progress{
+    width: 24.5vw;
+    height: 4vh;
+    -webkit-appearance: none;
+}
+progress::-webkit-progress-bar {
+    width: 24.5vw;
+    height: 3vh;
+    background-color: #ECECEC;
+    border-radius: 5vw;
+    vertical-align: middle;
+ }
+ progress::-webkit-progress-value {
+    background-color: #FFB316;
+    border-radius: 5vw;
+ }
+ 
+.rate_table td{
+    border:1px solid #666666;
+    padding: 1vh;
+    width: 11vw;
+    text-align: center;
+    font-size: 1.5vh;
+    white-space: nowrap;
+}
+.rate_1,.rate_2,.rate_3,.rate_4{
+    margin: 2vh;
+}
+.rate_table{
+    margin: 0 auto;
+}
+
+.rate_text{
+    font-size: 2vh;
+    margin-bottom: 9px;
+}
+label {
+    padding-right: 10px;
+    font-size: 1rem;
+}
+.achieve{
+    width:32%;
+    height: auto;
+    float: left;
+}
+.a_title img{
+    height: 7vh;
+    width: 27vw;
+}
+.achieve .a_title{
+    margin: 0 auto;
+    text-align: center;
+
+}
+.achieve .a_rate{
+    align-items: center;
+    width: 27vw;
+    height: 65vh;
+    margin: 0 auto;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 5px #666666;
+    display: flex;
+    margin-top: 3vh;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.pil-img, .bed-img, .ding-img, .mat-img{
+    width: 5vw;
+    height: 9vh;
+    margin-top: 0.5vh;
+}
+.a_rate {
+    position: relative;
+  }
+  
+.pillow, .bed, .bedding, .mat{
+    display: flex;
+    gap: 7px;
+    margin: 0 auto;
+    width: 10vw;
+    flex-direction: column;
+  }
+  
+.chart {
+    position: relative;
+    width: 9vw;
+    height: 18vh;
+    border-radius: 50%;
+    transition: 0.3s;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  span.center {
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 7vw;
+    height: 14vh;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 14vh;
+    font-size: 3vh;
+    transform: translate(-50%, -50%);
+  }
+.outgoing{
+    width:32%;
+    height: auto;
+    float: left;
+}
+.o_title img{
+    height: 7vh;
+    width: 27vw;
+}
+.outgoing .o_title{
+    margin: 0 auto;
+    text-align: center;
+}
+.outgoing .o_rate{
+    width: 27vw;
+    height: 65vh;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px #666666;
+    display: flex;
+    margin-top: 3vh;
+    overflow-y: scroll;
+    flex-direction: column;
+}
+.o_rate::-webkit-scrollbar{
+    width: 0.7vw;
+}
+.o_rate::-webkit-scrollbar-thumb{
+    border-radius: 7vw;
+    background-color: #FFB316;
+}
+.o_table_1,.o_table_2,.o_table_3{
+    margin: 2vh;
+}
+.o_produc_1, .o_produc_2, .o_produc_3{
+    margin: 1vh;
+    font-size: 2vh;
+}
+.o_rate_table td{
+    border:1px solid #666666;
+    width: 30vw;
+    padding: 1vh;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 1.5vh;
+}
+.o_rate_table img{
+    align-items: center;
+    vertical-align: middle;
+    width: 7vh;
+}
