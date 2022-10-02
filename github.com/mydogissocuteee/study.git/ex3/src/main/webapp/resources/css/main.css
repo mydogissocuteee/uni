@@ -89,7 +89,7 @@
 .main{
     overflow-y: scroll;
     width: 100%;
-    height: 92vh;
+    height: 90vh;
     background-color: white;
 }
 
@@ -104,6 +104,103 @@
     border: 2px solid transparent;
 } */
 
+/* 메인페이지 모달 팝업창 */
+.user_input_modal_window{
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.user_input_modal{
+    border: 2px solid #F9D984;
+    background-color: white;
+    top: 18.3%;
+    left: 7%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 13%;
+    height: 18%;
+}
+
+.user_input_modal_top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1vw;
+    color: black;
+    text-align: center;
+    height: 25%;
+    background-color: #F9D984;
+    justify-content: right;
+}
+.user_input_modal_top_txt{
+    width: 70%;
+}
+
+.user_input_modal_mid{
+    font-size: 1vw;
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    height: 75%;
+    background-color: white;
+}
+
+.user_input_modal_bot{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 45%;
+}
+
+.user_input_modal_bt{
+    height: 60%;
+    font-size: 0;
+    line-height: 0;
+    background-color: transparent;
+    border: transparent;
+}
+
+.user_input_modal_bt img{
+    height: 100%;
+}
+.user_input_modal_bot_01{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 45%;
+}
+
+.user_input_modal_bt_01{
+    height: 60%;
+    font-size: 0;
+    line-height: 0;
+    background-color: transparent;
+    border: transparent;
+}
+
+.user_input_modal_bt_01 img{
+    height: 100%;
+}
+.main_btnclose{
+    width: 15%;
+    height: 100%;
+}
+.main_btnclose_X{
+    border: transparent;
+    background-color: transparent;
+    line-height: 0;
+    vertical-align: 0;
+}
+.main_btnclose_X a{
+    border: transparent;
+    background-color: transparent;
+    line-height: 0;
+    vertical-align: 0;
+}
 
 /* 슬라이드 쇼 css */
 .slide{
@@ -122,7 +219,6 @@
     height: 51vh;
 }
 .mySlides {
-	    height: 51vh;
     display: none;
 }
 .prev, .next {
@@ -147,10 +243,8 @@
     position: relative;
 }
   .dot_collec{
-    bottom:0;
-    left: 50%;
-    transform: translate(-50%);
-    position: absolute;
+    margin-top: -30px;
+    position: relative;
   }
   .dot {
     cursor: pointer;
@@ -219,7 +313,7 @@
     background-color: white;
 }
 .product_best_btn{
-	clear:both;
+    clear: both;
     margin-top: 1vh;
     margin-left: 10%;
     display: flex;
@@ -245,21 +339,21 @@
     font-weight: bold;
     text-align: center;
 }
+
 .product_best_analysis img{
     width: 6vw;
     height : auto;
 }
 .product_best_analysis{
-	clear : both;
     margin-top: 1vh;
     margin-bottom: 1vh;
-    margin-right: 11vw;
-    float: right;
+    margin-left: 11vw;
     background-color: transparent;
     border: transparent;
     font-size: 0;
     line-height: 0;
 }
+
 /* 제조사 순위 css */
 .company_best{
     margin-top: 3vh;
@@ -276,10 +370,12 @@
 }
 
 .company_best_detail_Btn{
+    border: transparent;
+    font-size: 0;
+    line-height: 0;
     margin-top: 1vh;
     margin-bottom: 1vh;
-    margin-right: 15vw;
-    float: right;
+    margin-left: 11vw;
 }
 .company_best button {
     background-color: transparent;
@@ -330,222 +426,3 @@
 .bb_information_tb tr{
     font-size: 1.3vh;
 }
-
-
-/****************************************************************
-제조사 상품정보 css
-******************************************************************/
-/* 모달창 css */
-.modal{
-	overflow:hidden;
-}
-    .delevery_produc{
-   	 width: 5.5vw;
-    }
-    
-    .modal_head{
-      text-align: center;
-     border-bottom: 1px solid #707070;
-     padding: 1vw;
-     font-size: 1.5vw;
-    }
-    
-    .modal_body {
-    margin-left: auto;
-    background-color: white;
-    margin-right: auto;
-    overflow: auto;
-    width: 50%;
-    height: 80%;
-    box-shadow: 5px 10px 10px 1px rgb(0 0 0 / 30%);
-    position: fixed;
-    top: 3vw;
-    left: 25%;
-}
-
-.modal_content{
-	padding: 1vw;
-}
-/* 제조사 정보 */
-
-.customerInfo_tb td, .customerInfo_tb th {
-    border: 0.5px solid #333333;
-     padding:0.2vw;
-     text-align: center;
-}
-
-.customerInfo_tb th{
-	background-color: #f6f6f6;
-	
-}
-.customerInfo_tb{
-    width: 100%;
-	margin-top: 1vh;
-	 border-collapse: collapse;
-	 font-size: 0.8vw;
-}
-.close{
-	border: none;
-    float: right;
-    font-size: 2.1vh;
-    background-color: white;
-    color: #707070;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-/* 실시간 고객 매칭 */
-.customerImg_div{
-	 display: table-cell;
-	 vertical-align: middle;
-	 text-align: center;
-}
-.customer_head{
-	    width: 7vw;
-}
-
-.customer_div{
-	overflow:auto;
-
-}
-.customer_div::-webkit-scrollbar-button{
-    width: 0;
-    height: 0;
-}
-.customer_div::-webkit-scrollbar-thumb {
-    height: 30%; /* 스크롤바의 길이 */
-    background: #B0B0B0; /* 스크롤바의 색상 */
-    border-radius: 10px;
-}
-
-.customer_div::-webkit-scrollbar-track {
-    background: #f6f6f6;  /*스크롤바 뒷 배경 색상*/
-}
-
-.customer_tb{
-	border-spacing: 1vw;
-	margin-top: -1vh;
-	
-}
- 
-.customer_tb td{
-	box-shadow: 0px 0px 6px #00000029;
-	border-radius: 5px;
-	    padding: 0.3vw;
-}
-.customer_name{
-	font-size: 0.7vw;
-}
-.user_Img{
-	width: 3vw;
-}
-.add_1{
-        margin-top: 0.6vh;
-}
-.go_btn{
-    width: 4.2vw;
-}
-
-.add_2{
-	    float: right;
-    margin-left: 1vw;
-   margin-bottom: -0.2vh;
-    width: 5vw;
-    margin-top: -2vh;
-}
-
-/* 리뷰/만족도 */
-.review_tb{
-	width:100%;
-	 border-collapse: collapse;
-	 font-size: 0.8vw;
-}
-.review_head{
-	    width: 6vw;
-}
-.new_text{
-	width: 1.5vw;
-}
-.vip_text{
-	    width: 1.1vw;
-}
-.normal_text{
-	width:1.1vw
-} 
-.review_div{
-	margin-top: 1vh;
-}
-#scope-chart{
-    width: 18vw !important;
-    height: 19vh !important;
-    margin-top: 0.5vw;
-    display: inline !important;
-}
-
-.review_tb th{
-	background-color: #f6f6f6;
-}
-.review_td{
-	 border: 0.5px solid #333333;
-    padding:0.2vw;
-    text-align: center;
-}
-.review_td1{
-	 border-left: 0.5px solid #333333;
-    padding:0.2vw;
-    width: 20%;
-    text-align: right;
-}
-.review_tb th {
-    border: 0.5px solid #333333;
-    padding:0.2vw;
-}
-
-/* 별점 css */
-.star {
-    position: relative;
-    font-size: 1.2vw;
-    color: #ddd;
-  }
-  
-  .star1 {
-    position: relative;
-    font-size: 1.2vw;
-    color: #ddd;
-  }
-  
-  
-   .star1 .star_total{
-  width: 0;
-    position: absolute; 
-    left: 0;
-    color: #FFA216;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  
-  .star .star_design {
-    width: 0;
-    position: absolute; 
-    left: 0;
-    color: #FFA216;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  
-   .star .star_size {
-    width: 0;
-    position: absolute; 
-    left: 0;
-    color: #FFA216;
-    overflow: hidden;
-    pointer-events: none;
-  }
-     .star .star_texture {
-    width: 0;
-    position: absolute; 
-    left: 0;
-    color: #FFA216;
-    overflow: hidden;
-    pointer-events: none;
-  }

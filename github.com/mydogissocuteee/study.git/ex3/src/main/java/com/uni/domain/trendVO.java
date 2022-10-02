@@ -19,4 +19,5 @@ public class trendVO {
 	private String pattern;
 	private String material;
 	private String manufacturer;
+	private String product_name;
 }

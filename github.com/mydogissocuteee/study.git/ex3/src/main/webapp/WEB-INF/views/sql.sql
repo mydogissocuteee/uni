@@ -52,6 +52,6 @@ drop table customers
 select * from trend_analysis;
 
 select * from trend_analysis where product_type='type02' and pattern='P03'
-select * from trend_analysis where gender='m'
+select * from trend_analysis where product_type='type02'
 
-
+DELETE FROM trend_analysis WHERE product_name is null

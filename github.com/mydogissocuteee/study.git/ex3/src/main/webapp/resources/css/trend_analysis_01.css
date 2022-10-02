@@ -1,0 +1,990 @@
+@charset "EUC-KR";
+
+/* 메인페이지 모달 팝업창 */
+.user_input_modal_window{
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.user_input_modal{
+    border: 2px solid #F9D984;
+    background-color: white;
+    top: 18.3%;
+    left: 7%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 13%;
+    height: 18%;
+}
+
+.user_input_modal_top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1vw;
+    color: black;
+    text-align: center;
+    height: 25%;
+    background-color: #F9D984;
+    justify-content: right;
+}
+.user_input_modal_top_txt{
+    width: 70%;
+}
+
+.user_input_modal_mid{
+    font-size: 1vw;
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    height: 75%;
+    background-color: white;
+}
+
+.user_input_modal_bot{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 45%;
+}
+
+.user_input_modal_bt{
+    height: 60%;
+    font-size: 0;
+    line-height: 0;
+    background-color: transparent;
+    border: transparent;
+}
+
+.user_input_modal_bt img{
+    height: 100%;
+}
+.user_input_modal_bot_01{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 45%;
+}
+
+.user_input_modal_bt_01{
+    height: 60%;
+    font-size: 0;
+    line-height: 0;
+    background-color: transparent;
+    border: transparent;
+}
+
+.user_input_modal_bt_01 img{
+    height: 100%;
+}
+.main_btnclose{
+    width: 15%;
+    height: 100%;
+}
+.main_btnclose_X{
+    border: transparent;
+    background-color: transparent;
+    line-height: 0;
+    vertical-align: 0;
+}
+.main_btnclose_X a{
+    border: transparent;
+    background-color: transparent;
+    line-height: 0;
+    vertical-align: 0;
+}
+/* ���뿵�� */
+ @font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'NanumSquareRound';
+}
+
+.content{
+  overflow: auto;
+	height: 92vh;	
+}
+
+
+.user_btn{
+    margin-left: 1vw;
+    margin-right: 1vw;
+    background-color: transparent;
+    border: transparent;
+    font-size: 0;
+    line-height: 0;
+}
+/* header css */
+.header{
+    width: 100%;
+    height: 8vh;
+}
+/* header ����� �ΰ� css */
+.header_01{
+    display: flex;
+    align-items: center;
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    background-color: #F9D984;
+}
+
+.header_01 img{
+    height: 4vh;
+}
+.header_01 a{
+    color: white;
+    font-size: 2vh;
+}
+
+/* header ��񿣴� �ΰ� css */
+.header_02{
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    background-color: #F9D984;
+    display: flex;
+    align-items: center;
+    
+}
+.header_02 img{
+    height: 6vh;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* header �˻�â css */
+.header_03{
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    background-color: #F9D984;
+    display: flex;
+    align-items: center;
+}
+.header_03 input{
+    display: flex;
+    width: 17vw;
+    height: 4vh;
+    margin: 0% 2% 0% 26%;
+    border: none;
+    border-radius: 6px;
+}
+.header_03 button{
+    border: none;
+    background-color: #F9D984;
+}
+.header_03 img{
+    height: 4vh;
+    margin-top: 5%;
+}
+
+.trend_title{
+    padding-top: 2vh;
+	display:flex;
+	width:100%;
+	flex-direction: column;
+}
+.trend_title a{
+	margin:0 auto;
+    font-weight: lighter;
+    color: #666666;
+    font-size: 1.5vw;
+    text-align:center;
+}
+
+.trend_title p{
+	margin: 0 auto;
+    font-weight: lighter;
+    color: #666666;
+    font-size: 1vw;
+    text-align: center;
+}
+
+.keyword_tb{
+	width:100%;
+	height:100%;
+	border-collapse: collapse; 
+}
+
+.graph_title_head{
+    height: auto;
+    position: relative;
+    text-align: center;
+    border-bottom: 1px solid #FFA216;
+}
+.graph_head{
+	  padding:1vh;
+	  text-align: center;
+    font-size: 1.2vw;
+    margin: 0 auto;
+} 
+
+.download_btn{
+	  float:right;
+	  border:none;
+    background-repeat: no-repeat;
+    background-color: white;
+    background-size:contain;
+    display :inline-block;
+}
+.graph_title{
+	color:#666666;
+	font-size:0.8vw;
+   padding-bottom: 1vh;
+  padding-left: 1vw;
+}
+
+.search1 {
+	background-color:#fff;
+}
+.search1 td:first-child{
+    font-size: 1vw;
+	 border-radius: 10px 0 0 10px;
+     padding: 0.8vw;
+     width: 3vw;
+     text-align: center;
+}
+
+.trend_graph{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-row-gap: 3vh;
+}
+.trend_grid:nth-child(1){
+    grid-area: span 3 / span 2;
+}
+.trend_grid:nth-child(2){
+    grid-area: span 3 / span 2;
+}
+
+.trend_grid{
+  position: relative;
+}
+
+.trend_total_wrapp{
+    display: flex;
+    height: 150%;
+    width: 70vw;
+    margin: 0 auto;
+    flex-flow: column;
+    justify-content: space-around;
+
+}
+.trend_total_wrapp_new{
+  display: flex;
+  height: 98%;
+  width: 70vw;
+  margin: 0 auto;
+  flex-flow: column;
+  justify-content: space-around;
+}
+/* 2022년 9월 트렌드 제품 */
+.trend_circle_zip{
+  width: 100%;
+  height: 27%;
+  background-color: white;
+  border: 1px solid #FFA216 ;
+  border-radius: 11px;
+  display: flex;
+  flex-direction: column;
+}
+.trend_circle_zip_new{
+  width: 100%;
+  height: 42%;
+  background-color: white;
+  border: 1px solid #FFA216 ;
+  border-radius: 11px;
+  display: flex;
+  flex-direction: column;
+}
+.trend_circle_zip_title{
+  text-align: center;
+  width: 100%;
+  height: 12%;
+  font-size: 1vw;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trend_circle_zip_top04{
+  text-align: center;
+  width: 96%;
+  height: 8%;
+  display: flex;
+  align-items: center;
+  margin-left: 2%;
+}
+.trend_circle_zip_top04_01{
+  width: 10vw;
+  font-size: 0;
+  line-height: 0;
+  background-color: transparent;
+  border: transparent;
+  margin: 0;
+  padding: 0;
+}
+.trend_circle_zip_top04_01 img{
+  width: 100%;
+}
+
+/* 트렌드 제품 그래프 */
+.trend_circle_zip_graph{
+  position: relative;
+  width: 70vw;
+  height: 17vh;
+  display: flex;
+  justify-content: space-evenly;
+}
+.chart_01 {
+  position: relative;
+  width: 9vw;
+  height: 17vh;
+  border-radius: 50%;
+  transition: 0.3s;
+  background:lightgray;
+  display: flex;
+}
+.chart_01:after{
+  content:'';
+  background: #fff;
+  position: absolute;
+  top:50%; 
+  left:50%;
+  width:6vw;
+  height:11vh;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.chart_02 {
+  position: relative;
+  width: 9vw;
+  height: 17vh;
+  border-radius: 50%;
+  transition: 0.3s;
+  background:lightgray;
+}
+.chart_02:after{
+  content:'';
+  background: #fff;
+  position: absolute;
+  top:50%; 
+  left:50%;
+  width:6vw;
+  height:11vh;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.chart_03 {
+  position: relative;
+  width: 9vw;
+  height: 17vh;
+  border-radius: 50%;
+  transition: 0.3s;
+  background:lightgray;
+}
+.chart_03:after{
+  content:'';
+  background: #fff;
+  position: absolute;
+  top:50%; 
+  left:50%;
+  width:6vw;
+  height:11vh;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.chart_04 {
+  position: relative;
+  width: 9vw;
+  height: 17vh;
+  border-radius: 50%;
+  transition: 0.3s;
+  background:lightgray;
+}
+.chart_04:after{
+  content:'';
+  background: #fff;
+  position: absolute;
+  top:50%; 
+  left:50%;
+  width:6vw;
+  height:11vh;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.chart-bar{
+  width: inherit;
+  height: inherit;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.chart-total_01, .chart-total_02, .chart-total_03, .chart-total_04{
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background:gray;
+  width:100%;
+}
+.chart-total_01 span{
+  position: absolute;
+}
+.chart-total_02 span{
+  position: absolute;
+}
+.chart-total_03 span{
+  position: absolute;
+}
+.chart-total_04 span{
+  position: absolute;
+}
+.chart-total-num{
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+}
+.chart-total-num img{
+  width: 4vw;
+  height: 7vh;
+}
+.chart-total_04.chart-total-num img{
+  width: 2vw;
+  height: 7vh;
+}
+.trend_circle_zip_graph_list{
+  width: 100%;
+  height: 12vh;
+  display: flex;
+  justify-content: space-around;
+}
+.trend_circle_zip_graph_list_zip{
+  display: flex;
+  width: 65vw;
+
+}
+.trend_circle_zip_graph_list_01{
+  width: 25%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  overflow-x: scroll;
+  font-size: 0.9vw;
+}
+.trend_circle_zip_graph_list_01::-webkit-scrollbar{
+  display: none;
+}
+.trend_circle_zip_graph_list_01 table{
+  width: 50%;
+  height: 100%;
+}
+.trend_circle_zip_graph_list_01 table tr td{
+  text-align: center;
+}
+
+.trend_circle_zip_graph_list_02{
+  width: 24%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  overflow-x: scroll;
+  font-size: 0.9vw;
+}
+.trend_circle_zip_graph_list_02::-webkit-scrollbar{
+  display: none;
+}
+.trend_circle_zip_graph_list_02 table{
+  width: 50%;
+  height: 100%;
+}
+.trend_circle_zip_graph_list_02 table tr td{
+  text-align: center;
+}
+
+.trend_circle_zip_graph_list_03{
+  width: 25%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  overflow-x: scroll;
+  font-size: 0.9vw;
+}
+.trend_circle_zip_graph_list_03::-webkit-scrollbar{
+  display: none;
+}
+
+.trend_circle_zip_graph_list_03 table{
+  width: 50%;
+  height: 100%;
+}
+.trend_circle_zip_graph_list_03 table tr td{
+  text-align: center;
+}
+
+.trend_circle_zip_graph_list_04{
+  width: 24%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  overflow-x: scroll;
+  font-size: 0.9vw;
+}
+.trend_circle_zip_graph_list_04::-webkit-scrollbar{
+  display: none;
+}
+.trend_circle_zip_graph_list_04 table{
+  width: 50%;
+  height: 100%;
+}
+.trend_circle_zip_graph_list_04 table tr td{
+  text-align: center;
+}
+
+
+/* 전체 데이터 분포도 */
+.trend_allData_zip{
+  width: 100%;
+  height: 33%;
+  background-color: white;
+  border: 1px solid #FFA216 ;
+  border-radius: 11px;
+}
+.trend_allData_zip_new{
+  width: 100%;
+  height: 42%;
+  background-color: white;
+  border: 1px solid #FFA216 ;
+  border-radius: 11px;
+}
+.trend_circle_zip{
+  width: 100%;
+  height: 27%;
+  background-color: white;
+  border: 1px solid #FFA216 ;
+  border-radius: 11px;
+  display: flex;
+  flex-direction: column;
+}
+.trend_allData_zip_title{
+  text-align: center;
+  width: 100%;
+  height: 12%;
+  font-size: 1vw;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trend_allData_zip_top04{
+  text-align: center;
+  width: 96%;
+  height: 8%;
+  display: flex;
+  align-items: center;
+  margin-left: 2%;
+}
+.trend_allData_zip_top04_01{
+  width: 10vw;
+  font-size: 0;
+  line-height: 0;
+  background-color: transparent;
+  border: transparent;
+  margin: 0;
+  padding: 0;
+}
+.trend_allData_zip_top04_01 img{
+  width: 100%;
+}
+
+.trend_allData_zip_graph{
+  width: 100%;
+  height: 80%;
+}
+.trend_allData_zip_graph_00{
+  width: 100%;
+  height: 100%;
+}
+.trend_allData_zip_graph_01{
+  width: 100%;
+  height: 25%;
+}
+.trend_allData_zip_graph_01_01{
+  width: auto;
+  height: 3vh;
+  display: flex;
+  justify-content: space-between;
+}
+.trend_allData_zip_graph_01_01_title{
+  width: auto;
+  height: auto;
+  display: flex;
+}
+.trend_allData_zip_graph_01_01_title_btn{
+  width: 5vw;
+  height: 100%;
+  line-height: 0;
+  padding: 0;
+  margin: 0;
+  border: transparent;
+  background: transparent;
+}
+.trend_allData_zip_graph_01_01_title_btn img{
+  height: 90%;
+}
+
+.trend_allData_zip_graph_01_01_top04{
+  width: 60%;
+  height: auto;
+  overflow-x: scroll;
+  font-size: 0.9vw;
+}
+.trend_allData_zip_graph_01_01_top04::-webkit-scrollbar{
+  display: none;
+}
+.trend_allData_zip_graph_01_01_top04 table tr td:nth-child(1){
+  width: 15vw;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+.trend_allData_zip_graph_01_01_top04 table tr td:nth-child(2){
+  width: 16vw;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+.trend_allData_zip_graph_01_01_top04 table tr td:nth-child(3){
+  width: 16vw;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+.trend_allData_zip_graph_01_01_top04 table tr td:nth-child(4){
+  width: 15vw;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+
+.trend_allData_zip_graph_02{
+  width: 100%;
+  height: 25%;
+}
+.trend_allData_zip_graph_02_01{
+  width: auto;
+  height: 3vh;
+  display: flex;
+  justify-content: space-between;
+}
+.trend_allData_zip_graph_02_01_title{
+  width: auto;
+  height: auto;
+  display: flex;
+}
+.trend_allData_zip_graph_02_01_title_btn{
+  width: 6vw;
+  height: 100%;
+  line-height: 0;
+  padding: 0;
+  margin: 0;
+  border: transparent;
+  background: transparent;
+}
+.trend_allData_zip_graph_02_01_title_btn img{
+  height: 90%;
+}
+
+.trend_allData_zip_graph_02_01_top04{
+  width: 60%;
+  height: auto;
+  overflow-x: scroll;
+  font-size: 0.9vw;
+}
+.trend_allData_zip_graph_02_01_top04::-webkit-scrollbar{
+  display: none;
+}
+.trend_allData_zip_graph_02_01_top04 table tr td:nth-child(1){
+  width: 15vw;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+.trend_allData_zip_graph_02_01_top04 table tr td:nth-child(2){
+  width: 16vw;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+.trend_allData_zip_graph_02_01_top04 table tr td:nth-child(3){
+  width: 16vw;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+.trend_allData_zip_graph_02_01_top04 table tr td:nth-child(4){
+  width: 15vw;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+
+.trend_allData_zip_graph_03{
+  width: 100%;
+  height: 25%;
+}
+.trend_allData_zip_graph_03_01{
+  width: auto;
+  height: 3vh;
+  display: flex;
+  justify-content: space-between;
+}
+.trend_allData_zip_graph_03_01_title{
+  width: auto;
+  height: auto;
+  display: flex;
+}
+.trend_allData_zip_graph_03_01_title_btn{
+  width: 6vw;
+  height: 100%;
+  line-height: 0;
+  padding: 0;
+  margin: 0;
+  border: transparent;
+  background: transparent;
+}
+.trend_allData_zip_graph_03_01_title_btn img{
+  height: 90%;
+}
+.trend_allData_zip_graph_03_01_top04{
+  width: 60%;
+  height: auto;
+  overflow-x: scroll;
+  font-size: 0.9vw;
+}
+.trend_allData_zip_graph_03_01_top04::-webkit-scrollbar{
+  display: none;
+}
+.trend_allData_zip_graph_03_01_top04 table tr td:nth-child(1){
+  width: 15vw;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+.trend_allData_zip_graph_03_01_top04 table tr td:nth-child(2){
+  width: 16vw;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+.trend_allData_zip_graph_03_01_top04 table tr td:nth-child(3){
+  width: 16vw;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+.trend_allData_zip_graph_03_01_top04 table tr td:nth-child(4){
+  width: 15vw;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+
+.trend_allData_zip_graph_04{
+  width: 100%;
+  height: 25%;
+}
+.trend_allData_zip_graph_04_01{
+  width: auto;
+  height: 3vh;
+  display: flex;
+  justify-content: space-between;
+}
+.trend_allData_zip_graph_04_01_title{
+  width: auto;
+  height: auto;
+  display: flex;
+}
+.trend_allData_zip_graph_04_01_title_btn{
+  width: 9vw;
+  height: 100%;
+  line-height: 0;
+  padding: 0;
+  margin: 0;
+  border: transparent;
+  background: transparent;
+}
+.trend_allData_zip_graph_04_01_title_btn img{
+  height: 90%;
+}
+.trend_allData_zip_graph_04_01_top04{
+  width: 60%;
+  height: auto;
+  overflow-x: scroll;
+  font-size: 0.9vw;
+}
+.trend_allData_zip_graph_04_01_top04::-webkit-scrollbar{
+  display: none;
+}
+.trend_allData_zip_graph_04_01_top04 table tr td:nth-child(1){
+  width: 15vw;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+.trend_allData_zip_graph_04_01_top04 table tr td:nth-child(2){
+  width: 16vw;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+.trend_allData_zip_graph_04_01_top04 table tr td:nth-child(3){
+  width: 16vw;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+.trend_allData_zip_graph_04_01_top04 table tr td:nth-child(4){
+  width: 15vw;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+
+
+
+/*  통계 그래프 시작  */
+.trend_bott{
+  width: 100%;
+  height: 36%;
+}
+
+.graph_wrapp{
+	border: 1px solid #FFA216;
+	border-radius: 11px;
+    display: flex;
+    flex-direction: column;
+}
+ul, li {
+    list-style: none;
+  }
+  
+  .blind {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .vertical_chart_box {
+    position: relative;
+  }
+  .vertical_chart_box .chart_box {
+    position: relative;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .vertical_chart_box .axis_y {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 20px;
+    height: 100%;
+    font-size: 12px;
+    color: #4a4a4a;
+  }
+  .vertical_chart_box .axis_y:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    background: #d3d3d3;
+  }
+  .vertical_chart_box .axis_x {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    margin: 0 auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding: 0;
+    box-sizing: border-box;
+    height: 15vh;
+    border-bottom: 1px solid #d3d3d3;
+  }
+  .vertical_chart_box .axis_x .item {
+    flex: 1;
+    position: relative;
+  }
+  .vertical_chart_box .axis_x .item .text_box {
+    position: absolute;
+    font-size: 1vw;
+    left: 50%;
+    text-align: center;
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+  }
+  .text_box_text{
+    font-size: 1vw;
+    color: #666666;
+  }
+
+  .vertical_chart_box .axis_x .item .text_box .time {
+    display: block;
+    margin-top: 3px;
+    font-size: 12px;
+    color: #999;
+  }
+  .vertical_chart_box .axis_x .graph {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-direction: column-reverse;
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    height: 100%;
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+  }
+  .vertical_chart_box .axis_x .graph .time {
+    display: block;
+    position: relative;
+
+    box-sizing: content-box;
+    width: 100%;
+    border-radius: 3px 3px 0 0;
+  }
+  .vertical_chart_box .axis_x .graph .time.data1 {
+    background: #FFA216;
+    z-index: 3;
+  }
+
+  .vertical_chart_box .axis_x button.graph {
+    border: 0;
+    width: 2vw;
+  }
+
+  .total_btn{
+    width: 10vh;
+    bottom: 0;
+    right: 0;
+    position:absolute;
+  }

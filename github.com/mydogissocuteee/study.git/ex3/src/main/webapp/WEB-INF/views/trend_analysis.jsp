@@ -11,7 +11,7 @@
     <link rel="icon" href="./resources/img/trend_analysis/그림3.png">
     
     <!-- css -->
-     <link rel="stylesheet" href="./resources/css/trend_analysis.css" type="text/css">
+     <link rel="stylesheet" href="./resources/css/trend_analysis_01.css" type="text/css">
      
     <!-- favion 아이콘 -->
      <script src="https://kit.fontawesome.com/036f0eb301.js" crossorigin="anonymous"></script>
@@ -28,39 +28,126 @@
  	 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
-<c:if test="${param.select eq '0'}">
 <script>	
+
+
 	$(function () {
     console.log(${analysis.p3});
-    
+    const arrPattern = [{p1:${analysis.p1}}, {p2:${analysis.p2}}, ${analysis.p3}, ${analysis.p4}, ${analysis.p5}, ${analysis.p6}, ${analysis.p7}, ${analysis.p8}];
+    const arrMaterial = [${analysis.m1}, ${analysis.m2}, ${analysis.m3}, ${analysis.m4}];
+    const arrManu = [${analysis.f1}, ${analysis.f5}, ${analysis.f10}, ${analysis.f11}, ${analysis.f12}, ${analysis.f13}, ${analysis.f14}, ${analysis.f15}, ${analysis.f16}, ${analysis.f17}, ${analysis.f18}, ${analysis.f19}, ${analysis.f20}];
+    const arrColor = [${analysis.c1}, ${analysis.c2}, ${analysis.c3}, ${analysis.c4}, ${analysis.c7}, ${analysis.c10}, ${analysis.c11}, ${analysis.c12}];
+    console.log(arrPattern);
+    document.getElementById('p1').setAttribute('style','height:${analysis.p1}%');
+    document.getElementById('p2').setAttribute('style','height:${analysis.p2}%');
     document.getElementById('p3').setAttribute('style','height:${analysis.p3}%');
+    document.getElementById('p4').setAttribute('style','height:${analysis.p4}%');
+    document.getElementById('p5').setAttribute('style','height:${analysis.p5}%');
     document.getElementById('p6').setAttribute('style','height:${analysis.p6}%');
+    document.getElementById('p7').setAttribute('style','height:${analysis.p7}%');
     document.getElementById('p8').setAttribute('style','height:${analysis.p8}%');
+    document.getElementById('p9').setAttribute('style','height:${analysis.p9}%');
     document.getElementById('p10').setAttribute('style','height:${analysis.p10}%');
+    document.getElementById('p11').setAttribute('style','height:${analysis.p11}%');
+    document.getElementById('p12').setAttribute('style','height:${analysis.p12}%');
+    document.getElementById('p13').setAttribute('style','height:${analysis.p13}%');
+    document.getElementById('p14').setAttribute('style','height:${analysis.p14}%');
+    document.getElementById('p15').setAttribute('style','height:${analysis.p15}%');
+    document.getElementById('p16').setAttribute('style','height:${analysis.p16}%');
+    document.getElementById('p17').setAttribute('style','height:${analysis.p17}%');
+    document.getElementById('p18').setAttribute('style','height:${analysis.p18}%');
+    document.getElementById('p19').setAttribute('style','height:${analysis.p19}%');
+    document.getElementById('p20').setAttribute('style','height:${analysis.p20}%');
     document.getElementById('f1').setAttribute('style','height:${analysis.f1}%');
+    document.getElementById('f2').setAttribute('style','height:${analysis.f2}%');
+    document.getElementById('f3').setAttribute('style','height:${analysis.f3}%');
+    document.getElementById('f4').setAttribute('style','height:${analysis.f4}%');
     document.getElementById('f5').setAttribute('style','height:${analysis.f5}%');
+    document.getElementById('f6').setAttribute('style','height:${analysis.f6}%');
+    document.getElementById('f7').setAttribute('style','height:${analysis.f7}%');
+    document.getElementById('f8').setAttribute('style','height:${analysis.f8}%');
+    document.getElementById('f9').setAttribute('style','height:${analysis.f9}%');
+    document.getElementById('f10').setAttribute('style','height:${analysis.f10}%');
+    document.getElementById('f11').setAttribute('style','height:${analysis.f11}%');
+    document.getElementById('f12').setAttribute('style','height:${analysis.f12}%');
+    document.getElementById('f13').setAttribute('style','height:${analysis.f13}%');
     document.getElementById('f14').setAttribute('style','height:${analysis.f14}%');
+    document.getElementById('f15').setAttribute('style','height:${analysis.f15}%');
+    document.getElementById('f16').setAttribute('style','height:${analysis.f16}%');
     document.getElementById('f17').setAttribute('style','height:${analysis.f17}%');
+    document.getElementById('f18').setAttribute('style','height:${analysis.f18}%');
+    document.getElementById('f19').setAttribute('style','height:${analysis.f19}%');
+    document.getElementById('f20').setAttribute('style','height:${analysis.f20}%');
     document.getElementById('c1').setAttribute('style','height:${analysis.c1}%');
     document.getElementById('c2').setAttribute('style','height:${analysis.c2}%');
     document.getElementById('c3').setAttribute('style','height:${analysis.c3}%');
     document.getElementById('c4').setAttribute('style','height:${analysis.c4}%');
+    document.getElementById('c5').setAttribute('style','height:${analysis.c5}%');
+    document.getElementById('c6').setAttribute('style','height:${analysis.c6}%');
     document.getElementById('c7').setAttribute('style','height:${analysis.c7}%');
+    document.getElementById('c8').setAttribute('style','height:${analysis.c8}%');
+    document.getElementById('c9').setAttribute('style','height:${analysis.c9}%');
+    document.getElementById('c10').setAttribute('style','height:${analysis.c10}%');
+    document.getElementById('c11').setAttribute('style','height:${analysis.c11}%');
     document.getElementById('c12').setAttribute('style','height:${analysis.c12}%');
     document.getElementById('m1').setAttribute('style','height:${analysis.m1}%');
     document.getElementById('m2').setAttribute('style','height:${analysis.m2}%');
+    document.getElementById('m3').setAttribute('style','height:${analysis.m3}%');
     document.getElementById('m4').setAttribute('style','height:${analysis.m4}%');
     
 	});
 	</script>
-	</c:if>
-<form action="selectTrend.do">
+<script>
+    /* 메인페이지 모달 팝업창 */
+    function user_btn(){
+        $(".user_input_modal_window").fadeIn();
+    }
+
+    function main_btnclose_X(){
+        $(".user_input_modal_window").fadeOut();
+    }
+</script>
+    <!-- 프로필 모달창 -->
+    <div class="user_input_modal_window" id="user_input_modal_window" style="display: none;">
+        <div class="user_input_modal">
+          <div class="user_input_modal_top">
+            <div class="user_input_modal_top_txt">${customer.name }님</div>
+            <div class="main_btnclose">
+                <button class="main_btnclose_X" onclick="main_btnclose_X()"><a>X</a></button>
+            </div>
+          </div>
+          <div class="user_input_modal_mid">
+            <div class="user_input_modal_bot">
+            <c:choose>
+					<c:when test="${customer.sortation eq 'admin'}">
+						<button class="user_input_modal_bt" onclick="location.href='profilejsp.do'">
+                  		<img src="./resources/img/mainpage/회원정보.png">
+               			</button>
+					</c:when>
+					<c:when test="${customer.sortation eq 'user'}">
+						<button class="user_input_modal_bt" onclick="location.href='product_managejsp.do'">
+                  		<img src="./resources/img/mainpage/회원정보.png">
+                		</button>
+					</c:when>
+			 </c:choose>
+              </div>
+              <div class="user_input_modal_bot_01">
+                <button class="user_input_modal_bt_01" onclick="location.href='logout.do'">
+                    <img src="./resources/img/mainpage/로그아웃.png">
+                  </button>
+              </div>
+          </div>
+
+        </div>
+      </div>
        <header class="header">
         <div class = "header_01">
-             <img src="./resources/img/trend_analysis/사용자.png">
+             <button class="user_btn" id="user_btn" onclick="user_btn()">
+                <img src="./resources/img/mainpage/사용자.png">
+            </button>
              <c:choose>
-					<c:when test="${customer.sortation eq 'user'}"><a href="profilejsp.do">${customer.name }님, 안녕하세요</a></c:when>
-					<c:when test="${customer.sortation eq 'admin'}"><a href="product_managejsp.do">${customer.name }님, 안녕하세요</a></c:when>
+					<c:when test="${customer.sortation eq 'admin'}"><a href="profilejsp.do">${customer.name }님, 안녕하세요</a></c:when>
+					<c:when test="${customer.sortation eq 'user'}"><a href="product_managejsp.do">${customer.name }님, 안녕하세요</a></c:when>
 			 </c:choose>
         </div>
         <div class = "header_02" onclick="location.href='mainjsp.do'">
@@ -75,58 +162,225 @@
     
     <div class="content">
     <div class="trend_title"><a>구매자 트렌드 분석</a><p>다양한 분야로 상세한 정보를 쉽고 빠르게 확인해보세요</p></div>
-		<div class="trend_total_wrapp">
-			<div class="searchbtn_btn"><button class="trend_search"><img src="./resources/img/trend_analysis/trend_search.png" class="trend_search_img"></button></div>
-			<div class="trend_top">
-			<table class="keyword_tb">
-				<tr>
-					<th class="keyword_tb_header">키워드 선택</th>
-					<td colspan="2"  class="keyword_td" >
-						<select id="분류1" name="product_type">
-						    <option value="alltype">분류1</option>
-						    <option value="type01">블랭킷</option>
-						    <option value="type02">베개</option>
-						    <option value="type03">범퍼침대</option>
-						    <option value="type04">매트</option>
-						</select>
-						<a class="sel_subtext">></a>
-						<select id="분류2" name="season">
-						    <option value="allseason">기간</option>
-						    <option value="SS">S/S</option>
-						    <option value="FW">F/W</option>
-						</select>
-					</td>
-					
-				</tr>
-				<tr>
-				<th>성별</th>
-					<td   class="keyword_td" >
-						<label><input type="radio" name="gender" value="allgender" checked>&nbsp;전체</label>
-      					<label><input type="radio" name="gender" value="f" class="age_text">&nbsp;여성</label>
-      					<label><input type="radio" name="gender" value="m" class="age_text">&nbsp;남성</label>
-      				</td>
-				</tr>
-				<tr>
-					<th>연령</th>
-					<td   class="keyword_td" >
-						<label><input type="radio" name="allage" value="allage" class="age_all" checked><a class="age_text">&nbsp;전체</a></label>
-						   <label><input type="radio" name="age10" value="10대" class="age_10_60"><a class="age_text">&nbsp;10대</a></label>
-						   <label><input type="radio" name="age20" value="20대" class="age_10_60"><a class="age_text">&nbsp;20대</a></label>
-						   <label><input type="radio" name="age30" value="30대" class="age_10_60"><a class="age_text">&nbsp;30대</a></label>
-						   <label><input type="radio" name="age40" value="40대"  class="age_10_60"><a class="age_text">&nbsp;40대</a></label>
-						   <label><input type="radio" name="age50" value="50대" class="age_10_60"><a class="age_text">&nbsp;50대</a></label>
-						   <label><input type="radio" name="age60" value="60대" class="age_10_60"><a class="age_text">&nbsp;60대 이상</a></label>
-					  </td>
-				</tr>
-			</table>
+	<c:choose>
+		<c:when test="${customer.sortation eq 'admin'}"><div class="trend_total_wrapp"></c:when>
+		<c:when test="${customer.sortation eq 'user'}"><div class="trend_total_wrapp_new"></c:when>
+	</c:choose>
+	<c:choose>
+		<c:when test="${customer.sortation eq 'admin'}"><div class="trend_circle_zip"></c:when>
+		<c:when test="${customer.sortation eq 'user'}"><div class="trend_circle_zip_new"></c:when>
+	</c:choose>
+			<div class="trend_circle_zip_title">2022년 트렌드 제품</div>
+			<div class="trend_circle_zip_top04">
+				<button class="trend_circle_zip_top04_01"><img src="./resources/img/trend_analysis/트렌드 순위.png"></button>
+			</div>
+			<div class="trend_circle_zip_graph">
+				<div class="chart_01">
+					<div class="chart-bar_01" data-deg="${analysis.bestPillow4 }"></div>  <!--4위-->
+					<div class="chart-bar_01" data-deg="${analysis.bestPillow3 }"></div>  <!--3위-->
+					<div class="chart-bar_01" data-deg="${analysis.bestPillow2 }"></div> <!--2위-->
+					<div class="chart-bar_01" data-deg="${analysis.bestPillow1 }"></div>  <!--1위-->
+					<div class="chart-total_01"><span class="chart-total-num"><img src="./resources/img/trend_analysis/베개.png"></span></div>
+				</div>
+				<div class="chart_02">
+					<div class="chart-bar_02" data-deg="${analysis.bestBed4 }"></div>
+					<div class="chart-bar_02" data-deg="${analysis.bestBed3 }"></div>
+					<div class="chart-bar_02" data-deg="${analysis.bestBed2 }"></div>
+					<div class="chart-bar_02" data-deg="${analysis.bestBed1 }"></div>
+					<div class="chart-total_02"><span class="chart-total-num"><img src="./resources/img/trend_analysis/범퍼침대.png"></span></div>
 
+				</div>
+				<div class="chart_03">
+					<div class="chart-bar_03" data-deg="${analysis.bestBedding4 }"></div>
+					<div class="chart-bar_03" data-deg="${analysis.bestBedding3 }"></div>
+					<div class="chart-bar_03" data-deg="${analysis.bestBedding2 }"></div>
+					<div class="chart-bar_03" data-deg="${analysis.bestBedding1 }"></div>
+					<div class="chart-total_03"><span class="chart-total-num"><img src="./resources/img/trend_analysis/이불.png"></span></div>
+				</div>
+				<div class="chart_04">
+					<div class="chart-bar_04" data-deg="${analysis.bestMat4 }"></div>
+					<div class="chart-bar_04" data-deg="${analysis.bestMat3 }"></div>
+					<div class="chart-bar_04" data-deg="${analysis.bestMat2 }"></div>
+					<div class="chart-bar_04" data-deg="${analysis.bestMat1 }"></div>
+					<div class="chart-total_04"><span class="chart-total-num"><img src="./resources/img/trend_analysis/매트.png"></span></div>
+				</div>
+			</div>
+			<div class="trend_circle_zip_graph_list">
+				<div class="trend_circle_zip_graph_list_zip">
+					<div class="trend_circle_zip_graph_list_01">
+						<table>
+							<tr>
+								<td>1위 : ${analysis.bestPillowName1 }</td>
+							</tr>
+							<tr>
+								<td>2위 : ${analysis.bestPillowName2 }</</td>
+							</tr>
+							<tr>
+								<td>3위 : ${analysis.bestPillowName3 }</</td>
+							</tr>
+							<tr>
+								<td>4위 : ${analysis.bestPillowName4 }</</td>
+							</tr>
+						</table>
+					</div>
+					<div class="trend_circle_zip_graph_list_02">
+						<table>
+							<tr>
+								<td>1위 : ${analysis.bestBedName1 }</</td>
+							</tr>
+							<tr>
+								<td>2위 : ${analysis.bestBedName2 }</td>
+							</tr>
+							<tr>
+								<td>3위 : ${analysis.bestBedName3 }</td>
+							</tr>
+							<tr>
+								<td>4위 : ${analysis.bestBedName4 }</td>
+							</tr>
+						</table>
+					</div>
+					<div class="trend_circle_zip_graph_list_03">
+						<table>
+							<tr>
+								<td>1위 : ${analysis.bestBeddingName1 }</td>
+							</tr>
+							<tr>
+								<td>2위 : ${analysis.bestBeddingName2 }</td>
+							</tr>
+							<tr>
+								<td>3위 : ${analysis.bestBeddingName3 }</td>
+							</tr>
+							<tr>
+								<td>4위 : ${analysis.bestBeddingName4 }</td>
+							</tr>
+						</table>
+					</div>
+					<div class="trend_circle_zip_graph_list_04">
+						<table>
+							<tr>
+								<td>1위 : ${analysis.bestMatName1 }</td>
+							</tr>
+							<tr>
+								<td>2위 : ${analysis.bestMatName2 }</td>
+							</tr>
+							<tr>
+								<td>3위 : ${analysis.bestMatName3 }</td>
+							</tr>
+							<tr>
+								<td>4위 : ${analysis.bestMatName4 }</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
 		</div>
-		
+		<c:choose>
+		<c:when test="${customer.sortation eq 'user'}"><div class="trend_allData_zip"></c:when>
+		<c:when test="${customer.sortation eq 'admin'}"><div class="trend_allData_zip_new"></c:when>
+	</c:choose>
+			<div class="trend_allData_zip_title">전체 데이터 분포도</div>
+			<div class="trend_allData_zip_top04">
+				<button class="trend_allData_zip_top04_01">
+					<img src="./resources/img/trend_analysis/트렌드 순위.png">
+				</button>
+			</div>
+			<div class="trend_allData_zip_graph">
+				<div class="trend_allData_zip_graph_00">
+					<div class="trend_allData_zip_graph_01">
+						<div class="trend_allData_zip_graph_01_01">
+							<div class="trend_allData_zip_graph_01_01_title">
+								<button class="trend_allData_zip_graph_01_01_title_btn"><img src="./resources/img/trend_analysis/Color.png"></button>
+							</div>
+							<div class="trend_allData_zip_graph_01_01_top04">
+								<table>
+									<tr>
+										<td>1위 : ${analysis.bestColorName1 }</td>
+										<td>2위 : ${analysis.bestColorName2 }</td>
+										<td>3위 : ${analysis.bestColorName3 }</td>
+										<td>4위 : ${analysis.bestColorName4 }</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div class="trend_allData_zip_graph_01_02">
+							<div class="trend_allData_zip_graph_01_02_mak">
+								<canvas id="stChart" width="100%" height="3vh"></canvas>
+							</div>
+						</div>
+					</div>
+					<div class="trend_allData_zip_graph_02">
+						<div class="trend_allData_zip_graph_02_01">
+							<div class="trend_allData_zip_graph_02_01_title">
+								<button class="trend_allData_zip_graph_02_01_title_btn"><img src="./resources/img/trend_analysis/Matrial.png"></button>
+							</div>
+							<div class="trend_allData_zip_graph_02_01_top04">
+								<table>
+									<tr>
+										<td>1위 : ${analysis.bestMaterialName1 }</td>
+										<td>2위 : ${analysis.bestMaterialName2 }</td>
+										<td>3위 : ${analysis.bestMaterialName3 }</td>
+										<td>4위 : ${analysis.bestMaterialName4 }</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div class="trend_allData_zip_graph_02_02_mak">
+							<canvas id="stChart2" width="100%" height="3vh"></canvas>
+						</div>
+					</div>
+					<div class="trend_allData_zip_graph_03">
+						<div class="trend_allData_zip_graph_03_01">
+							<div class="trend_allData_zip_graph_03_01_title">
+								<button class="trend_allData_zip_graph_03_01_title_btn"><img src="./resources/img/trend_analysis/Design.png"></button>
+							</div>
+							<div class="trend_allData_zip_graph_03_01_top04">
+								<table>
+									<tr>
+										<td>1위 : ${analysis.bestPatternName1 }</td>
+										<td>2위 : ${analysis.bestPatternName2 }</td>
+										<td>3위 : ${analysis.bestPatternName3 }</td>
+										<td>4위 : ${analysis.bestPatternName4 }</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div class="trend_allData_zip_graph_03_02">
+							<div class="trend_allData_zip_graph_03_02_mak">
+								<canvas id="stChart3" width="100%" height="3vh"></canvas>
+							</div>
+						</div>
+					</div>
+					<div class="trend_allData_zip_graph_04">
+						<div class="trend_allData_zip_graph_04_01">
+							<div class="trend_allData_zip_graph_04_01_title">
+								<button class="trend_allData_zip_graph_04_01_title_btn"><img src="./resources/img/trend_analysis/ManuFacture.png"></button>
+							</div>
+							<div class="trend_allData_zip_graph_04_01_top04">
+								<table>
+									<tr>
+										<td>1위 : ${analysis.bestManuFacturerName1 }</td>
+										<td>2위 : ${analysis.bestManuFacturerName2 }</td>
+										<td>3위 : ${analysis.bestManuFacturerName3 }</td>
+										<td>4위 : ${analysis.bestManuFacturerName4 }</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div class="trend_allData_zip_graph_04_02">
+							<div class="trend_allData_zip_graph_04_02_mak">
+								<canvas id="stChart4" width="100%" height="3vh"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<c:if test="${customer.sortation eq 'admin'}">
 		<div class="trend_bott">
 			<div class="graph_wrapp">
 				<div class="graph_title_head">
 					<h2 class="graph_head">통계 그래프</h2>
-					<button class="download_btn"><img class="total_btn" src="./resources/img/trend_analysis/total_down.png" alt="통계다운로드"></button></h2>
+					<button class="download_btn" onclick="location.href='excel.do'"><img class="total_btn" src="./resources/img/trend_analysis/total_down.png" alt="통계다운로드"></button></h2>
 				</div>
 				<!-- 연령통계 그래프 -->
 				<div class="trend_graph">
@@ -617,8 +871,8 @@
 				</div>
 			</div>
 		</div>
-		
-		</div>
+		</c:if>
+	</div>
 		
 		
 	</div>
@@ -780,6 +1034,242 @@ function lastday(){ //년과 월에 따라 마지막 일 구하기
 			$(".age_10_60").prop('checked', false);
 		};
 	})
+</script>
+<script>
+	/* 원차트_01 */
+	var _chart_01 = document.querySelector('.chart_01');
+	var _chartBar_01 = document.querySelectorAll('.chart-bar_01');
+	var color_01 = ['#AB9F9F','#D2D0D1 ','#FFB316','#f599dc'] //색상
+	var newDeg_01 = []; //차트 deg
+
+	function chartDraw_01(){ 
+	for( var i=0;i<_chartBar_01.length;i++){
+		var _num = _chartBar_01[i].dataset.deg
+		newDeg_01.push( _num )
+	}
+
+	var num = newDeg_01.length - newDeg_01.length;
+	_chart_01.style.background = 'conic-gradient(#D2D0D1 '+
+													newDeg_01[0]+'deg, #AB9F9F '+
+													newDeg_01[0]+'deg '+newDeg_01[1]+'deg, #FFB316 '+
+													newDeg_01[1]+'deg '+newDeg_01[2]+'deg, #FC6401 '+
+													newDeg_01[2]+'deg '+newDeg_01[3]+'deg )';
+	}
+
+	chartDraw_01();
+
+/* 원차트_02 */
+	var _chart_02 = document.querySelector('.chart_02');
+	var _chartBar_02 = document.querySelectorAll('.chart-bar_02');
+	var color_02 = ['#AB9F9F','#D2D0D1','#FFB316','#f599dc'] //색상
+	var newDeg_02 = []; //차트 deg
+
+	function chartDraw_02(){ 
+	for( var i=0;i<_chartBar_02.length;i++){
+		var _num = _chartBar_02[i].dataset.deg
+		newDeg_02.push( _num )
+	}
+
+	var num = newDeg_02.length - newDeg_02.length;
+	_chart_02.style.background = 'conic-gradient(#D2D0D1 '+
+													newDeg_02[0]+'deg, #AB9F9F '+
+													newDeg_02[0]+'deg '+newDeg_02[1]+'deg, #FFB316 '+
+													newDeg_02[1]+'deg '+newDeg_02[2]+'deg, #FC6401 '+
+													newDeg_02[2]+'deg '+newDeg_02[3]+'deg )';
+	}
+
+	chartDraw_02();
+
+/* 원차트_03 */
+	var _chart_03 = document.querySelector('.chart_03');
+	var _chartBar_03 = document.querySelectorAll('.chart-bar_03');
+	var color_03 = ['#AB9F9F','#D2D0D1 ','#FFB316','#FC6401'] //색상
+	var newDeg_03 = []; //차트 deg
+
+	function chartDraw_03(){ 
+	for( var i=0;i<_chartBar_03.length;i++){
+		var _num = _chartBar_03[i].dataset.deg
+		newDeg_03.push( _num )
+	}
+	var num = newDeg_03.length - newDeg_03.length;
+	_chart_03.style.background = 'conic-gradient(#D2D0D1 '+
+													newDeg_03[0]+'deg, #AB9F9F '+
+													newDeg_03[0]+'deg '+newDeg_03[1]+'deg, #FFB316 '+
+													newDeg_03[1]+'deg '+newDeg_03[2]+'deg, #FC6401 '+
+													newDeg_03[2]+'deg '+newDeg_03[3]+'deg )';
+	
+	}
+
+	chartDraw_03();
+
+/* 원차트_04 */
+	var _chart_04 = document.querySelector('.chart_04');
+	var _chartBar_04 = document.querySelectorAll('.chart-bar_04');
+	var color_04 = ['#AB9F9F','#D2D0D1','#FFB316','#FC6401'] //색상
+	var newDeg_04 = []; //차트 deg
+
+	function chartDraw_04(){ 
+	for( var i=0;i<_chartBar_04.length;i++){
+		var _num = _chartBar_04[i].dataset.deg
+		newDeg_04.push( _num );
+		console.log(newDeg_04);
+	}
+
+	console.log(newDeg_04[4]);
+	_chart_04.style.background = 'conic-gradient(#D2D0D1 '+
+													newDeg_04[0]+'deg, #AB9F9F '+
+													newDeg_04[0]+'deg '+newDeg_04[1]+'deg, #FFB316 '+
+													newDeg_04[1]+'deg '+newDeg_04[2]+'deg, #FC6401 '+
+													newDeg_04[2]+'deg '+newDeg_04[3]+'deg )';
+	}
+
+	chartDraw_04();
+
+</script>
+
+<script>
+drawColumnChart();
+function drawColumnChart() {
+	var barOptions_stacked = {
+		tooltips: {
+			enabled: false
+		},
+		hover :{
+			animationDuration:0,
+			mode:null
+		},
+		scales: {
+			xAxes: [{
+				ticks: {
+					beginAtZero:true,
+					display: false
+				},
+				scaleLabel:{
+					display:false
+				},
+				gridLines: {
+					display:false
+				}, 
+				stacked: true
+			}],
+			yAxes: [{
+				gridLines: {
+					display:false,
+					zeroLineWidth: 0
+				},
+				ticks: {
+					display: false,
+					fontSize:11
+				},
+				gridLines: {
+					display:false
+				},
+				stacked: true
+			}]
+		},
+		legend:{
+			display:false
+		},
+		plugins: {
+        datalabels: {
+          display: false  
+        },
+      },
+	};
+
+	// Color 그래프
+	var ctx_01 = document.getElementById("stChart");
+	var myChart = new Chart(ctx_01, {
+		type: 'horizontalBar',
+		data: {
+			datasets: [{
+				// label:'a',
+				data:[${analysis.bestColor1}],
+				backgroundColor: ["#FC6401","#FFB316","#AB9F9F",],
+			},{
+				data: [${analysis.bestColor2}],
+				backgroundColor: "#FFB316",
+			},{
+				data: [${analysis.bestColor3}],
+				backgroundColor: "#AB9F9F",
+			},{
+				data: [${analysis.bestColor4}],
+				backgroundColor: "#D2D0D1",
+				// hoverBackgroundColor: "rgba(46,185,235,1)" 마우스 호버하면 색 변경
+			}],
+		},
+		options: barOptions_stacked,
+	});
+
+// Matrial 그래프
+	var ctx_02 = document.getElementById("stChart2");
+	var myChart2 = new Chart(ctx_02, {
+		type: 'horizontalBar',
+		data: {
+			datasets: [{
+				data:[${analysis.bestMaterial1}],
+				backgroundColor: ["#FC6401","#FFB316","#AB9F9F",],
+			},{
+				data: [${analysis.bestMaterial2}],
+				backgroundColor: "#FFB316",
+			},{
+				data: [${analysis.bestMaterial3}],
+				backgroundColor: "#AB9F9F",
+			},{
+				data: [${analysis.bestMaterial4}],
+				backgroundColor: "#D2D0D1",
+				// hoverBackgroundColor: "rgba(46,185,235,1)" 마우스 호버하면 색 변경
+			}],
+		},
+		options: barOptions_stacked,
+	});
+
+// Design 그래프
+	var ctx_03 = document.getElementById("stChart3");
+	var myChart3 = new Chart(ctx_03, {
+		type: 'horizontalBar',
+		data: {
+			datasets: [{
+				data:[${analysis.bestPattern1}],
+				backgroundColor: ["#FC6401","#FFB316","#AB9F9F",],
+			},{
+				data: [${analysis.bestPattern2}],
+				backgroundColor: "#FFB316",
+			},{
+				data: [${analysis.bestPattern3}],
+				backgroundColor: "#AB9F9F",
+			},{
+				data: [${analysis.bestPattern4}],
+				backgroundColor: "#D2D0D1",
+				// hoverBackgroundColor: "rgba(46,185,235,1)" 마우스 호버하면 색 변경
+			}],
+		},
+		options: barOptions_stacked,
+	});
+
+// ManuFacture 그래프
+	var ctx_04 = document.getElementById("stChart4");
+	var myChart4 = new Chart(ctx_04, {
+		type: 'horizontalBar',
+		data: {
+			datasets: [{
+				data:[${analysis.bestManuFacturer1}],
+				backgroundColor: ["#FC6401","#FFB316","#AB9F9F",],
+			},{
+				data: [${analysis.bestManuFacturer2}],
+				backgroundColor: "#FFB316",
+			},{
+				data: [${analysis.bestManuFacturer3}],
+				backgroundColor: "#AB9F9F",
+			},{
+				data: [${analysis.bestManuFacturer4}],
+				backgroundColor: "#D2D0D1",
+				// hoverBackgroundColor: "rgba(46,185,235,1)" 마우스 호버하면 색 변경
+			}],
+		},
+		options: barOptions_stacked,
+	});
+}
 </script>
 </body>
 </html>

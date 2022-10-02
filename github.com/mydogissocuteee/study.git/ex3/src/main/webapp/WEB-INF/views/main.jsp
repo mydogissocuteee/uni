@@ -13,15 +13,60 @@
             <!-- 모달 라이브러리 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
        <!--  chart.js-->
 	<script type="text/javascript" charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
  	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
+<script>
+    /* 메인페이지 모달 팝업창 */
+    function user_btn(){
+        $(".user_input_modal_window").fadeIn();
+    }
+
+    function main_btnclose_X(){
+        $(".user_input_modal_window").fadeOut();
+    }
+</script>
 <body>
+    <!-- 프로필 모달창 -->
+    <div class="user_input_modal_window" id="user_input_modal_window" style="display: none;">
+        <div class="user_input_modal">
+          <div class="user_input_modal_top">
+            <div class="user_input_modal_top_txt">${customer.name }님</div>
+            <div class="main_btnclose">
+                <button class="main_btnclose_X" onclick="main_btnclose_X()"><a>X</a></button>
+            </div>
+          </div>
+          <div class="user_input_modal_mid">
+            <div class="user_input_modal_bot">
+            <c:choose>
+					<c:when test="${customer.sortation eq 'user'}">
+						<button class="user_input_modal_bt" onclick="location.href='profilejsp.do'">
+                  		<img src="./resources/img/mainpage/회원정보.png">
+               			</button>
+					</c:when>
+					<c:when test="${customer.sortation eq 'admin'}">
+						<button class="user_input_modal_bt" onclick="location.href='product_managejsp.do'">
+                  		<img src="./resources/img/mainpage/회원정보.png">
+                		</button>
+					</c:when>
+			 </c:choose>
+              </div>
+              <div class="user_input_modal_bot_01">
+                <button class="user_input_modal_bt_01" onclick="location.href='logout.do'">
+                    <img src="./resources/img/mainpage/로그아웃.png">
+                  </button>
+              </div>
+          </div>
+
+        </div>
+      </div>
+
     <header class="header">
         <div class = "header_01">
-            <button class="user_btn">
+            <button class="user_btn" id="user_btn" onclick="user_btn()">
                 <img src="./resources/img/mainpage/사용자.png">
             </button>
              <c:choose>
@@ -38,6 +83,7 @@
         </div>
     </header>
     <div class="main">
+    <c:if test="${customer.sortation eq 'user'}">
         <div class="slide">
             <div class="left">
                 <a class="prev" onclick="moveSlides(-1)">&#10094;</a>
@@ -70,7 +116,7 @@
                 <a class="next" onclick="moveSlides(1)">&#10095;</a>
             </div>
         </div>
-
+        </c:if>
         <div class="product_cate">
             <div class="product_cate_txt">
                 <a>상품 카테고리</a>

@@ -20,13 +20,61 @@
 </head>
 
 <body>
+<script>
+    /* 메인페이지 모달 팝업창 */
+    function user_btn(){
+        $(".user_input_modal_window").fadeIn();
+    }
+
+    function main_btnclose_X(){
+        $(".user_input_modal_window").fadeOut();
+    }
+</script>
+    <!-- 프로필 모달창 -->
+    <div class="user_input_modal_window" id="user_input_modal_window" style="display: none;">
+        <div class="user_input_modal">
+          <div class="user_input_modal_top">
+            <div class="user_input_modal_top_txt">${customer.name }님</div>
+            <div class="main_btnclose">
+                <button class="main_btnclose_X" onclick="main_btnclose_X()"><a>X</a></button>
+            </div>
+          </div>
+          <div class="user_input_modal_mid">
+            <div class="user_input_modal_bot">
+            <c:choose>
+					<c:when test="${customer.sortation eq 'user'}">
+						<button class="user_input_modal_bt" onclick="location.href='profilejsp.do'">
+                  		<img src="./resources/img/mainpage/회원정보.png">
+               			</button>
+					</c:when>
+					<c:when test="${customer.sortation eq 'admin'}">
+						<button class="user_input_modal_bt" onclick="location.href='product_managejsp.do'">
+                  		<img src="./resources/img/mainpage/회원정보.png">
+                		</button>
+					</c:when>
+			 </c:choose>
+              </div>
+              <div class="user_input_modal_bot_01">
+                <button class="user_input_modal_bt_01" onclick="location.href='logout.do'">
+                    <img src="./resources/img/mainpage/로그아웃.png">
+                  </button>
+              </div>
+          </div>
+
+        </div>
+      </div>
 	<header class="header">
 		<div class="header_01">
-			<img src="./resources/img/profile/사용자.png">
-			<a>${customer.name }님, 안녕하세요</a>
+			<button class="user_btn" id="user_btn" onclick="user_btn()">
+                <img src="./resources/img/mainpage/사용자.png">
+            </button>
+			<c:choose>
+					<c:when test="${customer.sortation eq 'user'}"><a href="profilejsp.do">${customer.name }님, 안녕하세요</a></c:when>
+					<c:when test="${customer.sortation eq 'admin'}"><a href="product_managejsp.do">${customer.name }님, 안녕하세요</a></c:when>
+			 </c:choose>
 		</div>
-		<div class = "header_02" onclick="location.href='mainjsp.do'">
-			<img src="./resources/img/profile/그림2.png">
+		<div class="header_02">
+			<img src="./resources/img/profile/그림2.png"  onclick="location.href='mainjsp.do'">
 		</div>
 		<div class="header_03">
 			<input type="text">
@@ -115,7 +163,7 @@
 							</td>
 							<td class="td_vertical">
 								<div><img class="writeRv_btn" src="./resources/img/profile/write.png"></div>
-								<button class="delivery_tracking_btn2" onclick="open1()">
+								<button class="delivery_tracking_btn2" data-toggle="modal" href="#deliveryModal" onclick="loadData1()">
 									<img src="./resources/img/profile/delivery_view.png">
 								</button>
 							</td>
@@ -141,7 +189,7 @@
 							</td>
 							<td class="td_vertical">
 								<div><img class="repurchase_btn" src="./resources/img/profile/repurchase.png"></div>
-								<button class="delivery_tracking_btn1" onclick="open1()">
+								<button class="delivery_tracking_btn1" data-toggle="modal" href="#deliveryModal" onclick="loadData2()">
 									<img src="./resources/img/profile/delivery_view.png">
 								</button>
 							</td>
@@ -151,23 +199,98 @@
 			</div>
 		</div>
 
-		<!-- 배송조회 모달-->
-		<div class="modal" id="deliveryModal" style="display:none">
-			<div class="modal_body">
-				<button type="button"  class="close" onclick="close1()">X</button>
-				<div class="modal_header">
-					<h3 class="modal_head">배송조회</h3>
+		<!-- 배송조회 모달 계란-->
+		<div class="modal_01" id="deliveryModal_01" style="display:none">
+			<div class="modal_body_01">
+				<button type="button" class="close_01" data-dismiss="modal_01">X</button>
+				<div class="modal_header_01">
+					<h3 class="modal_head_01">배송조회</h3>
 				</div>
-				<div class="modal_content">
-					<div class="modal_produc">
-						<img class="delevery_produc" src="./resources/img/profile/modal_img.png">
-						<div class="modal_wrapp" style="display: grid">
-							<span class="modal_date">22.09.03</span>
-							<span class="modal_name">범퍼침대 특대형</span>
-							<span class="modal_price">300,000원</span>
+				<div class="modal_content_01">
+					<div class="modal_produc_01">
+						<img class="delevery_produc_01" src="./resources/img/profile/egg.png">
+						<div class="modal_wrapp_01" style="display: grid">
+							<span class="modal_date_01">22.09.02</span>
+							<span class="modal_shipping_01">송장번호:650951690445</span>
+							<span class="modal_name_01">계란후라이 아기이불</span>
+							<span class="modal_price_01">80,000원</span>
 						</div>
 					</div>
-					<div class="delivery_modal_tb">
+					<div class="delivery_modal_tb_01">
+						<img class="delivery_grid_00" src="./resources/img/profile/배달창_체크.png">
+						<img class="delivery_grid_01" src="./resources/img/profile/배달창_결제완료_이미지.png">
+						<img class="delivery_grid_02" src="./resources/img/profile/배달창_결제완료_텍스트.png">
+						<img class="delivery_grid_10" src="./resources/img/profile/배달창_체크.png">
+						<img class="delivery_grid_11" src="./resources/img/profile/배달창_제조_이미지.png">
+						<img class="delivery_grid_12" src="./resources/img/profile/배달창_제조_텍스트.png">
+						<img class="delivery_grid_20" src="./resources/img/profile/배달창_언체크.png">
+						<img class="delivery_grid_21" src="./resources/img/profile/배달창_집하_이미지.png">
+						<img class="delivery_grid_22" src="./resources/img/profile/배달창_집하_텍스트.png">
+						<img class="delivery_grid_30" src="./resources/img/profile/배달창_언체크.png">
+						<img class="delivery_grid_31" src="./resources/img/profile/배달창_배송_이미지.png">
+						<img class="delivery_grid_32" src="./resources/img/profile/배달창_배송_텍스트.png">
+						<img class="delivery_grid_40" src="./resources/img/profile/배달창_언체크.png">
+						<img class="delivery_grid_41" src="./resources/img/profile/배달창_배송완료_이미지.png">
+						<img class="delivery_grid_42" src="./resources/img/profile/배달창_배송완료_텍스트.png">
+					</div>
+				</div>
+			</div>
+		</div>
+				<!-- 배송조회 모달 쿨매트-->
+		<div class="modal_02" id="deliveryModal_02" style="display:none">
+			<div class="modal_body_02">
+				<button type="button" class="close_02" data-dismiss="modal_02">X</button>
+				<div class="modal_header_02">
+					<h3 class="modal_head_02">배송조회</h3>
+				</div>
+				<div class="modal_content_02">
+					<div class="modal_produc_02">
+						<img class="delevery_produc_02" src="./resources/img/profile/baby.png">
+						<div class="modal_wrapp_02" style="display: grid">
+							<span class="modal_date_02">22.09.02</span>
+							<span class="modal_shipping_02">송장번호:564999104331</span>
+							<span class="modal_name_02">아이 쿨매트</span>
+							<span class="modal_price_02">80,000원</span>
+						</div>
+					</div>
+					<div class="delivery_modal_tb_02">
+						<img class="delivery_grid_00" src="./resources/img/profile/배달창_체크.png">
+						<img class="delivery_grid_01" src="./resources/img/profile/배달창_결제완료_이미지.png">
+						<img class="delivery_grid_02" src="./resources/img/profile/배달창_결제완료_텍스트.png">
+						<img class="delivery_grid_10" src="./resources/img/profile/배달창_체크.png">
+						<img class="delivery_grid_11" src="./resources/img/profile/배달창_제조_이미지.png">
+						<img class="delivery_grid_12" src="./resources/img/profile/배달창_제조_텍스트.png">
+						<img class="delivery_grid_20" src="./resources/img/profile/배달창_언체크.png">
+						<img class="delivery_grid_21" src="./resources/img/profile/배달창_집하_이미지.png">
+						<img class="delivery_grid_22" src="./resources/img/profile/배달창_집하_텍스트.png">
+						<img class="delivery_grid_30" src="./resources/img/profile/배달창_언체크.png">
+						<img class="delivery_grid_31" src="./resources/img/profile/배달창_배송_이미지.png">
+						<img class="delivery_grid_32" src="./resources/img/profile/배달창_배송_텍스트.png">
+						<img class="delivery_grid_40" src="./resources/img/profile/배달창_언체크.png">
+						<img class="delivery_grid_41" src="./resources/img/profile/배달창_배송완료_이미지.png">
+						<img class="delivery_grid_42" src="./resources/img/profile/배달창_배송완료_텍스트.png">
+					</div>
+				</div>
+			</div>
+		</div>
+				<!-- 배송조회 모달 특대형-->
+		<div class="modal_03" id="deliveryModal_03" style="display:none">
+			<div class="modal_body_03">
+				<button type="button" class="close_03" data-dismiss="modal_03">X</button>
+				<div class="modal_header_03">
+					<h3 class="modal_head_03">배송조회</h3>
+				</div>
+				<div class="modal_content_03">
+					<div class="modal_produc_03">
+						<img class="delevery_produc_03" src="./resources/img/profile/bed.png">
+						<div class="modal_wrapp_03" style="display: grid">
+							<span class="modal_date_03">22.09.02</span>
+							<span class="modal_shipping_03">송장번호:650562709770</span>
+							<span class="modal_name_03">범퍼침대 특대형</span>
+							<span class="modal_price_03">300,000원</span>
+						</div>
+					</div>
+					<div class="delivery_modal_tb_03">
 						<img class="delivery_grid_00" src="./resources/img/profile/배달창_체크.png">
 						<img class="delivery_grid_01" src="./resources/img/profile/배달창_결제완료_이미지.png">
 						<img class="delivery_grid_02" src="./resources/img/profile/배달창_결제완료_텍스트.png">
@@ -189,10 +312,52 @@
 		</div>
 	</div>
 
-	<!-- 배송조회 javaScript -->
-<script>
+	<!-- 모달창 javaScript -->
+	<script>
+//계란
+		const deliveryModal_01 = document.querySelector('#deliveryModal_01');
+		const btnOpenPopup_01 = document.querySelector('.delivery_tracking_btn3');
+		const btnClose_01 = document.querySelector('.close_01');
+		deliveryModal_01.style.display = 'none';
 
-function loadData(){
+		btnOpenPopup_01.addEventListener('click', () => {
+			deliveryModal_01.style.display = 'block';
+		});
+
+		btnClose_01.addEventListener('click', () => {
+			deliveryModal_01.style.display = 'none';
+		});
+
+//쿨매트
+		const deliveryModal_02 = document.querySelector('#deliveryModal_02');
+		const btnOpenPopup_02 = document.querySelector('.delivery_tracking_btn2');
+		const btnClose_02 = document.querySelector('.close_02');
+		deliveryModal_02.style.display = 'none';
+
+		btnOpenPopup_02.addEventListener('click', () => {
+			deliveryModal_02.style.display = 'block';
+		});
+
+		btnClose_02.addEventListener('click', () => {
+			deliveryModal_02.style.display = 'none';
+		});
+
+// 특대형
+		const deliveryModal_03 = document.querySelector('#deliveryModal_03');
+		const btnOpenPopup_03 = document.querySelector('.delivery_tracking_btn1');
+		const btnClose_03 = document.querySelector('.close_03');
+		deliveryModal_03.style.display = 'none';
+
+		btnOpenPopup_03.addEventListener('click', () => {
+			deliveryModal_03.style.display = 'block';
+		});
+
+		btnClose_03.addEventListener('click', () => {
+			deliveryModal_03.style.display = 'none';
+		});			
+
+	// 배송 api
+	function loadData(){
 	 $.ajax({
 	        url:'api.do',
 	        type : 'get',
@@ -212,36 +377,49 @@ function loadData(){
 	    })	
 	
 }
-
-</script>
-<script>
-function open1() {
-	loadData();
-	document.querySelector('#deliveryModal').style.display = 'block';
-}
-
-function close1() {
-	document.querySelector('#deliveryModal').style.display = 'none';
-}
-
-
-// ESC 누르면 모달창 닫기
-$(document).keydown(function(e){
-	//keyCode 구 브라우저, which 현재 브라우저
-    var code = e.keyCode || e.which;
-    if (code == 27) { // 27은 ESC 키번호
-        $('#deliveryModal').hide();
-    }
-});
-
-//모달 영역 밖 클릭 시 모달창 닫기
-$(document).mouseup(function (e){
-	if($("#deliveryModal").has(e.target).length === 0){
-		$("#deliveryModal").hide();
+	function loadData1(){
+		 $.ajax({
+		        url:'api.do',
+		        type : 'get',
+		        success :  function(data){
+		            var tracker = data;
+		            if (tracker>=1) {
+		            document.getElementsByClassName( 'delivery_grid_20' )[1].setAttribute( 'src', './resources/img/profile/배달창_체크.png' );
+		            	if(tracker>=2) {
+		            		document.getElementsByClassName( 'delivery_grid_30' )[1].setAttribute( 'src', './resources/img/profile/배달창_체크.png' );
+		            		if(tracker>=3) {
+		            			document.getElementsByClassName( 'delivery_grid_40' )[1].setAttribute( 'src', './resources/img/profile/배달창_체크.png' );
+		            }}}
+		        },
+		        error: function(){
+		        	alert("안돼여..");
+		    	}
+		    })	
+		
 	}
-});
+	function loadData2(){
+		 $.ajax({
+		        url:'api.do',
+		        type : 'get',
+		        success :  function(data){
+		            var tracker = data;
+		            if (tracker>=1) {
+		            document.getElementsByClassName( 'delivery_grid_20' )[2].setAttribute( 'src', './resources/img/profile/배달창_체크.png' );
+		            	if(tracker>=2) {
+		            		document.getElementsByClassName( 'delivery_grid_30' )[2].setAttribute( 'src', './resources/img/profile/배달창_체크.png' );
+		            		}}
+		        },
+		        error: function(){
+		        	alert("안돼여..");
+		    	}
+		    })	
+		
+	}
+		
+	</script>
 
-</script>
+
+
 
 </body>
 

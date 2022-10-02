@@ -287,18 +287,21 @@
 							<div class="slide_left">
 								<a class="slide_left_prev" onclick="moveSlides(-1)">&#10094;</a>
 							</div>
-							<div class="slide_midlle">
+							
+							<c:choose>
+					<c:when test="${param.product eq '베개'}">
+								<div class="slide_midlle">
 								<div class="slideitem fade">
-									<div></div>
+									<div><img src="./resources/drawing/20220629_베개.png"></div>
 								</div>
 								<div class="slideitem fade">
-									<div></div>
+									<div><img src="./resources/drawing/20220629_베개2.png"></div>
 								</div>
 								<div class="slideitem fade">
-									<div></div>
+									<div><img src="./resources/drawing/20220629_베개3.png"></div>
 								</div>
 								<div class="slideitem fade">
-									<div></div>
+									<div><img src="./resources/drawing/20220629_베개4.png"></div>
 								</div>
 							</div>
 							<div class="slide_right">
@@ -310,11 +313,113 @@
 
 							</div>
 							<div class = "slide_dot">
-								<span class="dot" onclick="currentSlide(0)"></span>
-								<span class="dot" onclick="currentSlide(1)"></span>
-								<span class="dot" onclick="currentSlide(2)"></span>
-								<span class="dot" onclick="currentSlide(3)"></span>
+								<span class="dot" onclick="currentSlide(0)"><img src="./resources/drawing/20220629_베개.png"></span>
+								<span class="dot" onclick="currentSlide(1)"><img src="./resources/drawing/20220629_베개2.png"></span>
+								<span class="dot" onclick="currentSlide(2)"><img src="./resources/drawing/20220629_베개3.png"></span>
+								<span class="dot" onclick="currentSlide(3)"><img src="./resources/drawing/20220629_베개4.png"></span>
 							</div>
+					
+					</c:when>
+					<c:when test="${param.product eq '매트'}">
+												<div class="slide_midlle">
+								<div class="slideitem fade">
+									<div><img src="./resources/drawing/20220628_놀이매트.png"></div>
+								</div>
+								<div class="slideitem fade">
+									<div><img src="./resources/drawing/20220628_놀이매트2.png"></div>
+								</div>
+								<div class="slideitem fade">
+									<div><img src="./resources/drawing/20220628_놀이매트3.png"></div>
+								</div>
+								<div class="slideitem fade">
+									<div><img src="./resources/drawing/20220628_놀이매트4.png"></div>
+								</div>
+							</div>
+							<div class="slide_right">
+								<a class="slide_right_next" onclick="moveSlides(1)">&#10095;</a>
+							</div>
+						</div>
+						<div class="slide_bottom">
+							<div class="slide_bot_left">
+
+							</div>
+							<div class = "slide_dot">
+								<span class="dot" onclick="currentSlide(0)"><img src="./resources/drawing/20220628_놀이매트.png"></span>
+								<span class="dot" onclick="currentSlide(1)"><img src="./resources/drawing/20220628_놀이매트2.png"></span>
+								<span class="dot" onclick="currentSlide(2)"><img src="./resources/drawing/20220628_놀이매트3.png"></span>
+								<span class="dot" onclick="currentSlide(3)"><img src="./resources/drawing/20220628_놀이매트4.png"></span>
+							</div>
+					
+					
+					</c:when>
+					<c:when test="${param.product eq '블랭킷'}">
+						<div class="slide_midlle">
+						<div class="slideitem fade">
+							<div><img src="./resources/drawing/20220624_차렵이불1.png"></div>
+						</div>
+						<div class="slideitem fade">
+							<div><img src="./resources/drawing/20220624_차렵이불2.png"></div>
+						</div>
+						<div class="slideitem fade">
+							<div><img src="./resources/drawing/20220624_차렵이불3.png"></div>
+						</div>
+						<div class="slideitem fade">
+							<div><img src="./resources/drawing/20220624_차렵이불4.png"></div>
+						</div>
+					</div>
+					<div class="slide_right">
+						<a class="slide_right_next" onclick="moveSlides(1)">&#10095;</a>
+					</div>
+					</div>
+					<div class="slide_bottom">
+						<div class="slide_bot_left">
+
+						</div>
+						<div class = "slide_dot">
+							<span class="dot" onclick="currentSlide(0)"><img src="./resources/drawing/20220624_차렵이불1.png"></span>
+							<span class="dot" onclick="currentSlide(1)"><img src="./resources/drawing/20220624_차렵이불2.png"></span>
+							<span class="dot" onclick="currentSlide(2)"><img src="./resources/drawing/20220624_차렵이불3.png"></span>
+							<span class="dot" onclick="currentSlide(3)"><img src="./resources/drawing/20220624_차렵이불4.png"></span>
+						</div>
+
+
+				</c:when>
+				<c:when test="${param.product eq '범퍼침대'}">
+					<div class="slide_midlle">
+					<div class="slideitem fade">
+						<div><img src="./resources/drawing/20220704_범퍼침대확장1.png"></div>
+					</div>
+					<div class="slideitem fade">
+						<div><img src="./resources/drawing/20220704_범퍼침대확장2.png"></div>
+					</div>
+					<div class="slideitem fade">
+						<div><img src="./resources/drawing/20220704_범퍼침대확장3.png"></div>
+					</div>
+					<div class="slideitem fade">
+						<div><img src="./resources/drawing/20220704_범퍼침대확장4.png"></div>
+					</div>
+				</div>
+				<div class="slide_right">
+					<a class="slide_right_next" onclick="moveSlides(1)">&#10095;</a>
+					</div>
+				</div>
+				<div class="slide_bottom">
+					<div class="slide_bot_left">
+
+					</div>
+					<div class = "slide_dot">
+						<span class="dot" onclick="currentSlide(0)"><img src="./resources/drawing/20220704_범퍼침대확장1.png"></span>
+						<span class="dot" onclick="currentSlide(1)"><img src="./resources/drawing/20220704_범퍼침대확장2.png"></span>
+						<span class="dot" onclick="currentSlide(2)"><img src="./resources/drawing/20220704_범퍼침대확장3.png"></span>
+						<span class="dot" onclick="currentSlide(3)"><img src="./resources/drawing/20220704_범퍼침대확장4.png"></span>
+					</div>
+
+
+			</c:when>
+				</c:choose>
+							
+
+							
 							<div class="slide_bot_right">
 								<button class="print_btn">
 									<img src="./resources/img/produc_info/인쇄.png">

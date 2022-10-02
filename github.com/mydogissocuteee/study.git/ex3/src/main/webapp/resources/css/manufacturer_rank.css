@@ -1,7 +1,7 @@
 @charset "EUC-KR";
 
 
-/* ���뿵�� */
+/* 占쏙옙占쎈영占쏙옙 */
  @font-face {
     font-family: 'NanumSquareRound';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
@@ -14,14 +14,118 @@
     font-family: 'NanumSquareRound';
 }
 
+/* 메인페이지 모달 팝업창 */
+.user_input_modal_window{
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
 
+.user_input_modal{
+    border: 2px solid #F9D984;
+    background-color: white;
+    top: 18.3%;
+    left: 7%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 13%;
+    height: 18%;
+}
+
+.user_input_modal_top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1vw;
+    color: black;
+    text-align: center;
+    height: 25%;
+    background-color: #F9D984;
+    justify-content: right;
+}
+.user_input_modal_top_txt{
+    width: 70%;
+}
+
+.user_input_modal_mid{
+    font-size: 1vw;
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    height: 75%;
+    background-color: white;
+}
+
+.user_input_modal_bot{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 45%;
+}
+
+.user_input_modal_bt{
+    height: 60%;
+    font-size: 0;
+    line-height: 0;
+    background-color: transparent;
+    border: transparent;
+}
+
+.user_input_modal_bt img{
+    height: 100%;
+}
+.user_input_modal_bot_01{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 45%;
+}
+
+.user_input_modal_bt_01{
+    height: 60%;
+    font-size: 0;
+    line-height: 0;
+    background-color: transparent;
+    border: transparent;
+}
+
+.user_input_modal_bt_01 img{
+    height: 100%;
+}
+.main_btnclose{
+    width: 15%;
+    height: 100%;
+}
+.main_btnclose_X{
+    border: transparent;
+    background-color: transparent;
+    line-height: 0;
+    vertical-align: 0;
+}
+.main_btnclose_X a{
+    border: transparent;
+    background-color: transparent;
+    line-height: 0;
+    vertical-align: 0;
+}
 
 /* header css */
 .header{
     width: 100%;
     height: 8vh;
 }
-/* header ����� �ΰ� css */
+.user_btn{
+    margin-left: 1vw;
+    margin-right: 1vw;
+    background-color: transparent;
+    border: transparent;
+    font-size: 0;
+    line-height: 0;
+}
+/* header 占쏙옙占쏙옙占� 占싸곤옙 css */
 .header_01{
     display: flex;
     align-items: center;
@@ -41,7 +145,7 @@
     font-size: 2vh;
 }
 
-/* header ��񿣴� �ΰ� css */
+/* header 占쏙옙澍４占� 占싸곤옙 css */
 .header_02{
     width: 33.33%;
     height: 100%;
@@ -57,7 +161,7 @@
     margin: 0 auto;
 }
 
-/* header �˻�â css */
+/* header 占싯삼옙창 css */
 .header_03{
     width: 33.33%;
     height: 100%;
@@ -83,7 +187,7 @@
     margin-top: 5%;
 }
 
-/* ���� */
+/* 占쏙옙占쏙옙 */
 .manu_total{
     overflow: auto;
 	height: 92vh;	

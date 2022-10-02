@@ -10,12 +10,59 @@
     <title>슬기로운 BB 플랫폼</title>
     <link rel="stylesheet" href="./resources/css/product_manage.css" type="text/css">
     <script type="text/javascript" src="./resources/js/product_manage.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    
 </head>
 <body>
+
+<script>
+    /* 메인페이지 모달 팝업창 */
+    function user_btn(){
+        $(".user_input_modal_window").fadeIn();
+    }
+
+    function main_btnclose_X(){
+        $(".user_input_modal_window").fadeOut();
+    }
+</script>
+    <!-- 프로필 모달창 -->
+    <div class="user_input_modal_window" id="user_input_modal_window" style="display: none;">
+        <div class="user_input_modal">
+          <div class="user_input_modal_top">
+            <div class="user_input_modal_top_txt">${customer.name }님</div>
+            <div class="main_btnclose">
+                <button class="main_btnclose_X" onclick="main_btnclose_X()"><a>X</a></button>
+            </div>
+          </div>
+          <div class="user_input_modal_mid">
+            <div class="user_input_modal_bot">
+            <c:choose>
+					<c:when test="${customer.sortation eq 'user'}">
+						<button class="user_input_modal_bt" onclick="location.href='profilejsp.do'">
+                  		<img src="./resources/img/mainpage/회원정보.png">
+               			</button>
+					</c:when>
+					<c:when test="${customer.sortation eq 'admin'}">
+						<button class="user_input_modal_bt" onclick="location.href='product_managejsp.do'">
+                  		<img src="./resources/img/mainpage/회원정보.png">
+                		</button>
+					</c:when>
+			 </c:choose>
+              </div>
+              <div class="user_input_modal_bot_01">
+                <button class="user_input_modal_bt_01" onclick="location.href='logout.do'">
+                    <img src="./resources/img/mainpage/로그아웃.png">
+                  </button>
+              </div>
+          </div>
+
+        </div>
+      </div>
     <header class="header">
         <div class = "header_01">
-            <button class="user_btn">
-                <img src="./resources/img/product_manage/사용자.png">
+            <button class="user_btn" id="user_btn" onclick="user_btn()">
+                <img src="./resources/img/mainpage/사용자.png">
             </button>
              <c:choose>
 					<c:when test="${customer.sortation eq 'user'}"><a href="profilejsp.do">${customer.name }님, 안녕하세요</a></c:when>
