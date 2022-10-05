@@ -4,16 +4,16 @@ import lombok.Data;
 
 @Data
 public class workOrderVO {
-	private String ord_schedule;
-	private String ord_code;
-	private String ord_name;
-	private String ord_count;
-	private String ord_product_id;
-	private String ord_product_name;
-	private String ord_work;
-	private String ord_planned_quantity;
-	private String ord_performance_quantity;
-	private String ord_remarks;
-	private String ord_order_no;
+	private String wo_num;
+	private String wo_process;
+	private String wo_process_type;
+	private String wo_goods_num;
+	private String wo_goods_name;
+	private String wo_spec_name;
+	private String wo_count;
+	private String wo_client;
+	private String wo_date;
+	private String wo_start_date;
+	private String wo_end_date;
 	private String company;
 }

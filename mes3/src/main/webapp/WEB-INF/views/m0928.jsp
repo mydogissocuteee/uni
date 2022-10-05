@@ -230,7 +230,7 @@
                         라우팅 명
                     </div>
                     <div class="routing_modal_body_top_input">
-                        <input autocomplete="off" type="text">
+                        <input autocomplete="off" type="text" id="prr_name">
                     </div>
                     <div class="routing_modal_body_top_save">
                         <button class="routing_modal_body_top_save_btn">
@@ -303,15 +303,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        0003
-                                    </td>
-                                    <td>
-                                        결합
-                                    </td>
-                                </tr>
+                            <tbody id="routing_modal_body_bottom_r_table_tbody">
                             </tbody>
                         </table>
                     </div>
@@ -1153,11 +1145,13 @@
                 <th>제품명</th>
                 <th>제품번호</th>
               </tr>
+              <tbody class="m12_plan_productSearch_content_tbody">
               <tr>
                 <td>1</td>
                 <td></td>
                 <td></td>
               </tr>
+              </tbody>
             </table>
           </div>
         </div>
@@ -1169,8 +1163,8 @@
             <div class="m11_workOrder_modal_head">작업 지시 생성
                 <div class="m11_produc_plus_Modal_head_select">
                     <div class="m11_produc_plus_Modal_head_select_01">
-                        <input type="checkbox" name="m11_workOrder" onclick="m11_produc_plus_Modal_head_select_01_check(this)">주문 생성
-                        <input type="checkbox" name="m11_workOrder" onclick="m11_produc_plus_Modal_head_select_01_check(this)">생산계획 생성
+                        <input type="radio" name="m11_workOrder" value = "m11_workOrder01">주문 생성
+                        <input type="radio" name="m11_workOrder" value = "m11_workOrder02">생산계획 생성
                     </div>
                 </div>
                 <button type="button" class="m11_workOrder_modal_close" onclick="m11_workOrder_modal_close()">X</button>
@@ -1180,9 +1174,6 @@
                     <div class="m11_work_order_plus_content_01_01">
                         <input autocomplete='off' class="m11_work_order_plus_Modal_search_input_01"type="date">&nbsp;~&nbsp;
                         <input autocomplete='off' class="m11_work_order_plus_Modal_search_input_01"type="date">
-                        <div class="m11_work_order_plus_content_01_01_btn">
-                            <button><img src="./resources/img/공정관리/검색.png"></button>
-                        </div>
                     </div>
                 </div>
                 <div class="m11_work_order_plus_content_02">
@@ -1212,9 +1203,7 @@
                 <div class="m11_work_orderPlan_plus_content_01">
                     <div class="m11_work_orderPlan_plus_content_02_01">
                     <input autocomplete='off' class="m11_work_orderPlan_plus_Modal_search_input"type="text">
-                        <button class="m11_work_orderPlan_plus_Modal_search_btn01">
-                            <img src="./resources/img/제품관리/선택.png" class="m11_work_orderPlan_plus_Modal_search_btn_02">
-                        </button>
+
                     </div>
                 </div>
                 <div class="m11_work_orderPlan_plus_content_02">
@@ -1246,7 +1235,7 @@
     <!-- *1002 생산관리 -> 작업지시 : 생산품목 추가 모달창 -->
     <div class="m11_produc_plus_Modal" id="m11_produc_plus_Modal" style="display:none">
         <div class="m11_produc_plus_modal_body">
-            <div class="m11_produc_plus_Modal_head">작업지시
+            <div class="m11_produc_plus_Modal_head">작업지시 - 생산품목 추가
                 <button type="button" class="m11_produc_plus_Close"onclick="m11_produc_plus_Close()">X</button>
             </div>
             <div class="m11_produc_plus_content_01">
@@ -1280,33 +1269,7 @@
                             <td>
                                 작업지시번호:
                             </td>
-                            <td>
-                                <div class="m11_produc_plus_content_01_table_div01">
-                                    <div class="m11_produc_plus_content_01_table_div01_select">
-                                        <div class="m11_produc_plus_content_01_table_div01_txt">&nbsp;</div>
-                                        <div class="m11_produc_plus_content_01_table_div01_btn" onclick="m11_produc_plus_content_01_table_div01_btn()">
-                                            <img src="./resources/img/제품관리/엑스.png">
-                                        </div>
-                                        <ul id="m11_produc_plus_content_01_table_div01_list">
-                                            <li class="option">
-                                                1
-                                            </li>
-                                            <li class="option">
-                                                2
-                                            </li>
-                                            <li class="option">
-                                                3
-                                            </li>
-                                            <li class="option">
-                                                4
-                                            </li>
-                                            <li class="option">
-                                                5
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </td>
+                            <td class="m06_num" style="text-align: center; color:#999999;">자동으로 부여됩니다.</td>
                             <td colspan="5">
                             </td>
                         </tr>
@@ -1315,7 +1278,7 @@
                                 생산일자:
                             </td>
                             <td>
-                                <input type="date" style="width: 95%;">
+                                <input type="date" style="width: 95%;" id="pi_date">
                             </td>
                             <td colspan="5">
                             </td>
@@ -1428,7 +1391,7 @@
                                 수량:
                             </td>
                             <td colspan="2">
-                                <input type="text" autocomplete="off">
+                                <input type="text" autocomplete="off" id="pi_material_count">
                             </td>
                             <td>
                                 단위:
@@ -1443,7 +1406,7 @@
                                 지시 내용:
                             </td>
                             <td colspan="6">
-                                <input type="text" autocomplete="off" style ="width: 98% !important;">
+                                <input type="text" autocomplete="off" style ="width: 98% !important;" id="pi_content">
                             </td>
                         </tr>
                         <tr>
@@ -1451,13 +1414,13 @@
                                 시작 요청일:
                             </td>
                             <td>
-                                <input type="date" style="width: 95%;">
+                                <input type="date" style="width: 95%;" id="pi_start_date">
                             </td>
                             <td colspan="2">
                                 완료 요청일:
                             </td>
                             <td colspan="3">
-                                <input type="date" style="width: 95%;">
+                                <input type="date" style="width: 95%;" id="pi_end_date">
                             </td>
                         </tr>
                         <tr>
@@ -1503,7 +1466,7 @@
                                위치주소:
                             </td>
                             <td colspan="6">
-                                <input type="text" autocomplete="off" style ="width: 98% !important;">
+                                <input type="text" autocomplete="off" style ="width: 98% !important;" id="pi_move_address">
                             </td>
                         </tr>
                         <tr>
@@ -1511,7 +1474,7 @@
                                 기타 사항:
                             </td>
                             <td colspan="6">
-                                <input type="text" autocomplete="off" style ="width: 98% !important;">
+                                <input type="text" autocomplete="off" style ="width: 98% !important;" id="pi_memo">
                             </td>
                         </tr>
                     </tbody>
@@ -3638,11 +3601,11 @@
                                     <tr>
                                         <td class="m06_title02">거래처구분</td>
                                         <td class="m06_num01">
-                                            <input class="m06_radio" type="radio" name="account"
+                                            <input class="m06_radio" type="radio" name="account" value="매출처" id="매출처"
                                                 style="width: 0.9vw;">매출처
-                                            <input class="m06_radio" type="radio" name="account"
+                                            <input class="m06_radio" type="radio" name="account" value="매입처" id="매입처"
                                                 style="width: 0.9vw;">매입처
-                                            <input class="m06_radio" type="radio" name="account"
+                                            <input class="m06_radio" type="radio" name="account" value="외주처" id="외주처"
                                                 style="width: 0.9vw;">외주처
                                         </td>
                                     </tr>
@@ -4206,13 +4169,13 @@
                       <table class="produce_plan_tb_01">
                         <tr>
                           <td>계획년월</td>
-                          <td><input type="date"></td>
+                          <td><input type="date" id="pp_date"></td>
                         </tr>
                         <tr>
                           <td>제품명</td>
                           <td style="position:relative;">
                             <div class="produce_plan_tb_01_div_01">
-                                <div class="produce_plan_tb_01_div_01_txt">
+                                <div class="produce_plan_tb_01_div_01_txt" id="pp_goods_name">
                                     &nbsp;
                                 </div>
                             </div>
@@ -4223,19 +4186,19 @@
                         </tr>
                         <tr>
                           <td>제품번호</td>
-                          <td><div class="produce_plan_tb_01_div_02">&nbsp;</div></td>
+                          <td><div class="produce_plan_tb_01_div_02" id="pp_goods_num">&nbsp;</div></td>
                         </tr>
                         <tr>
                           <td>생산일자</td>
-                          <td><input type="date"></td>
+                          <td><input type="date" id="pp_product_date"></td>
                         </tr>
                         <tr>
                           <td>계획수량</td>
-                          <td><input type="text"></td>
+                          <td><input type="text" id="pp_quantity"></td>
                         </tr>
                         <tr>
                           <td>실적수량</td>
-                          <td><input type="text"></td>
+                          <td><input type="text" id="pp_performance_quantity"></td>
                         </tr>
                         <tr>
                           <td colspan="2">
@@ -4298,7 +4261,7 @@
                               <td>실적수량</td>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody id="produce_plan_tb_02_tbody">
                             <tr>
                               <td><input type="checkbox"></td>
                               <td>에코클린매트</td>
@@ -4356,19 +4319,19 @@
                         <tbody>
                           <tr>
                             <td>주문번호:</td>
-                            <td></td>
+                            <td id="wo_go_num"></td>
                             <td>고객:</td>
-                            <td></td>
+                            <td id="wo_go_client"></td>
                             <td>납기일자:</td>
-                            <td></td>
+                            <td id="wo_go_dueDate"></td>
                             <td>고객발주번호:</td>
-                            <td></td>
+                            <td id="wo_go_place"></td>
                           </tr>
                           <tr>
                             <td>품목번호:</td>
-                            <td></td>
+                            <td id="wo_go_goods_seq"></td>
                             <td>품목명:</td>
-                            <td></td>
+                            <td id="wo_go_goods_name"></td>
                             <td>사양명:</td>
                             <td></td>
                             <td colspan="2"></td>
@@ -4377,7 +4340,7 @@
                             <td>단위:</td>
                             <td></td>
                             <td>수량:</td>
-                            <td></td>
+                            <td id="wo_pp_performance_quantity"></td>
                             <td>최종공정:</td>
                             <td></td>
                             <td colspan="2"></td>
@@ -4469,19 +4432,6 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td><input type="checkbox"></td>
-                            <td>22.08.09</td>
-                            <td>151242151212</td>
-                            <td>생산</td>
-                            <td></td>
-                            <td>ㅇㅇㅇ</td>
-                            <td>ㄹㅇㄹㅇ</td>
-                            <td>ㅇㄹㅇㄹ</td>
-                            <td>22.05.11</td>
-                            <td>22.05.11</td>
-                            <td></td>
-                          </tr>
                         </tbody>
                       </table>
                     </div>
@@ -5014,7 +4964,7 @@
                       <table>
                         <tr>
                           <td>주문번호</td>
-                          <td><span>자동으로 부여됩니다.</span></td>
+                          <td><span id="go_num">자동으로 부여됩니다.</span></td>
                           <td>거래처</td>
                           <td class="m51_product_admin_td_02">
                             <div class="m51_product_admin_td_09_01_select">
@@ -5725,6 +5675,7 @@
     	show_m03_product_admin_td04_select_txt_list();
     	show_goods();
     	show_client();
+    	show_process_routing();
         document.getElementById("main_title").innerHTML = "기준정보&nbsp; > &nbsp;제품 관리"
         $(".main_top_bar").css("display", "flex");
         $(".mainbody_03").css("display", "flex");
@@ -5765,6 +5716,7 @@
     $('#goods_li').click(function () {
     	show_material();
     	show_client();
+    	show_process_routing();
         document.getElementById("main_title").innerHTML = "기준정보&nbsp; > &nbsp;자재 관리"
         $(".main_top_bar").css("display", "flex");
         $(".mainbody_04").css("display", "flex");
@@ -5828,37 +5780,7 @@
     // 끝
     
     
-    $(document).on("click", ".routing_modal_body_bottom_l_table tbody tr", function(){
 
-            const table = document.getElementById('routing_modal_body_bottom_r_table');
-            $(this).remove();
-            
-            const click_td1 = $(this).children().eq(0).text();
-            const click_td2 = $(this).children().eq(1).text();
-
-            const newRow = table.insertRow();
-            const newCel1 = newRow.insertCell(0);
-            const newCel2 = newRow.insertCell(1);
-            
-            newCel1.innerText = click_td1;
-            newCel2.innerText = click_td2;
-    });
-
-
-    $(document).on("click", ".routing_modal_body_bottom_r_table tbody tr", function(){
-
-        const table = document.getElementById('routing_modal_body_bottom_l_table');
-        $(this).remove();
-        const click_td1 = $(this).children().eq(0).text();
-        const click_td2 = $(this).children().eq(1).text();
-
-        const newRow = table.insertRow();
-        const newCel1 = newRow.insertCell(0);
-        const newCel2 = newRow.insertCell(1);
-
-        newCel1.innerText = click_td1;
-        newCel2.innerText = click_td2;
-    });
     ////////
     
         $(document).on("dblclick", ".processAdmin_tb_03 tbody tr", function(){
@@ -6046,44 +5968,9 @@
 
     // 생산관리 -> 생산 계획
     $('#producPlan_li').click(function () {
+    	show_goods();
+    	show_product_plan();
         document.getElementById("main_title").innerHTML = "생산 관리&nbsp; > &nbsp;생산 계획"
-        $(".main_top_bar").css("display", "flex");
-        $(".mainbody_11").css("display", "flex");
-        $(".mainbody_00").css("display", "none");
-        $(".mainbody_01").css("display", "none");
-        $(".mainbody_02").css("display", "none");
-        $(".mainbody_03").css("display", "none");
-        $(".mainbody_04").css("display", "none");
-        $(".mainbody_05").css("display", "none");
-        $(".mainbody_06").css("display", "none");
-        $(".mainbody_07").css("display", "none");
-        $(".mainbody_08").css("display", "none");
-        $(".mainbody_12").css("display", "none");
-        $(".mainbody_13").css("display", "none");
-        $(".mainbody_14").css("display", "none");
-        $(".mainbody_21").css("display", "none");
-        $(".mainbody_22").css("display", "none");
-        $(".mainbody_23").css("display", "none");
-        $(".mainbody_24").css("display", "none");
-        $(".mainbody_31").css("display", "none");
-        $(".mainbody_32").css("display", "none");
-        $(".mainbody_41").css("display", "none");
-        $(".mainbody_42").css("display", "none");
-        $(".mainbody_43").css("display", "none");
-        $(".mainbody_44").css("display", "none");
-        $(".mainbody_51").css("display", "none");
-        $(".mainbody_52").css("display", "none");
-        $(".mainbody_61").css("display", "none");
-        $(".mainbody_71").css("display", "none");
-        $(".mainbody_72").css("display", "none");
-        $(".mainbody_15").css("display", "none");
-        $(".mainbody_33").css("display", "none");
-
-    })
-
-    // 생산관리 -> 작업 지시
-    $('#order_li').click(function () {
-        document.getElementById("main_title").innerHTML = "생산 관리&nbsp; > &nbsp;작업 지시"
         $(".main_top_bar").css("display", "flex");
         $(".mainbody_12").css("display", "flex");
         $(".mainbody_00").css("display", "none");
@@ -6118,11 +6005,15 @@
 
     })
 
-    // 생산관리 -> 작업 지시 조회
-    $('#orderView_li').click(function () {
-        document.getElementById("main_title").innerHTML = "생산 관리&nbsp; > &nbsp;작업 지시 조회"
+    // 생산관리 -> 작업 지시
+    $('#order_li').click(function () {
+    	show_goodsOrder();
+    	show_product_plan();
+    	show_process();
+    	show_client();
+        document.getElementById("main_title").innerHTML = "생산 관리&nbsp; > &nbsp;작업 지시"
         $(".main_top_bar").css("display", "flex");
-        $(".mainbody_13").css("display", "flex");
+        $(".mainbody_11").css("display", "flex");
         $(".mainbody_00").css("display", "none");
         $(".mainbody_01").css("display", "none");
         $(".mainbody_02").css("display", "none");
@@ -6132,8 +6023,8 @@
         $(".mainbody_06").css("display", "none");
         $(".mainbody_07").css("display", "none");
         $(".mainbody_08").css("display", "none");
-        $(".mainbody_11").css("display", "none");
         $(".mainbody_12").css("display", "none");
+        $(".mainbody_13").css("display", "none");
         $(".mainbody_14").css("display", "none");
         $(".mainbody_21").css("display", "none");
         $(".mainbody_22").css("display", "none");
@@ -6155,11 +6046,49 @@
 
     })
 
+    // 생산관리 -> 작업 지시 조회
+    $('#orderView_li').click(function () {
+    	show_work_order();
+        document.getElementById("main_title").innerHTML = "생산 관리&nbsp; > &nbsp;작업 지시 조회"
+        $(".main_top_bar").css("display", "flex");
+        $(".mainbody_14").css("display", "flex");
+        $(".mainbody_00").css("display", "none");
+        $(".mainbody_01").css("display", "none");
+        $(".mainbody_02").css("display", "none");
+        $(".mainbody_03").css("display", "none");
+        $(".mainbody_04").css("display", "none");
+        $(".mainbody_05").css("display", "none");
+        $(".mainbody_06").css("display", "none");
+        $(".mainbody_07").css("display", "none");
+        $(".mainbody_08").css("display", "none");
+        $(".mainbody_11").css("display", "none");
+        $(".mainbody_12").css("display", "none");
+        $(".mainbody_15").css("display", "none");
+        $(".mainbody_21").css("display", "none");
+        $(".mainbody_22").css("display", "none");
+        $(".mainbody_23").css("display", "none");
+        $(".mainbody_24").css("display", "none");
+        $(".mainbody_31").css("display", "none");
+        $(".mainbody_32").css("display", "none");
+        $(".mainbody_41").css("display", "none");
+        $(".mainbody_42").css("display", "none");
+        $(".mainbody_43").css("display", "none");
+        $(".mainbody_44").css("display", "none");
+        $(".mainbody_51").css("display", "none");
+        $(".mainbody_52").css("display", "none");
+        $(".mainbody_61").css("display", "none");
+        $(".mainbody_71").css("display", "none");
+        $(".mainbody_72").css("display", "none");
+        $(".mainbody_13").css("display", "none");
+        $(".mainbody_33").css("display", "none");
+
+    })
+
     // 생산관리 -> 생산 실적 조회
     $('#productView_li').click(function () {
         document.getElementById("main_title").innerHTML = "생산 관리&nbsp; > &nbsp;생산 실적 조회"
         $(".main_top_bar").css("display", "flex");
-        $(".mainbody_14").css("display", "flex");
+        $(".mainbody_15").css("display", "flex");
         $(".mainbody_00").css("display", "none");
         $(".mainbody_01").css("display", "none");
         $(".mainbody_02").css("display", "none");
@@ -6187,7 +6116,7 @@
         $(".mainbody_61").css("display", "none");
         $(".mainbody_71").css("display", "none");
         $(".mainbody_72").css("display", "none");
-        $(".mainbody_15").css("display", "none");
+        $(".mainbody_14").css("display", "none");
         $(".mainbody_33").css("display", "none");
 
     })
@@ -6196,7 +6125,7 @@
     $('#produc_daliy').click(function () {
         document.getElementById("main_title").innerHTML = "생산 관리&nbsp; > &nbsp;생산 일보"
         $(".main_top_bar").css("display", "flex");
-        $(".mainbody_15").css("display", "flex");
+        $(".mainbody_13").css("display", "flex");
         $(".mainbody_00").css("display", "none");
         $(".mainbody_01").css("display", "none");
         $(".mainbody_02").css("display", "none");
@@ -6208,7 +6137,7 @@
         $(".mainbody_08").css("display", "none");
         $(".mainbody_11").css("display", "none");
         $(".mainbody_12").css("display", "none");
-        $(".mainbody_13").css("display", "none");
+        $(".mainbody_15").css("display", "none");
         $(".mainbody_21").css("display", "none");
         $(".mainbody_22").css("display", "none");
         $(".mainbody_23").css("display", "none");
@@ -6617,6 +6546,8 @@
         $(".mainbody_03").css("display", "none");
         $(".mainbody_04").css("display", "none");
         $(".mainbody_05").css("display", "none");
+        $(".mainbody_06").css("display", "none");
+        $(".mainbody_07").css("display", "none");
         $(".mainbody_11").css("display", "none");
         $(".mainbody_12").css("display", "none");
         $(".mainbody_13").css("display", "none");
@@ -6651,6 +6582,8 @@
         $(".mainbody_03").css("display", "none");
         $(".mainbody_04").css("display", "none");
         $(".mainbody_05").css("display", "none");
+        $(".mainbody_06").css("display", "none");
+        $(".mainbody_07").css("display", "none");
         $(".mainbody_11").css("display", "none");
         $(".mainbody_12").css("display", "none");
         $(".mainbody_13").css("display", "none");
@@ -6684,6 +6617,8 @@
         $(".mainbody_03").css("display", "none");
         $(".mainbody_04").css("display", "none");
         $(".mainbody_05").css("display", "none");
+        $(".mainbody_06").css("display", "none");
+        $(".mainbody_07").css("display", "none");
         $(".mainbody_11").css("display", "none");
         $(".mainbody_12").css("display", "none");
         $(".mainbody_13").css("display", "none");
@@ -6717,6 +6652,8 @@
         $(".mainbody_03").css("display", "none");
         $(".mainbody_04").css("display", "none");
         $(".mainbody_05").css("display", "none");
+        $(".mainbody_06").css("display", "none");
+        $(".mainbody_07").css("display", "none");
         $(".mainbody_11").css("display", "none");
         $(".mainbody_12").css("display", "none");
         $(".mainbody_13").css("display", "none");
@@ -6750,6 +6687,8 @@
         $(".mainbody_03").css("display", "none");
         $(".mainbody_04").css("display", "none");
         $(".mainbody_05").css("display", "none");
+        $(".mainbody_06").css("display", "none");
+        $(".mainbody_07").css("display", "none");
         $(".mainbody_11").css("display", "none");
         $(".mainbody_12").css("display", "none");
         $(".mainbody_13").css("display", "none");
@@ -9679,6 +9618,33 @@ document.addEventListener("click", function (g) {
         $('.m11_produc_plus_Modal').fadeIn();
     
     })
+    
+        function mainbody_11_03_top_l_01_btn(){
+        for(i=0; i<$(".work_order_tb_02 tbody tr").length; i++){
+            var num = i+1
+            if($('.work_order_tb_02 tbody tr:nth-child('+num+')').css("background-color") == "rgb(153, 153, 153)"){
+                console.log(num);
+                $('.work_order_tb_02 tbody tr:nth-child('+num+')').prev().before($('.work_order_tb_02 tbody tr:nth-child('+num+')'));
+
+                break;
+            }
+        }
+
+    }
+
+    function mainbody_11_03_top_l_02_btn(){
+        for(i=0; i<$(".work_order_tb_02 tbody tr").length; i++){
+            var num = i+1
+            if($('.work_order_tb_02 tbody tr:nth-child('+num+')').css("background-color") == "rgb(153, 153, 153)"){
+                console.log(num);
+                console.log($('.work_order_tb_02 tbody tr:nth-child('+num+')').next());
+                $('.work_order_tb_02 tbody tr:nth-child('+num+')').next().after($('.work_order_tb_02 tbody tr:nth-child('+num+')'));
+
+                break;
+            }
+        }
+
+    }
 
     
     $(document).ready(()=>{
@@ -9702,6 +9668,17 @@ document.addEventListener("click", function (g) {
       var currentMonth = thisMonth.getMonth(); // 달력에서 표기하는 월
       var currentDate = thisMonth.getDate(); // 달력에서 표기하는 일
   
+      var todays = "O";
+      todays+=currentYear;
+      todays+=(parseInt(currentMonth)+1);
+      if (currentDate<10){
+    	  todays+='0';
+    	  todays+=currentDate;
+      }else {
+      	todays+=currentDate;
+      }
+      console.log(todays);
+      $("#go_num").text(todays);
       // kst 기준 현재시간
       // console.log(thisMonth);
   
@@ -9795,24 +9772,23 @@ document.addEventListener("click", function (g) {
     function openCloseToc() {
         $('.m11_workOrder_modal_window').fadeIn();
     }
+    
+    $("input[name='m11_workOrder']:radio").change(function () {
+        var serviceType = this.value; //라디오 버튼 값
+        if(serviceType == "m11_workOrder01"){
+            $(".m11_workOrder_modal_body01").css('display', 'none');
+            $(".m11_workOrder_modal_body02").css('display', 'flex');
+            
+        }else if(serviceType == "m11_workOrder02"){
+            $(".m11_workOrder_modal_body01").css('display', 'flex');
+            $(".m11_workOrder_modal_body02").css('display', 'none');
+        }
+    });
+
 
     function m11_workOrder_modal_close() {
         $('.m11_workOrder_modal_window').fadeOut();
     }
-
-    // *1002 생산관리 -> 작업 지시 -> 작업지시 생성 모달창 : 체크박스 하나만//
-    function m11_produc_plus_Modal_head_select_01_check(element) {
-    
-    const checkboxes 
-        = document.getElementsByName("m11_workOrder");
-    
-    checkboxes.forEach((cb) => {
-        cb.checked = false;
-    })
-    
-    element.checked = true;
-    }
-
 
 
     // *1002 생산관리 -> 생산일보 -> 공정 선택 모달창//
@@ -10176,47 +10152,6 @@ document.addEventListener("click", function (g) {
     }
 
 
-     // div select custom
-     const selectBoxElements_m4 = document.querySelectorAll(".m04_goods_admin_td_02_00");
-
-    function toggleSelectBox_m4(selectBox) {
-        selectBox.classList.toggle("active");
-    }
-
-    function selectOption_m4(optionElement) {
-        const selectBox = optionElement.closest(".m04_goods_admin_td_02_00");
-        const selectedElement = selectBox.querySelector(".m04_goods_admin_td_03_select_txt");
-        selectedElement.textContent = optionElement.textContent;
-    }
-
-    selectBoxElements_m4.forEach(selectBoxElement => {
-        selectBoxElement.addEventListener("click", function (g) {
-            const targetElement = g.target;
-            const isOptionElement = targetElement.classList.contains("option");
-
-            if (isOptionElement) {
-                selectOption_m4(targetElement);
-            }
-
-            toggleSelectBox_m4(selectBoxElement);
-        });
-    });
-
-    document.addEventListener("click", function (g) {
-        const targetElement = g.target;
-        const isSelect = targetElement.classList.contains("m04_goods_admin_td_03_select_txt") || targetElement.closest(".m04_goods_admin_td_03_select_txt");
-
-        if (isSelect) {
-            return;
-        }
-
-        const allSelectBoxElements_m4 = document.querySelectorAll(".m04_goods_admin_td_02_00");
-
-        allSelectBoxElements_m4.forEach(boxElement => {
-            boxElement.classList.remove("active");
-        });
-    });
-    
    
   </script>
 </html>

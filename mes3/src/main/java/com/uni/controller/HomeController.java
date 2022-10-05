@@ -40,9 +40,11 @@ import com.uni.domain.goodsOrderVO;
 import com.uni.domain.materials_orderVO;
 import com.uni.domain.outBoundVO;
 import com.uni.domain.proOrderVO;
+import com.uni.domain.processRoutingVO;
 import com.uni.domain.processVO;
+import com.uni.domain.productItemVO;
+import com.uni.domain.productPlanVO;
 import com.uni.domain.productionPerformanceVO;
-import com.uni.domain.productionPlanVO;
 import com.uni.domain.userGroupRightVO;
 import com.uni.domain.userGroupVO;
 import com.uni.domain.workOrderVO;
@@ -377,7 +379,23 @@ public class HomeController {
 		boardmapper.processUpdate(vo);
 	}
 	
-	// 공정 관리
+	//공정 관리 - 라우팅
+	@ResponseBody
+	@RequestMapping("/processRoutingSelect.do")
+	public List<processRoutingVO> processRoutingSelect(String company) {
+		List<processRoutingVO> data = boardmapper.processRoutingSelect(company);
+		System.out.println("라우팅 리스트");
+		return data;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/processRoutingInsert.do")
+	public void processRoutingInsert(processRoutingVO vo) {
+		boardmapper.processRoutingInsert(vo);
+		System.out.println(vo+"---라우팅 입력");
+	}
+	
+	// 공정 관리 - 검사
 	@ResponseBody
 	@RequestMapping("/inspectionSelect.do")
 	public List<inspectionVO> inspectionSelect(String pr_num) {
@@ -525,6 +543,118 @@ public class HomeController {
 		System.out.println(go_num+"---자재 삭제");
 		boardmapper.goodsOrderDelete(go_num);
 	}
+	
+	/////////생산 관리/////////
+	// 생산 계획 관리
+	@ResponseBody
+	@RequestMapping("/productPlanSelect.do")
+	public List<productPlanVO> productPlanSelect(String company) {
+		List<productPlanVO> data = boardmapper.productPlanSelect(company);
+		System.out.println(company+"회사의 생산 계획 리스트");
+		System.out.println(data.size());
+		return data;
+	}
+	
+	//입력
+	@ResponseBody
+	@RequestMapping("/productPlanInsert.do")
+	public void productPlanInsert(productPlanVO vo) {
+		boardmapper.productPlanInsert(vo);
+		System.out.println(vo+"---자재 입력");
+	}
+	
+	// 삭제
+	@ResponseBody
+	@RequestMapping("/productPlanDelete.do")
+	public void productPlanDelete(String pp_num) {
+		System.out.println(pp_num+"---자재 삭제");
+		boardmapper.productPlanDelete(pp_num);
+	}
+	
+	// 수정
+	@ResponseBody
+	@RequestMapping("/productPlanUpdate.do")
+	public void productPlanUpdate(productPlanVO vo) {
+		System.out.println(vo.getPp_num()+"---회원수정");
+		boardmapper.productPlanUpdate(vo);
+	}
+	
+	// 생산 품목
+	@ResponseBody
+	@RequestMapping("/productItemSelect.do")
+	public List<productItemVO> productItemSelect(String company) {
+		List<productItemVO> data = boardmapper.productItemSelect(company);
+		System.out.println(company+"회사의 생산 계획 리스트");
+		System.out.println(data.size());
+		return data;
+	}
+	
+	//입력
+	@ResponseBody
+	@RequestMapping("/productItemInsert.do")
+	public void productItemInsert(productItemVO vo) {
+		boardmapper.productItemInsert(vo);
+		vo.setPi_process(vo.getPi_process().replace(" ", ""));
+		vo.setPi_process_type(vo.getPi_process_type().replace(" ", ""));
+		vo.setPi_client(vo.getPi_client().replace(" ", ""));
+		vo.setPi_material(vo.getPi_material().replace(" ", ""));
+		vo.setPi_material_unit(vo.getPi_material_unit().replace(" ", ""));
+		vo.setPi_move(vo.getPi_move().replace(" ", ""));
+		vo.setPi_move_name(vo.getPi_move_name().replace(" ", ""));
+		System.out.println(vo+"---생산품목 입력");
+	}
+	
+	// 삭제
+	@ResponseBody
+	@RequestMapping("/productItemDelete.do")
+	public void productItemDelete(String pp_num) {
+		System.out.println(pp_num+"---자재 삭제");
+		boardmapper.productItemDelete(pp_num);
+	}
+	
+	// 수정
+	@ResponseBody
+	@RequestMapping("/productItemUpdate.do")
+	public void productItemUpdate(productItemVO vo) {
+		System.out.println(vo.getPi_num()+"---회원수정");
+		boardmapper.productItemUpdate(vo);
+	}
+	
+	// 작업지시
+	@ResponseBody
+	@RequestMapping("/workOrderSelect.do")
+	public List<workOrderVO> workOrderSelect(String company) {
+		List<workOrderVO> data = boardmapper.workOrderSelect(company);
+		System.out.println(company+"회사의 생산 계획 리스트");
+		return data;
+	}
+	
+	//입력
+	@ResponseBody
+	@RequestMapping("/workOrderInsert.do")
+	public void workOrderInsert(workOrderVO vo) {
+		boardmapper.workOrderInsert(vo);
+		vo.setWo_process_type(vo.getWo_process_type().replace(" ", ""));
+		vo.setWo_goods_name(vo.getWo_goods_name().replace(" ", ""));
+		System.out.println(vo+"---생산품목 입력");
+	}
+	
+	// 삭제
+	@ResponseBody
+	@RequestMapping("/workOrderDelete.do")
+	public void workOrderDelete(String wo_num) {
+		System.out.println(wo_num+"---자재 삭제");
+		boardmapper.workOrderDelete(wo_num);
+	}
+	
+	// 수정
+	@ResponseBody
+	@RequestMapping("/workOrderUpdate.do")
+	public void workOrderUpdate(workOrderVO vo) {
+		System.out.println("---회원수정");
+		boardmapper.workOrderUpdate(vo);
+	}
+	
 	
 	@ResponseBody
 	@RequestMapping("/json.do")

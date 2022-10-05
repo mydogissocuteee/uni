@@ -121,22 +121,45 @@ select * from location where lc_class='재고로케이션분류';
 --공정관리
 create table process(
 pr_seq_num number, -- sql 부여 번호
-pr_num varchar2(100), -- 사용자 입력 번호
-pr_name varchar2(100),
-pr_sortation varchar2(100),
-pr_facilities varchar2(100),
-pr_reviewer varchar2(100),
-pr_approver varchar2(100),
-pr_memo varchar2(100),
-company varchar2(100)
+pr_num varchar2(1000), -- 사용자 입력 번호
+pr_name varchar2(1000),
+pr_sortation varchar2(1000),
+pr_facilities varchar2(1000),
+pr_reviewer varchar2(1000),
+pr_approver varchar2(1000),
+pr_memo varchar2(1000),
+company varchar2(1000)
 )
 create sequence pr_seq_num;
 insert into process values(pr_seq_num.nextval, '0001', '공정명', '구분', '설비', '검토자', '승인자', '메모', 'fourever');
 insert into process values(pr_seq_num.nextval, '0002', 'db 연결 완', '구분', '설비', '검토자', '승인자', '메모', 'fourever');
+insert into process(pr_routing) values('1');
 
 select * from process
 
 drop table process
+
+--공정관리 라우팅
+create table process_rounting(
+prr_num number, -- sql 부여 번호
+prr_name varchar2(1000), -- sql 부여 번호
+prr_left varchar2(1000), -- 사용자 입력 번호
+prr_right varchar2(1000),
+company varchar2(1000)
+)
+
+create sequence prr_num;
+
+select * from process_rounting
+MERGE INTO process_rounting
+USING dual
+ON (prr_name = 'ㅇ')
+WHEN MATCHED THEN
+    UPDATE SET prr_left = 'we', prr_right = 'we'
+WHEN NOT MATCHED THEN
+    INSERT (prr_num, prr_name, prr_left, prr_right, company) VALUES (111, 'ㅇ', 'ㅇ', 'ㅇ', 'ㅇ');
+
+drop table process_rounting
 
 --공정관리 / 검사
 create table inspection(
@@ -164,29 +187,30 @@ drop table inspection;
 
 -- 거래처
 create table client (
-ct_num number, --시퀀스
-ct_mutual varchar2(100), --상호
-ct_sortation varchar2(100), --구분
-ct_repName varchar2(100), --대표자명
-ct_businessNumber varchar2(100), --사업자번호
-ct_chrgName varchar2(100), --담당자명
-ct_postalCode varchar2(100), --우편번호
-ct_address varchar2(100), --주소
-ct_condition varchar2(100), --업태
-ct_industry varchar2(100), --업종
-ct_contact varchar2(100), --연락처
-ct_fax varchar2(100), --fax
-ct_email varchar2(100),
-company varchar2(100)
+ct_num varchar2(1000), --시퀀스
+ct_mutual varchar2(1000), --상호
+ct_sortation varchar2(1000), --구분
+ct_repName varchar2(1000), --대표자명
+ct_businessNumber varchar2(1000), --사업자번호
+ct_chrgName varchar2(1000), --담당자명
+ct_postalCode varchar2(1000), --우편번호
+ct_address varchar2(1000), --주소
+ct_condition varchar2(1000), --업태
+ct_industry varchar2(1000), --업종
+ct_contact varchar2(1000), --연락처
+ct_fax varchar2(1000), --fax
+ct_email varchar2(1000),
+company varchar2(1000)
 );
 
-insert into client(ct_num,ct_mutual,company ) values(client_seq.nextval, 'db연결, 삭제 완료 입력 남음', 'fourever')
+insert into client(ct_num, company) values('C000'||client_seq.nextval, 'fourever')
 
 create sequence client_seq;
 
 select * from client
+select ct_num from client 
 drop table client
-
+drop sequence client_seq
 DELETE FROM client_forever WHERE sortation='매출처'
 
 
@@ -280,6 +304,93 @@ select * from goods_order;
 select * from goods_order where company='fourever'
 create sequence go_seq;
 
+
+--------------------------
+--------- 생산관리 ---------
+--------------------------
+--생산계획 pp
+create table product_plan(
+pp_num number, --시퀀스
+pp_date varchar2(100),
+pp_goods_name varchar2(100),
+pp_goods_num varchar2(100),
+pp_product_date varchar2(100),
+pp_quantity varchar2(100),
+pp_performance_quantity varchar2(100),
+company varchar2(100)
+)
+drop table product_plan;
+create sequence pp_num;
+DELETE FROM product_plan WHERE pp_equipment_name='d'
+select * from product_plan;
+insert into PRODUCT_PLAN(pp_goods_num, company) values('d', 'd')
+
+create table product_item(
+pi_num number, --시퀀스
+pi_date varchar2(100),
+pi_process varchar2(100),
+pi_process_type varchar2(100),
+pi_client varchar2(100),
+pi_material varchar2(100),
+pi_material_count varchar2(100),
+pi_material_unit varchar2(100),
+pi_content varchar2(100),
+pi_start_date varchar2(100),
+pi_end_date varchar2(100),
+pi_move varchar2(100),
+pi_move_name varchar2(100),
+pi_move_address varchar2(100),
+pi_memo varchar2(100),
+company varchar2(100)
+)
+select MAX(pi_num) from product_item
+create sequence pi_num;
+select * from product_item;
+
+create table work_order(
+wo_num number, --시퀀스
+wo_process varchar2(1000),
+wo_process_type varchar2(1000),
+wo_goods_num varchar2(1000),
+wo_goods_name varchar2(1000),
+wo_spec_name varchar2(1000),
+wo_count varchar2(1000),
+wo_client varchar2(1000),
+wo_date varchar2(1000),
+wo_start_date varchar2(1000),
+wo_end_date varchar2(1000),
+company varchar2(100)
+)
+create sequence wo_num;
+drop table work_order;
+-----------------------------------------
+
+
+
+
+--생산실적조회
+create table p (
+num number not null,
+productionDate date not null,
+shift varchar2(100) not null,
+process varchar2(100) not null,
+facilities varchar2(100) not null,
+product_id varchar2(100) not null,
+process_routing_id varchar2(100),
+performanceQuantity varchar2(100), 
+goodProductQuantity varchar2(100), 
+defectQuantity varchar2(100), 
+defectCode varchar2(100),
+department varchar2(100),
+writer varchar2(100),
+views varchar2(100)
+);
+
+drop table ct_production_labor_forever
+
+create sequence ct_production_labor_forever_seq;
+
+ select * from ct_production_labor_forever
 --------------------------
 --------- 자재관리 ---------
 --------------------------
@@ -308,75 +419,8 @@ drop table materials_order;
 select * from materials_order;
 
 
---생산일보
 
 
---생산실적조회
-create table ct_production_labor_forever (
-num number not null,
-productionDate date not null,
-shift varchar2(100) not null,
-process varchar2(100) not null,
-facilities varchar2(100) not null,
-product_id varchar2(100) not null,
-process_routing_id varchar2(100),
-performanceQuantity varchar2(100), 
-goodProductQuantity varchar2(100), 
-defectQuantity varchar2(100), 
-defectCode varchar2(100),
-department varchar2(100),
-writer varchar2(100),
-views varchar2(100)
-);
-
-drop table ct_production_labor_forever
-
-create sequence ct_production_labor_forever_seq;
-
-insert into ct_production_labor_forever values(
-ct_production_labor_forever_seq.nextval, sysdate, '4', '5', '4', '5', '6',
- '7', '8', '9', '0', '1', '12', '12')
- 
- insert into ct_production_labor_forever values(
-ct_production_labor_forever_seq.nextval, sysdate, 'Day', '가공', 'K-3', 'OS12', '3L01Y21',
- '172', '170', '2', 'E-026', '설비부', '김수빈', '5-30');
-
-insert into ct_production_labor_forever values(
-ct_production_labor_forever_seq.nextval, sysdate, 'Night', '운반', 'A-1', 'OS12', '1A01Q21',
- '1435', '1430', '5', 'S-002', '생산부', '엄지원', '06-14');
-
-insert into ct_production_labor_forever values(
-ct_production_labor_forever_seq.nextval, sysdate, 'D/E', '품질검사', 'K-5', 'OS12', '6R01G21',
- '684', '682', '2', 'A-002', '기술지원부', '최다빈', '06-28');
- 
- select * from ct_production_labor_forever
-
---BOM
-
-
--- 작업지시 15
-create table ct_workorder (
-ord_num number,
-ord_schedule varchar2(100),
-ord_code varchar2(100), --설비코드
-ord_name varchar2(100), --설비명
-ord_count varchar2(100), --작업수
-ord_product_id varchar2(100), --품번
-ord_product_name varchar2(100), --품명
-ord_work varchar2(100), --작업순서
-ord_planned_quantity varchar2(100), --계획수량
-ord_performance_quantity varchar2(100), --실적수량
-ord_remarks varchar2(100), --비고
-ord_order_no varchar2(100), --작업지시번호
-company varchar2(100) -- 회사
-);
-create sequence ord_seq;
-insert into ct_workorder values(
-'2022-8-16', 'CR09', '조립', '33', 'U',
- 'E', '8', '7', '', '1332', '', 'fourever');
-DELETE FROM ct_workorder WHERE ord_product_name='sdf'
-drop table ct_workorder
-select * from ct_workorder;
 
 --출고 관리
 create table goods_out (
@@ -397,20 +441,6 @@ select * from ct_goods_out_bound
 drop table ct_goods_out_bound
 insert into ct_goods_out_bound(out_no) VALUES (goods_out_seq.nextval||'hi')
 
---생산계획 pp
-create table production_plan(
-pp_num number,
-pp_date varchar2(100),
-pp_equipment_name varchar2(100),
-pp_equipment_code varchar2(100),
-pp_item_num varchar2(100),
-pp_item_name varchar2(100),
-company varchar2(100)
-)
-drop table production_plan;
-create sequence pp_seq;
-DELETE FROM production_plan WHERE pp_equipment_name='d'
-select * from production_plan;
 
 
 

@@ -21,9 +21,11 @@ import com.uni.domain.goodsOrderVO;
 import com.uni.domain.materials_orderVO;
 import com.uni.domain.outBoundVO;
 import com.uni.domain.proOrderVO;
+import com.uni.domain.processRoutingVO;
 import com.uni.domain.processVO;
+import com.uni.domain.productItemVO;
+import com.uni.domain.productPlanVO;
 import com.uni.domain.productionPerformanceVO;
-import com.uni.domain.productionPlanVO;
 import com.uni.domain.userGroupRightVO;
 import com.uni.domain.userGroupVO;
 import com.uni.domain.workOrderVO;
@@ -117,7 +119,7 @@ public interface BoardMapper {
 	
 	// 추가
 	@Insert("insert into process values(pr_seq_num.nextval, '${vo.pr_num}', '${vo.pr_name}', '${vo.pr_sortation}', '${vo.pr_facilities}', '${vo.pr_reviewer}', "
-			+ " '${vo.pr_approver}', '${vo.pr_memo}','${vo.company}' )")
+			+ " '${vo.pr_approver}', '${vo.pr_memo}', '${vo.company}' )")
 	public void processInsert(@Param("vo") processVO vo, @Param("company") String company);
 	
 	// 삭제
@@ -129,18 +131,33 @@ public interface BoardMapper {
 			+ " pr_approver='${vo.pr_approver}', pr_memo='${vo.pr_memo}' where pr_seq_num=${vo.pr_seq_num}")
 	public void processUpdate(@Param("vo") processVO vo);
 	
+	// 라우팅 조회
+	@Select("select * from process_rounting where company='${company}'")
+	public List<processRoutingVO> processRoutingSelect(@Param("company") String company);
+	
+	// 추가
+	@Insert("MERGE INTO process_rounting "
+			+ "USING dual "
+			+ "ON (prr_name = '${vo.prr_name}') "
+			+ "WHEN MATCHED THEN "
+			+ "    UPDATE SET prr_left = '${vo.prr_left}', prr_right = '${vo.prr_right}' "
+			+ "WHEN NOT MATCHED THEN "
+			+ "    INSERT (prr_num, prr_name, prr_left, prr_right, company) VALUES (prr_num.nextval, '${vo.prr_name}', '${vo.prr_left}', '${vo.prr_right}', '${vo.company}')")
+	public void processRoutingInsert(@Param("vo") processRoutingVO vo);
+	
+	
 	// 거래처 조회
 	@Select("select * from client where company='${company}'")
 	public List<clientVO> clientSelect(@Param("company") String company);
 	
 	// 추가
-	@Insert("insert into client values(client_seq.nextval, '${vo.ct_mutual}', '${vo.ct_sortation}', '${vo.ct_repName}', '${vo.ct_businessNumber}',"
+	@Insert("insert into client values('C'||to_char(LPAD(client_seq.nextval, 4, '0')), '${vo.ct_mutual}', '${vo.ct_sortation}', '${vo.ct_repName}', '${vo.ct_businessNumber}',"
 			+ " '${vo.ct_chrgName}', '${vo.ct_postalCode}', '${vo.ct_address}', '${vo.ct_condition}', '${vo.ct_industry}',"
 			+ " '${vo.ct_contact}', '${vo.ct_fax}', '${vo.ct_email}', '${vo.company}')")
 	public void clientInsert(@Param("vo") clientVO vo, @Param("company") String company);
 	
 	// 삭제
-	@Delete("DELETE FROM client WHERE ct_num=${ct_num}")
+	@Delete("DELETE FROM client WHERE ct_num='${ct_num}'")
 	public void clientDelete(@Param("ct_num") String ct_num);
 	
 	// 수정
@@ -213,7 +230,7 @@ public interface BoardMapper {
 	public List<goodsOrderVO> goodsOrderSelect(@Param("company") String company);
 	
 	// 추가
-	@Insert("insert into goods_order values(go_seq.nextval, '${vo.go_goods_seq}', '${vo.go_goods_name}', '${vo.go_goods_count}', '${vo.go_client}',"
+	@Insert("insert into goods_order values('${vo.go_num}', '${vo.go_goods_seq}', '${vo.go_goods_name}', '${vo.go_goods_count}', '${vo.go_client}',"
 			+ " '${vo.go_orderDate}', '${vo.go_dueDate}', '${vo.go_place}','${vo.go_address}','${vo.go_price}',"
 			+ " '${vo.go_amount}', '${vo.go_taxation}', '${vo.go_now}', '${vo.company}' )")
 	public void goodsOrderInsert(@Param("vo") goodsOrderVO vo);
@@ -223,34 +240,75 @@ public interface BoardMapper {
 	public void goodsOrderDelete(@Param("go_num") String go_num);
 
 	
+	////////////생산 관리
+	// 생산 계획 조회
+	@Select("select * from product_plan where company='${company}'")
+	public List<productPlanVO> productPlanSelect(@Param("company") String company);
 	
+	// 추가
+	@Insert("insert into product_plan values(pp_num.nextval, '${vo.pp_date}', '${vo.pp_goods_name}', '${vo.pp_goods_num}', '${vo.pp_product_date}', "
+			+ " '${vo.pp_quantity}', '${vo.pp_performance_quantity}','${vo.company}' )")
+	public void productPlanInsert(@Param("vo") productPlanVO vo);
 	
+	// 삭제
+	@Delete("DELETE FROM product_plan WHERE pp_num=${pp_num}")
+	public void productPlanDelete(@Param("pp_num") String pp_num);
 	
+	// 수정
+	@Update("update product_plan set pp_date='${vo.pp_date}', pp_goods_name='${vo.pp_goods_name}', pp_goods_num='${vo.pp_goods_num}', pp_product_date='${vo.pp_product_date}', pp_quantity='${vo.pp_quantity}', "
+			+ "	pp_performance_quantity='${vo.pp_performance_quantity}' "
+			+ "	 WHERE pp_num=${vo.pp_num}")
+	public void productPlanUpdate(@Param("vo") productPlanVO vo);
 	
+	// 생산품목 조회
+	@Select("select * from product_item where company='${company}'")
+	public List<productItemVO> productItemSelect(@Param("company") String company);
 	
+	@Select("select MAX(pi_num) from product_item")
+	public String productItemSelectSequence(@Param("company") String company);
 	
-	// 작업지시
-	@Select("select * from ct_workorder where company='${company}'")
+	// 추가
+	@Insert("insert into product_item values(pi_num.nextval, '${vo.pi_date}', '${vo.pi_process}', '${vo.pi_process_type}', '${vo.pi_client}', "
+			+ " '${vo.pi_material}', '${vo.pi_material_count}','${vo.pi_material_unit}','${vo.pi_content}','${vo.pi_start_date}', "
+			+ " '${vo.pi_end_date}', '${vo.pi_move}','${vo.pi_move_name}','${vo.pi_move_address}','${vo.pi_memo}',"
+			+ " '${vo.company}' )")
+	public void productItemInsert(@Param("vo") productItemVO vo);
+	
+	// 삭제
+	@Delete("DELETE FROM product_item WHERE pi_num=${pi_num}")
+	public void productItemDelete(@Param("pp_num") String pi_num);
+	
+	// 수정
+	@Update("update product_item set pi_date='${vo.pi_date}', pi_process='${vo.pi_process}', pi_process_type='${vo.pi_process_type}', pi_client='${vo.pi_client}', pi_material='${vo.pi_material}', "
+			+ "	pi_material_count='${vo.pi_material_count}', pi_material_unit='${vo.pi_material_unit}', pi_content='${vo.pi_content}', pi_start_date='${vo.pi_start_date}', pi_end_date='${vo.pi_end_date}', "
+			+ "	pi_move='${vo.pi_move}', pi_move_name='${vo.pi_move_name}', pi_move_address='${vo.pi_move_address}', pi_memo='${vo.pi_memo}', "
+			+ "	 WHERE pi_num=${vo.pi_num}")
+	public void productItemUpdate(@Param("vo") productItemVO vo);
+	
+	// 작업지시 조회
+	@Select("select * from work_order where company='${company}'")
 	public List<workOrderVO> workOrderSelect(@Param("company") String company);
 	
-	@Insert("insert into ct_workorder values(ord_seq.nextval, '${vo.ord_schedule}', '${vo.ord_code}', '${vo.ord_name}', '${vo.ord_count}', '${vo.ord_product_id}',"
-			+ " '${vo.ord_product_name}', '${vo.ord_work}', '${vo.ord_planned_quantity}', '${vo.ord_performance_quantity}', '${vo.ord_remarks}', '${vo.ord_order_no}', '${vo.company}')")
+	// 추가
+	@Insert("insert into work_order values(wo_num.nextval, '${vo.wo_process}', '${vo.wo_process_type}', '${vo.wo_goods_num}', '${vo.wo_goods_name}', "
+			+ " '${vo.wo_spec_name}', '${vo.wo_count}','${vo.wo_client}','${vo.wo_date}','${vo.wo_start_date}', "
+			+ " '${vo.wo_end_date}', '${vo.company}' )")
 	public void workOrderInsert(@Param("vo") workOrderVO vo);
 	
+	// 삭제
+	@Delete("DELETE FROM work_order WHERE wo_num=${wo_num}")
+	public void workOrderDelete(@Param("wo_num") String wo_num);
+	
+	// 수정
+	@Update("update work_order set pi_date='${vo.pi_date}', pi_process='${vo.pi_process}', pi_process_type='${vo.pi_process_type}', pi_client='${vo.pi_client}', pi_material='${vo.pi_material}', "
+			+ "	pi_material_count='${vo.pi_material_count}', pi_material_unit='${vo.pi_material_unit}', pi_content='${vo.pi_content}', pi_start_date='${vo.pi_start_date}', pi_end_date='${vo.pi_end_date}', "
+			+ "	pi_move='${vo.pi_move}', pi_move_name='${vo.pi_move_name}', pi_move_address='${vo.pi_move_address}', pi_memo='${vo.pi_memo}', "
+			+ "	 WHERE wo_num=${vo.wo_num}")
+	public void workOrderUpdate(@Param("vo") workOrderVO vo);
+	
+	
+	/////////////////
 
-	
-
-	@Select("select * from ct_production_labor_forever order by num")
-	public List<productionPerformanceVO> productionPerformanceForever();
-	
-	
-	
-	// 생산계획
-	@Insert("insert into production_plan values(pp_seq.nextval, '${vo.pp_date}', '${vo.pp_equipment_name}', '${vo.pp_equipment_code}', '${vo.pp_item_num}', '${vo.pp_item_name}', '${vo.company}')")
-	public void productionPlanInsert(@Param("vo") productionPlanVO vo);
-	
-	@Select("select * from production_plan where company='${company}'")
-	public List<productionPlanVO> productionPlanSelect(@Param("company") String company);
 	
 	//출고지시
 	@Select("select * from ct_goods_out_bound where company='${company}'")

@@ -1,6 +1,8 @@
 /**
  * 
  */
+
+
 /** 사용자 관리 */
 function show_user(){
 	$.ajax({
@@ -226,6 +228,7 @@ function show_process(){
 function processHtml(data){
 	var view="";
 	var view2="";
+	var view3="";
      	view+='<table class="processAdmin_tb_02">';
      	view+='<thead>';
      	view+='<tr>';
@@ -245,44 +248,58 @@ function processHtml(data){
 		view+='<td>'+obj.pr_sortation+'</td>';
 		view+='</tr>';
 		view2+='<tr>';
-		view2+='<td>'+obj.pr_num+'</td>';
-		view2+='<td>'+obj.pr_name+'</td>';
+		view2+='<td><input type="hidden" name="pr_seq_num" value="'+obj.pr_seq_num+'">'+obj.pr_num+'</td>';
+		view2+='<td><input type="hidden" name="routing" value="1">'+obj.pr_name+'</td>';
 		view2+='</tr>';
+		view3+='<li class="option">'+obj.pr_name+'</li>';
 })
 		view+='</tbody>';
 		view+='</table>';
   $( '.processAdmin_tb_02' ).html(view);
   $( '#routing_modal_body_bottom_l_table_tbody' ).html(view2);
+  $( '#m11_produc_plus_content_01_table_div02_list' ).html(view3);
 }
 
 
-function processInsert(){
-	$('.process_input_modal_window').fadeIn();
-	console.log("공정입력");
-var processVO = {
-			company : "fourever",
-			pr_num : $("#processAdmin_tb_01_num").val(),
-			pr_name : $("#processAdmin_tb_01_name").val(),
-			pr_sortation : $("#mainbody_05_02_left_bott_tb_table_txt").text(),
-			pr_facilities : $("#processAdmin_tb_01_system").text(),
-			pr_reviewer : $("#processAdmin_tb_01_wrapp_01_01").text(),
-			pr_approver : $("#processAdmin_tb_01_wrapp_02_01").text(),
-			pr_memo : $("#processAdmin_tb_01_memo").val()
-	};
-	$.ajax({
-			url : "processInsert.do",
-			type : "GET",
-			async:false,
-			data : processVO,
-			// dataType : "json",
-			success : function(){
-				console.log("공정 입력 success");},
-			error : function(request, status, error){
-			    console.log("공정 입력 error");}
-		});
-		
-	  	show_process();
-}
+	function processInsert(){
+	   $('.process_input_modal_window').fadeIn();
+	
+	    var TEXT01 = $('#processAdmin_tb_01_num').val();
+	   var TEXT02 = $('#processAdmin_tb_01_name').val();
+	   var TEXT03 = $('#mainbody_05_02_left_bott_tb_table_txt').text();
+	   if(TEXT01==""){
+	       $(".process_input_modal_mid").text("공정번호를 입력해주세요.");
+	   }else if(TEXT02==""){
+	       $(".process_input_modal_mid").text("공정명을 입력해주세요.");
+	   }else if(TEXT03.indexOf(" ") !== -1){
+	       $(".process_input_modal_mid").text("공정구분을 선택해주세요.");
+	   }else {
+	       $(".process_input_modal_mid").text("공정이 추가되었습니다.");
+	      var processVO = {
+	         company : "fourever",
+	         pr_num : $("#processAdmin_tb_01_num").val(),
+	         pr_name : $("#processAdmin_tb_01_name").val(),
+	         pr_sortation : $("#mainbody_05_02_left_bott_tb_table_txt").text(),
+	         pr_facilities : $("#processAdmin_tb_01_system").text(),
+	         pr_reviewer : $("#processAdmin_tb_01_wrapp_01_01").text(),
+	         pr_approver : $("#processAdmin_tb_01_wrapp_02_01").text(),
+	         pr_memo : $("#processAdmin_tb_01_memo").val()
+	      };
+	      $.ajax({
+	         url : "processInsert.do",
+	         type : "GET",
+	         async:false,
+	         data : processVO,
+	         // dataType : "json",
+	         success : function(){
+	            console.log("공정 입력 success");},
+	         error : function(request, status, error){
+	             console.log("공정 입력 error");}
+	      });
+	      
+	        show_process();
+	      }
+	   }
 
 
 
@@ -356,13 +373,14 @@ function clientHtml(data){
 		view+='</thead>';
 		view+='<tbody>';
 	var view2="";
+	var view3="";
 	var clientindex=1;
   	$.each(data,function(index, obj){	//반복문
 		view+='<tr>';
 		view+='<td><input autocomplete="off" type="checkbox" id="processAdmin_tb_02_checkbox" name="clientNum" value="'+obj.ct_num+'">';
 		view+='<label for="processAdmin_tb_02_checkbox"></label></td>';
 		view+='<td>'+obj.ct_mutual+'</td>';
-		view+='<td>'+obj.ct_contact+'</td>';
+		view+='<td>'+obj.ct_num+'</td>';
 		view+='<td>'+obj.ct_businessNumber+'</td>';
 		view+='<td>'+obj.ct_repName+'</td>';
 		view+='</tr>';
@@ -372,9 +390,12 @@ function clientHtml(data){
 		view2+='<td class="goods_customer_num_Search_td_00">'+obj.ct_num+'</td>';
 		view2+='<td class="goods_customer_num_Search_td_00">'+obj.ct_mutual+'</td>';
 		view2+='<td class="goods_customer_num_Search_td_00">'+obj.ct_sortation+'</td>';
+		view2+='<input type=hidden value="'+obj.ct_address+'">';
 		view2+='</tr>';
 		
 		clientindex=clientindex+1;
+		
+		view3+='<li class="option">'+obj.ct_mutual+'</li>';
 })
 		view+='</tbody>';
 		view+='</table>';
@@ -382,6 +403,7 @@ function clientHtml(data){
   $( '#customer_tbody' ).html(view2);
   $( '#goods_customer_num_tbody' ).html(view2);
   $( '#m51_Order_customer_num_tbody' ).html(view2);
+  $( '#m11_produc_plus_content_01_table_div03_list' ).html(view3);
 }
 
 
@@ -479,6 +501,7 @@ var clientVO = {
 		var view2="";
 		var view3="";
 		var view4="";
+		var view5="";
 		 view+='<thead><tr>';
 	     view+='<td></td>';
 	     view+='<td>품목번호</td>';
@@ -512,21 +535,27 @@ var clientVO = {
 	     view3+='<td class="product_admin_tb_line">'+obj.gs_unit+'</td>';
 	     view3+='<td class="product_admin_tb_line">'+obj.gs_standard+'</td>';
 	     view3+='<td class="product_admin_tb_line">'+obj.gs_price+'</td>';
-	     view3+='<td><input type="text" autocomplete="off" class="go_goods_count" id="num1_'+obj.gs_seq_num+'" name="go_goods_count"></td>'; //주문수량
-	     view3+='<td><input type="text" autocomplete="off" class="go_goods_discount" id="num2_'+obj.gs_seq_num+'" name=""></td>'; //할인율
-	     view3+='<td><input type="text" autocomplete="off" class="goodsamount" id="total_'+obj.gs_seq_num+'" name="go_amount"></td>'; //금액
+	     view3+='<td><input type="text" autocomplete="off" class="go_goods_count" id="num1_'+obj.gs_seq_num+'" name="go_goods_count" value="0"></td>'; //주문수량
+	     view3+='<td><input type="text" autocomplete="off" class="go_goods_discount" id="num2_'+obj.gs_seq_num+'" name="" value="0"></td>'; //할인율
+	     view3+='<td><input type="text" autocomplete="off" class="goodsamount" id="total_'+obj.gs_seq_num+'" name="go_amount" value="0"></td>'; //금액
 	     view3+='</tr>';
 		 view4+='<tr>';
-	     view4+='<td class="product_admin_tb_line">'+index+'</td>';
+	     view4+='<td class="product_admin_tb_line">'+(index+1)+'</td>';
 	     view4+='<td class="product_admin_tb_line">'+obj.gs_seq_num+'</td>';
 	     view4+='<td class="product_admin_tb_line">'+obj.gs_name+'</td>';
 	     view4+='</tr>';
+ 		 view5+='<tr>';
+	     view5+='<td class="product_admin_tb_line">'+(index+1)+'</td>';
+	     view5+='<td class="product_admin_tb_line">'+obj.gs_name+'</td>';
+	     view5+='<td class="product_admin_tb_line">'+obj.gs_seq_num+'</td>';
+	     view5+='</tr>';
 	})
 	     view+='</tbody>';
 	  $( '#product_admin_tb_02' ).html(view);
 	  $( '.m07_bom_list_tbody' ).html(view2);
 	  $( '#mainbody_51_2_table_tbody' ).html(view3);
 	  $( '.m051_product_choice_tbody' ).html(view4);
+	  $( '.m12_plan_productSearch_content_tbody' ).html(view5);
 	}
 	
 	
@@ -853,7 +882,6 @@ var clientVO = {
 			var view2="";
 			var view3="";
 			var num=1;
-			console.log("hi");
 		  $.each(data,function(index, obj){	//반복문
 		     view+='<tr>';
 		     view+='<td>'+num+'</td>';
@@ -892,7 +920,6 @@ var clientVO = {
 		function ajaxHtml13(data){
 			var view="";
 			var num=1;
-			console.log("hi");
 		  $.each(data,function(index, obj){	//반복문
 		     view+='<li class="option">'+obj.cc_name+'</li>';
 		})
@@ -987,40 +1014,56 @@ var clientVO = {
 	})
 	
 	
-	// clientInsert()
+	   // clientInsert()
     $(document).on("click", ".mainbody_06_btn3", function(){
-
-		console.log("안올듯");
-			console.log("durls")
-		var clientVO = {
-			company : "fourever",
-			ct_mutual : $("#m06_l_mutual_input").val(),
-			ct_sortation : $("input[name=account]:checked").val(),
-			ct_repName : $("#m06_l_name_input").val(),
-			ct_businessNumber : $("#m06_l_bsnum_input").val(),
-			ct_chrgName : $("#m06_l_person_name_input").val(),
-			ct_postalCode : $("#m06_l_post_input").val(),
-			ct_address : $("#m06_l_address_input").val(),
-			ct_condition : $("#m06_l_bs01_input").val(),
-			ct_industry : $("#m06_l_bs02_input").val(),
-			ct_contact : $("#m06_l_phone_input").val(),
-			ct_fax : $("#m06_l_fax_input").val(),
-			ct_email : $("#m06_l_email_input").val()
-		};
-		$.ajax({
-			url : "clientInsert.do",
-			type : "GET",
-			async:false,
-			data : clientVO,
-			// dataType : "json",
-			success : function(){
-				console.log("거래처 입력 success");},
-			error : function(request, status, error){
-			    console.log("거래처 입력 error");}
-		});
-		
-	  	show_client();
-	});
+      $('.customer_input_modal_window').fadeIn();
+      var TEXT01 = $('#m06_l_mutual_input').val();
+      console.log(TEXT01);
+      var TEXT02 = $('#m06_l_name_input').val();
+      var TEXT03 = $('#m06_l_bsnum_input').val();
+      var TEXT04 = $('#m06_l_person_name_input').val();
+      if(TEXT01==""){
+         $(".customer_input_modal_mid").text("상호명을 입력해주세요.");
+      }else if($('.m06_radio').is(':checked') == false){
+         $(".customer_input_modal_mid").text("거래처구분을 선택해주세요.");
+      }else if(TEXT02==""){
+         $(".customer_input_modal_mid").text("대표자명을 입력해주세요.");
+      }else if(TEXT03==""){
+         $(".customer_input_modal_mid").text("사업자번호를 입력해주세요.");
+      }else if(TEXT04==""){
+         $(".customer_input_modal_mid").text("담당자명을 입력해주세요.");
+      }else {
+         $(".customer_input_modal_mid").text("거래처가 추가되었습니다.");
+         var clientVO = {
+            company : "fourever",
+            ct_mutual : $("#m06_l_mutual_input").val(),
+            ct_sortation : $("input[name=account]:checked").val(),
+            ct_repName : $("#m06_l_name_input").val(),
+            ct_businessNumber : $("#m06_l_bsnum_input").val(),
+            ct_chrgName : $("#m06_l_person_name_input").val(),
+            ct_postalCode : $("#m06_l_post_input").val(),
+            ct_address : $("#m06_l_address_input").val(),
+            ct_condition : $("#m06_l_bs01_input").val(),
+            ct_industry : $("#m06_l_bs02_input").val(),
+            ct_contact : $("#m06_l_phone_input").val(),
+            ct_fax : $("#m06_l_fax_input").val(),
+            ct_email : $("#m06_l_email_input").val()
+         };
+         $.ajax({
+            url : "clientInsert.do",
+            type : "GET",
+            async:false,
+            data : clientVO,
+            // dataType : "json",
+            success : function(){
+               console.log("거래처 입력 success");},
+            error : function(request, status, error){
+               console.log("거래처 입력 error");}
+         });
+         
+           show_client();
+      }
+   });
 
 
 	//제품 삭제
@@ -1103,75 +1146,106 @@ var clientVO = {
 	
 	
     $(document).on('click', '.mainbody_03_01_btn3', function(e){
-	console.log("durls")
-		var goodsVO = {
-			company : "fourever",
-			gs_num : $("#m3_l_itemnum_input").val(),
-			gs_name : $("#m3_l_itemname_input").val(),
-			gs_sortation : $("#product_admin_td_03_select_txt").text(),
-			gs_unit : $("#m03_product_admin_td04_select_txt").text(),
-			gs_family : $("#m03_product_admin_td05_select_txt").text(),
-			gs_routing : $("#m03_product_admin_td06_select_txt").text(),
-			gs_code_a : $("#m03_product_admin_td05_select_txt").text(),
-			gs_code_c : $("#m03_product_admin_td05_select_txt").text(),
-			gs_standard : $("#m3_l_standard_input").val(),
-			gs_price : $("#m3_l_money_input").val(),
-			gs_client : $("#product_admin_td_09_01_select_01").text(),
-			gs_packingUnit : $("#m03_product_admin_td09_select_txt").text(),
-			gs_packingAmount : $("#m3_l_packcount_input").val(),
-			gs_safeAmount : $("#m3_l_savecount_input").val(),
-			gs_location : $("#product_admin_td_13_select_01").text()
-		};
-		$.ajax({
-			url : "goodsInsert.do",
-			type : "GET",
-			async:false,
-			data : goodsVO,
-			// dataType : "json",
-			success : function(){
-				console.log("거래처 입력 success");},
-			error : function(request, status, error){
-			    console.log("거래처 입력 error");}
-		});
-		
-	  	show_goods();
-})
+      $('.product_input_modal_window').fadeIn();
+
+      var TEXT01 = $('#m3_l_itemnum_input').val();
+      var TEXT02 = $('#m3_l_itemname_input').val();
+      var TEXT03 = $('#product_admin_td_03_select_txt').text();
+      var TEXT04 = $('#m03_product_admin_td04_select_txt').text();
+      if(TEXT01==""){
+         $(".product_input_modal_mid").text("품목번호를 입력해주세요.");
+      }else if(TEXT02==""){
+         $(".product_input_modal_mid").text("품목명을 입력해주세요.");
+      }else if(TEXT03.indexOf(" ") !== -1){
+         $(".product_input_modal_mid").text("품목구분을 선택해주세요.");
+      }else if(TEXT04.indexOf(" ") !== -1){
+         $(".product_input_modal_mid").text("단위를 선택해주세요.");
+      }else {
+         $(".product_input_modal_mid").text("제품이 추가되었습니다.");
+         var goodsVO = {
+            company : "fourever",
+            gs_num : $("#m3_l_itemnum_input").val(),
+            gs_name : $("#m3_l_itemname_input").val(),
+            gs_sortation : $("#product_admin_td_03_select_txt").text(),
+            gs_unit : $("#m03_product_admin_td04_select_txt").text(),
+            gs_family : $("#m03_product_admin_td05_select_txt").text(),
+            gs_routing : $("#m03_product_admin_td06_select_txt").text(),
+            gs_code_a : $("#m03_product_admin_td05_select_txt").text(),
+            gs_code_c : $("#m03_product_admin_td05_select_txt").text(),
+            gs_standard : $("#m3_l_standard_input").val(),
+            gs_price : $("#m3_l_money_input").val(),
+            gs_client : $("#product_admin_td_09_01_select_01").text(),
+            gs_packingUnit : $("#m03_product_admin_td09_select_txt").text(),
+            gs_packingAmount : $("#m3_l_packcount_input").val(),
+            gs_safeAmount : $("#m3_l_savecount_input").val(),
+            gs_location : $("#product_admin_td_13_select_01").text()
+         };
+         $.ajax({
+            url : "goodsInsert.do",
+            type : "GET",
+            async:false,
+            data : goodsVO,
+            // dataType : "json",
+            success : function(){
+               console.log("거래처 입력 success");},
+            error : function(request, status, error){
+               console.log("거래처 입력 error");}
+         });
+         
+           show_goods();
+      }
+   })
 	
-    $(document).on('click', '.mainbody_04_01_btn3', function(e){
-	$('.goods_input_modal_window').fadeIn();
-	console.log("durls")
-		var materialVO = {
-			company : "fourever",
-			ml_num : $("#m4_l_itemnum_input").val(),
-			ml_name : $("m4_l_itemname_input").val(),
-			ml_sortation : $("#m04_goods_admin_td_03_select_txt").text(),
-			ml_uni : $("#m04_goods_admin_td04_03_select_txt").text(),
-			ml_family : $("#m04_goods_admin_td05_03_select_txt").text(),
-			ml_routing : $("#m04_goods_admin_td06_03_select_txt").text(),
-			ml_code_a : $("#m04_goods_admin_td07_03_select_txt").text(),
-			ml_code_c : $("#m04_goods_admin_td08_03_select_txt").text(),
-			ml_standard : $("#m4_l_standard_input").val(),
-			ml_price : $("#m4_l_money_input").val(),
-			ml_client : $("#m04_goods_admin_td_09_01_select_01").text(),
-			ml_packingUnit : $("#m04_goods_admin_td09_03_select_txt").text(),
-			ml_packingAmount : $("#m4_l_packcount_input").val(),
-			ml_safeAmount : $("#m4_l_savecount_input").val(),
-			ml_location : $("#m04_goods_admin_td_13_select_01").text()
-		};
-		$.ajax({
-			url : "materialInsert.do",
-			type : "GET",
-			async:false,
-			data : materialVO,
-			// dataType : "json",
-			success : function(){
-				console.log("거래처 입력 success");},
-			error : function(request, status, error){
-			    console.log("거래처 입력 error");}
-		});
-		
-	  	show_material();
-})
+        $(document).on('click', '.mainbody_04_01_btn3', function(e){
+      $('.goods_input_modal_window').fadeIn();
+      
+      var TEXT01 = $('#m4_l_itemnum_input').val();
+      var TEXT02 = $('#m4_l_itemname_input').val();
+      var TEXT03 = $('#m04_goods_admin_td_03_select_txt').text();
+      var TEXT04 = $('#m04_goods_admin_td04_03_select_txt').text();
+      if(TEXT01==""){
+         $(".goods_input_modal_mid").text("품목번호를 입력해주세요.");
+      }else if(TEXT02==""){
+         $(".goods_input_modal_mid").text("품목명을 입력해주세요.");
+      }else if(TEXT03.indexOf(" ") !== -1){
+         $(".goods_input_modal_mid").text("품목구분을 선택해주세요.");
+      }else if(TEXT04.indexOf(" ") !== -1){
+         $(".goods_input_modal_mid").text("단위를 선택해주세요.");
+      }else {
+         $(".goods_input_modal_mid").text("자재가 저장되었습니다.");
+         var materialVO = {
+            company : "fourever",
+            ml_num : $("#m4_l_itemnum_input").val(),
+            ml_name : $("m4_l_itemname_input").val(),
+            ml_sortation : $("#m04_goods_admin_td_03_select_txt").text(),
+            ml_uni : $("#m04_goods_admin_td04_03_select_txt").text(),
+            ml_family : $("#m04_goods_admin_td05_03_select_txt").text(),
+            ml_routing : $("#m04_goods_admin_td06_03_select_txt").text(),
+            ml_code_a : $("#m04_goods_admin_td07_03_select_txt").text(),
+            ml_code_c : $("#m04_goods_admin_td08_03_select_txt").text(),
+            ml_standard : $("#m4_l_standard_input").val(),
+            ml_price : $("#m4_l_money_input").val(),
+            ml_client : $("#m04_goods_admin_td_09_01_select_01").text(),
+            ml_packingUnit : $("#m04_goods_admin_td09_03_select_txt").text(),
+            ml_packingAmount : $("#m4_l_packcount_input").val(),
+            ml_safeAmount : $("#m4_l_savecount_input").val(),
+            ml_location : $("#m04_goods_admin_td_13_select_01").text()
+         };
+         $.ajax({
+            url : "materialInsert.do",
+            type : "GET",
+            async:false,
+            data : materialVO,
+            // dataType : "json",
+            success : function(){
+               console.log("거래처 입력 success");},
+            error : function(request, status, error){
+               console.log("거래처 입력 error");}
+         });
+         
+           show_material();
+      }
+   })
 
 	// 공정 관리 수정 하기
 	// tr 클릭했을때
@@ -1263,7 +1337,19 @@ var processVO = {
 		  $.each(data,function(index, obj){	//반복문
 		     if(obj.ct_num==clientUpdateNum){
 			 $("#m06_l_mutual_input").val(obj.ct_mutual);
-			 $("input[name=account]:checked").val(obj.ct_sortation);
+				if(obj.ct_sortation=="매출처"){
+					$("#매출처").prop("checked", true);
+					$("#매입처").prop("checked", false);
+					$("#외주처").prop("checked", false);
+				}else if(obj.ct_sortation=="매입처"){
+					$("#매출처").prop("checked", false);
+					$("#매입처").prop("checked", true);
+					$("#외주처").prop("checked", false);
+				}else{
+					$("#매출처").prop("checked", false);
+					$("#매입처").prop("checked", false);
+					$("#외주처").prop("checked", true);
+				}
 			 $("#m06_l_name_input").val(obj.ct_repName);
 			 $("#m06_l_bsnum_input").val(obj.ct_businessNumber);
 			 $("#m06_l_person_name_input").val(obj.ct_chrgName);
@@ -1363,42 +1449,58 @@ var processVO = {
 		
 		})
 	
-	    $(document).on('click', '.mainbody_03_01_btn4', function(e){
-		$(".process_input_modal_mid").text("제품이 수정되었습니다.");
-		$('.process_input_modal_window').fadeIn();
-		var goodsVO = {
-			company : "fourever",
-			gs_seq_num : goodsUpdateNum,
-			gs_num : $("#m3_l_itemnum_input").val(),
-			gs_name : $("#m3_l_itemname_input").val(),
-			gs_sortation : $("#product_admin_td_03_select_txt").text(),
-			gs_unit : $("#m03_product_admin_td04_select_txt").text(),
-			gs_family : $("#m03_product_admin_td05_select_txt").text(),
-			gs_routing : $("#m03_product_admin_td06_select_txt").text(),
-			gs_code_a : $("#m03_product_admin_td05_select_txt").text(),
-			gs_code_c : $("#m03_product_admin_td05_select_txt").text(),
-			gs_standard : $("#m3_l_standard_input").val(),
-			gs_price : $("#m3_l_money_input").val(),
-			gs_client : $("#product_admin_td_09_01_select_01").text(),
-			gs_packingUnit : $("#m03_product_admin_td09_select_txt").text(),
-			gs_packingAmount : $("#m3_l_packcount_input").val(),
-			gs_safeAmount : $("#m3_l_savecount_input").val(),
-			gs_location : $("#product_admin_td_13_select_01").text()
-		};
-		$.ajax({
-			url : "goodsUpdate.do",
-			type : "GET",
-			async:false,
-			data : goodsVO,
-			// dataType : "json",
-			success : function(){
-				console.log("제품 수정 success");},
-			error : function(request, status, error){
-			    console.log("제품 수정 error");}
-		});
-			
-	  	show_goods();
-	})
+	$(document).on('click', '.mainbody_03_01_btn4', function(e){
+         $('.product_input_modal_window').fadeIn();
+
+         var TEXT01 = $('#m3_l_itemnum_input').val();
+         var TEXT02 = $('#m3_l_itemname_input').val();
+         var TEXT03 = $('#product_admin_td_03_select_txt').text();
+         var TEXT04 = $('#m03_product_admin_td04_select_txt').text();
+         if(TEXT01==""){
+            $(".product_input_modal_mid").text("품목번호를 입력해주세요.");
+         }else if(TEXT02==""){
+            $(".product_input_modal_mid").text("품목명을 입력해주세요.");
+         }else if(TEXT03.indexOf(" ") !== -1){
+            $(".product_input_modal_mid").text("품목구분을 선택해주세요.");
+         }else if(TEXT04.indexOf(" ") !== -1){
+            $(".product_input_modal_mid").text("단위를 선택해주세요.");
+         }else {
+            $(".product_input_modal_mid").text("제품이 수정되었습니다.");
+            var goodsVO = {
+               company : "fourever",
+               gs_seq_num : goodsUpdateNum,
+               gs_num : $("#m3_l_itemnum_input").val(),
+               gs_name : $("#m3_l_itemname_input").val(),
+               gs_sortation : $("#product_admin_td_03_select_txt").text(),
+               gs_unit : $("#m03_product_admin_td04_select_txt").text(),
+               gs_family : $("#m03_product_admin_td05_select_txt").text(),
+               gs_routing : $("#m03_product_admin_td06_select_txt").text(),
+               gs_code_a : $("#m03_product_admin_td05_select_txt").text(),
+               gs_code_c : $("#m03_product_admin_td05_select_txt").text(),
+               gs_standard : $("#m3_l_standard_input").val(),
+               gs_price : $("#m3_l_money_input").val(),
+               gs_client : $("#product_admin_td_09_01_select_01").text(),
+               gs_packingUnit : $("#m03_product_admin_td09_select_txt").text(),
+               gs_packingAmount : $("#m3_l_packcount_input").val(),
+               gs_safeAmount : $("#m3_l_savecount_input").val(),
+               gs_location : $("#product_admin_td_13_select_01").text()
+            };
+            $.ajax({
+               url : "goodsUpdate.do",
+               type : "GET",
+               async:false,
+               data : goodsVO,
+               // dataType : "json",
+               success : function(){
+                  console.log("제품 수정 success");},
+               error : function(request, status, error){
+                  console.log("제품 수정 error");}
+            });
+               
+              show_goods();
+
+         }
+      })
 	
 	// 자재 관리 수정 하기
 	// tr 클릭했을때
@@ -1445,43 +1547,57 @@ var processVO = {
 		
 		})
 	
-	    $(document).on('click', '.mainbody_04_01_btn4', function(e){
-		$(".process_input_modal_mid").text("자재가 수정되었습니다.");
-		$('.process_input_modal_window').fadeIn();
-		console.log("공정입력");
-		var materialVO = {
-			company : "fourever",
-			ml_seq_num : materialUpdateNum,
-			ml_num : $("#m4_l_itemnum_input").val(),
-			ml_name : $("m4_l_itemname_input").val(),
-			ml_sortation : $("#m04_goods_admin_td_03_select_txt").text(),
-			ml_uni : $("#m04_goods_admin_td04_03_select_txt").text(),
-			ml_family : $("#m04_goods_admin_td05_03_select_txt").text(),
-			ml_routing : $("#m04_goods_admin_td06_03_select_txt").text(),
-			ml_code_a : $("#m04_goods_admin_td07_03_select_txt").text(),
-			ml_code_c : $("#m04_goods_admin_td08_03_select_txt").text(),
-			ml_standard : $("#m4_l_standard_input").val(),
-			ml_price : $("#m4_l_money_input").val(),
-			ml_client : $("#m04_goods_admin_td_09_01_select_01").text(),
-			ml_packingUnit : $("#m04_goods_admin_td09_03_select_txt").text(),
-			ml_packingAmount : $("#m4_l_packcount_input").val(),
-			ml_safeAmount : $("#m4_l_savecount_input").val(),
-			ml_location : $("#m04_goods_admin_td_13_select_01").text()
-		};
-		$.ajax({
-			url : "materialUpdate.do",
-			type : "GET",
-			async:false,
-			data : materialVO,
-			// dataType : "json",
-			success : function(){
-				console.log("자재 수정 success");},
-			error : function(request, status, error){
-			    console.log("자재 수정 error");}
-		});
-			
-	  	show_material();
-	})
+	           $(document).on('click', '.mainbody_04_01_btn4', function(e){
+         $('.goods_input_modal_window').fadeIn();
+      
+         var TEXT01 = $('#m4_l_itemnum_input').val();
+         var TEXT02 = $('#m4_l_itemname_input').val();
+         var TEXT03 = $('#m04_goods_admin_td_03_select_txt').text();
+         var TEXT04 = $('#m04_goods_admin_td04_03_select_txt').text();
+         if(TEXT01==""){
+            $(".goods_input_modal_mid").text("품목번호를 입력해주세요.");
+         }else if(TEXT02==""){
+            $(".goods_input_modal_mid").text("품목명을 입력해주세요.");
+         }else if(TEXT03.indexOf(" ") !== -1){
+            $(".goods_input_modal_mid").text("품목구분을 선택해주세요.");
+         }else if(TEXT04.indexOf(" ") !== -1){
+            $(".goods_input_modal_mid").text("단위를 선택해주세요.");
+         }else {
+            $(".goods_input_modal_mid").text("자재가 수정되었습니다.");
+            var materialVO = {
+               company : "fourever",
+               ml_seq_num : materialUpdateNum,
+               ml_num : $("#m4_l_itemnum_input").val(),
+               ml_name : $("m4_l_itemname_input").val(),
+               ml_sortation : $("#m04_goods_admin_td_03_select_txt").text(),
+               ml_uni : $("#m04_goods_admin_td04_03_select_txt").text(),
+               ml_family : $("#m04_goods_admin_td05_03_select_txt").text(),
+               ml_routing : $("#m04_goods_admin_td06_03_select_txt").text(),
+               ml_code_a : $("#m04_goods_admin_td07_03_select_txt").text(),
+               ml_code_c : $("#m04_goods_admin_td08_03_select_txt").text(),
+               ml_standard : $("#m4_l_standard_input").val(),
+               ml_price : $("#m4_l_money_input").val(),
+               ml_client : $("#m04_goods_admin_td_09_01_select_01").text(),
+               ml_packingUnit : $("#m04_goods_admin_td09_03_select_txt").text(),
+               ml_packingAmount : $("#m4_l_packcount_input").val(),
+               ml_safeAmount : $("#m4_l_savecount_input").val(),
+               ml_location : $("#m04_goods_admin_td_13_select_01").text()
+            };
+            $.ajax({
+               url : "materialUpdate.do",
+               type : "GET",
+               async:false,
+               data : materialVO,
+               // dataType : "json",
+               success : function(){
+                  console.log("자재 수정 success");},
+               error : function(request, status, error){
+                  console.log("자재 수정 error");}
+            });
+               
+              show_material();
+         }
+      })
 	
 	var selectedLocationClass = "";
     $(document).on('click', '.mainbody_08_01_l_bottom_table tbody tr', function(e){
@@ -1603,18 +1719,37 @@ var processVO = {
 	})
 	
 	
-	var selectLocation = "";
-	var parentLocation = "";
-	$(document).on('click', '#mainbody_08_01_r_bottom_table_body tr', function(e){
-		$(this).css("background-color","#999999");
-		selectLocation = $(this).find('input');
-		selectLocation = selectLocation.val();
-		parentLocation = $(this).find('td:eq(1)');
-		parentLocation = parentLocation.text();
-		$("#m08_loca_text_01").text(parentLocation);
-	})
-	
-	
+	   $(document).on('click', '#locationList tr', function(e){
+      $('#locationList tr').css("background-color","");
+      $('#locationList tr').css("color","black");
+      $('#mainbody_08_01_r_bottom_table_body tr').css("background-color","");
+      $('#mainbody_08_01_r_bottom_table_body tr').css("color","black");
+      $(this).css("background-color","#999999");
+      $(this).css("color","white");
+
+      selectLocation = $(this).find('input');
+      selectLocation = selectLocation.val();
+      parentLocation = $(this).find('td:eq(1)');
+      parentLocation = parentLocation.text();
+      $("#m08_loca_text_01").text(parentLocation);
+   })
+   
+   var selectLocation = "";
+   var parentLocation = "";
+   $(document).on('click', '#mainbody_08_01_r_bottom_table_body tr', function(e){
+      $('#mainbody_08_01_r_bottom_table_body tr').css("background-color","");
+      $('#mainbody_08_01_r_bottom_table_body tr').css("color","black");
+      $(this).css("background-color","#999999");
+
+      selectLocation = $(this).find('input');
+      selectLocation = selectLocation.val();
+      parentLocation = $(this).find('td:eq(1)');
+      parentLocation = parentLocation.text();
+      parentLocation_name = parentLocation.replace(/^\s+/,'');
+      console.log(parentLocation_name.substr(2));
+      $("#m08_loca_text_01").text(parentLocation_name.substr(2));
+   })
+   
 	
 	function locationInputHtml(){
 		console.log(selectLocation);
@@ -1786,24 +1921,27 @@ var processVO = {
 		var go_goods_name = "";
 		var go_goods_count = "";
 		var num = 0;
-		$("input[name='goodsOrderNum']:checked").each(function(e){
-			var goods_name = go_goods_name+=$(this).next();
-			if(num==0){
-				go_goods_seq+=$(this).val();
-				go_goods_name+=goods_name.text();
-				go_goods_count+=$(this).next(5).val();
-			}else {
-				go_goods_seq+=", ";
-				go_goods_seq+=$(this).val();
-				go_goods_name+=", ";
-				go_goods_name+=$(this).next().val();
-				go_goods_count+=", ";
-				go_goods_count+=$(this).next(5).val();
-			}num=1;
+		
+		num = 0;
+		$(".product_name").each(function(e){
 			console.log(num);
+			if(num===0){
+				go_goods_name+=$(this).text();
+				go_goods_seq+=$(this).prev().find("input").val();
+				go_goods_count+=$(this).next().next().next().next().find("input").val();
+			}else {
+				go_goods_name+=", ";
+				go_goods_name+=$(this).text();
+				go_goods_seq+=", ";
+				go_goods_seq+=$(this).prev().find("input").val();
+				go_goods_count+=", ";
+				go_goods_count+=$(this).next().next().next().next().find("input").val();
+			}num=1;
 		})
+			console.log(go_goods_name);
 		var goodsOrderVO = {
 		company : "fourever",
+		go_num : $("#go_num").text(),
 		go_goods_seq : go_goods_seq,
 		go_goods_name : go_goods_name,
 		go_goods_count : go_goods_count,
@@ -1846,6 +1984,7 @@ var processVO = {
 
 		function goodsOrderHtml(data){
 			var view="";
+			var view2="";
 			  $.each(data,function(index, obj){	//반복문
 			     view+='<tr>';
 			     view+='<td><input type="checkbox" name="goodsOrderDeleteNum" value="'+obj.go_num+'"></td>';
@@ -1859,8 +1998,16 @@ var processVO = {
 		         view+='<td>'+obj.go_dueDate+'</td>'; 
 		         view+='<td></td>'; 
 		         view+='</tr>'; 
+				 view2+='<tr>';
+		         view2+='<td class="m11_work_orderPlan_plus_Search_td_00">'+obj.go_num+'</td>'; 
+		         view2+='<td class="m11_work_orderPlan_plus_Search_td_00">'+obj.go_client+'</td>'; 
+		         view2+='<td class="m11_work_orderPlan_plus_Search_td_00">'+obj.go_goods_seq+'</td>'; 
+		         view2+='<td class="m11_work_orderPlan_plus_Search_td_00">'+obj.go_goods_name+'</td>'; 
+		         view2+='<td class="m11_work_orderPlan_plus_Search_td_00">'+obj.go_goods_count+'</td>'; 
+		         view2+='</tr>'; 
 			  })
 		  $( '#m52_output_view_tb_tbody' ).html(view);
+		  $( '.m11_work_orderPlan_plus_Search_tb tbody' ).html(view2);
 		}
 	}
 		
@@ -1914,6 +2061,7 @@ var processVO = {
 	        var goinputvalue = $(this).find("input").val();
 			if(selectedgoodsNum==goinputvalue){
 				$(this).css("display", "table");
+				$(this).find("td:eq(1)").attr("class", "product_name");
 			}
 
 	    })
@@ -1924,7 +2072,9 @@ var processVO = {
 	//주문 관리 거래처 클릭하면 추가
 	$(document).on('click', '#m51_Order_customer_num_tbody tr', function(e){
 		var selected = $(this).find("td:eq(2)").text();
+		var selectedaddress = $(this).find("input").val();
 		$("#m51_product_admin_td_09_01_select_01").text(selected);
+		$("#go_address").val(selectedaddress);
 		m51_Order_customer_num_Close();
 	})
 	
@@ -1961,7 +2111,15 @@ var processVO = {
 		console.log(num2);
 		this.value = this.value.replace(/[^0-9]/g, '');
 		num3.val(price*num1*num2);
-		$("#go_amount").val(price*num1*num2);
+		
+		var go_price = 0;
+		$('.goodsamount').each(function() {
+			go_price+=parseInt($(this).val());
+			if (isNaN(this.value) || this.value === '') {
+				$(this).val(0);
+			}
+		})
+		$("#go_price").val(go_price);
 	})
 	
 	// 주문관리 합계금액 계산
@@ -1976,15 +2134,598 @@ var processVO = {
 		console.log(num2);
 		this.value = this.value.replace(/[^0-9]/g, '');
 		num3.val(price*num1*num2);
-		$("#go_amount").val(price*num1*num2);
-		
-	$('.input_num').each(function() {
-		if (isNaN(this.value) || this.value === '') {
-				$('.input_total').val(0);
-				$('.input_total2').val(0);
-			}else{
-			$('.input_total_${vo.product_num }').val(num1*num2);
-			$('.input_total2_${vo.product_num }').val(num1*num2*num3);
+	
+		var go_price = 0;
+		$('.goodsamount').each(function() {
+			go_price+=parseInt($(this).val());
+			if (isNaN(this.value) || this.value === '') {
+				$(this).val(0);
 			}
 		})
+		$("#go_price").val(go_price);
+		
 	})
+	
+	$(document).on('click', 'input:radio[name=taxation]', function(e) {
+			console.log("클릭 들어옴");
+		if ($(this).val()=="영세"||$(this).val()=="면세"){
+			$("#go_amount").val($("#go_price").val());
+		}else{
+			$("#go_amount").val(parseInt($("#go_price").val())*1.1);
+		}
+		
+	})
+	
+	$(document).on('click', '.process_plan_btn_02', function(e) {
+		var productPlanVO = {
+			company : "fourever",
+			pp_date : $("#pp_date").val(),
+			pp_goods_name : $("#pp_goods_name").text(),
+			pp_goods_num : $("#pp_goods_num").text(),
+			pp_product_date : $("#pp_product_date").val(),
+			pp_quantity : $("#pp_quantity").val(),
+			pp_performance_quantity : $("#pp_performance_quantity").val()
+		};
+	
+		$.ajax({
+			url : "productPlanInsert.do",
+			type : "GET",
+			async:false,
+			data : productPlanVO,
+			// dataType : "json",
+			success : function(){
+				console.log("success");},
+			error : function(request, status, error){
+			    console.log("생산 계획 입력 error");
+				}
+		});
+		
+		
+	})	
+	$(document).on('click', '.m12_plan_productSearch_content_tbody tr', function(e) {
+		$("#pp_goods_name").text($(this).find("td:eq(1)").text());
+		$("#pp_goods_num").text($(this).find("td:eq(2)").text());
+		m12_plan_productModalClose();
+	})
+	
+	
+	/** 생산계획 조회  */
+	function show_product_plan(){
+		$.ajax({
+		  		url:"productPlanSelect.do",
+		  		type:"get",
+		  		async: false,
+				data: {company: 'fourever'},
+		  		success:ajaxHtml,
+		  		error:function(data){ 
+		  			let str = JSON.stringify(data);
+		  			console.log(str);
+		  		}
+		  	});
+	
+	function ajaxHtml(data){
+		var view="";
+		var view2="";
+		  $.each(data,function(index, obj){	//반복문
+		     view+='<tr>'; 
+		     view+='<td><input type="checkbox" name="productionPlanNum" value="'+obj.pp_num+'"></td>'; 
+		     view+='<td>'+obj.pp_goods_name+'</td>'; 
+		     view+='<td>'+obj.pp_goods_num+'</td>'; 
+		     view+='<td>'+obj.pp_product_date+'</td>'; 
+		     view+='<td>'+obj.pp_quantity+'</td>'; 
+		     view+='<td>'+obj.pp_performance_quantity+'</td>'; 
+		     view+='</tr>'; 
+			 view2+='<tr>'; 
+		     view2+='<td class="m11_work_order_plus_Search_td_00"><input type="hidden" value="'+obj.pp_num+'">'+obj.pp_product_date+'</td>'; 
+		     view2+='<td class="m11_work_order_plus_Search_td_00">'+obj.pp_goods_num+'</td>'; 
+		     view2+='<td class="m11_work_order_plus_Search_td_00">'+obj.pp_goods_name+'</td>'; 
+		     view2+='<td class="m11_work_order_plus_Search_td_00"></td>'; 
+		     view2+='<td class="m11_work_order_plus_Search_td_00">'+obj.pp_quantity+'</td>'; 
+		     view2+='</tr>'; 
+		  })
+	  $( '#produce_plan_tb_02_tbody' ).html(view);
+	  $( '.m11_work_order_plus_Search_tb tbody' ).html(view2);
+	}}
+	
+
+
+	// 생산계획 삭제
+	$(document).on('click', '.process_plan_btn_01', function(e){
+		productPlanDelete();
+	})
+	
+	function productPlanDelete() {
+		var len = $("input[name='productionPlanNum']:checked").length;
+		if(len == 1){
+			var value = $("input[name='productionPlanNum']:checked").val();
+			$.ajax({
+				url : "productPlanDelete.do",
+				type : "GET",
+				async:false,
+				data : {"pp_num":value},
+				success : function(){
+					console.log(" 삭제 success");},
+				error : function(request, status, error){
+				    console.log("삭제 error");}
+			});
+			}else { //개수를 체크하고 2개부터는 each함수를 통해 각각 가져온다.
+			    $("input[name='productionPlanNum']:checked").each(function(e){
+		        var value = $(this).val();
+				console.log(value);
+				$.ajax({
+					url : "productPlanDelete.do",
+					type : "GET",
+					async:false,
+					data : {"pp_num":value},
+					success : function(){
+						console.log(" 삭제 success");},
+					error : function(request, status, error){
+					    console.log("삭제 error");}
+					});
+			
+			    })
+			}
+		show_product_plan();	
+	}
+	
+	
+	// 생산 계획 수정하기
+	var productPlanUpdateNum = 0;
+    $(document).on('click', '#produce_plan_tb_02_tbody tr', function(e){
+		productPlanUpdateNum = $(this).find("input").val();
+		$.ajax({
+	  		url:"productPlanSelect.do",
+	  		type:"get",
+	  		async: false,
+			data : {company: 'fourever'},
+	  		success:processinputHtml,
+	  		error:function(data){ 
+	  			let str = JSON.stringify(data);
+	  			console.log(str);
+	  		}
+	  	});
+
+	// input에 db 내용 보여주기
+	function processinputHtml(data){
+		var view="";
+		console.log(productPlanUpdateNum+"수정하기");
+		$.each(data,function(index, obj){	//반복문
+		     if(obj.pp_num==productPlanUpdateNum){
+		    	 $('#pp_date').val(obj.pp_date);
+		    	 $('#pp_goods_name').text(obj.pp_goods_name);
+		    	 $('#pp_goods_num').text(obj.pp_goods_num);
+		    	 $('#pp_product_date').val(obj.pp_product_date);
+		    	 $('#pp_quantity').val(obj.pp_quantity);
+		    	 $('#pp_performance_quantity').val(obj.pp_performance_quantity);
+		     }
+		})
+		}
+		$('.process_plan_btn_02').attr('onclick','processUpdate()');
+	
+	})
+	
+	
+	// 작업 지시 생성 클릭
+	// 주문 가져오기
+    $(document).on('click', '.m11_work_orderPlan_plus_Search_tb tr', function(e){
+		var go_num =  $(this).find("td:eq(0)").text();
+		$.ajax({
+	  		url:"goodsOrderSelect.do",
+	  		type:"get",
+	  		async: false,
+			data : {company: 'fourever'},
+	  		success:processinputHtml,
+	  		error:function(data){ 
+	  			let str = JSON.stringify(data);
+	  			console.log(str);
+	  		}
+	  	});
+
+		function processinputHtml(data){
+			var view="";
+			$.each(data,function(index, obj){
+		console.log("주문"+go_num);
+			     if(obj.go_num==go_num){
+			    	 $('#wo_go_num').text(obj.go_num);
+					 $('.mainbody_11_01_top_04_01').text("");
+			    	 $('.mainbody_11_01_top_05_01').text(obj.go_num);
+			    	 $('#wo_go_client').text(obj.go_client);
+			    	 $('#wo_go_dueDate').text(obj.go_dueDate);
+			    	 $('#wo_go_place').text(obj.go_place);
+			    	 $('#wo_go_goods_seq').text(obj.go_goods_seq);
+			    	 $('#wo_go_goods_name').text(obj.go_goods_name);
+					 $('#wo_pp_performance_quantity').text(""); //수량 id 지정후 넣기
+			     }
+			})
+		}
+	m11_workOrder_modal_close();
+	})
+	
+	// 작업 지시 생성 클릭
+	// 생산계획 가져오기
+    $(document).on('click', '.m11_work_order_plus_Search_tb tr', function(e){
+		var pp_num =  $(this).find("input").val();
+		$.ajax({
+	  		url:"productPlanSelect.do",
+	  		type:"get",
+	  		async: false,
+			data : {company: 'fourever'},
+	  		success:processinputHtml,
+	  		error:function(data){ 
+	  			let str = JSON.stringify(data);
+	  			console.log(str);
+	  		}
+	  	});
+
+		function processinputHtml(data){
+			var view="";
+			$.each(data,function(index, obj){
+			     if(obj.pp_num==pp_num){
+				console.log(pp_num);
+					 $('.mainbody_11_01_top_05_01').text("");
+			    	 $('.mainbody_11_01_top_04_01').text(obj.pp_num);
+			    	 $('#wo_go_num').text(obj.pp_num);
+			    	 $('#wo_go_client').text("");
+			    	 $('#wo_go_dueDate').text(obj.pp_date);
+			    	 $('#wo_go_place').text(""); //고객발주번호
+			    	 $('#wo_go_goods_seq').text(obj.pp_goods_num);
+			    	 $('#wo_go_goods_name').text(obj.pp_goods_name);
+			    	 $('#wo_pp_performance_quantity').text(obj.pp_performance_quantity); //수량 id 지정후 넣기
+			     }
+			})
+		}
+	m11_workOrder_modal_close();
+	})
+	
+	
+	var indexx=1;
+	// 생산품목 입력
+	$(document).on('click', '.m11_produc_plus_content_01_table_btn', function(e) {
+		var productItemVO = {
+			company : "fourever",
+			pi_date : $("#pi_date").val(),
+			pi_process : $(".m11_produc_plus_content_01_table_div02_txt").text(),
+			pi_process_type : $(".m11_produc_plus_content_01_table_div02_1").text(),
+			pi_client : $(".m11_produc_plus_content_01_table_div03_txt").text(),
+			pi_material : $(".m11_produc_plus_content_01_table_div04_txt").text(),
+			pi_material_count : $("#pi_material_count").val(),
+			pi_material_unit : $(".m11_produc_plus_content_01_table_div0_1").text(),
+			pi_content : $("#pi_content").val(),
+			pi_start_date : $("#pi_start_date").val(),
+			pi_end_date : $("#pi_end_date").val(),
+			pi_move : $(".m11_produc_plus_content_01_table_div06_txt").text(),
+			pi_move_name : $(".m11_produc_plus_content_01_table_div02_1").text(),
+			pi_move_address : $("#pi_move_address").val(),
+			pi_memo : $("#pi_memo").val()
+		};
+	
+		$.ajax({
+			url : "productItemInsert.do",
+			type : "GET",
+			async:false,
+			data : productItemVO,
+			// dataType : "json",
+			success : addwork_order_tb_02_list,
+			error : function(request, status, error){
+			    console.log("생산품목 입력 error");
+				}
+		});
+		
+	function addwork_order_tb_02_list(data){
+		var work_order_tb_02_list = $(".work_order_tb_02 tbody").html();
+		console.log(work_order_tb_02_list);
+		work_order_tb_02_list+='<tr>';
+		work_order_tb_02_list+='<td><input type="checkbox" name="product_item_delete"></td>';
+		work_order_tb_02_list+='<td>'+productItemVO.pi_date+'</td>';
+		work_order_tb_02_list+='<td>'+indexx+'</td>';
+		work_order_tb_02_list+='<td class="wo_process">'+productItemVO.pi_process+'</td>';
+		work_order_tb_02_list+='<td class="wo_process_type">'+productItemVO.pi_process_type+'</td>';
+		work_order_tb_02_list+='<td class="var wo_goods_name">'+productItemVO.pi_material+'</td>';
+		work_order_tb_02_list+='<td>'+productItemVO.pi_material_unit+'</td>';
+		work_order_tb_02_list+='<td class="wo_count">'+productItemVO.pi_material_count+'</td>';
+		work_order_tb_02_list+='<td class="wo_start_date">'+productItemVO.pi_start_date+'</td>';
+		work_order_tb_02_list+='<td class="wo_end_date">'+productItemVO.pi_end_date+'</td>';
+		work_order_tb_02_list+='<td></td>';
+	    work_order_tb_02_list+='</tr>';
+		$(".work_order_tb_02 tbody").html(work_order_tb_02_list);
+		}
+		indexx+=1;
+	})	
+	
+	// 작업 지시 입력
+	$(document).on('click', '.mainbody_11_01_top_btn_02', function(e) {
+		var num = 0;
+		var wo_process = "";
+		var wo_process_type = "";
+		var wo_goods_num = "";
+		var wo_goods_name = "";
+		var wo_count = "";
+		var wo_start_date = "";
+		var wo_end_date = "";
+		
+		num = 0;
+		$(".wo_process").each(function(e){
+			if(num===0){
+				wo_process+=$(this).text();
+			}else {
+				wo_process+="<br>";
+				wo_process+=$(this).text();
+			}num=1;
+		})
+		num = 0;
+		$(".wo_goods_num").each(function(e){
+			if(num===0){
+				wo_goods_num+=$(this).text();
+			}else {
+				wo_goods_num+="<br>";
+				wo_goods_num+=$(this).text();
+			}num=1;
+		})
+		num = 0;
+		$(".wo_goods_name").each(function(e){
+			if(num===0){
+				wo_goods_name+=$(this).text();
+			}else {
+				wo_goods_name+="<br>";
+				wo_goods_name+=$(this).text();
+			}num=1;
+		})
+		num = 0;
+		$(".wo_count").each(function(e){
+			if(num===0){
+				wo_count+=$(this).text();
+			}else {
+				wo_count+="<br>";
+				wo_count+=$(this).text();
+			}num=1;
+		})
+		num = 0;
+		$(".wo_start_date").each(function(e){
+			if(num===0){
+				wo_start_date+=$(this).text();
+			}else {
+				wo_start_date+="<br>";
+				wo_start_date+=$(this).text();
+			}num=1;
+		})
+		num = 0;
+		$(".wo_end_date").each(function(e){
+			if(num===0){
+				wo_end_date+=$(this).text();
+			}else {
+				wo_end_date+="<br>";
+				wo_end_date+=$(this).text();
+			}num=1;
+		})
+		
+		var workOrderVO = {
+		company : "fourever",
+		wo_process : wo_process,
+		wo_process_type : wo_process_type,
+		wo_goods_num : wo_goods_num,
+		wo_goods_name : wo_goods_name,
+		wo_spec_name : $("#go_orderDate").val(),
+		wo_count : wo_count,
+		wo_client : $("#wo_go_client").text(),
+		wo_date : $("#wo_go_dueDate").text(),
+		wo_start_date : wo_start_date,
+		wo_end_date : wo_end_date
+		};
+		$.ajax({
+				url : "workOrderInsert.do",
+				type : "GET",
+				async:false,
+				data : workOrderVO,
+				// dataType : "json",
+				success : function(){
+					console.log("success");
+					},
+				error : function(request, status, error){
+				    console.log("주문 입력 error");
+					}
+			});
+	
+	
+	})
+	
+	
+	function show_work_order(){
+	$.ajax({
+	  		url:"workOrderSelect.do",
+	  		type:"get",
+	  		async: false,
+	  		data: {company:'fourever'},
+	  		success:materialHtml,
+	  		error:function(data){ 
+	  			let str = JSON.stringify(data);
+	  			console.log(str);
+	  		}
+	  	});
+	
+	
+		function materialHtml(data){
+			var view="";
+			 $.each(data,function(index, obj){	//반복문
+			     view+='<tr>';
+			     view+='<td><input type="checkbox" name="work_order_delete" value="'+obj.wo_num+'"></td>';
+			     view+='<td></td>';
+			     view+='<td>'+obj.wo_process+'</td>';
+			     view+='<td>'+obj.wo_process_type+'</td>';
+			     view+='<td>'+obj.wo_goods_num+'</td>';
+			     view+='<td>'+obj.wo_goods_name+'</td>';
+			     view+='<td>'+obj.wo_spec_name+'</td>';
+			     view+='<td>'+obj.wo_count+'</td>';
+			     view+='<td>'+obj.wo_client+'</td>';
+			     view+='<td>'+obj.wo_date+'</td>';
+			     view+='<td>'+obj.wo_start_date+'</td>';
+			     view+='<td>'+obj.wo_end_date+'</td>';
+			     view+='<td></td>';
+			     view+='</tr>';
+			})
+		  	 $( '.process_order_view_tb tbody' ).html(view);
+		}
+	
+	}
+	
+	
+	$(document).on('click', '.mainbody_11_03_top_btn_05', function(e) {
+		$("input[name='product_item_delete']:checked").each(function(e){
+	        $(this).parent().parent().remove();
+		    })
+	})
+	
+	
+	$(document).on('click', '.mainbody_14_01_top_btn_03', function(e) {
+		var len = $("input[name='work_order_delete']:checked").length;
+		if(len == 1){
+			var value = $("input[name='work_order_delete']:checked").val();
+			$.ajax({
+				url : "workOrderDelete.do",
+				type : "GET",
+				async:false,
+				data : {"wo_num":value},
+				// dataType : "json",
+				success : function(){
+						$("input[name='work_order_delete']:checked").remove();
+					console.log(" 삭제 success");},
+				error : function(request, status, error){
+				    console.log("삭제 error");}
+		});
+		}else { //개수를 체크하고 2개부터는 each함수를 통해 각각 가져온다.
+		    $("input[name='work_order_delete']:checked").each(function(e){
+		        var value = $(this).val();
+				console.log(value);
+				$.ajax({
+					url : "workOrderDelete.do",
+					type : "GET",
+					async:false,
+					data : {"wo_num":value},
+					// dataType : "json",
+					success : function(){
+						console.log(" 삭제 success");},
+					error : function(request, status, error){
+					    console.log("삭제 error");}
+				});
+	
+		    })
+		}
+		show_work_order();
+	})
+	
+
+	
+	//라우팅 클릭
+    $(document).on("click", ".routing_modal_body_bottom_l_table tbody tr", function(){
+
+        const table = document.getElementById('routing_modal_body_bottom_r_table_tbody');
+        $(this).remove();
+        
+        const click_td1 = $(this).children().eq(0).html();
+        const click_td2 = $(this).children().eq(1).html();
+
+        console.log(click_td1);
+        const newRow = table.insertRow();
+        const newCel1 = newRow.insertCell(0);
+        const newCel2 = newRow.insertCell(1);
+        
+        newCel1.innerHTML = click_td1;
+        newCel2.innerHTML = click_td2;
+        newCel2.firstChild.setAttribute("value", "2");
+    });
+
+
+    $(document).on("click", ".routing_modal_body_bottom_r_table tbody tr", function(){
+
+        const table = document.getElementById('routing_modal_body_bottom_l_table_tbody');
+        $(this).remove();
+        const click_td1 = $(this).children().eq(0).html();
+        const click_td2 = $(this).children().eq(1).html();
+
+        const newRow = table.insertRow();
+        const newCel1 = newRow.insertCell(0);
+        const newCel2 = newRow.insertCell(1);
+
+        newCel1.innerHTML = click_td1;
+        newCel2.innerHTML = click_td2;
+		newCel2.firstChild.setAttribute("value", "1");
+    });
+	
+	
+	$(document).on('click', '.routing_modal_body_top_save_btn', function(e) {
+		routingInsert();
+		
+	})
+	
+	function routingInsert(){
+		var prr_left = "";
+		var prr_right = "";
+		$("input[name='routing']").each(function(e){
+			if ($(this).val()==1){
+				prr_left+=$(this).parent().prev().find("input").val();
+				prr_left+=',';
+			}else{
+				prr_right+=$(this).parent().prev().find("input").val();
+				prr_right+=',';
+			}
+		})
+		processRoutingVO = {
+			prr_name : $('#prr_name').val(),
+			prr_left : prr_left,
+			prr_right : prr_right,
+			company : 'fourever'
+		}
+		console.log(processRoutingVO.prr_name);
+		$.ajax({
+				url : "processRoutingInsert.do",
+				type : "GET",
+				async:false,
+				data : processRoutingVO,
+				success : function(){
+					console.log(" success");},
+				error : function(request, status, error){
+				    console.log(" error");}
+		});
+		show_process_routing();
+	}
+	
+	function show_process_routing(){
+		$.ajax({
+				url : "processRoutingSelect.do",
+				type : "GET",
+				async:false,
+				data : {company: 'fourever'},
+				success : routingHtml,
+				error : function(request, status, error){
+				    console.log(" error");}
+		});
+		
+		function routingHtml(data){
+			var view = "";
+			$.each(data,function(index, obj){
+				view+='<li class="option">'+obj.prr_name+'</li>';
+			})
+			$(".m03_product_admin_td06_div ul").html(view);
+			$(".m04_goods_admin_td06_02_00 ul").html(view);
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
