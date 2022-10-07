@@ -519,7 +519,7 @@ var clientVO = {
 	     view+='<td class="product_admin_tb_line">'+obj.gs_routing+'</td>';
 	     view+='</tr>';
 	     view2+='<tr>';
-		 view2+='<td class="product_admin_tb_line">'+obj.gs_num+'</td>';
+		 view2+='<td class="product_admin_tb_line"><input type="hidden" name="gs_seq_num" value="'+obj.gs_seq_num+'"><input type="hidden" name="gs_standard" value="'+obj.gs_standard+'"><input type="hidden" name="gs_unit" value="'+obj.gs_unit+'">'+obj.gs_num+'</td>';
 	     view2+='<td class="product_admin_tb_line">'+obj.gs_name+'</td>';
 	     view2+='<td class="product_admin_tb_line">'+obj.gs_family+'</td>';
 	     view2+='<td class="product_admin_tb_line">'+obj.gs_routing+'</td>';
@@ -530,13 +530,13 @@ var clientVO = {
 	     view2+='</td>';
 	     view2+='</tr>';
 		 view3+='<tr>';
-		 view3+='<td><input autocomplete="off" type="checkbox" name="goodsOrderNum" value="'+obj.gs_seq_num+'"></td>';
+		 view3+='<td><input autocomplete="off" type="checkbox" class="goodsOrderNum" name="goodsOrderNum" value="'+obj.gs_seq_num+'"></td>';
 	     view3+='<td class="product_admin_tb_line">'+obj.gs_name+'</td>';
-	     view3+='<td class="product_admin_tb_line">'+obj.gs_unit+'</td>';
-	     view3+='<td class="product_admin_tb_line">'+obj.gs_standard+'</td>';
-	     view3+='<td class="product_admin_tb_line">'+obj.gs_price+'</td>';
+	     view3+='<td class="go_goods_standard">'+obj.gs_standard+'</td>';
+	     view3+='<td class="go_goods_unit">'+obj.gs_unit+'</td>';
+	     view3+='<td class="go_goods_price">'+obj.gs_price+'</td>';
 	     view3+='<td><input type="text" autocomplete="off" class="go_goods_count" id="num1_'+obj.gs_seq_num+'" name="go_goods_count" value="0"></td>'; //주문수량
-	     view3+='<td><input type="text" autocomplete="off" class="go_goods_discount" id="num2_'+obj.gs_seq_num+'" name="" value="0"></td>'; //할인율
+	     view3+='<td><input type="text" autocomplete="off" class="go_goods_discount" id="num2_'+obj.gs_seq_num+'" name="go_goods_discount" value="0"></td>'; //할인율
 	     view3+='<td><input type="text" autocomplete="off" class="goodsamount" id="total_'+obj.gs_seq_num+'" name="go_amount" value="0"></td>'; //금액
 	     view3+='</tr>';
 		 view4+='<tr>';
@@ -585,6 +585,7 @@ var clientVO = {
 	     view+='</tr>';
 	     view+='</thead>';
 	     view+='<tbody>';
+	     view2='';
 		 $.each(data,function(index, obj){	//반복문
 		     view+='<tr class="m04_goods_admin_tb_line" id="m04_goods_admin_tb_line">';
 		     view+='<td class="product_admin_tb_line_01"><input autocomplete="off" type="checkbox" name="materialNum" value="'+obj.ml_seq_num+'" class="productAdmin_check"></td>';
@@ -593,9 +594,20 @@ var clientVO = {
 		     view+='<td class="product_admin_tb_line">'+obj.ml_family+'</td>';
 		     view+='<td class="product_admin_tb_line">'+obj.ml_routing+'</td>';
 		     view+='</tr>';
+
+		     view2+='<tr class="m07_bom_localtion_tr">';
+		     view2+='<td class="m07_bom_localtion_td_01"><input type="checkbox">';
+		     view2+='<input type="hidden" name= "ml_sortation" value="'+obj.ml_sortation+'">'; //구분
+		     view2+='<input type="hidden" name= "ml_standard" value="'+obj.ml_standard+'">'; //규격
+		     view2+='<input type="hidden" name= "ml_uni" value="'+obj.ml_uni+'">'; //단위
+			 view2+='</td>';
+		     view2+='<td class="m07_bom_localtion_td_02">'+obj.ml_num+'</td>';
+		     view2+='<td class="m07_bom_localtion_td_03">'+obj.ml_name+'</td>';
+		     view2+='</tr>';
 		})
 	     view+='</tbody>';
 	  	 $( '#m04_goods_admin_tb_02' ).html(view);
+	  	 $( '.m07_bom_localtion_tb tbody' ).html(view2);
 	}
 
 	/** input list 인풋 리스트 넣기 */
@@ -1216,7 +1228,7 @@ var clientVO = {
          var materialVO = {
             company : "fourever",
             ml_num : $("#m4_l_itemnum_input").val(),
-            ml_name : $("m4_l_itemname_input").val(),
+            ml_name : $("#m4_l_itemname_input").val(),
             ml_sortation : $("#m04_goods_admin_td_03_select_txt").text(),
             ml_uni : $("#m04_goods_admin_td04_03_select_txt").text(),
             ml_family : $("#m04_goods_admin_td05_03_select_txt").text(),
@@ -1568,7 +1580,7 @@ var processVO = {
                company : "fourever",
                ml_seq_num : materialUpdateNum,
                ml_num : $("#m4_l_itemnum_input").val(),
-               ml_name : $("m4_l_itemname_input").val(),
+               ml_name : $("#m4_l_itemname_input").val(),
                ml_sortation : $("#m04_goods_admin_td_03_select_txt").text(),
                ml_uni : $("#m04_goods_admin_td04_03_select_txt").text(),
                ml_family : $("#m04_goods_admin_td05_03_select_txt").text(),
@@ -1609,34 +1621,7 @@ var processVO = {
 	})
 	
 	
-    $(document).on('click', '.m08_localtion_content_01_01_btn', function(e){
-		var locationVO = {
-			company : "fourever",
-			lc_class : selectedLocationClass,
-			lc_parent : $("#m08_loca_text_01").text(),
-			lc_name : $("#lc_name").val(),
-			lc_num : $("#lc_num").val(),
-			lc_type : $("#lc_type").text(),
-			lc_jang : $("#lc_jang").val(),
-			lc_pok : $("#lc_pok").val(),
-			lc_go : $("#lc_go").val(),
-			lc_yeol : $("#lc_yeol").val(),
-			lc_yeon : $("#lc_yeon").val(),
-			lc_dan : $("#lc_dan").val(),
-		};
-		$.ajax({
-			url : "locationInsert.do",
-			type : "GET",
-			async:false,
-			data : locationVO,
-			// dataType : "json",
-			success : function(){
-				console.log("로케이션 삽입 success");},
-			error : function(request, status, error){
-			    console.log("로케이션 삽입 error");}
-		});
-	
-	})
+
 	
 	
 	// 로케이션
@@ -1659,7 +1644,7 @@ var processVO = {
 		     view+='<tr>';
 		     view+='<td> <input autocomplete="off" type="checkbox" name="locationDeleteNum" value="'+obj.lc_seq_num+'"id="m08_r_bottom_table_checkbox">';
              view+='<label for="m08_r_bottom_table_checkbox"></label></td>';
-		     view+='<td>'+obj.lc_name+'</td>';
+		     view+='<td><input type="hidden" name="parentName" value="'+obj.lc_parent+'">'+obj.lc_name+'</td>';
 		     view+='<td>'+obj.lc_num+'</td>';
 		     view+='<td>'+obj.lc_type+'</td>';
 		     view+='<td>'+obj.lc_jang+'</td>';
@@ -1718,36 +1703,94 @@ var processVO = {
 		locationDelete();
 	})
 	
-	
-	   $(document).on('click', '#locationList tr', function(e){
-      $('#locationList tr').css("background-color","");
-      $('#locationList tr').css("color","black");
-      $('#mainbody_08_01_r_bottom_table_body tr').css("background-color","");
-      $('#mainbody_08_01_r_bottom_table_body tr').css("color","black");
-      $(this).css("background-color","#999999");
-      $(this).css("color","white");
+	// 로케이션 분류 리스트를 클릭했을때
+	$(document).on('click', '#locationList tr', function(e){
+		
+	  $('#locationList tr').css("background-color","");
+	  $('#locationList tr').css("color","black");
+	  $('#mainbody_08_01_r_bottom_table_body tr').css("background-color","");
+	  $('#mainbody_08_01_r_bottom_table_body tr').css("color","black");
+	  $('.m08_localtion_content_01_01_btn').attr("id","m08_localtion_content_01_01_btn_01");
+	  $(this).css("background-color","#999999");
+	  $(this).css("color","white");
 
-      selectLocation = $(this).find('input');
-      selectLocation = selectLocation.val();
-      parentLocation = $(this).find('td:eq(1)');
-      parentLocation = parentLocation.text();
-      $("#m08_loca_text_01").text(parentLocation);
+	location_logic();
+	  
+	  //상위 로케이션 비우기
+	  $("#m08_loca_text_01").text("");
    })
    
+   // 로케이션 명을 클릭했을 때
    var selectLocation = "";
    var parentLocation = "";
+   var parentLocation_name = "";
    $(document).on('click', '#mainbody_08_01_r_bottom_table_body tr', function(e){
+
+   const Location_inout = document.querySelectorAll('#mainbody_08_01_r_bottom_table_body tr input[name=parentName]');
+
+   console.log(Array.from(Location_inout).filter(v => v.value.includes($(this).children().eq(1).text())).length);
+   
+   for (i = 0; i < Array.from(Location_inout).filter(v => v.value.includes($(this).children().eq(1).text())).length; i++){
+      if(Array.from(Location_inout).filter(v => v.value.includes($(this).children().eq(1).text()))[i].classList.contains('num1')){
+         $('#mainbody_08_01_r_bottom_table_body tr').css("background-color","");
+         $('#mainbody_08_01_r_bottom_table_body tr').css("color","black");
+         $('.m08_localtion_content_01_01_btn').attr("id","m08_localtion_content_01_01_btn_02");
+         $(this).css("background-color","#999999");
+         $(this).css("color","white");
+      
+         // 클릭한 요소 부터 다음 parentName이 같은 요소까지 tr 번호를 센다음 그 사이애들은 다 None으로 쳐리
+         for (i=0; i<$('#mainbody_08_01_r_bottom_table_body tr').length; i++){
+            var num = i+1;
+            if($('#mainbody_08_01_r_bottom_table_body tr:nth-child('+num+') td input[name=parentName]').val().includes($(this).children().eq(1).text())){
+               $('#mainbody_08_01_r_bottom_table_body tr:nth-child('+num+') td input[name=parentName]').removeClass();
+               $('#mainbody_08_01_r_bottom_table_body tr:nth-child('+num+')').css("display","none");
+            }
+         }
+      }else{
+         $('#mainbody_08_01_r_bottom_table_body tr').css("background-color","");
+         $('#mainbody_08_01_r_bottom_table_body tr').css("color","black");
+         $('.m08_localtion_content_01_01_btn').attr("id","m08_localtion_content_01_01_btn_02");
+         $(this).css("background-color","#999999");
+         $(this).css("color","white");
+         for (i=0; i<$('#mainbody_08_01_r_bottom_table_body tr').length; i++){
+            var num = i+1;
+            if($('#mainbody_08_01_r_bottom_table_body tr:nth-child('+num+') td input[name=parentName]').val() === $(this).children().eq(1).text()){
+               $('#mainbody_08_01_r_bottom_table_body tr:nth-child('+num+')').css("display","table-row");
+               $('#mainbody_08_01_r_bottom_table_body tr:nth-child('+num+') td input[name=parentName]').addClass('num1');
+               $('#mainbody_08_01_r_bottom_table_body tr:nth-child('+num+')').insertBefore($(this).next())
+            }
+         }
+      }
+      // Array.from(Location_inout).filter(v => v.value.includes($(this).children().eq(1).text()))
+
+   }
+
+   if(Array.from(Location_inout).filter(v => v.value.includes($(this).children().eq(1).text())).length == 0 ){
       $('#mainbody_08_01_r_bottom_table_body tr').css("background-color","");
       $('#mainbody_08_01_r_bottom_table_body tr').css("color","black");
+      $('.m08_localtion_content_01_01_btn').attr("id","m08_localtion_content_01_01_btn_02");
       $(this).css("background-color","#999999");
+      $(this).css("color","white");
+      for (i=0; i<$('#mainbody_08_01_r_bottom_table_body tr').length; i++){
+         var num = i+1;
+         if($('#mainbody_08_01_r_bottom_table_body tr:nth-child('+num+') td input[name=parentName]').val() === $(this).children().eq(1).text()){
+            $('#mainbody_08_01_r_bottom_table_body tr:nth-child('+num+')').css("display","table-row");
+            $('#mainbody_08_01_r_bottom_table_body tr:nth-child('+num+') td input[name=parentName]').addClass('num1');
+            $('#mainbody_08_01_r_bottom_table_body tr:nth-child('+num+')').insertBefore($(this).next())
+         }
+      }
+
+   }
+   
 
       selectLocation = $(this).find('input');
       selectLocation = selectLocation.val();
       parentLocation = $(this).find('td:eq(1)');
       parentLocation = parentLocation.text();
-      parentLocation_name = parentLocation.replace(/^\s+/,'');
-      console.log(parentLocation_name.substr(2));
-      $("#m08_loca_text_01").text(parentLocation_name.substr(2));
+      console.log('db에 저장돼야할것'+parentLocation);
+      parentLocation_name = parentLocation.replace(/^\s+/,'').substr(1);
+      console.log('모달창에 보여야할것'+parentLocation_name);
+      $("#m08_loca_text_01").text(parentLocation_name);
    })
    
 	
@@ -1757,7 +1800,7 @@ var processVO = {
 	  		url:"locationSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		success: locationInputHtml,
+	  		success: locationInputHTML,
 	  		error:function(data){
 	  			let str = JSON.stringify(data);
 	  			console.log(str);
@@ -1765,28 +1808,28 @@ var processVO = {
 	  	})
 		console.log(selectLocation+"수정하기");
 	
-	}
-		function locationInputHtml(data) {
-		var view="";
-		  $.each(data,function(index, obj){	//반복문
-		console.log(selectLocation+"수정하기");
-		     if(obj.lc_seq_num==selectLocation){
-				 $("#m08_loca_text_01").text(obj.lc_parent);
-				 $("#lc_name").val(obj.lc_name);
-				 $("#lc_num").val(obj.lc_num);
-				 $("#lc_type").text(obj.lc_type);
-				 $("#lc_jang").val(obj.lc_jang);
-				 $("#lc_pok").val(obj.lc_pok);
-				 $("#lc_go").val(obj.lc_go);
-				 $("#lc_yeol").val(obj.lc_yeol);
-				 $("#lc_yeon").val(obj.lc_yeon);
-				 $("#lc_dan").val(obj.lc_dan);
-		     }
-		})
-		
-	}
+		function locationInputHTML(data) {
+			var view="";
+			  $.each(data,function(index, obj){	//반복문
+			console.log(selectLocation+"수정하기");
+			     if(obj.lc_seq_num==selectLocation){
+					 $("#m08_loca_text_01").text(obj.lc_parent);
+					 $("#lc_name").val(obj.lc_name);
+					 $("#lc_num").val(obj.lc_num);
+					 $("#lc_type").text(obj.lc_type);
+					 $("#lc_jang").val(obj.lc_jang);
+					 $("#lc_pok").val(obj.lc_pok);
+					 $("#lc_go").val(obj.lc_go);
+					 $("#lc_yeol").val(obj.lc_yeol);
+					 $("#lc_yeon").val(obj.lc_yeon);
+					 $("#lc_dan").val(obj.lc_dan);
+			     }
+			})
+			
+		}
 	
 	
+	}
 	
 	
 	
@@ -1909,65 +1952,113 @@ var processVO = {
 	
 	}
 	
-		function show_bom(){
-			
-			
-		}
 		
 		
-	// 주문 관리 등록 추가
-	$(document).on('click', '.mainbody_51_1_top_btn_02', function(e){
-		var go_goods_seq = "";
-		var go_goods_name = "";
-		var go_goods_count = "";
-		var num = 0;
-		
-		num = 0;
-		$(".product_name").each(function(e){
-			console.log(num);
-			if(num===0){
-				go_goods_name+=$(this).text();
-				go_goods_seq+=$(this).prev().find("input").val();
-				go_goods_count+=$(this).next().next().next().next().find("input").val();
-			}else {
-				go_goods_name+=", ";
-				go_goods_name+=$(this).text();
-				go_goods_seq+=", ";
-				go_goods_seq+=$(this).prev().find("input").val();
-				go_goods_count+=", ";
-				go_goods_count+=$(this).next().next().next().next().find("input").val();
-			}num=1;
-		})
-			console.log(go_goods_name);
-		var goodsOrderVO = {
-		company : "fourever",
-		go_num : $("#go_num").text(),
-		go_goods_seq : go_goods_seq,
-		go_goods_name : go_goods_name,
-		go_goods_count : go_goods_count,
-		go_client : $("#m51_product_admin_td_09_01_select_01").text(),
-		go_orderDate : $("#go_orderDate").val(),
-		go_dueDate : $("#go_dueDate").val(),
-		go_place : $("#go_place").val(),
-		go_address : $("#go_address").val(),
-		go_price : $("#go_price").val(),
-		go_amount : $("#go_amount").val(),
-		go_taxation : $("input[name=taxation]:checked").val(),
-		};
-		$.ajax({
-				url : "goodsOrderInsert.do",
-				type : "GET",
-				async:false,
-				data : goodsOrderVO,
-				// dataType : "json",
-				success : function(){
-					console.log("success");
-					},
-				error : function(request, status, error){
-				    console.log("주문 입력 error");
-					}
-			});
-	})
+   // 주문 관리 등록 추가
+   $(document).on('click', '.mainbody_51_1_top_btn_02', function(e){
+      $('.user_group_input_modal_window').fadeIn();
+      
+      var TEXT01 = $('#m51_product_admin_td_09_01_select_01').text();
+      var TEXT02 = $('#go_orderDate').val();
+      var TEXT03 = $('#go_dueDate').val();
+      var TEXT04 = $('#go_place').val();
+      var TEXT05 = $('#go_address').val();
+      if(TEXT01== ('\u00A0')){
+         $(".user_group_input_modal_mid").text("거래처를 선택해주세요.");
+      }else if(TEXT02==""){
+         $(".user_group_input_modal_mid").text("접수일자를 선택해주세요.");
+      }else if(TEXT03==""){
+         $(".user_group_input_modal_mid").text("납기일자를 선택해주세요.");
+      }else if(TEXT04==""){
+         $(".user_group_input_modal_mid").text("고객발주번호를 입력해주세요.");
+      }else if(TEXT05==""){
+         $(".user_group_input_modal_mid").text("배송지를 입력해주세요.");
+      }else if($('#go_taxation').is(':checked') == false){
+         $(".user_group_input_modal_mid").text("과세형태를 선택해주세요.");
+      }else {
+         $(".user_group_input_modal_mid").text("주문이 등록되었습니다.");
+
+         var go_goods_seq = "";
+         var go_goods_name = "";
+         var go_goods_count = "";
+         var go_goods_discount = ""; //추가 할인율
+         var go_goods_price = ""; //추가 금액
+         var go_goods_standard = ""; //또추가
+         var go_goods_unit = ""; //또추가
+         var go_goods_unitPrice = ""; //또추가
+         var go_price = "";
+         var num = 0;
+         
+         num = 0;
+         $(".product_name").each(function(e){
+            console.log(num);
+            if(num===0){
+               go_goods_name+=$(this).text();
+               go_goods_seq+=$(this).prev().find("input").val();
+               go_goods_count+=$(this).next().next().next().next().find("input").val();
+               go_price+=$(this).parent().find("input[name=go_amount]").val();
+               go_goods_discount+=$(this).parent().find("input[name=go_goods_discount]").val();
+               go_goods_price+=$(this).parent().find("input[name=go_goods_price]").val();
+               go_goods_standard+=$(this).parent().find(".go_goods_standard").text();
+               go_goods_unit+=$(this).parent().find(".go_goods_unit").text();
+               go_goods_unitPrice+=$(this).parent().find(".go_goods_price").text();
+            }else {
+               go_goods_name+=",";
+               go_goods_name+=$(this).text();
+               go_goods_seq+=",";
+               go_goods_seq+=$(this).prev().find("input").val();
+               go_goods_count+=",";
+               go_goods_count+=$(this).next().next().next().next().find("input").val();
+               go_price+=",";
+               go_price+=$(this).parent().find("input[name=go_amount]").val();
+               go_goods_discount+=",";
+               go_goods_discount+=$(this).parent().find("input[name=go_goods_discount]").val();
+               go_goods_price+=",";
+               go_goods_price+=$(this).parent().find("input[name=go_goods_price]").val();
+			   go_goods_standard+=$(this).parent().find(".go_goods_standard").text();
+               go_goods_standard+=",";
+               go_goods_unit+=$(this).parent().find(".go_goods_unit").text();
+               go_goods_unit+=",";
+               go_goods_unitPrice+=$(this).parent().find(".go_goods_price").text();
+               go_goods_unitPrice+=",";
+            }num=1;
+         })
+            console.log(go_goods_name);
+         var goodsOrderVO = {
+         company : "fourever",
+         go_num : $("#go_num").text(),
+         go_goods_seq : go_goods_seq,
+         go_goods_name : go_goods_name,
+         go_goods_count : go_goods_count,
+         go_goods_standard : go_goods_standard,
+         go_goods_unit : go_goods_unit,
+         go_goods_unitPrice : go_goods_unitPrice,
+         go_goods_discount : go_goods_discount,
+         go_goods_price : go_goods_price,
+         go_client : $("#m51_product_admin_td_09_01_select_01").text(),
+         go_orderDate : $("#go_orderDate").val(),
+         go_dueDate : $("#go_dueDate").val(),
+         go_place : $("#go_place").val(),
+         go_address : $("#go_address").val(),
+         go_price : go_price,
+         go_amount : $("#go_amount").val(),
+         go_taxation : $("input[name=taxation]:checked").val(),
+         };
+         $.ajax({
+               url : "goodsOrderInsert.do",
+               type : "GET",
+               async:false,
+               data : goodsOrderVO,
+               // dataType : "json",
+               success : function(){
+                  console.log("success");
+                  },
+               error : function(request, status, error){
+                  console.log("주문 입력 error");
+                  }
+            });
+      }
+   })
 		
 	function show_goodsOrder(){
 		$.ajax({
@@ -1994,7 +2085,7 @@ var processVO = {
 		         view+='<td>'+obj.go_goods_seq+'</td>'; 
 		         view+='<td>'+obj.go_goods_name+'</td>'; 
 		         view+='<td>'+obj.go_goods_count+'</td>'; 
-		         view+='<td>'+obj.go_amount+'</td>'; 
+		         view+='<td>'+obj.go_price+'</td>'; 
 		         view+='<td>'+obj.go_dueDate+'</td>'; 
 		         view+='<td></td>'; 
 		         view+='</tr>'; 
@@ -2091,6 +2182,7 @@ var processVO = {
 		$("#product_admin_td_13_select_01").text(selected);
 		m03_product_locationClose();
 	})
+
 	
 	//자재 관리 로케이션 클릭하면 추가
 	$(document).on('click', '.m04_goods_localtion_tbody tr', function(e){
@@ -2709,6 +2801,322 @@ var processVO = {
 		}
 		
 	}
+	
+	
+	
+	
+	 function enterkey4() {
+      if (window.event.keyCode == 13) {
+            for(i=0; i<$("#m52_output_view_tb_tbody tr").length; i++){
+                num = i+1;
+				if($('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(2)').text().length >9){
+	               $('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(2)').text($('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(2)').text().substr(2));
+	            }
+                if($('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(5)').text().match(",")){
+                    console.log("품목이 2개 이상");
+                    var TEXT01_01 = $('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(5)').text().split(",");
+                    var TEXT02_01 = $('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(6)').text().split(",");
+                    var TEXT03_01 = $('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(7)').text().split(",");
+					var TEXT04_01 = $('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(8)').text().split(",");
+                    for(i=0; i<TEXT01_01.length; i++){
+                        $('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(5)').text(TEXT01_01[0]);
+                        $('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(6)').text(TEXT02_01[0]);
+                        $('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(7)').text(TEXT03_01[0]);
+						$('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(8)').text(TEXT04_01[0])
+                        if(i==1){
+                            console.log(num);
+                            console.log(i);
+                            console.log(num-i);
+                            $('#m52_output_view_tb_tbody tr').eq(num-1).after('<tr><td><img src="./resources/img/주문관리/리스트.png"></td><td>'+$('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(2)').text()+'</td><td>'+$('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(3)').text()+'</td><td>'+$('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(4)').text()+'</td><td>'+TEXT01_01[i]+'</td><td>'+TEXT02_01[i]+'</td><td>'+TEXT03_01[i]+'</td><td>'+TEXT04_01[i]+'</td><td>'+$('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(9)').text()+'</td><td>'+$('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(10)').text()+'</td></tr><tr><tr>');
+                        }else if(i>1){
+                            $('#m52_output_view_tb_tbody tr').eq(num+i-1).after('<tr><td><img src="./resources/img/주문관리/리스트.png"></td><td>'+$('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(2)').text()+'</td><td>'+$('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(3)').text()+'</td><td>'+$('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(4)').text()+'</td><td>'+TEXT01_01[i]+'</td><td>'+TEXT02_01[i]+'</td><td>'+TEXT03_01[i]+'</td><td>'+TEXT04_01[i]+'</td><td>'+$('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(9)').text()+'</td><td>'+$('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(10)').text()+'</td></tr><tr><tr>');
+                        }
+                    }
+                }
+            }
+        }
+    }
+	
+	 $(document).on('click', '.m051_product_choice_tbody tr', function(e){
+        $('.m51_product_choice_Modal').fadeOut();
+    })
+	
+	$(document).on('click', '.mainbody_51_2_bottom_btn_2_01', function(e){
+        
+    })
+	
+	
+	
+	// 로케이션 추가 버튼
+	//로케이션 분류를 클릭했을 때
+	    $(document).on('click', '#m08_localtion_content_01_01_btn_01', function(e){
+		var locationVO = {
+			company : "fourever",
+			lc_class : selectedLocationClass,
+			lc_parent : $("#m08_loca_text_01").text(),
+			lc_name : '└&nbsp;'+$("#lc_name").val(),
+			lc_num : $("#lc_num").val(),
+			lc_type : $("#lc_type").text(),
+			lc_jang : $("#lc_jang").val(),
+			lc_pok : $("#lc_pok").val(),
+			lc_go : $("#lc_go").val(),
+			lc_yeol : $("#lc_yeol").val(),
+			lc_yeon : $("#lc_yeon").val(),
+			lc_dan : $("#lc_dan").val(),
+		};
+		$.ajax({
+			url : "locationInsert.do",
+			type : "GET",
+			async:false,
+			data : locationVO,
+			// dataType : "json",
+			success : function(){
+				console.log("로케이션 삽입 success");},
+			error : function(request, status, error){
+			    console.log("로케이션 삽입 error");}
+		});
+	
+	})
+	
+	//로케이션 명을 선택했을때
+   $(document).on('click', '#m08_localtion_content_01_01_btn_02', function(e){
+		var name_space = parentLocation.split("└");
+		name_space = "&nbsp;&nbsp;&nbsp;"+name_space[0]+"└&nbsp;";
+		var locationVO = {
+			company : "fourever",
+			lc_class : selectedLocationClass,
+			lc_parent : parentLocation,
+			lc_name : name_space+$("#lc_name").val(), //부모를 가져와서 공백 3개 더하기
+			lc_num : $("#lc_num").val(),
+			lc_type : $("#lc_type").text(),
+			lc_jang : $("#lc_jang").val(),
+			lc_pok : $("#lc_pok").val(),
+			lc_go : $("#lc_go").val(),
+			lc_yeol : $("#lc_yeol").val(),
+			lc_yeon : $("#lc_yeon").val(),
+			lc_dan : $("#lc_dan").val(),
+		};
+		$.ajax({
+			url : "locationInsert.do",
+			type : "GET",
+			async:false,
+			data : locationVO,
+			// dataType : "json",
+			success : function(){
+				console.log("로케이션 삽입 success");},
+			error : function(request, status, error){
+			    console.log("로케이션 삽입 error");}
+		});
+	
+	})
+	
+	////////BOM 관리//////////
+	// 품목 클릭하면 오른쪽에 보이게
+	var gs_seq_num = "";
+	$(document).on('click', '.m07_bom_list_tbody tr', function(e){
+		gs_seq_num = $(this).find("input[name=gs_seq_num]").val()
+		$.ajax({
+	  		url:"goodsSelect.do",
+	  		type:"get",
+	  		async: false,
+	  		success: goodsinputHtml,
+	  		error:function(data){ 
+	  			let str = JSON.stringify(data);
+	  			console.log(str);
+	  		}
+	  	});
+
+		function goodsinputHtml(data){
+			var view="";
+			  $.each(data,function(index, obj){
+			     if(obj.gs_seq_num==gs_seq_num){
+					view ='<tr class="m07_cate_name_10 main">';
+					view+='<td class="m07_cate_main_name_11">&nbsp;― [완제품]'+obj.gs_name+'</td>'
+					view+='<td class="m07_cate_main_name_12">'+obj.gs_num+'</td>'
+					view+='<td class="m07_cate_main_name_13">1</td>'
+					view+='<td class="m07_cate_main_name_14">'+obj.gs_standard+'</td>'
+					view+='<td class="m07_cate_main_name_15">'+obj.gs_unit+'</td>'
+					view+='<td class="m07_cate_main_name_16">'
+					view+='<div class="m07_bom_list_tbody_btn_02_01">'
+					view+='<button class="m07_bom_list_tbody_btn_02_02">'
+					view+='<img src="./resources/img/BOM/부품추가.png">'
+					view+='</button>'
+					view+='</div>'
+					view+='</td>'
+					view+='</tr>'
+			     }
+			})
+		$(".m07_le_bom_list_tbody").html(view);
+		}
+		show_bom();
+	})
+	
+	// bom 추가버튼 누르기 
+	var parentOfBom = "";
+	$(document).on('click', '.m07_bom_list_tbody_btn_02_02', function(e){
+		parentOfBom= $(this).parent().parent().parent().find('td:eq(0)').text();
+		console.log(parentOfBom);
+		$('.m07_bom_locationModal').fadeIn();
+		
+	})
+	
+	// 모달창에서 자재 클릭하면 추가되기 
+	$(document).on('click', '.m07_bom_localtion_tr', function(e){
+		console.log(parentOfBom+"추가하기")
+		var ml_sortation = $(this).find('input[name=ml_sortation]').val();
+		var ml_name = $(this).find('td:eq(2)').text();
+		if(parentOfBom.indexOf("└") !== -1){
+			var b_name = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└['+ml_sortation+']'+ml_name;
+			console.log("원자재의 bom")
+		}else{
+			var b_name = '&nbsp;&nbsp;&nbsp;└['+ml_sortation+']'+ml_name;
+			console.log("완제품의 bom")
+		}
+		var b_num = $(this).find('td:eq(1)').text();
+		var b_standard = $(this).find('input[name=ml_standard]').val();
+		var b_unit = $(this).find('input[name=ml_uni]').val();
+		var bomVO = {
+			b_goods_seq: gs_seq_num,
+			b_parent: parentOfBom,
+			b_name: b_name,
+			b_num: b_num,
+			b_count: 0,
+			b_standard: b_standard,
+			b_unit: b_unit,
+			company: 'fourever'
+		}
+		$.ajax({
+	         url : "bomInsert.do",
+	         type : "GET",
+	         async:false,
+	         data : bomVO,
+	         // dataType : "json",
+	         success : function(){
+	            console.log("공정 입력 success");},
+	         error : function(request, status, error){
+	             console.log("공정 입력 error");}
+	      });
+		
+	})
+	
+	function show_bom(){
+		$.ajax({
+	         url : "bomSelect.do",
+	         type : "GET",
+	         async:false,
+	         data : {b_goods_seq: gs_seq_num},
+	         success : goodsinputHtml,
+	         error : function(request, status, error){
+	             console.log("bom 조회 error");}
+	      });
+		function goodsinputHtml(data){
+			var view="";
+			  $.each(data,function(index, obj){
+				view+='<tr class="m07_cate_name_10 main">';
+				view+='<td class="m07_cate_main_name_11"><input type="hidden" name="vomParent" value="'+obj.b_parent+'">'+obj.b_name+'</td>'
+				view+='<td class="m07_cate_main_name_12">'+obj.b_num+'</td>'
+				view+='<td class="m07_cate_main_name_13"><input type="text" name="b_count" style="width: 50%;"></td>'
+				view+='<td class="m07_cate_main_name_14">'+obj.b_standard+'</td>'
+				view+='<td class="m07_cate_main_name_15">'+obj.b_unit+'</td>'
+				view+='<td class="m07_cate_main_name_16">'
+				view+='<div class="m07_bom_list_tbody_btn_02_01">'
+				view+='<button class="m07_bom_list_tbody_btn_02_02">'
+				view+='<img src="./resources/img/BOM/부품추가.png">'
+				view+='</button>'
+				view+='</div>'
+				view+='</td>'
+				view+='</tr>'
+			})
+			var dd = $(".m07_le_bom_list_tbody").html();
+		$(".m07_le_bom_list_tbody").html(dd+view);
+		}
+		
+	}
+	
+	// 주문 내역 더블클릭
+    $(document).on("dblclick", "#m52_output_view_tb_tbody tr", function(){
+		var goodsOrderDeleteNum = $(this).find("input[name=goodsOrderDeleteNum]").val();
+		console.log(goodsOrderDeleteNum);
+		
+		//여기에 html 넣기
+			$.ajax({
+	         url : "goodsOrderSelectSequence.do",
+	         type : "GET",
+	         async:false,
+	         data : {go_num: goodsOrderDeleteNum},
+	         success : hhhtttmmmlll,
+	         error : function(request, status, error){
+	             console.log("bom 조회 error");}
+	      	});
+
+			function hhhtttmmmlll(data){
+				  $.each(data,function(index, obj){
+					 $("#go_num").text(data.go_num);
+					 $("#m51_product_admin_td_09_01_select_01").text(data.go_client);
+			         $("#go_orderDate").val(data.go_orderDate);
+			         $("#go_dueDate").val(data.go_dueDate);
+			         $("#go_place").val(data.go_place);
+			         $("#go_address").val(data.go_address);
+			         $("#go_price").val(data.go_price);
+			         $("#go_amount").val(data.go_amount);
+					 if(data.go_taxation=="과세"){
+				         $("#과세").prop("checked", true);
+				         $("#영세").prop("checked", false);
+				         $("#면세").prop("checked", false);
+					 }else if(data.go_taxation=="과세"){
+				         $("#과세").prop("checked", false);
+				         $("#영세").prop("checked", true);
+				         $("#면세").prop("checked", false);
+					 }else {
+				         $("#과세").prop("checked", false);
+				         $("#영세").prop("checked", false);
+				         $("#면세").prop("checked", true);
+					 }
+					$("#mainbody_51_2_table_tbody tr").each(function(e){
+						console.log($(this));
+				        goodsOrderNumdd = $(this).firstChild;
+						var jbSplit = data.go_goods_seq.split( ',');
+					      for ( var i in jbSplit ) {
+						if(goodsOrderNumdd==i){
+							
+							$(this).css("display", "table");
+							$(this).find("td:eq(1)").attr("class", "product_name");
+					      }
+						}
+					})
+		
+			    })
+			}
+		
+		/////////////
+		
+        $('.mainbody_51_1_top_btn_02').attr('class','mainbody_51_1_top_btn_02_update');
+       show_client();
+       show_goods();
+        document.getElementById("main_title").innerHTML = "주문 관리&nbsp; > &nbsp;주문 관리"
+        $(".main_top_bar").css("display", "flex");
+        $(".mainbody_51").css("display", "flex");
+        $(".mainbody_52").css("display", "none");
+
+		
+    })
+	
+	
+	    function location_logic() {
+        // name="parentName" value="undefined"
+        for (i=0; i<$('#mainbody_08_01_r_bottom_table_body tr').length; i++){
+            var num = i+1;
+            if($('#mainbody_08_01_r_bottom_table_body tr:nth-child('+num+') td input[name=parentName]').val() === "undefined"){
+                $('#mainbody_08_01_r_bottom_table_body tr:nth-child('+num+')').css("display","table-row");
+            }
+        }
+
+    }
+
+    
+	
+	
+	
 	
 	
 	

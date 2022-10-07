@@ -14,6 +14,7 @@ import com.uni.domain.locationVO;
 import com.uni.domain.materialVO;
 import com.uni.domain.MemberVO;
 import com.uni.domain.badVO;
+import com.uni.domain.bomVO;
 import com.uni.domain.clientVO;
 import com.uni.domain.codeVO;
 import com.uni.domain.dailyVO;
@@ -229,16 +230,46 @@ public interface BoardMapper {
 	@Select("select * from goods_order where company='${company}'")
 	public List<goodsOrderVO> goodsOrderSelect(@Param("company") String company);
 	
+	@Select("select * from goods_order where go_num='${go_num}'")
+	public goodsOrderVO goodsOrderSelectSequence(@Param("go_num") String go_num);
+	
 	// 추가
-	@Insert("insert into goods_order values('${vo.go_num}', '${vo.go_goods_seq}', '${vo.go_goods_name}', '${vo.go_goods_count}', '${vo.go_client}',"
+	@Insert("insert into goods_order values('O'||ZBF_GET_BATCHKEY('now'), '${vo.go_goods_seq}', '${vo.go_goods_name}', '${vo.go_goods_count}', '${vo.go_goods_standard}',"
+			+ " '${vo.go_goods_unit}', '${vo.go_goods_unitPrice}', '${vo.go_goods_discount}', '${vo.go_goods_price}', '${vo.go_client}',"
 			+ " '${vo.go_orderDate}', '${vo.go_dueDate}', '${vo.go_place}','${vo.go_address}','${vo.go_price}',"
 			+ " '${vo.go_amount}', '${vo.go_taxation}', '${vo.go_now}', '${vo.company}' )")
 	public void goodsOrderInsert(@Param("vo") goodsOrderVO vo);
 	
 	// 삭제
-	@Delete("DELETE FROM goods_order WHERE go_num=${go_num}")
+	@Delete("DELETE FROM goods_order WHERE go_num='${go_num}'")
 	public void goodsOrderDelete(@Param("go_num") String go_num);
 
+	// 수정
+	@Update("update goods_order set ml_num='${vo.go_goods_seq}', ml_name='${vo.go_goods_name}', go_goods_count='${vo.go_goods_count}', go_goods_standard='${vo.go_goods_standard}', go_goods_unit='${vo.go_goods_unit}', "
+			+ "	go_goods_unitPrice='${vo.go_goods_unitPrice}', go_goods_discount='${vo.go_goods_discount}',go_goods_price='${vo.go_goods_price}',go_client='${vo.go_client}', go_orderDate='${vo.go_orderDate}', "
+			+ "	go_dueDate='${vo.go_dueDate}', go_place='${vo.go_place}',go_address='${vo.go_address}',go_price='${vo.go_price}', go_amount='${vo.go_amount}' "
+			+ "	go_taxation='${vo.go_taxation}', go_now='${vo.go_now}' "
+			+ "	 WHERE go_num=${vo.go_num}")
+	public void goodsOrderUpdate(@Param("vo") goodsOrderVO vo);
+	
+	// bom 조회
+	@Select("select * from bom where b_goods_seq='${b_goods_seq}'")
+	public List<bomVO> bomSelect(@Param("b_goods_seq") String b_goods_seq);
+	
+	// 추가
+	@Insert("insert into bom values(b_seq_num.nextval, '${vo.b_goods_seq}', '${vo.b_parent}', '${vo.b_name}', '${vo.b_num}', '${vo.b_count}', '${vo.b_standard}', "
+			+ " '${vo.b_unit}', '${vo.company}') ")
+	public void bomInsert(@Param("vo") bomVO vo);
+	
+	// 삭제
+	@Delete("DELETE FROM bom WHERE b_seq_num=${b_seq_num}")
+	public void bomDelete(@Param("ml_seq_num") String ml_seq_num);
+	
+	// 수정
+	@Update("update bom set b_count='${vo.b_count}'"
+			+ "	 WHERE b_seq_num=${vo.b_seq_num}")
+	public void bomUpdate(@Param("vo") bomVO vo);
+		
 	
 	////////////생산 관리
 	// 생산 계획 조회

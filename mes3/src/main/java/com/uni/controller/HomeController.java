@@ -33,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.uni.domain.MemberVO;
 import com.uni.domain.badVO;
+import com.uni.domain.bomVO;
 import com.uni.domain.clientVO;
 import com.uni.domain.codeVO;
 import com.uni.domain.dailyVO;
@@ -519,12 +520,56 @@ public class HomeController {
 		boardmapper.materialUpdate(vo);
 	}
 	
+	// bom 관리
+	@ResponseBody
+	@RequestMapping("/bomSelect.do")
+	public List<bomVO> bomSelect(String b_goods_seq) {
+		List<bomVO> data = boardmapper.bomSelect(b_goods_seq);
+		System.out.println(b_goods_seq+"bom 리스트");
+		System.out.println(data.size());
+
+		return data;
+	}
+	
+	//입력
+	@ResponseBody
+	@RequestMapping("/bomInsert.do")
+	public void bomInsert(bomVO vo) {
+		boardmapper.bomInsert(vo);
+		System.out.println(vo+"---자재 입력");
+	}
+	
+	// 삭제
+	@ResponseBody
+	@RequestMapping("/bomDelete.do")
+	public void bomDelete(String ml_seq_num) {
+		System.out.println(ml_seq_num+"---자재 삭제");
+		boardmapper.bomDelete(ml_seq_num);
+	}
+	
+	// 수정
+	@ResponseBody
+	@RequestMapping("/bomUpdate.do")
+	public void bomUpdate(bomVO vo) {
+		System.out.println(vo.getB_seq_num()+"---회원수정");
+		boardmapper.bomUpdate(vo);
+	}
+	
 	/////////주문 관리///////////
 	@ResponseBody
 	@RequestMapping("/goodsOrderSelect.do")
 	public List<goodsOrderVO> goodsOrderSelect(String company) {
 		List<goodsOrderVO> data = boardmapper.goodsOrderSelect(company);
 		System.out.println(company+"회사의 주문 리스트");
+		return data;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/goodsOrderSelectSequence.do")
+	public goodsOrderVO goodsOrderSelectSequence(String go_num) {
+		goodsOrderVO data = boardmapper.goodsOrderSelectSequence(go_num);
+		System.out.println(company+"회사의 주문 리스트");
+		System.out.println(data.getGo_num());
 		return data;
 	}
 	
@@ -542,6 +587,14 @@ public class HomeController {
 	public void goodsOrderDelete(String go_num) {
 		System.out.println(go_num+"---자재 삭제");
 		boardmapper.goodsOrderDelete(go_num);
+	}
+	
+	// 수정
+	@ResponseBody
+	@RequestMapping("/goodsOrderUpdate.do")
+	public void goodsOrderUpdate(goodsOrderVO vo) {
+		System.out.println(vo.getGo_num()+"---회원수정");
+		boardmapper.goodsOrderUpdate(vo);
 	}
 	
 	/////////생산 관리/////////

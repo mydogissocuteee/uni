@@ -9,6 +9,11 @@ public class goodsOrderVO {
 	private String go_goods_seq;
 	private String go_goods_name;
 	private String go_goods_count;
+	private String go_goods_standard;
+	private String go_goods_unit;
+	private String go_goods_unitPrice;
+	private String go_goods_discount;
+	private String go_goods_price;
 	private String go_client;
 	private String go_orderDate;
 	private String go_dueDate;

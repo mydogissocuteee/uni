@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/036f0eb301.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./resources/css/mes.css" type="text/css">
+    <link rel="stylesheet" href="/css/mes.css" type="text/css">
     <title>bar</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -651,13 +651,13 @@
             </div>
             <div class="m08_localtion_content_01">
                 <div class="m08_localtion_content_01_01">
-                    <button class="m08_localtion_content_01_01_btn"><img src="./resources/img/save.png"></button>
+                    <button class="m08_localtion_content_01_01_btn" id="m08_localtion_content_01_01_btn_01"><img src="./resources/img/save.png"></button>
                 </div>
                 <div class="m08_localtion_content_01_02">
                     <div class="m08_localtion_content_01_02_01">
                         <div class="m08_localtion_content_01_02_01_01">
                             <span class="m08_loca_text">상위 로케이션 :</span>
-                            <span class="m08_loca_text_01" id="m08_loca_text_01">fssfd</span>
+                            <span class="m08_loca_text_01" id="m08_loca_text_01"></span>
                         </div>
                         <div class="m08_localtion_content_01_02_01_02">
                             <span class="m08_loca_text">&nbsp;로케이션 명&nbsp;&nbsp; :</span>
@@ -1491,7 +1491,7 @@
               onclick="m12_productModalClose()">X</button></div>
           <div class="m12_productSearch_content_01">
             <div class="m12_productSearch_content_01_01"><input class="m12_productModal_search_input" type="text"><button
-                class="m12_productSearchModal_btn01"><img src="./resources/img/생산관리/선택.png" class="m12_productModal_search_btn_img"></button></div>
+                class="m12_productSearchModal_btn01"><img src="/img/생산관리/선택.png" class="m12_productModal_search_btn_img"></button></div>
           </div>
           <div class="m12_productSearch_content_02">
             <table class="m12_productSearch_content_tb">
@@ -1668,6 +1668,314 @@
     </div>
 
 
+    <!-- *1004 자재관리 > 자재발주 : 업체명 선택 모달창 -->
+    <div class="m21_customerModal" id="m21_customerSearchModal" style="display:none">
+        <div class="m21_customer_modal_body">
+            <div class="m21_customerModal_head">자재관리 업체명 검색
+                <button type="button" class="m21_customerClose" onclick="m21_customerClose()">X</button>
+            </div>
+            <div class="m21_customer_content_01">
+                <div class="m21_customer_content_01_01">
+                    <input autocomplete='off' class="m21_customerModal_search_input"type="text">
+                </div>
+            </div>
+            <div class="m21_customer_content_02">
+                <table class="m21_customerSearch_tb">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>번호</th>
+                            <th>거래처 명</th>
+                            <th>구분</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="m21_customerSearch_td_00">1</td>
+                            <td class="m21_customerSearch_td_00">00000005</td>
+                            <td class="m21_customerSearch_td_00">543214</td>
+                            <td class="m21_customerSearch_td_00">매입처</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- *1004 자재관리 > 자재발주 : 품목 추가 선택 모달창 -->
+    <div class="m21_product_choice_Modal" id="m21_product_choice_SearchModal">
+        <div class="m21_product_choice_modal_body">
+            <div class="m21_product_choice_Modal_head">품목 선택
+                <button type="button" class="m21_product_choice_Close_btn" onclick="m21_product_choice_Close()">X</button>
+            </div>
+            <div class="m021_product_choice_content_01">
+                <div class="product_choice_content_01_01">
+                    <input type="text">
+                </div>
+            </div>
+            <div class="m021_product_choice_content_02">
+                <table class="m021_product_choice_tb">
+                    <thead>
+                        <tr>
+                            <th>품목번호</th>
+                            <th>품목명</th>
+                            <th>사양</th>
+                            <th>규격</th>
+                            <th>단위</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>156</td>
+                            <td>ASJHD</td>
+                            <td>adjdh</td>
+                            <td>1</td>
+                            <td>5421231</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- *1004 자재관리 -> 자재입고현황 : 로케이션 검색모달창 -->
+    <div class="m23_goods_locationModal" id="m23_goods_locationSearchModal" style="display:none">
+        <div class="m23_goods_location_modal_body">
+            <div class="m23_goods_locationModal_head">자재 로케이션 검색 
+                <button type="button" class="m23_goods_locationClose" onclick="m23_goods_locationClose()">X</button>
+            </div>
+            <div class="m23_goods_localtion_content_01">
+                <span class="m23_goods_loca_text">로케이션 분류 :</span>
+                <div class="m23_goods_location_select">
+                    <div class="m23_goods_location_selected">
+                        <div class="m23_goods_location_select_txt">
+                            &nbsp
+                        </div>
+                        <div class="m23_goods_location_select_btn">
+                            <button class="m23_goods_location_select_btn_cls" onclick="m23_goods_location_select_btn_cls()">
+                                <img src="./resources/img/제품관리/엑스.png">
+                            </button>
+                        </div>
+                        <ul>
+                            <li class="option">1</li>
+                            <li class="option">2</li>
+                            <li class="option">3</li>
+                            <li class="option">4</li>
+                            <li class="option">5</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="m23_goods_localtion_content_02">
+                <table class="m23_goods_localtion_tb">
+                    <thead>
+                        <tr>
+                            <th>로케이션명</th>
+                            <th>로케이션 번호</th>
+                            <th>유형</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>fdasf</td>
+                            <td>131321</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- *1004 자재관리 > 자재입고현황 : 새 입고 추가 모달창 -->
+    <div class="m23_material_order_productModal" id="m23_material_order_productAddModal" style="display:none">
+        <div class="m23_material_order_product_modal_body">
+            <div class="m23_material_order_productModal_head"><div id="m23_material_order_productModal_head_name">새 항목 추가</div>
+                <button type="button" class="m023_materialOrder_productClose" onclick="m23_material_order_productClose()">X</button>
+            </div>
+            <div class="m023_material_order_product_content_02">
+                <div class="m023_material_order_product_content_02_01">
+                    <label>
+                        <input type="radio" name="새입고추가" value="new_item_add2">
+                        <span>새 항목 추가</span>
+                    </label>
+                </div>
+                <div class="m023_material_order_product_content_02_02">
+                    <label>
+                        <input type="radio" name="새입고추가"  value="raw_material_add2">
+                        <span>발주에서 추가</span>
+                    </label>
+                </div>
+                <div class="m023_material_order_product_content_02_03">
+                    <label>
+                        <input type="radio"name="새입고추가" value="external_processing_addd">
+                        <span>출고에서 추가</span>
+                    </label>
+                </div>
+            </div>
+            <div class="m023_material_order_product_content_01">
+                <div class="m023_material_order_product_t">
+                  <div class="m023_material_order_product_t_01"><input type="text" placeholder="품목 또는 사양, 규격을 검색하세요"></div>
+                  <div class="m023_material_order_product_t_02">
+                      <button class="m023_material_order_product_btn_01" >
+                          <img src="./resources/img/자재관리/검색.png">
+                      </button>
+                  </div>
+                </div>
+              </div>
+            <div class="m023_material_order_product_content_03">
+                <div class="m23_product_plus_content_01">
+                    <div class="m23_product_plus_content_01_01">
+                        <input autocomplete='off' class="m23_product_plus_Modal_search_input"type="text" placeholder="검색어를 입력하세요">
+                    </div>
+                </div>
+                <div class="m23_product_plus_content_02">
+                    <table class="m23_product_plus_Search_tb">
+                        <thead>
+                            <tr>
+                                <th>품목번호</th>
+                                <th>품목명</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>00000005</td>
+                                <td>543214</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="m023_material_order_product_content_04">
+                <table class="m023_material_order_product_tb">
+                    <thead>
+                        <tr>
+                            <th>발주번호</th>
+                            <th>거래처명</th>
+                            <th>품목번호</th>
+                            <th>품목명</th>
+                            <th>발주수량</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>51351</td>
+                            <td>db</td>
+                            <td>1호</td>
+                            <td>gvdrfws</td>
+                            <td>개</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="m023_order_choice_product_content_05">
+                <table class="m023_order_choice_product_tb">
+                    <thead>
+                        <tr>
+                            <th>출고번호</th>
+                            <th>거래처명</th>
+                            <th>품목번호</th>
+                            <th>품목명</th>
+                            <th>출고수량</th>
+                            <th>입고수량</th>
+                            <th>미입고수량</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>124641246412464</td>
+                            <td>유니컴퍼니</td>
+                            <td>13876</td>
+                            <td>에코클린매트03</td>
+                            <td>개</td>
+                            <td><input type="text" autocomplete="off"></td>
+                            <td><input type="text" autocomplete="off"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- *1005 물류 관리 -> 출고 : 거래처 검색 모달창 -->
+    <div class="m31_customerModal" id="m31_customerSearchModal" style="display:none">
+        <div class="m31_customer_modal_body">
+            <div class="m31_customerModal_head">물류관리 거래처 검색
+                <button type="button" class="m31_customerClose" onclick="m31_customerClose()">X</button>
+            </div>
+            <div class="m31_customer_content_01">
+                <div class="m31_customer_content_01_01">
+                    <input autocomplete='off' class="m31_customerModal_search_input"type="text">
+                </div>
+            </div>
+            <div class="m31_customer_content_02">
+                <table class="m31_customerSearch_tb">
+                    <thead>
+                        <tr>
+                            <th>거래처번호</th>
+                            <th>거래처명</th>
+                            <th>구분</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>00000005</td>
+                            <td>543214</td>
+                            <td>매입처</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- *1005 물류 관리 -> 출고 : 제품명 선택 모달창 -->
+    <div class="m31_plan_productModal" id="m31_plan_productSearchModal">
+        <div class="m31_plan_productSearchModal_body">
+          <div class="m31_plan_productSearchModal_head">제품명 검색<button type="button" class="m31_plan_productModalClose"
+              onclick="m31_plan_productModalClose()">X</button></div>
+          <div class="m31_plan_productSearch_content_01">
+            <div class="m31_plan_productSearch_content_01_01"><input class="m31_plan_productModal_search_input" type="text"></div>
+          </div>
+          <div class="m31_plan_productSearch_content_02">
+            <table class="m31_plan_productSearch_content_tb">
+                <thead>
+                    <tr>
+                        <th>제품번호</th>
+                        <th>제품명</th>
+                      </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>fgh</td>
+                        <td>sfdg</td>
+                      </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    
 
     <!-- 메인 탑 네비게이션 바 -->
     <div class="mainbar">
@@ -1739,7 +2047,7 @@
                             <li><a href="#" id="material_li">자재 발주</a></li>
                             <li><a href="#" id="materialView_li">자재 발주 조회</a></li>
                             <li><a href="#" id="materialArrival_li">자재 입고 현황</a></li>
-                            <li><a href="#" id="inventoryList_li">자재 재고 현황</a></li>
+                            <li><a href="#" id="inventoryList_li">자재 재고 조회</a></li>
                         </ul>
                     </li>
                     <li class="active">
@@ -1891,11 +2199,11 @@
                                 </tr>
                                 <tr>
                                     <td>연락처</td>
-                                    <td><input autocomplete='off' id="u_input_phonenum" type="text"></td>
+                                    <td><input autocomplete='off' id="u_input_phonenum" type="text" value=" "></td>
                                 </tr>
                                 <tr>
                                     <td>이메일</td>
-                                    <td><input autocomplete='off' id="u_input_email" type="text"></td>
+                                    <td><input autocomplete='off' id="u_input_email" type="text" value=" "></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
@@ -2152,7 +2460,7 @@
                                                     for="m2_l_bot_bottom_table_checkbox34"></label></td>
                                         </tr>
                                         <tr id="cate_sub_name_34">
-                                            <td id="cate_sub_name_34_1" style="padding-left: 3%;">└ 자재 재고 현황</td>
+                                            <td id="cate_sub_name_34_1" style="padding-left: 3%;">└ 자재 재고 조회</td>
                                             <td id="cate_sub_name_34_2" style="padding-left: 3%;">└ sub_MN_L4_0000004</td>
                                             <td id="cate_sub_name_34_3"><input autocomplete='off' type="checkbox"
                                                     id="m2_l_bot_bottom_table_checkbox35" name="ugr_name" value="자재 재고 현황"><label
@@ -2716,11 +3024,11 @@
                                                 </div>
                                             </div>
                                             <ul id="">
-                                                <li class="option">1</li>
-                                                <li class="option">2</li>
-                                                <li class="option">3</li>
-                                                <li class="option">4</li>
-                                                <li class="option">5</li>
+                                                <li class="option">완제품</li>
+                                                <li class="option">반제품</li>
+                                                <li class="option">외주가공품</li>
+                                                <li class="option">원자재</li>
+                                                <li class="option">부자재</li>
                                             </ul>
                                         </div>
                                     </td>
@@ -2743,11 +3051,11 @@
                                                 </div>
                                             </div>
                                             <ul id="m03_product_admin_td04_select_txt_list">
-                                                <li class="option">1</li>
-                                                <li class="option">2</li>
-                                                <li class="option">3</li>
-                                                <li class="option">4</li>
-                                                <li class="option">5</li>
+                                                <li class="option">완제품</li>
+                                                <li class="option">반제품</li>
+                                                <li class="option">외주가공품</li>
+                                                <li class="option">원자재</li>
+                                                <li class="option">부자재</li>
                                             </ul>
                                         </div>
                                     </td>
@@ -3035,11 +3343,11 @@
                                                 </div>
                                             </div>
                                             <ul>
-                                                <li class="option">1</li>
-                                                <li class="option">2</li>
-                                                <li class="option">3</li>
-                                                <li class="option">4</li>
-                                                <li class="option">5</li>
+                                                <li class="option">완제품</li>
+                                                <li class="option">반제품</li>
+                                                <li class="option">외주가공품</li>
+                                                <li class="option">원자재</li>
+                                                <li class="option">부자재</li>
                                             </ul>
                                         </div>
                                     </td>
@@ -3975,9 +4283,7 @@
                                             <input autocomplete='off' type="checkbox" id="m08_r_bottom_table_checkbox">
                                             <label for="m08_r_bottom_table_checkbox"></label>
                                         </td>
-                                        <td>
-                                            └ 로케이션 명
-                                        </td>
+                                        <td>└ 로케이션 명</td>
                                         <td>
                                             153153153135
                                         </td>
@@ -4185,6 +4491,10 @@
                         </td>
                         </tr>
                         <tr>
+                          <td>주문번호</td>
+                          <td><input type="text" id="pp_performance_quantity"></td>
+                        </tr>
+                        <tr>
                           <td>제품번호</td>
                           <td><div class="produce_plan_tb_01_div_02" id="pp_goods_num">&nbsp;</div></td>
                         </tr>
@@ -4195,10 +4505,6 @@
                         <tr>
                           <td>계획수량</td>
                           <td><input type="text" id="pp_quantity"></td>
-                        </tr>
-                        <tr>
-                          <td>실적수량</td>
-                          <td><input type="text" id="pp_performance_quantity"></td>
                         </tr>
                         <tr>
                           <td colspan="2">
@@ -4258,7 +4564,7 @@
                               <td>제품번호</td>
                               <td>생산일자</td>
                               <td>계획수량</td>
-                              <td>실적수량</td>
+                              <td>주문번호</td>
                             </tr>
                           </thead>
                           <tbody id="produce_plan_tb_02_tbody">
@@ -4332,18 +4638,10 @@
                             <td id="wo_go_goods_seq"></td>
                             <td>품목명:</td>
                             <td id="wo_go_goods_name"></td>
-                            <td>사양명:</td>
-                            <td></td>
-                            <td colspan="2"></td>
-                          </tr>
-                          <tr>
                             <td>단위:</td>
                             <td></td>
                             <td>수량:</td>
                             <td id="wo_pp_performance_quantity"></td>
-                            <td>최종공정:</td>
-                            <td></td>
-                            <td colspan="2"></td>
                           </tr>
                         </tbody>
                       </table>
@@ -4898,40 +5196,634 @@
               </div>
 
 
-            <!-- 자재관리 > 자재발주 -->
+            <!-- *1004 자재관리 > 자재발주 -->
             <div class="mainbody_21">
-                <span>21</span>
+                <div class="mainbody_21_00">
+                    <div class="mainbody_21_top">
+                        <div class="mainbody_21_top_l"><input class="mainbody_21_top_l_in" type="text" placeholder="발주번호 검색"></div>
+                        <div class="mainbody_21_top_r">
+                            <div class="mainbody_21_top_r_01">
+                                <button class="mainbody_21_top_btn_01">
+                                    <img src="./resources/img/자재관리/초기화.png">
+                                </button>
+                            </div>
+                            <div class="mainbody_21_top_r_02">
+                                <button class="mainbody_21_top_btn_02">
+                                    <img src="./resources/img/save.png">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mainbody_21_mid">
+                        <div class="mainbody_21_mid_table">
+                        <table class="material_order_tb_01">
+                            <tbody>
+                                <tr>
+                                    <td>발주번호</td>
+                                    <td>자동으로 부여됩니다.</td>
+                                    <td>업체명</td>
+                                    <td>
+                                        <div class="m21_admin_td_09_01_select">
+                                            <div class="m21_admin_td_09_01_select_01" id="m21_admin_td_09_01_select_01">&nbsp;</div>
+                                            <div class="m21_admin_td_09_01_select_03">
+                                                <button class="m21_customerSearch_btn"onclick="m21_customerOpen()">
+                                                    <img src="./resources/img/제품관리/선택.png"class="mainbody_21_01_choice_01">
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>발주일자</td>
+                                    <td><input type="date"></td>
+                                    <td>납기일자</td>
+                                    <td><input type="date"></td>
+                                </tr>    
+                                <tr>
+                                    <td>납품장소</td>
+                                    <td><input type="text"></td>
+                                    <td>유효일자</td>
+                                    <td><input type="date"></td>
+                                </tr>
+                                <tr>
+                                    <td>결제조건</td>
+                                    <td><input type="text"></td>
+                                    <td>주소</td>
+                                    <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                    <td>담당자</td>
+                                    <td><input type="text"></td>
+                                    <td>연락처</td>
+                                    <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                    <td>휴대전화번호</td>
+                                    <td><input type="text"></td>
+                                    <td>비고</td>
+                                    <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                    <td>요청사항</td>
+                                    <td><input type="text"></td>
+                                    <td>총금액</td>
+                                    <td><input type="text"></td>
+                                </tr>         
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                    <div class="mainbody_21_bott_t">
+                        <div class="mainbody_21_bott_t_01">
+                            <button  class="mainbody_21_bott_btn_01" onclick="m21_product_choice_Open()">
+                                <img src="./resources/img/생산관리/품목추가.png">
+                            </button>
+                        </div>
+                        <div class="mainbody_21_bott_t_02">
+                            <button class="mainbody_21_bott_btn_02">
+                                <img src="./resources/img/삭제.png">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mainbody_21_bott_b">
+                        <div class="mainbody_21_bott_b_table">
+                        <table class="material_order_tb_02">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>품목번호</th>
+                                    <th>품목명</th>
+                                    <th>규격</th>
+                                    <th>사양</th>
+                                    <th>단위</th>
+                                    <th>단가</th>
+                                    <th>발주수량</th>
+                                    <th>할인율</th>
+                                    <th>부가세</th>
+                                    <th>공급가액</th>
+                                    <th>합계</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>12345468</td>
+                                    <td>skfl</td>
+                                    <td>skfl</td>
+                                    <td>skfl</td>
+                                    <td>갯수</td>
+                                    <td><input type="text" autocomplete="off"></td>
+                                    <td><input type="text" autocomplete="off"></td>
+                                    <td><input type="text" autocomplete="off"></td>
+                                    <td><input type="text" autocomplete="off"></td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- 자재관리 > 자재발주조회 -->
+            <!-- *1004 자재관리 > 자재 발주 조회 -->
             <div class="mainbody_22">
-                <span>22</span>
+                <div class="mainbody_22_00">
+                    <div class="mainbody_22_01">
+                        <div class="mainbody_22_01_top">
+                            <div class="mainbody_22_01_top_l">
+                              <div class="mainbody_22_01_top_l_01">발주일</div>
+                              <div class="mainbody_22_01_top_l_02"><input type="date">&nbsp~&nbsp</div>
+                              <div class="mainbody_22_01_top_l_03"><input type="date"></div>
+                              <div class="mainbody_22_01_top_l_05">
+                                <button class="mainbody_22_01_top_btn_01">
+                                  <img src="./resources/img/생산관리/검색.png">
+                                </button>
+                              </div>
+                           </div>
+              
+                           <div class="mainbody_22_01_top_r">
+                            <div class="mainbody_22_01_top_l_04"><input type="text" placeholder="검색어를 입력하세요"></div>
+                            <div class="mainbody_22_01_top_r_01">
+                              <button class="mainbody_22_01_top_btn_02">
+                                <img src="./resources/img/생산관리/엑셀.png">
+                              </button>
+                            </div>
+                            <div class="mainbody_22_01_top_r_02">
+                              <button class="mainbody_22_01_top_btn_03">
+                                <img src="./resources/img/생산관리/삭제.png">
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                    <div class="mainbody_22_bot">
+                        <div class="mainbody_22_bot_00">
+                            <table class="material_order_view_tb">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>발주번호</th>
+                                        <th>발주일</th>
+                                        <th>납품일</th>
+                                        <th>발주업체</th>
+                                        <th>총 금액</th>
+                                        <th>대표품목</th>
+                                        <th>발주수량</th>
+                                        <th>상세조회</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>gfdh</td>
+                                        <td>fgh</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>dfgh</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
 
-            <!-- 자재관리 > 자재입고현황 -->
+            <!-- *1004 자재관리 > 자재입고현황 -->
             <div class="mainbody_23">
-                <span>23</span>
+                <div class="mainbody_23_00">
+                    <div class="mainbody_23_01">
+                        <div class="mainbody_23_top">
+                            <div class="mainbody_23_top_l">
+                                <div class="mainbody_23_top_l_01_01">
+                                    <div class="mainbody_23_top_l_01_01_01">
+                                        <div class="mainbody_23_top_l_04">
+                                            <div class="mainbody_23_top_l_04_01"><input type="radio" name="" value="전체" checked><span>전체</span></div>
+                                            <div class="mainbody_23_top_l_04_02"><input type="radio" name="" value="원부자재"><span>원부자재</span></div>
+                                            <div class="mainbody_23_top_l_04_03"><input type="radio" name="" value="외주가공품"><span>외주가공품</span></div>
+                                            <div class="mainbody_23_top_l_04_04"><input type="radio" name="" value="상품"><span>상품</span></div>
+                                            <div class="mainbody_23_top_l_04_05"><input type="radio" name="" value="생산"><span>생산</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="mainbody_23_top_l_01_01_02">
+                                        <div class="mainbody_23_top_l_01">입고처리일</div>
+                                        <div class="mainbody_23_top_l_02"><input type="date">&nbsp;~&nbsp;</div>
+                                        <div class="mainbody_23_top_l_03"><input type="date"></div>
+                                        <div  class="mainbody_23_top_l_05">
+                                            <button class="mainbody_23_top_l_btn_01">
+                                                <img src="./resources/img/생산관리/검색.png">
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mainbody_23_top_r">
+                                <div class="mainbody_23_top_r_01">
+                                    <button class="mainbody_23_top_r_btn_01">
+                                        <img src="./resources/img/자재관리/엑셀.png">
+                                    </button>
+                                </div>
+                                <div class="mainbody_23_top_r_02">
+                                    <button class="mainbody_23_top_r_btn_02" onclick="m23_material_order_productOpen()">
+                                        <img src="./resources/img/자재관리/새입고추가.png">
+                                    </button>
+                                </div>
+                                <div class="mainbody_23_top_r_03">
+                                    <button class="mainbody_23_top_r_btn_03">
+                                        <img src="./resources/img/save.png">
+                                    </button>
+                                </div>
+                                <div class="mainbody_23_top_r_04">
+                                    <button class="mainbody_23_top_r_btn_04">
+                                        <img src="./resources/img/삭제.png">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mainbody_23_bot">
+                            <div class="mainbody_23_bot_tb">
+                                <table class="receiving_goods_tb">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>입고 일자</th>
+                                            <th>재고이동 유형</th>
+                                            <th>LOT번호</th>
+                                            <th>발주번호</th>
+                                            <th>품목명</th>
+                                            <th>품목번호</th>
+                                            <th>수량</th>
+                                            <th>단위</th>
+                                            <th>포장단위수량</th>
+                                            <th>포장단위</th>
+                                            <th>로케이션</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>22-09-19</td>
+                                        <td>원부자재입고</td>
+                                        <td><input type="text" autocomplete="off"></td>
+                                        <td><input type="text" autocomplete="off"></td>
+                                        <td>sdfsdjf</td>
+                                        <td>001</td>
+                                        <td><input type="text" autocomplete="off"></td>
+                                        <td>갯수</td>
+                                        <td><input type="text" autocomplete="off"></td>
+                                        <td>박스</td>
+                                        <td>
+                                            <div class="mainbody_23_bot_02">
+                                                <button  class="mainbody_23_bot_btn_02" onclick="m23_product_locationOpen()">
+                                                    <img src="./resources/img/자재관리/돋보기.png">
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- 자재관리 > 자재재고현황 -->
+            <!-- *1004 자재관리 > 자재재고현황 -->
             <div class="mainbody_24">
-                <span>24</span>
+                <div class="mainbody_24_00">
+                    <div class="mainbody_24_01">
+                        <div class="mainbody_24_01_top">
+                            <div class="mainbody_24_01_top_l">
+                              <div class="mainbody_24_01_top_l_01">자재발주일</div>
+                              <div class="mainbody_24_01_top_l_02"><input type="date">&nbsp~&nbsp</div>
+                              <div class="mainbody_24_01_top_l_03"><input type="date"></div>
+                              <div class="mainbody_24_01_top_l_05">
+                                <button class="mainbody_24_01_top_btn_01">
+                                  <img src="./resources/img/생산관리/검색.png">
+                                </button>
+                              </div>
+                           </div>
+              
+                           <div class="mainbody_24_01_top_r">
+                            <div class="mainbody_24_01_top_l_04"><input type="text" placeholder="검색어를 입력하세요"></div>
+                            <div class="mainbody_24_01_top_r_01">
+                              <button class="mainbody_24_01_top_btn_02">
+                                <img src="./resources/img/생산관리/엑셀.png">
+                              </button>
+                            </div>
+                            <div class="mainbody_24_01_top_r_02">
+                              <button class="mainbody_24_01_top_btn_03">
+                                <img src="./resources/img/생산관리/삭제.png">
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mainbody_24_bott">
+                            <div class="mainbody_24_bott_tb_wrapp">
+                                <table class="mainbody_24_bott_tb">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>품목코드</th>
+                                            <th>품명</th>
+                                            <th>LOT번호</th>
+                                            <th>규격</th>
+                                            <th>단위</th>
+                                            <th>판매단가</th>
+                                            <th>구매단가</th>
+                                            <th>로케이션</th>
+                                            <th>현 재고</th>
+                                            <th>재고상태</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>21354</td>
+                                            <td>dfvgs</td>
+                                            <td>12135</td>
+                                            <td>1호</td>
+                                            <td>갯수</td>
+                                            <td>200</td>
+                                            <td>100</td>
+                                            <td>ajdhkljh</td>
+                                            <td>354351</td>
+                                            <td>부족</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- 물류관리 > 출고지시 -->
+
+            <!-- *1005 물류 관리 > 출고 -->
             <div class="mainbody_31">
-                <span>31</span>
+                <div class="m31_main">
+                  <div class="m31_left">
+                    <div class="mainbody_31_01_01">
+                        <div class="mainbody_31_01_01_btn1">
+                            <button class="mainbody_31_01_btn1" onclick="mainbody_03_01_btn1()">
+                                <img src="./resources/img/제품관리/초기화.png" alt="초기화">
+                            </button>
+                        </div>
+                        <div style="width: 47.1%;">
+                        </div>
+                        <div class="mainbody_31_01_01_btn2">
+                            <button class="mainbody_31_01_btn2">
+                                <img src="./resources/img/제품관리/엑셀.png" alt="엑셀" class="mainbody_31_01_btn1_img2">
+                            </button>
+                        </div>
+                        <div class="mainbody_31_01_01_btn3">
+                            <button class="mainbody_31_01_btn3" onclick="productSave()">
+                                <img src="./resources/img/제품관리/저장.png" alt="저장" class="mainbody_31_01_btn1_img3">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="m31_left_bot">
+                      <div class="m31_left_bot_body">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>주문번호</td>
+                              <td>
+                                <div style="border: 0 !important;">
+                                  자동으로 부여됩니다.
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="color: #5dba8e;">거래처</td>
+                              <td>
+                                <div class="m31_left_bot_body_div01">
+                                  <div class="m31_left_bot_body_left">
+                                    &nbsp;
+                                  </div>
+                                  <button class="m31_left_bot_body_right_btn" onclick="m31_left_bot_body_right_btn()">
+                                    <img src="./resources/img/제품관리/선택.png">
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>제품명</td>
+                              <td>
+                                <div class="m31_left_bot_body_div02">
+                                  <div class="m31_left_bot_body_div02_left">
+                                    &nbsp;
+                                  </div>
+                                  <button class="m31_left_bot_body_div02_right_btn" onclick="m31_left_bot_body_div02_right_btn()">
+                                    <img src="./resources/img/제품관리/선택.png">
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>출고예정일</td>
+                              <td><input type="date"></td>
+                            </tr>
+                            <tr>
+                              <td>배송지</td>
+                              <td>
+                                <div>&nbsp;</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>출고일자</td>
+                              <td><input type="date"id="m31_date"></td>
+                            </tr>
+                            <tr>
+                              <td>담당자</td>
+                              <td>
+                                <input type="text" autocomplete="off">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>연락처</td>
+                              <td>
+                                <input type="text" autocomplete="off">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="m31_right">
+                    <div class="m31_right_top">
+                        <div class="mainbody_31_02_01_search">
+                            <input autocomplete='off' class="mainbody_31_02_01_searchInput" placeholder="검색어를 입력하세요">
+                        </div>
+                        <div class="mainbody_31_02_01_del">
+                            <button class="mainbody_31_02_01_del_bt">
+                                <img src="./resources/img/삭제.png">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="m31_right_bot">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th></th>
+                            <th>주문상세번호</th>
+                            <th>품목번호</th>
+                            <th>품목명</th>
+                            <th>수량</th>
+                            <th>생산LOT번호</th>
+                            <th>비고</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><input type="checkbox"></td>
+                            <td>00000000</td>
+                            <td>00000000</td>
+                            <td>품목명1</td>
+                            <td>15200</td>
+                            <td>00000000</td>
+                            <td>비고1</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
             </div>
-
-            <!-- 물류관리 > 출고조회 -->
+        
+            <!-- *1005 물류 관리 > 출고 조회 -->
             <div class="mainbody_32">
-                <span>32</span>
+                <div class="mainbody_32_00">
+                  <div class="mainbody_32_01">
+                    <div class="mainbody_32_01_top">
+                      <div class="mainbody_32_01_top_l">
+                        <div class="mainbody_32_01_top_l_01">출고일</div>
+                        <div class="mainbody_32_01_top_l_02"><input type="date">&nbsp~&nbsp</div>
+                        <div class="mainbody_32_01_top_l_03"><input type="date"></div>
+                        <div class="mainbody_32_01_top_l_05">
+                          <button class="mainbody_32_01_top_btn_01">
+                            <img src="./resources/img/생산관리/검색.png">
+                          </button>
+                        </div>
+                     </div>
+        
+                     <div class="mainbody_32_01_top_r">
+                      <div class="mainbody_32_01_top_l_04"><input type="text" placeholder="검색어를 입력하세요"></div>
+                      <div class="mainbody_32_01_top_r_01">
+                        <button class="mainbody_32_01_top_btn_02">
+                          <img src="./resources/img/공정관리/엑셀.png">
+                        </button>
+                      </div>
+        
+                    </div>
+                  </div>
+        
+                    <div class="mainbody_32_01_bott">
+                      <table class="mainbody_32_01_bott_table">
+                        <thead>
+                          <tr>
+                            <td></td>
+                            <td>출고번호</td>
+                            <td>거래처</td>
+                            <td>품목번호</td>
+                            <td>품목명</td>
+                            <td>출고수량</td>
+                            <td>출고일</td>
+                            <td>처리상태</td>
+                            <td>상세조회</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><input type="checkbox" autocomplete="off"></td>
+                            <td>2209290001</td>
+                            <td>유니컴퍼니</td>
+                            <td>15151425</td>
+                            <td>애코클린매트</td>
+                            <td>12,769</td>
+                            <td>22.09.29</td>
+                            <td>출고완료</td>
+                            <td></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
             </div>
             
-            <!-- 물류관리 > 제품 재고 현황 -->
+            <!-- *1005 물류관리 > 제품 재고 현황 -->
             <div class="mainbody_33">
-                <span>32</span>
+                <div class="mainbody_33_00">
+                    <div class="mainbody_33_01">
+                        <div class="mainbody_33_01_top">
+                            <div class="mainbody_33_01_top_l">
+                              <div class="mainbody_33_01_top_l_01">제품일</div>
+                              <div class="mainbody_33_01_top_l_02"><input type="date">&nbsp~&nbsp</div>
+                              <div class="mainbody_33_01_top_l_03"><input type="date"></div>
+                              <div class="mainbody_33_01_top_l_05">
+                                <button class="mainbody_33_01_top_btn_01">
+                                  <img src="./resources/img/생산관리/검색.png">
+                                </button>
+                              </div>
+                           </div>
+              
+                           <div class="mainbody_33_01_top_r">
+                            <div class="mainbody_33_01_top_l_04"><input type="text" placeholder="검색어를 입력하세요"></div>
+                            <div class="mainbody_33_01_top_r_01">
+                              <button class="mainbody_33_01_top_btn_02">
+                                <img src="./resources/img/생산관리/엑셀.png">
+                              </button>
+                            </div>
+                            <div class="mainbody_33_01_top_r_02">
+                              <button class="mainbody_33_01_top_btn_03">
+                                <img src="./resources/img/생산관리/삭제.png">
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mainbody_33_bott">
+                            <div class="mainbody_33_bott_tb_wrapp">
+                                <table class="mainbody_33_bott_tb">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>제품코드</th>
+                                            <th>제품명</th>
+                                            <th>LOT번호</th>
+                                            <th>규격</th>
+                                            <th>단위</th>
+                                            <th>판매단가</th>
+                                            <th>로케이션</th>
+                                            <th>현 재고</th>
+                                            <th>입고상태</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>21354</td>
+                                            <td>dfvgs</td>
+                                            <td>12135</td>
+                                            <td>1호</td>
+                                            <td>갯수</td>
+                                            <td>200</td>
+                                            <td>ajdhkljh</td>
+                                            <td>354351</td>
+                                            <td>asdljnh</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            
             
             <!-- 품질관리 > 불량수량입력 -->
             <div class="mainbody_41">
@@ -5046,7 +5938,7 @@
                         </div>
                        <div class="mainbody_51_2_bottom_btn_zip_02">
                             <div class="mainbody_51_2_bottom_btn_3">
-                                <button class="mainbody_51_2_bottom_btn_2_02" onclick="mainbody_51_2_bottom_btn_2_02()"><img src="./resources/img/자재관리/품목추가.png"></button>
+                                <button class="mainbody_51_2_bottom_btn_2_02" onclick="mainbody_51_2_bottom_btn_2_02()"><img src="./resources/img/생산관리/품목추가.png"></button>
                             </div>
                             <div class="mainbody_51_2_bottom_btn_2">
                                 <button class="mainbody_51_2_bottom_btn_2_01"><img src="./resources/img/삭제.png"></button>
@@ -5112,7 +6004,7 @@
                      </div>
         
                      <div class="mainbody_52_01_top_r">
-                      <div class="mainbody_52_01_top_l_04"><input type="text" placeholder="검색어를 입력하세요"></div>
+                      <div class="mainbody_52_01_top_l_04"><input type="text" placeholder="검색어를 입력하세요" onkeyup="enterkey4()"></div>
                       <div class="mainbody_52_01_top_r_01">
                         <button class="mainbody_52_01_top_btn_02">
                           <img src="./resources/img/주문관리/인쇄.png">
@@ -5167,15 +6059,351 @@
                 <span>61</span>
             </div>
             
-            <!-- LOT 추적 -->
+           <!-- LOT > LOT 추적 -->
             <div class="mainbody_71">
-                <span>61</span>
+                <div class="mainbody_71_00">
+                    <div  class="mainbody_71_01">
+                        <div  class="mainbody_71_top">
+                            <div class="mainbody_71_top_l">
+                                <div class="mainbody_71_top_l_01">
+                                   <input type="text" class="m77_lot_tracking_lotnum" placeholder="LOT 번호를 입력하세요">
+                                </div>
+                                <div class="mainbody_71_top_l_02">
+                                    <div class="mainbody_71_top_l_02_01">
+                                        <input type="radio" name="전개">정전개
+                                    </div>
+                                    <div class="mainbody_71_top_l_02_02">
+                                        <input type="radio" name="전개">역전개
+                                    </div>
+                                 </div>
+                                <div class="mainbody_71_top_l_03">
+                                    <button class="mainbody_71_top_l_btn_01">
+                                        <img src="./resources/img/생산관리/검색.png">
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mainbody_71_top_r">
+                                <div class="mainbody_71_top_r_01">
+                                    <button class="mainbody_71_top_r_btn_01">
+                                        <img src="./resources/img/생산관리/엑셀.png">
+                                    </button>
+                                </div>
+                                <div class="mainbody_71_top_r_02">
+                                    <button class="mainbody_71_top_r_btn_02">
+                                        <img src="./resources/img/삭제.png">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div  class="mainbody_71_bot">
+                            <div class="mainbody_71_bot_00">
+                                <table class="lot_tracking_tb">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>LOT번호</th>
+                                            <th>재고이동유형</th>
+                                            <th>발생일자</th>
+                                            <th>품목구분</th>
+                                            <th>품목번호</th>
+                                            <th>품목명</th>
+                                            <th>수량</th>
+                                            <th>가격</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>fhjdg</td>
+                                            <td>sdfg</td>
+                                            <td>sdfg</td>
+                                            <td>sdfg</td>
+                                            <td>sdfg</td>
+                                            <td>sdfg</td>
+                                            <td>sdfg</td>
+                                            <td>sdfg</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-           	<!-- LOT 정보 조회 -->
+
+            <!-- LOT > LOT 정보조회 -->
             <div class="mainbody_72">
-                <span>61</span>
-            </div>
+                <div class="mainbody_72_00">
+                        <div class="mainbody_72_01">
+                            <div class="mainbody_72_01_00">
+                            <div class="mainbody_72_01_02">
+                                <input type="text" class="lot_info_view_search" placeholder="LOT 번호를 입력하세요">
+                            </div>
+                            <div class="mainbody_72_01_03">
+                                <button class="mainbody_72_01_btn_01">
+                                    <img src="./resources/img/생산관리/검색.png">
+                                </button>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="mainbody_72_02">
+                            <div class="mainbody_72_02_01">
+                                <div class="mainbody_72_02_head">
+                                    <div class="mainbody_72_02_head_text">출고</div>
+                                </div>
+                                <div class="mainbody_72_02_00">
+                                    <div class="mainbody_72_02_l">
+                                        <table class="m72_release_tb">
+                                            <tbody>
+                                                <tr>
+                                                    <th>품목번호:</th>
+                                                    <td></td>
+                                                    <th>품목명:</th>
+                                                    <td></td>
+                                                    <th>규격:</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>출고일자:</th>
+                                                    <td>
+                                                        <input type="date">
+                                                    </td>
+                                                    <th>출고수량:</th>
+                                                    <td>
+                                                        <div></div>
+                                                    </td>
+                                                    <th>작업자:</th>
+                                                    <td>
+                                                        <div></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>거래처:</th>
+                                                    <td>
+                                                        <input type="date">
+                                                    </td>
+                                                    <th>연락처:</th>
+                                                    <td>
+                                                        <div></div>
+                                                    </td>
+                                                    <th>배송처:</th>
+                                                    <td>
+                                                        <div></div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mainbody_72_03">
+                            <div class="mainbody_72_03_01">
+                                <div class="mainbody_72_03_head">
+                                    <div class="mainbody_72_03_head_text">생산</div>
+                                </div>
+                                <div class="mainbody_72_03_00">
+                                    <div class="mainbody_72_03_l">
+                                        <table class="m72_production_tb_01">
+                                            <tbody>
+                                                <tr>
+                                                    <th>품목번호:</th>
+                                                    <td>
+                                                        <div></div>
+                                                    </td>
+                                                    <th>품목명:</th>
+                                                    <th>
+                                                        <div></div>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th>생산LOT번호:</th>
+                                                    <td colspan="3">
+                                                        <div></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>생산수량:</th>
+                                                    <td>
+                                                        <div></div>
+                                                    </td>
+                                                    <th>작업자:</th>
+                                                    <td>
+                                                        <div></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>생산일자:</th>
+                                                    <td>
+                                                        <input type="date">
+                                                    </td>
+                                                    <th>시프트:</th>
+                                                    <td>
+                                                        <div></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>공정명:</th>
+                                                    <td>
+                                                        <div></div>
+                                                    </td>
+                                                    <th>설비명:</th>
+                                                    <td>
+                                                        <div></div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                
+                                    <div class="mainbody_72_03_r">
+                                        <div class="mainbody_72_03_r_00">
+                                            <table class="m72_production_tb_02">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>작업자</th>
+                                                        <th>작업구분</th>
+                                                        <th>시작시간</th>
+                                                        <th>종료시간</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>akdls</td>
+                                                        <td>gnk</td>
+                                                        <td>9:00</td>
+                                                        <td>10:00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>akjdkj</td>
+                                                        <td>dsjhoa</td>
+                                                        <td>10:00</td>
+                                                        <td>11:00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mainbody_72_04">
+                            <div class="mainbody_72_04_01">
+                                <div class="mainbody_72_04_head">
+                                    <div class="mainbody_72_04_head_text">품질</div>
+                                </div>
+                                <div class="mainbody_72_04_00">
+                                    <div class="mainbody_72_04_l">
+                                        <table class="m72_quality_tb_01">
+                                            <tbody>
+                                                <tr>
+                                                    <th>검사일자:</th>
+                                                    <td>
+                                                        <input type="date">
+                                                    </td>
+                                                    <th>시프트:</th>
+                                                    <th>
+                                                        <div></div>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th>공정명:</th>
+                                                    <td>
+                                                        <div></div>
+                                                    </td>
+                                                    <th>설비명:</th>
+                                                    <td>
+                                                        <div></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>작업자:</th>
+                                                    <td>
+                                                        <div></div>
+                                                    </td>
+                                                    <th>승인자:</th>
+                                                    <td>
+                                                        <div></div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="mainbody_72_04_r">
+                                        <div class="mainbody_72_04_r_00">
+                                            <table class="m72_quality_tb_02">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>검사항목</th>
+                                                        <th>검사기준</th>
+                                                        <th>시료</th>
+                                                        <th>결과</th>
+                                                        <th>판정</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>dsc</td>
+                                                        <td>akdls</td>
+                                                        <td>gnk</td>
+                                                        <td>skcm</td>
+                                                        <td>akasdl</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>jaskdk</td>
+                                                        <td>kdj</td>
+                                                        <td>woje</td>
+                                                        <td>nlkn</td>
+                                                        <td>dsanlj</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mainbody_72_05">
+                            <div class="mainbody_72_05_01">
+                                <div class="mainbody_72_05_head">
+                                    <div class="mainbody_72_05_head_text">자재</div>
+                                </div>
+                                <div class="mainbody_72_05_00">
+                                    <table class="m72_material_tb">
+                                        <thead>
+                                            <tr>
+                                                <th>자재 LOT번호</th>
+                                                <th>자재번호</th>
+                                                <th>자재명</th>
+                                                <th>투입일자</th>
+                                                <th>투입수량</th>
+                                                <th>입고일자</th>
+                                                <th>입고수량</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1573201</td>
+                                                <td>1573201</td>
+                                                <td>asldj</td>
+                                                <td>2022-09-19</td>
+                                                <td>2233469</td>
+                                                <td>2022-09-19</td>
+                                                <td>1354</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
         </div>
     </div>
 </body>
@@ -5889,8 +7117,8 @@
 
     // 기준정보 -> BOM 관리
     $('#bom_li').click(function () {
-    	show_bom();
     	show_goods();
+    	show_material();
         document.getElementById("main_title").innerHTML = "기준정보&nbsp; > &nbsp;BOM 관리"
         $(".main_top_bar").css("display", "flex");
         $(".mainbody_07").css("display", "flex");
@@ -6260,9 +7488,9 @@
 
     })
 
-    // 자재관리 -> 자재 재고 현황
+    // 자재관리 -> 자재 재고 조회
     $('#inventoryList_li').click(function () {
-        document.getElementById("main_title").innerHTML = "자재 관리&nbsp; > &nbsp;자재 재고 현황"
+        document.getElementById("main_title").innerHTML = "자재 관리&nbsp; > &nbsp;자재 재고 조회"
         $(".main_top_bar").css("display", "flex");
         $(".mainbody_24").css("display", "flex");
         $(".mainbody_00").css("display", "none");
@@ -9668,17 +10896,6 @@ document.addEventListener("click", function (g) {
       var currentMonth = thisMonth.getMonth(); // 달력에서 표기하는 월
       var currentDate = thisMonth.getDate(); // 달력에서 표기하는 일
   
-      var todays = "O";
-      todays+=currentYear;
-      todays+=(parseInt(currentMonth)+1);
-      if (currentDate<10){
-    	  todays+='0';
-    	  todays+=currentDate;
-      }else {
-      	todays+=currentDate;
-      }
-      console.log(todays);
-      $("#go_num").text(todays);
       // kst 기준 현재시간
       // console.log(thisMonth);
   
@@ -10154,4 +11371,203 @@ document.addEventListener("click", function (g) {
 
    
   </script>
+    <!-- *1004 자재관리 -->
+<script>
+
+
+    $(document).on('click', '.m23_goods_localtion_tb tbody tr', function(e){ 
+        console.log($(this).children().eq(0));
+        $('.m23_goods_locationModal').fadeOut();
+        $(".mainbody_23_bot_02").text($(this).children().eq(0).text()).val();
+
+    });
+
+    // 자재관리 > 자재발주 : 업체명 선택 모달창
+   function m21_customerOpen() {
+       $('.m21_customerModal').fadeIn();
+   }
+   
+   function m21_customerClose() {
+       $('.m21_customerModal').fadeOut();
+   }
+
+   // 자재관리 > 자재발주 : 품목 추가 선택 모달창
+   function m21_product_choice_Open() {
+       $('.m21_product_choice_Modal').fadeIn();
+   }
+   
+   function m21_product_choice_Close() {
+       $('.m21_product_choice_Modal').fadeOut();
+   }
+
+    // 자재관리 > 자재입고현황 : 새 입고 추가 모달창
+   function m23_material_order_productOpen() {
+       $('.m23_material_order_productModal').fadeIn();
+       $(".m023_material_order_product_content_01").css('display', 'none');
+       $(".m023_material_order_product_content_03").css('display', 'flex');
+       $(".m023_material_order_product_content_04").css('display', 'none');
+   $(".m023_order_choice_product_content_05").css('display', 'none');
+       $("input[name='새입고추가']:radio").change(function () {
+       var serviceType = this.value; //라디오 버튼 값
+       if(serviceType == "new_item_add2"){
+           $(".m023_materialOrder_productClose").css('display', 'block');
+           document.getElementById("m23_material_order_productModal_head_name").innerHTML = "새 항목 추가"
+           $(".m023_material_order_product_content_01").css('display', 'none');
+           $(".m023_material_order_product_content_03").css('display', 'flex');
+           $(".m023_material_order_product_content_04").css('display', 'none');
+           $(".m023_order_choice_product_content_05").css('display', 'none');
+           
+       }else if(serviceType == "raw_material_add2"){
+           document.getElementById("m23_material_order_productModal_head_name").innerHTML = "발주 선택"
+           $(".m023_materialOrder_productClose").css('display', 'block');
+           $(".m023_material_order_product_content_01").css('display', 'none');
+           $(".m023_material_order_product_content_03").css('display', 'none');
+           $(".m023_material_order_product_content_04").css('display', 'flex');
+           $(".m023_order_choice_product_content_05").css('display', 'none');
+       }else{
+           document.getElementById("m23_material_order_productModal_head_name").innerHTML = "외주 임가공 출고 선택"
+           $(".m023_materialOrder_productClose").css('display', 'block');
+           $(".m023_material_order_product_content_01").css('display', 'none');
+           $(".m023_material_order_product_content_03").css('display', 'none');
+           $(".m023_material_order_product_content_04").css('display', 'none');
+           $(".m023_order_choice_product_content_05").css('display', 'flex');
+       }
+   });
+   }
+   function m23_material_order_productClose() {
+       $('.m23_material_order_productModal').fadeOut();
+   }
+   
+
+    // 자재발주 > 자재입고현황 : 로케이션 검색 모달창
+    function m23_product_locationOpen() {
+        $('.m23_goods_locationModal').fadeIn();
+    }
+
+    function m23_goods_locationClose() {
+        $('.m23_goods_locationModal').fadeOut();
+    }
+
+    const mainbody_23_01_selectBoxElements = document.querySelectorAll(".m23_goods_location_select");
+
+    function mainbody_23_01_toggleSelectBox(selectBox) {
+    selectBox.classList.toggle("active");
+    }
+
+    function mainbody_23_01_selectOption(optionElement) {
+    const selectBox = optionElement.closest(".m23_goods_location_select");
+    const selectedElement = selectBox.querySelector(".m23_goods_location_select_txt");
+    selectedElement.textContent = optionElement.textContent;
+    }
+
+    mainbody_23_01_selectBoxElements.forEach(selectBoxElement => {
+    selectBoxElement.addEventListener("click", function (e) {
+        const targetElement = e.target;
+        const isOptionElement = targetElement.classList.contains("option");
+
+        if (isOptionElement) {
+            console.log("here");
+            mainbody_23_01_selectOption(targetElement);
+        }
+
+        mainbody_23_01_toggleSelectBox(selectBoxElement);
+    });
+    });
+
+    document.addEventListener("click", function (e) {
+    const targetElement = e.target;
+    const isSelect = targetElement.classList.contains(".m23_goods_location_select") || targetElement.closest(".m23_goods_location_select_txt");
+
+    if (isSelect) {
+        return;
+    }
+
+    const mainbody_23_01_allSelectBoxElements = document.querySelectorAll(".m23_goods_location_select");
+
+    mainbody_23_01_allSelectBoxElements.forEach(boxElement => {
+        boxElement.classList.remove("active");
+    });
+    });
+
+    function m23_goods_location_select_btn_cls() {
+        $(".m23_goods_location_select_txt").text('\u00A0');
+    }
+
+</script>
+
+<!-- *1005 물류관리-->
+<script>
+    //물류 관리 -> 출고 -> 배송처 select custom
+    function m31_product_admin_td06_select_btn_click() {
+        console.log("dd");
+        $("#m31_product_admin_td06_select_txt").empty();
+    }
+
+    const m31_td06_selectBoxElements = document.querySelectorAll(".m31_product_admin_td06_div");
+
+    function m31_td06_toggleSelectBox(selectBox) {
+        selectBox.classList.toggle("active");
+    }
+
+    function m31_td06_selectOption(optionElement) {
+        const selectBox = optionElement.closest(".m31_product_admin_td06_div");
+        const selectedElement = selectBox.querySelector(".m31_product_admin_td06_select_txt");
+        selectedElement.textContent = optionElement.textContent;
+    }
+
+    m31_td06_selectBoxElements.forEach(selectBoxElement => {
+        selectBoxElement.addEventListener("click", function (e) {
+            const targetElement = e.target;
+            const isOptionElement = targetElement.classList.contains("option");
+
+            if (isOptionElement) {
+                m31_td06_selectOption(targetElement);
+            }
+
+            m31_td06_toggleSelectBox(selectBoxElement);
+        });
+    });
+
+    document.addEventListener("click", function (e) {
+        const targetElement = e.target;
+        const isSelect = targetElement.classList.contains(".m31_product_admin_td06_select_txt") || targetElement.closest(".m31_product_admin_td06_select_txt");
+
+        if (isSelect) {
+            return;
+        }
+
+        const m31_td06_allSelectBoxElements = document.querySelectorAll(".m31_product_admin_td06_div");
+
+        m31_td06_allSelectBoxElements.forEach(boxElement => {
+            boxElement.classList.remove("active");
+        });
+    });
+
+    //물류 관리 -> 출고 -> 날짜
+    // input type="date" 현재 날짜 기본값
+    document.getElementById('m31_date').value = new Date().toISOString().substring(0, 10);
+
+
+    //물류 관리 -> 출고 -> 거래처 검색 모달창
+    function m31_left_bot_body_right_btn() {
+        $('.m31_customerModal').fadeIn();
+    }
+
+    function m31_customerClose() {
+        $('.m31_customerModal').fadeOut();
+    }
+
+    // 물류 관리 -> 출고 -> 제품명 선택 모달창//
+    function m31_left_bot_body_div02_right_btn() {
+        $('.m31_plan_productModal').fadeIn();
+    }
+
+    function m31_plan_productModalClose() {
+        $('.m31_plan_productModal').fadeOut();
+    }
+
+
+
+    
+</script>
 </html>

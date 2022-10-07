@@ -203,7 +203,8 @@ ct_email varchar2(1000),
 company varchar2(1000)
 );
 
-insert into client(ct_num, company) values('C000'||client_seq.nextval, 'fourever')
+insert into client(ct_num) values('C'||to_char(LPAD(client_seq.nextval, 4, '0')))
+insert into client(ct_num) values('       └')
 
 create sequence client_seq;
 
@@ -212,6 +213,8 @@ select ct_num from client
 drop table client
 drop sequence client_seq
 DELETE FROM client_forever WHERE sortation='매출처'
+
+select ZBF_GET_BATCHKEY('now') from DUAL;
 
 
 --제품관리
@@ -280,31 +283,53 @@ drop table material;
 create sequence ml_seq;
 insert into material(ml_seq_num, ml_num, company) values(ml_seq.nextval, 'db연결', 'fourever');
 
+
+--bom
+create table bom (
+b_seq_num number, --시퀀스 번호
+b_goods_seq number, --시퀀스 번호 gs_seq_num
+b_parent  varchar2(100), --누구의 bom인지
+b_name  varchar2(100), --부품명
+b_num  varchar2(100), --품목번호
+b_count  varchar2(100), --소요량
+b_standard  varchar2(100), --규격
+b_unit  varchar2(100), --단위
+company varchar2(100)
+);
+select * from bom;
+create sequence b_seq_num;
+drop table bom;
 --------------------------
 --------- 주문관리 ---------
 --------------------------
 create table goods_order(
-go_num varchar2(100), --주문번호 시퀀스
-go_goods_seq varchar2(100), --주문제품 품목번호
-go_goods_name varchar2(100), --주문제품 품목명
-go_goods_count varchar2(100), --주문수량
-go_client varchar2(100), --거래처
-go_orderDate varchar2(100), --접수일자
-go_dueDate varchar2(100), --납기일자
-go_place varchar2(100),--고객발주번호
-go_address varchar2(100), --배송지
-go_price varchar2(100), --공급가액
-go_amount varchar2(100), --합계금액
-go_taxation varchar2(100), --과세형태
-go_now varchar2(100), --처리상태
+go_num varchar2(100), --주문번호 시퀀스d
+go_goods_seq varchar2(100), --주문제품 품목번호ss
+go_goods_name varchar2(100), --주문제품 품목명ss
+go_goods_count varchar2(100), --주문수량ss
+go_goods_standard varchar2(100), --규격(또추가)
+go_goods_unit varchar2(100), --단위(또추가)
+go_goods_unitPrice varchar2(100), --단가(또추가)
+go_goods_discount varchar2(100), --할인율 (추가)
+go_goods_price varchar2(100), --금액(추가)
+go_client varchar2(100), --거래처d
+go_orderDate varchar2(100), --접수일자d
+go_dueDate varchar2(100), --납기일자d
+go_place varchar2(100),--고객발주번호d
+go_address varchar2(100), --배송지d
+go_price varchar2(100), --공급가액d
+go_amount varchar2(100), --합계금액d
+go_taxation varchar2(100), --과세형태d
+go_now varchar2(100), --처리상태x
 company varchar2(100) --회사
 );
 insert into goods_order(go_num, go_goods_seq, company) values(go_seq.nextval, 234, 'fourever');
 select * from goods_order;
 select * from goods_order where company='fourever'
 create sequence go_seq;
-
-
+select gs_unit from goods 
+where gs_seq_num = (select substr(go_goods_seq,1,2)  from goods_order where go_num ='O2210060001');
+drop table goods_order
 --------------------------
 --------- 생산관리 ---------
 --------------------------
@@ -316,7 +341,7 @@ pp_goods_name varchar2(100),
 pp_goods_num varchar2(100),
 pp_product_date varchar2(100),
 pp_quantity varchar2(100),
-pp_performance_quantity varchar2(100),
+pp_performance_quantity varchar2(100), --주문번호
 company varchar2(100)
 )
 drop table product_plan;
