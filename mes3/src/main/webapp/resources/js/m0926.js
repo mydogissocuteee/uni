@@ -3059,11 +3059,11 @@ var processVO = {
 			         $("#go_address").val(data.go_address);
 			         $("#go_price").val(data.go_price);
 			         $("#go_amount").val(data.go_amount);
-					 if(data.go_taxation=="과세"){
+					 if(data.go_taxation==="과세"){
 				         $("#과세").prop("checked", true);
 				         $("#영세").prop("checked", false);
 				         $("#면세").prop("checked", false);
-					 }else if(data.go_taxation=="과세"){
+					 }else if(data.go_taxation==="영세"){
 				         $("#과세").prop("checked", false);
 				         $("#영세").prop("checked", true);
 				         $("#면세").prop("checked", false);
@@ -3074,10 +3074,12 @@ var processVO = {
 					 }
 					$("#mainbody_51_2_table_tbody tr").each(function(e){
 						console.log($(this));
-				        goodsOrderNumdd = $(this).firstChild;
+						console.log($(this).find("input")[0]);
+				        goodsOrderNumdd = $(this).find("input")[0];
+						console.log(goodsOrderNumdd);
 						var jbSplit = data.go_goods_seq.split( ',');
 					      for ( var i in jbSplit ) {
-						if(goodsOrderNumdd==i){
+						if(goodsOrderNumdd===i){
 							
 							$(this).css("display", "table");
 							$(this).find("td:eq(1)").attr("class", "product_name");
@@ -3114,9 +3116,91 @@ var processVO = {
     }
 
     
-	
-	
-	
+	// 주문 내역 수정
+    $(document).on("click", ".mainbody_51_1_top_btn_02_update", function(){
+      
+         $(".user_group_input_modal_mid").text("주문이 등록되었습니다.");
+
+         var go_goods_seq = "";
+         var go_goods_name = "";
+         var go_goods_count = "";
+         var go_goods_discount = ""; //추가 할인율
+         var go_goods_price = ""; //추가 금액
+         var go_goods_standard = ""; //또추가
+         var go_goods_unit = ""; //또추가
+         var go_goods_unitPrice = ""; //또추가
+         var go_price = "";
+         var num = 0;
+         
+         $(".product_name").each(function(e){
+            console.log(num);
+            if(num===0){
+               go_goods_name+=$(this).text();
+               go_goods_seq+=$(this).prev().find("input").val();
+               go_goods_count+=$(this).next().next().next().next().find("input").val();
+               go_price+=$(this).parent().find("input[name=go_amount]").val();
+               go_goods_discount+=$(this).parent().find("input[name=go_goods_discount]").val();
+               go_goods_price+=$(this).parent().find("input[name=go_goods_price]").val();
+               go_goods_standard+=$(this).parent().find(".go_goods_standard").text();
+               go_goods_unit+=$(this).parent().find(".go_goods_unit").text();
+               go_goods_unitPrice+=$(this).parent().find(".go_goods_price").text();
+            }else {
+               go_goods_name+=",";
+               go_goods_name+=$(this).text();
+               go_goods_seq+=",";
+               go_goods_seq+=$(this).prev().find("input").val();
+               go_goods_count+=",";
+               go_goods_count+=$(this).next().next().next().next().find("input").val();
+               go_price+=",";
+               go_price+=$(this).parent().find("input[name=go_amount]").val();
+               go_goods_discount+=",";
+               go_goods_discount+=$(this).parent().find("input[name=go_goods_discount]").val();
+               go_goods_price+=",";
+               go_goods_price+=$(this).parent().find("input[name=go_goods_price]").val();
+			   go_goods_standard+=$(this).parent().find(".go_goods_standard").text();
+               go_goods_standard+=",";
+               go_goods_unit+=$(this).parent().find(".go_goods_unit").text();
+               go_goods_unit+=",";
+               go_goods_unitPrice+=$(this).parent().find(".go_goods_price").text();
+               go_goods_unitPrice+=",";
+            }num=1;
+         })
+            console.log(go_goods_name);
+         var goodsOrderVO = {
+         company : "fourever",
+         go_num : $("#go_num").text(),
+         go_goods_seq : go_goods_seq,
+         go_goods_name : go_goods_name,
+         go_goods_count : go_goods_count,
+         go_goods_standard : go_goods_standard,
+         go_goods_unit : go_goods_unit,
+         go_goods_unitPrice : go_goods_unitPrice,
+         go_goods_discount : go_goods_discount,
+         go_goods_price : go_goods_price,
+         go_client : $("#m51_product_admin_td_09_01_select_01").text(),
+         go_orderDate : $("#go_orderDate").val(),
+         go_dueDate : $("#go_dueDate").val(),
+         go_place : $("#go_place").val(),
+         go_address : $("#go_address").val(),
+         go_price : go_price,
+         go_amount : $("#go_amount").val(),
+         go_taxation : $("input[name=taxation]:checked").val(),
+         };
+            console.log(goodsOrderVO);
+         $.ajax({
+               url : "goodsOrderUpdate.do",
+               type : "GET",
+               async:false,
+               data : goodsOrderVO,
+               // dataType : "json",
+               success : function(){
+                  console.log("success");
+                  },
+               error : function(request, status, error){
+                  console.log("주문 입력 error");
+                  }
+            });
+	})
 	
 	
 	

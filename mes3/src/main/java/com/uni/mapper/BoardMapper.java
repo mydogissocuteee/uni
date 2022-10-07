@@ -245,11 +245,11 @@ public interface BoardMapper {
 	public void goodsOrderDelete(@Param("go_num") String go_num);
 
 	// 수정
-	@Update("update goods_order set ml_num='${vo.go_goods_seq}', ml_name='${vo.go_goods_name}', go_goods_count='${vo.go_goods_count}', go_goods_standard='${vo.go_goods_standard}', go_goods_unit='${vo.go_goods_unit}', "
-			+ "	go_goods_unitPrice='${vo.go_goods_unitPrice}', go_goods_discount='${vo.go_goods_discount}',go_goods_price='${vo.go_goods_price}',go_client='${vo.go_client}', go_orderDate='${vo.go_orderDate}', "
-			+ "	go_dueDate='${vo.go_dueDate}', go_place='${vo.go_place}',go_address='${vo.go_address}',go_price='${vo.go_price}', go_amount='${vo.go_amount}' "
+	@Update("update goods_order set go_goods_seq='${vo.go_goods_seq}', go_goods_name='${vo.go_goods_name}', go_goods_count='${vo.go_goods_count}', go_goods_standard='${vo.go_goods_standard}', go_goods_unit='${vo.go_goods_unit}', "
+			+ "	go_goods_unitPrice='${vo.go_goods_unitPrice}', go_goods_discount='${vo.go_goods_discount}', go_goods_price='${vo.go_goods_price}', go_client='${vo.go_client}', go_orderDate='${vo.go_orderDate}', "
+			+ "	go_dueDate='${vo.go_dueDate}', go_place='${vo.go_place}', go_address='${vo.go_address}', go_price='${vo.go_price}', go_amount='${vo.go_amount}', "
 			+ "	go_taxation='${vo.go_taxation}', go_now='${vo.go_now}' "
-			+ "	 WHERE go_num=${vo.go_num}")
+			+ "	 WHERE go_num='${vo.go_num}' ")
 	public void goodsOrderUpdate(@Param("vo") goodsOrderVO vo);
 	
 	// bom 조회
