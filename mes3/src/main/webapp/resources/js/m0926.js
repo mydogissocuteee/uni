@@ -24,6 +24,7 @@ function ajaxHtml(data){
 	var view2="";
          view2+='<thead> <tr> <th></th> <th>번호</th> <th>사용자 명</th> </tr> </thead>'; 
          view2+='<tbody>';  
+	var view3="";
 	  $.each(data,function(index, obj){	//반복문
 	     view+='<div class="list_bundle_data" name="'+obj.num+'" id="list_bundle_data">';
          view+='<div class="list_d_1">';
@@ -40,14 +41,21 @@ function ajaxHtml(data){
          view+='</div>'; 
 
          view2+='<tr>';
-         view2+='<td>'+index+'</td>';
-         view2+='<td>'+obj.num+'</td>';
-         view2+='<td>'+obj.username+'</td>';
+         view2+='<td class="m13_work_plus_Search_td_00">'+index+'</td>';
+         view2+='<td class="m13_work_plus_Search_td_00">'+obj.num+'</td>';
+         view2+='<td class="m13_work_plus_Search_td_00">'+obj.username+'</td>';
          view2+='</tr>';
+
+		view3+='<tr>';
+		view3+='<td class="m13_work_plus_Search_td_00">'+(index+1)+'</td>';
+		view3+='<td class="m13_work_plus_Search_td_00"><input type="hidden" name="num" value="'+obj.num+'">'+obj.num+'</td>';
+		view3+='<td class="m13_work_plus_Search_td_00"><input type="hidden" name="routing" value="1">'+obj.username+'</td>';
+		view3+='</tr>';
 	  })
   view2+='</tbody>';
   $( '#list_Data' ).html(view);
   $( '#userSearch_content_tb' ).html(view2);
+  $( '.m13_work_plus_Search_tb tbody' ).html(view3);
 }
 
 /** 사용자 관리 끝 */
@@ -229,6 +237,7 @@ function processHtml(data){
 	var view="";
 	var view2="";
 	var view3="";
+	var view4="";
      	view+='<table class="processAdmin_tb_02">';
      	view+='<thead>';
      	view+='<tr>';
@@ -239,6 +248,11 @@ function processHtml(data){
      	view+='</tr>';
 		view+='</thead>';
 		view+='<tbody>';
+		view4+='<tr>';
+		view4+='<td></td>';
+		view4+='<td>번호</td>';
+		view4+='<td>공정명</td>';
+		view4+='</tr>';
   	$.each(data,function(index, obj){	//반복문
 		view+='<tr>';
 		view+='<td><input autocomplete="off" type="checkbox" id="processAdmin_tb_02_checkbox" name="processNum" value="'+obj.pr_seq_num+'">';
@@ -252,12 +266,18 @@ function processHtml(data){
 		view2+='<td><input type="hidden" name="routing" value="1">'+obj.pr_name+'</td>';
 		view2+='</tr>';
 		view3+='<li class="option">'+obj.pr_name+'</li>';
+		view4+='<tr>';
+		view4+='<td>'+(index+1)+'</td>';
+		view4+='<td><input type="hidden" name="pr_seq_num" value="'+obj.pr_seq_num+'">'+obj.pr_num+'</td>';
+		view4+='<td><input type="hidden" name="routing" value="1">'+obj.pr_name+'</td>';
+		view4+='</tr>';
 })
 		view+='</tbody>';
 		view+='</table>';
   $( '.processAdmin_tb_02' ).html(view);
   $( '#routing_modal_body_bottom_l_table_tbody' ).html(view2);
   $( '#m11_produc_plus_content_01_table_div02_list' ).html(view3);
+  $( '.m12_productSearch_content_tb tbody' ).html(view4);
 }
 
 
@@ -374,6 +394,7 @@ function clientHtml(data){
 		view+='<tbody>';
 	var view2="";
 	var view3="";
+	var view4="";
 	var clientindex=1;
   	$.each(data,function(index, obj){	//반복문
 		view+='<tr>';
@@ -396,6 +417,14 @@ function clientHtml(data){
 		clientindex=clientindex+1;
 		
 		view3+='<li class="option">'+obj.ct_mutual+'</li>';
+		
+		view4+='<tr>';
+		view4+='<td class="m21_customerSearch_td_00"><input type="hidden" name="ct_num" value="'+obj.ct_num+'"'+clientindex+'</td>';
+		view4+='<td class="m21_customerSearch_td_00">'+obj.ct_num+'</td>';
+		view4+='<td class="m21_customerSearch_td_00">'+obj.ct_mutual+'</td>';
+		view4+='<td class="m21_customerSearch_td_00">'+obj.ct_sortation+'</td>';
+		view4+='<input type=hidden value="'+obj.ct_address+'">';
+		view4+='</tr>';
 })
 		view+='</tbody>';
 		view+='</table>';
@@ -404,40 +433,41 @@ function clientHtml(data){
   $( '#goods_customer_num_tbody' ).html(view2);
   $( '#m51_Order_customer_num_tbody' ).html(view2);
   $( '#m11_produc_plus_content_01_table_div03_list' ).html(view3);
+  $( '.m21_customerSearch_tb tbody').html(view4);
 }
 
 
-function clientInsert(){
-	console.log("durls")
-var clientVO = {
-			company : "fourever",
-			ct_mutual : $("#m06_l_mutual_input").val(),
-			ct_sortation : $("input[name=account]:checked").val(),
-			ct_repName : $("#m06_l_name_input").val(),
-			ct_businessNumber : $("#m06_l_bsnum_input").val(),
-			ct_chrgName : $("#m06_l_person_name_input").val(),
-			ct_postalCode : $("#m06_l_post_input").val(),
-			ct_address : $("#m06_l_address_input").val(),
-			ct_condition : $("#m06_l_bs01_input").val(),
-			ct_industry : $("#m06_l_bs02_input").val(),
-			ct_contact : $("#m06_l_phone_input").val(),
-			ct_fax : $("#m06_l_fax_input").val(),
-			ct_email : $("#m06_l_email_input").val()
-	};
-	$.ajax({
-			url : "clientInsert.do",
-			type : "GET",
-			async:false,
-			data : clientVO,
-			// dataType : "json",
-			success : function(){
-				console.log("거래처 입력 success");},
-			error : function(request, status, error){
-			    console.log("거래처 입력 error");}
-		});
-		
-	  	show_client();
-}
+	function clientInsert(){
+		console.log("durls")
+	var clientVO = {
+				company : "fourever",
+				ct_mutual : $("#m06_l_mutual_input").val(),
+				ct_sortation : $("input[name=account]:checked").val(),
+				ct_repName : $("#m06_l_name_input").val(),
+				ct_businessNumber : $("#m06_l_bsnum_input").val(),
+				ct_chrgName : $("#m06_l_person_name_input").val(),
+				ct_postalCode : $("#m06_l_post_input").val(),
+				ct_address : $("#m06_l_address_input").val(),
+				ct_condition : $("#m06_l_bs01_input").val(),
+				ct_industry : $("#m06_l_bs02_input").val(),
+				ct_contact : $("#m06_l_phone_input").val(),
+				ct_fax : $("#m06_l_fax_input").val(),
+				ct_email : $("#m06_l_email_input").val()
+		};
+		$.ajax({
+				url : "clientInsert.do",
+				type : "GET",
+				async:false,
+				data : clientVO,
+				// dataType : "json",
+				success : function(){
+					console.log("거래처 입력 success");},
+				error : function(request, status, error){
+				    console.log("거래처 입력 error");}
+			});
+			
+		  	show_client();
+	}
 
  function clientDelete() {
 	var len = $("input[name='clientNum']:checked").length;
@@ -502,6 +532,7 @@ var clientVO = {
 		var view3="";
 		var view4="";
 		var view5="";
+		var view6="";
 		 view+='<thead><tr>';
 	     view+='<td></td>';
 	     view+='<td>품목번호</td>';
@@ -537,7 +568,7 @@ var clientVO = {
 	     view3+='<td class="go_goods_price">'+obj.gs_price+'</td>';
 	     view3+='<td><input type="text" autocomplete="off" class="go_goods_count" id="num1_'+obj.gs_seq_num+'" name="go_goods_count" value="0"></td>'; //주문수량
 	     view3+='<td><input type="text" autocomplete="off" class="go_goods_discount" id="num2_'+obj.gs_seq_num+'" name="go_goods_discount" value="0"></td>'; //할인율
-	     view3+='<td><input type="text" autocomplete="off" class="goodsamount" id="total_'+obj.gs_seq_num+'" name="go_amount" value="0"></td>'; //금액
+	     view3+='<td><input type="text" autocomplete="off" class="goodsamount" id="total_'+obj.gs_seq_num+'" name="go_goods_price" value="0"></td>'; //금액
 	     view3+='</tr>';
 		 view4+='<tr>';
 	     view4+='<td class="product_admin_tb_line">'+(index+1)+'</td>';
@@ -549,6 +580,11 @@ var clientVO = {
 	     view5+='<td class="product_admin_tb_line">'+obj.gs_name+'</td>';
 	     view5+='<td class="product_admin_tb_line">'+obj.gs_seq_num+'</td>';
 	     view5+='</tr>';
+		 view6+='<tr>';
+	     view6+='<td class="m13_product_plus_Search_td_00">'+(index+1)+'</td>';
+	     view6+='<td class="m13_product_plus_Search_td_00">'+obj.gs_seq_num+'</td>';
+	     view6+='<td class="m13_product_plus_Search_td_00">'+obj.gs_name+'</td>';
+	     view6+='</tr>';
 	})
 	     view+='</tbody>';
 	  $( '#product_admin_tb_02' ).html(view);
@@ -556,6 +592,7 @@ var clientVO = {
 	  $( '#mainbody_51_2_table_tbody' ).html(view3);
 	  $( '.m051_product_choice_tbody' ).html(view4);
 	  $( '.m12_plan_productSearch_content_tbody' ).html(view5);
+	  $( '.m13_product_plus_Search_tb tbody' ).html(view6);
 	}
 	
 	
@@ -586,6 +623,8 @@ var clientVO = {
 	     view+='</thead>';
 	     view+='<tbody>';
 	     view2='';
+	     view3='';
+	     view4='';
 		 $.each(data,function(index, obj){	//반복문
 		     view+='<tr class="m04_goods_admin_tb_line" id="m04_goods_admin_tb_line">';
 		     view+='<td class="product_admin_tb_line_01"><input autocomplete="off" type="checkbox" name="materialNum" value="'+obj.ml_seq_num+'" class="productAdmin_check"></td>';
@@ -604,10 +643,35 @@ var clientVO = {
 		     view2+='<td class="m07_bom_localtion_td_02">'+obj.ml_num+'</td>';
 		     view2+='<td class="m07_bom_localtion_td_03">'+obj.ml_name+'</td>';
 		     view2+='</tr>';
+
+			 view3+='<tr>';
+		     view3+='<td><input type="hidden" name= "ml_seq_num" value="'+obj.ml_seq_num+'">'+obj.ml_seq_num+'</td>';
+		     view3+='<td class="m07_bom_localtion_td_02">'+obj.ml_name+'</td>';
+		     view3+='<td class="m07_bom_localtion_td_02">'+obj.ml_family+'</td>'; //사양?
+		     view3+='<td class="m07_bom_localtion_td_02">'+obj.ml_standard+'</td>';
+		     view3+='<td class="m07_bom_localtion_td_03">'+obj.ml_uni+'</td>';
+		     view3+='</tr>';
+
+			 view4+='<tr>';
+		     view4+='<td><input type="checkbox" value="'+obj.ml_seq_num+'"></td>';
+		     view4+='<td>'+obj.ml_seq_num+'</td>';
+		     view4+='<td>'+obj.ml_seq_name+'</td>';
+		     view4+='<td>'+obj.ml_standard+'</td>';
+		     view4+='<td>'+obj.ml_family+'</td>';
+		     view4+='<td>'+obj.ml_uni+'</td>';
+		     view4+='<td>'+obj.ml_price+'</td>';
+		     view4+='<td><input type="text" autocomplete="off" class="mo_count"></td>';
+		     view4+='<td><input type="text" autocomplete="off" class="mo_discount"></td>';
+		     view4+='<td><input type="text" autocomplete="off" class="mo_tax"></td>';
+		     view4+='<td class="mo_supplyValue"></td>';
+		     view4+='<td class="mo_sum"></td>';
+		     view4+='</tr>';
 		})
 	     view+='</tbody>';
 	  	 $( '#m04_goods_admin_tb_02' ).html(view);
 	  	 $( '.m07_bom_localtion_tb tbody' ).html(view2);
+	  	 $( '.m021_product_choice_tb tbody' ).html(view3);
+	  	 $( '.material_order_tb_02 tbody' ).html(view4);
 	}
 
 	/** input list 인풋 리스트 넣기 */
@@ -937,6 +1001,36 @@ var clientVO = {
 		})
 		  $( '#m08_location_select_txt_list' ).html(view);
 		  $( '#m08_corr_location_select_txt_list' ).html(view);
+		}
+		$.ajax({
+	  		url:"codeSelect.do",
+	  		type:"get",
+	  		async: false,
+	  		data : {"company":'fourever',
+	   			"className":'설비'},
+	  		success:ajaxHtml14,
+	  		error:function(data){ 
+	  			let str = JSON.stringify(data);
+	  			console.log(str);
+	  		}
+	  	});
+		
+		function ajaxHtml14(data){
+			var view4="";
+			var num=1;
+			view4+='<tr>';
+			view4+='<td></td>';
+			view4+='<td>번호</td>';
+			view4+='<td>설비명</td>';
+			view4+='</tr>';
+		  $.each(data,function(index, obj){	//반복문
+		    view4+='<tr>';
+			view4+='<td>'+(index+1)+'</td>';
+			view4+='<td><input type="hidden" name="pr_seq_num" value="'+obj.cc_num+'">'+obj.cc_value+'</td>';
+			view4+='<td><input type="hidden" name="routing" value="1">'+obj.cc_name+'</td>';
+			view4+='</tr>';
+		})
+		  $( '.m12_equipSearch_content_tb tbody' ).html(view4);
 		}
 		
 	}
@@ -1973,7 +2067,7 @@ var processVO = {
          $(".user_group_input_modal_mid").text("고객발주번호를 입력해주세요.");
       }else if(TEXT05==""){
          $(".user_group_input_modal_mid").text("배송지를 입력해주세요.");
-      }else if($('#go_taxation').is(':checked') == false){
+      }else if($('.go_taxation').is(':checked') == false){
          $(".user_group_input_modal_mid").text("과세형태를 선택해주세요.");
       }else {
          $(".user_group_input_modal_mid").text("주문이 등록되었습니다.");
@@ -1996,7 +2090,6 @@ var processVO = {
                go_goods_name+=$(this).text();
                go_goods_seq+=$(this).prev().find("input").val();
                go_goods_count+=$(this).next().next().next().next().find("input").val();
-               go_price+=$(this).parent().find("input[name=go_amount]").val();
                go_goods_discount+=$(this).parent().find("input[name=go_goods_discount]").val();
                go_goods_price+=$(this).parent().find("input[name=go_goods_price]").val();
                go_goods_standard+=$(this).parent().find(".go_goods_standard").text();
@@ -2009,12 +2102,11 @@ var processVO = {
                go_goods_seq+=$(this).prev().find("input").val();
                go_goods_count+=",";
                go_goods_count+=$(this).next().next().next().next().find("input").val();
-               go_price+=",";
-               go_price+=$(this).parent().find("input[name=go_amount]").val();
                go_goods_discount+=",";
                go_goods_discount+=$(this).parent().find("input[name=go_goods_discount]").val();
                go_goods_price+=",";
                go_goods_price+=$(this).parent().find("input[name=go_goods_price]").val();
+				 console.log("go_goods_price");
 			   go_goods_standard+=$(this).parent().find(".go_goods_standard").text();
                go_goods_standard+=",";
                go_goods_unit+=$(this).parent().find(".go_goods_unit").text();
@@ -2040,7 +2132,7 @@ var processVO = {
          go_dueDate : $("#go_dueDate").val(),
          go_place : $("#go_place").val(),
          go_address : $("#go_address").val(),
-         go_price : go_price,
+         go_price : $("#go_price").val(),
          go_amount : $("#go_amount").val(),
          go_taxation : $("input[name=taxation]:checked").val(),
          };
@@ -2154,10 +2246,7 @@ var processVO = {
 				$(this).css("display", "table");
 				$(this).find("td:eq(1)").attr("class", "product_name");
 			}
-
 	    })
-		
-		
 	})
 	
 	//주문 관리 거래처 클릭하면 추가
@@ -2249,6 +2338,7 @@ var processVO = {
 	})
 	
 	$(document).on('click', '.process_plan_btn_02', function(e) {
+		        $('.user_input_modal_window').fadeIn();
 		var productPlanVO = {
 			company : "fourever",
 			pp_date : $("#pp_date").val(),
@@ -2637,10 +2727,12 @@ var processVO = {
 	
 		function materialHtml(data){
 			var view="";
+			var view2="";
+			var view3="";
 			 $.each(data,function(index, obj){	//반복문
 			     view+='<tr>';
 			     view+='<td><input type="checkbox" name="work_order_delete" value="'+obj.wo_num+'"></td>';
-			     view+='<td></td>';
+			     view+='<td>'+obj.wo_num+'</td>';
 			     view+='<td>'+obj.wo_process+'</td>';
 			     view+='<td>'+obj.wo_process_type+'</td>';
 			     view+='<td>'+obj.wo_goods_num+'</td>';
@@ -2653,8 +2745,32 @@ var processVO = {
 			     view+='<td>'+obj.wo_end_date+'</td>';
 			     view+='<td></td>';
 			     view+='</tr>';
+				 view2+='<tr>';
+			     view2+='<td><input type="checkbox" name="work_order_daily" value="'+obj.wo_num+'"></td>';
+			     view2+='<td>'+obj.wo_num+'</td>';
+			     view2+='<td>'+obj.wo_goods_num+'</td>';
+			     view2+='<td>'+obj.wo_goods_name+'</td>';
+			     view2+='<td>'+obj.wo_spec_name+'</td>';
+			     view2+='<td><input type="text" autocomplete="off" class="lotNum"></td>';
+			     view2+='<td><input type="text" autocomplete="off" class="plannedQuantity"></td>';
+			     view2+='<td><input type="text" autocomplete="off" class="performanceQuantity"></td>';
+			     view2+='<td><input type="text" autocomplete="off" class="goodQuantity"></td>';
+			     view2+='<td><input type="text" autocomplete="off" class="badQuantity"></td>';
+			     view2+='<td><input type="text" autocomplete="off" class="badNum"></td>';
+			     view2+='<td><input type="text" autocomplete="off" class="badPercent"></td>';
+			     view2+='</tr>';
+				
+				 view3+='<tr>';
+			     view3+='<td class="m13_work_order_plus_Search_td_00">'+(index+1)+'</td>';
+			     view3+='<td class="m13_work_order_plus_Search_td_00">'+obj.wo_num+'</td>';
+			     view3+='<td class="m13_work_order_plus_Search_td_00">'+obj.wo_date+'</td>';
+			     view3+='<td class="m13_work_order_plus_Search_td_02">'+obj.wo_goods_name+'</td>';
+			     view3+='<td class="m13_work_order_plus_Search_td_02">'+obj.wo_count+'</td>';
+			     view3+='</tr>';
 			})
 		  	 $( '.process_order_view_tb tbody' ).html(view);
+		  	 $( '.process_order_tb_01 tbody' ).html(view2);
+		  	 $( '.m13_work_order_plus_Search_tb tbody' ).html(view3);
 		}
 	
 	}
@@ -3032,13 +3148,20 @@ var processVO = {
 		}
 		
 	}
-	
+	var jbSplit = "";
 	// 주문 내역 더블클릭
     $(document).on("dblclick", "#m52_output_view_tb_tbody tr", function(){
 		var goodsOrderDeleteNum = $(this).find("input[name=goodsOrderDeleteNum]").val();
 		console.log(goodsOrderDeleteNum);
 		
-		//여기에 html 넣기
+		        $('.mainbody_51_1_top_btn_02').attr('class','mainbody_51_1_top_btn_02_update');
+       show_client();
+       show_goods();
+        document.getElementById("main_title").innerHTML = "주문 관리&nbsp; > &nbsp;주문 관리"
+        $(".main_top_bar").css("display", "flex");
+        $(".mainbody_51").css("display", "flex");
+        $(".mainbody_52").css("display", "none");
+		
 			$.ajax({
 	         url : "goodsOrderSelectSequence.do",
 	         type : "GET",
@@ -3048,9 +3171,15 @@ var processVO = {
 	         error : function(request, status, error){
 	             console.log("bom 조회 error");}
 	      	});
-
+		/////////////
+		
+    })
+	
 			function hhhtttmmmlll(data){
 				  $.each(data,function(index, obj){
+					var data_go_goods_count=data.go_goods_count;
+					var data_go_goods_discount=data.go_goods_discount;
+					var data_go_goods_price=data.go_goods_price;
 					 $("#go_num").text(data.go_num);
 					 $("#m51_product_admin_td_09_01_select_01").text(data.go_client);
 			         $("#go_orderDate").val(data.go_orderDate);
@@ -3059,50 +3188,48 @@ var processVO = {
 			         $("#go_address").val(data.go_address);
 			         $("#go_price").val(data.go_price);
 			         $("#go_amount").val(data.go_amount);
-					 if(data.go_taxation==="과세"){
-				         $("#과세").prop("checked", true);
-				         $("#영세").prop("checked", false);
-				         $("#면세").prop("checked", false);
-					 }else if(data.go_taxation==="영세"){
-				         $("#과세").prop("checked", false);
-				         $("#영세").prop("checked", true);
-				         $("#면세").prop("checked", false);
+					 if(data.go_taxation=="과세"){
+						console.log($(".go_taxation").eq(2).val());
+						 
+				         $(".go_taxation").eq(0).prop("checked", true);
+				         $(".go_taxation").eq(1).prop("checked", false);
+				         $(".go_taxation").eq(2).prop("checked", false);
+					 }else if(data.go_taxation=="영세"){
+				         $(".go_taxation").eq(0).prop("checked", false);
+				         $(".go_taxation").eq(1).prop("checked", true);
+				         $(".go_taxation").eq(2).prop("checked", false);
 					 }else {
-				         $("#과세").prop("checked", false);
-				         $("#영세").prop("checked", false);
-				         $("#면세").prop("checked", true);
+				         $(".go_taxation").eq(0).prop("checked", false);
+				         $(".go_taxation").eq(1).prop("checked", false);
+				         $(".go_taxation").eq(2).prop("checked", true);
 					 }
 					$("#mainbody_51_2_table_tbody tr").each(function(e){
-						console.log($(this));
-						console.log($(this).find("input")[0]);
 				        goodsOrderNumdd = $(this).find("input")[0];
-						console.log(goodsOrderNumdd);
-						var jbSplit = data.go_goods_seq.split( ',');
+				        goodsOrderNumdd = goodsOrderNumdd.value;
+						jbSplit = data.go_goods_seq;
+						jbSplit = jbSplit.split( ',');
+						data_go_goods_count = data.go_goods_count;
+						data_go_goods_count = data_go_goods_count.split( ',');
+						data_go_goods_discount = data.go_goods_discount;
+						data_go_goods_discount = data_go_goods_discount.split( ',');
+						data_go_goods_price = data.go_goods_price;
+						data_go_goods_price = data_go_goods_price.split( ',');
+						
 					      for ( var i in jbSplit ) {
-						if(goodsOrderNumdd===i){
-							
-							$(this).css("display", "table");
-							$(this).find("td:eq(1)").attr("class", "product_name");
-					      }
+							if(goodsOrderNumdd===jbSplit[i]){
+								var num1 = jbSplit[i];
+								$(this).css("display","table");
+								$(this).find(".go_goods_count").val(data_go_goods_count[i]);
+								$(this).find("input[name=go_goods_discount]").val(data_go_goods_discount[i]);
+								$(this).find("input[name=go_goods_price]").val(data_go_goods_price[i]);
+								
+						      }
 						}
 					})
 		
 			    })
+				
 			}
-		
-		/////////////
-		
-        $('.mainbody_51_1_top_btn_02').attr('class','mainbody_51_1_top_btn_02_update');
-       show_client();
-       show_goods();
-        document.getElementById("main_title").innerHTML = "주문 관리&nbsp; > &nbsp;주문 관리"
-        $(".main_top_bar").css("display", "flex");
-        $(".mainbody_51").css("display", "flex");
-        $(".mainbody_52").css("display", "none");
-
-		
-    })
-	
 	
 	    function location_logic() {
         // name="parentName" value="undefined"
@@ -3114,7 +3241,6 @@ var processVO = {
         }
 
     }
-
     
 	// 주문 내역 수정
     $(document).on("click", ".mainbody_51_1_top_btn_02_update", function(){
@@ -3203,10 +3329,52 @@ var processVO = {
 	})
 	
 	
+	$(document).on("click", ".m12_productSearch_content_tb tr", function(){
+		$(this).find("td:eq(1)").text();
+		$("#dailyProcessNum").text($(this).find("td:eq(1)").text());
+		$("#dailyProcessName").text($(this).find("td:eq(2)").text());
+		m12_productModalClose();
+	})
+	
+	$(document).on("click", ".m12_equipSearch_content_tb tr", function(){
+		$(this).find("td:eq(1)").text();
+		$("#dailyFacilitiesNum").text($(this).find("td:eq(1)").text());
+		$("#dailyFacilitiesName").text($(this).find("td:eq(2)").text());
+		m12_equipModalClose();
+	})
 	
 	
-	
-	
+	$(document).on("click", ".mainbody_21_top_btn_02", function(){
+		console.log("durls")
+	var materialsOrderVO = {
+		company : "fourever",
+		mo_client : $("#m21_admin_td_09_01_select_01").text(),
+		mo_orderDate : $("#mo_orderDate").val(),
+		mo_dueDate : $("#mo_dueDate").val(),
+		mo_place : $("#mo_place").val(),
+		mo_effectivedate : $("#mo_effectivedate").val(),
+		mo_conditions : $("#mo_conditions").val(),
+		mo_address : $("#mo_address").val(),
+		mo_charger : $("#mo_charger").val(),
+		mo_contact : $("#mo_contact").val(),
+		mo_contact_phone : $("#mo_contact_phone").val(),
+		mo_memo : $("#mo_memo").val(),
+		mo_request : $("#mo_request").val(),
+		mo_amount : $("#mo_amount").val()
+	};
+		$.ajax({
+				url : "materialsOrderInsert.do",
+				type : "GET",
+				async:false,
+				data : materialsOrderVO,
+				// dataType : "json",
+				success : function(){
+					console.log("자재발주 입력 success");},
+				error : function(request, status, error){
+				    console.log("자재발주 입력 error");}
+			});
+			
+	})
 	
 	
 	

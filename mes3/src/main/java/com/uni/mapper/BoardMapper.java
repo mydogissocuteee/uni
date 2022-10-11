@@ -12,6 +12,7 @@ import com.uni.domain.goodsVO;
 import com.uni.domain.inspectionVO;
 import com.uni.domain.locationVO;
 import com.uni.domain.materialVO;
+import com.uni.domain.materialsOrderVO;
 import com.uni.domain.MemberVO;
 import com.uni.domain.badVO;
 import com.uni.domain.bomVO;
@@ -19,7 +20,6 @@ import com.uni.domain.clientVO;
 import com.uni.domain.codeVO;
 import com.uni.domain.dailyVO;
 import com.uni.domain.goodsOrderVO;
-import com.uni.domain.materials_orderVO;
 import com.uni.domain.outBoundVO;
 import com.uni.domain.proOrderVO;
 import com.uni.domain.processRoutingVO;
@@ -321,13 +321,13 @@ public interface BoardMapper {
 	public List<workOrderVO> workOrderSelect(@Param("company") String company);
 	
 	// 추가
-	@Insert("insert into work_order values(wo_num.nextval, '${vo.wo_process}', '${vo.wo_process_type}', '${vo.wo_goods_num}', '${vo.wo_goods_name}', "
+	@Insert("insert into work_order values(ZBF_GET_WO_NUM('now'), '${vo.wo_process}', '${vo.wo_process_type}', '${vo.wo_goods_num}', '${vo.wo_goods_name}', "
 			+ " '${vo.wo_spec_name}', '${vo.wo_count}','${vo.wo_client}','${vo.wo_date}','${vo.wo_start_date}', "
 			+ " '${vo.wo_end_date}', '${vo.company}' )")
 	public void workOrderInsert(@Param("vo") workOrderVO vo);
 	
 	// 삭제
-	@Delete("DELETE FROM work_order WHERE wo_num=${wo_num}")
+	@Delete("DELETE FROM work_order WHERE wo_num='${wo_num}'")
 	public void workOrderDelete(@Param("wo_num") String wo_num);
 	
 	// 수정
@@ -337,7 +337,29 @@ public interface BoardMapper {
 			+ "	 WHERE wo_num=${vo.wo_num}")
 	public void workOrderUpdate(@Param("vo") workOrderVO vo);
 	
+	////////자재관리//////////
+	// 자재발주 조회
+	@Select("select * from materials_order where company='${company}'")
+	public List<materialsOrderVO> materialsOrderSelect(@Param("company") String company);
 	
+	// 추가
+	@Insert("insert into materials_order values(ZBF_GET_MO_NUM('now'), '${vo.mo_client}', '${vo.mo_orderDate}', '${vo.mo_dueDate}', '${vo.mo_place}', "
+			+ " '${vo.mo_effectivedate}', '${vo.mo_conditions}','${vo.mo_address}','${vo.mo_charger}','${vo.mo_contact}', "
+			+ " '${vo.mo_contact_phone}', '${vo.mo_memo}', '${vo.mo_request}', '${vo.mo_amount}', '${vo.company}' )")
+	public void materialsOrderInsert(@Param("vo") materialsOrderVO vo);
+	
+	// 삭제
+	@Delete("DELETE FROM materials_order WHERE mo_num=${mo_num}")
+	public void materialsOrderDelete(@Param("mo_num") String mo_num);
+	
+	// 수정
+	@Update("update materials_order set mo_client='${vo.mo_client}', mo_orderDate='${vo.mo_orderDate}', mo_dueDate='${vo.mo_dueDate}', mo_place='${vo.mo_place}', mo_effectivedate='${vo.mo_effectivedate}', "
+			+ "	mo_conditions='${vo.mo_conditions}', mo_address='${vo.mo_address}', mo_charger='${vo.mo_charger}', mo_contact='${vo.mo_contact}', mo_contact_phone='${vo.mo_contact_phone}', "
+			+ "	mo_memo='${vo.mo_memo}', mo_request='${vo.mo_request}', mo_amount='${vo.mo_amount}' "
+			+ "	 WHERE mo_num=${vo.mo_num}")
+	public void materialsOrderUpdate(@Param("vo") materialsOrderVO vo);
+	
+	/////////////////
 	/////////////////
 
 	
@@ -378,22 +400,6 @@ public interface BoardMapper {
 	//생산실적조회
 	@Select("select * from daily_product where company='${company}'")
 	public List<dailyVO> dailySelect(@Param("company") String company);
-	
-	//자재발주 넣기
-	@Insert("insert into materials_order values(mat_seq.nextval, '${vo.mat_inputDate}', '${vo.mat_orderDate}', '${vo.mat_dueDate}', '${vo.mat_place}', '${vo.mat_effectivedate}', '${vo.mat_conditions}', '${vo.mat_address}', '${vo.mat_client}', '${vo.mat_contact}', '${vo.mat_request}', '${vo.mat_amount}', '${vo.mat_proName}','x', '${vo.company}')")
-	public void matOrderInsert(@Param("vo") materials_orderVO vo);
-	
-	// 자재발주 입고현황
-	@Select("select * from materials_order where company='${company}' and mat_complete='x'")
-	public List<materials_orderVO> materials_orderSelectX(@Param("company") String company);
-	
-	//자재발주 입고 수정
-	@Update("update materials_order set mat_complete='o' where mat_num=${mat_check}")
-	public void matOrderUpdate(@Param("mat_check") String mat_check);
-	
-	// 자재 발주 조회
-	@Select("select * from materials_order where company='${company}' and mat_complete='o'")
-	public List<materials_orderVO> materials_orderSelectO(@Param("company") String company);
 	
 }
 

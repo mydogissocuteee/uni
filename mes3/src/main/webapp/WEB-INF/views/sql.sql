@@ -373,7 +373,7 @@ create sequence pi_num;
 select * from product_item;
 
 create table work_order(
-wo_num number, --시퀀스
+wo_num varchar2(1000), --시퀀스
 wo_process varchar2(1000),
 wo_process_type varchar2(1000),
 wo_goods_num varchar2(1000),
@@ -386,57 +386,37 @@ wo_start_date varchar2(1000),
 wo_end_date varchar2(1000),
 company varchar2(100)
 )
-create sequence wo_num;
+select wo_num('now') from DUAL;
+select * from work_order;
+drop sequence wo_num;
+
 drop table work_order;
 -----------------------------------------
 
 
 
 
---생산실적조회
-create table p (
-num number not null,
-productionDate date not null,
-shift varchar2(100) not null,
-process varchar2(100) not null,
-facilities varchar2(100) not null,
-product_id varchar2(100) not null,
-process_routing_id varchar2(100),
-performanceQuantity varchar2(100), 
-goodProductQuantity varchar2(100), 
-defectQuantity varchar2(100), 
-defectCode varchar2(100),
-department varchar2(100),
-writer varchar2(100),
-views varchar2(100)
-);
-
-drop table ct_production_labor_forever
-
-create sequence ct_production_labor_forever_seq;
-
- select * from ct_production_labor_forever
 --------------------------
 --------- 자재관리 ---------
 --------------------------
 
 --자재발주
 create table materials_order(
-mo_num varchar2(100), --발주코드
-mo_inputDate varchar2(100), --입력일자
-mo_orderDate varchar2(100), --발주일자
-mo_dueDate varchar2(100), --납기일자
-mo_place varchar2(100),--납품장소
-mo_effectivedate varchar2(100), --유효일자
-mo_conditions varchar2(100), --결제조건
-mo_address varchar2(100), --주소
-mo_client varchar2(100), --발주업체
-mo_contact varchar2(100), --연락처
-mo_request varchar2(100), --요청사항
-mo_amount varchar2(100), --총금액
-mo_proName varchar2(100), --품목명
-mo_complete varchar2(100), --완료
-company varchar2(100) --회사
+mo_num varchar2(1000), --발주번호
+mo_client varchar2(1000), --업체명
+mo_orderDate varchar2(1000), --발주일자
+mo_dueDate varchar2(1000), --납기일자
+mo_place varchar2(1000),--납품장소
+mo_effectivedate varchar2(1000), --유효일자
+mo_conditions varchar2(1000), --결제조건
+mo_address varchar2(1000), --주소
+mo_charger varchar2(1000), --담당자
+mo_contact varchar2(1000), --연락처
+mo_contact_phone varchar2(1000), --전화
+mo_memo varchar2(1000), --비고
+mo_request varchar2(1000), --요청
+mo_amount varchar2(1000), --총금액
+company varchar2(1000) --회사
 );
 create sequence mat_seq;
 drop table materials_order;

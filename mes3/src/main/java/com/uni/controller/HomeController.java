@@ -29,6 +29,7 @@ import com.uni.domain.goodsVO;
 import com.uni.domain.inspectionVO;
 import com.uni.domain.locationVO;
 import com.uni.domain.materialVO;
+import com.uni.domain.materialsOrderVO;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.uni.domain.MemberVO;
@@ -38,7 +39,6 @@ import com.uni.domain.clientVO;
 import com.uni.domain.codeVO;
 import com.uni.domain.dailyVO;
 import com.uni.domain.goodsOrderVO;
-import com.uni.domain.materials_orderVO;
 import com.uni.domain.outBoundVO;
 import com.uni.domain.proOrderVO;
 import com.uni.domain.processRoutingVO;
@@ -708,6 +708,41 @@ public class HomeController {
 		boardmapper.workOrderUpdate(vo);
 	}
 	
+	///////////자재관리/////////////
+	// 자재발주
+	@ResponseBody
+	@RequestMapping("/materialsOrderSelect.do")
+	public List<materialsOrderVO> materialsOrderSelect(String company) {
+		List<materialsOrderVO> data = boardmapper.materialsOrderSelect(company);
+		System.out.println(company+"회사의 생산 계획 리스트");
+		return data;
+	}
+	
+	//입력
+	@ResponseBody
+	@RequestMapping("/materialsOrderInsert.do")
+	public void materialsOrderInsert(materialsOrderVO vo) {
+		boardmapper.materialsOrderInsert(vo);
+		//vo.setWo_process_type(vo.getWo_process_type().replace(" ", ""));
+		//vo.setWo_goods_name(vo.getWo_goods_name().replace(" ", ""));
+		System.out.println(vo+"---자재발주 입력");
+	}
+	
+	// 삭제
+	@ResponseBody
+	@RequestMapping("/materialsOrderDelete.do")
+	public void materialsOrderDelete(String mo_num) {
+		System.out.println(mo_num+"---자재 삭제");
+		boardmapper.materialsOrderDelete(mo_num);
+	}
+	
+	// 수정
+	@ResponseBody
+	@RequestMapping("/materialsOrderUpdate.do")
+	public void materialsOrderUpdate(materialsOrderVO vo) {
+		System.out.println("---회원수정");
+		boardmapper.materialsOrderUpdate(vo);
+	}
 	
 	@ResponseBody
 	@RequestMapping("/json.do")

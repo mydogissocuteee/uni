@@ -4928,8 +4928,8 @@
                               </button>
                             </div>
                           </td>
-                          <td>조립</td>
-                          <td>001</td>
+                          <td id="dailyProcessName"></td>
+                          <td id="dailyProcessNum"></td>
                         </tr>
                         <tr>
                           <td>설비</td>
@@ -4940,8 +4940,8 @@
                               </button>
                             </div>
                           </td>
-                          <td></td>
-                          <td>Display Field</td>
+                          <td id="dailyFacilitiesName"></td>
+                          <td id="dailyFacilitiesNum"></td>
                         </tr>
                         <tr>
                           <td></td>
@@ -5235,39 +5235,39 @@
                                 </tr>
                                 <tr>
                                     <td>발주일자</td>
-                                    <td><input type="date"></td>
+                                    <td><input type="date" id="mo_orderDate"></td>
                                     <td>납기일자</td>
-                                    <td><input type="date"></td>
+                                    <td><input type="date" id="mo_dueDate"></td>
                                 </tr>    
                                 <tr>
                                     <td>납품장소</td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" id="mo_place"></td>
                                     <td>유효일자</td>
-                                    <td><input type="date"></td>
+                                    <td><input type="date" id="mo_effectivedate"></td>
                                 </tr>
                                 <tr>
                                     <td>결제조건</td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" id="mo_conditions"></td>
                                     <td>주소</td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" id="mo_address"></td>
                                 </tr>
                                 <tr>
                                     <td>담당자</td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" id="mo_charger"></td>
                                     <td>연락처</td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" id="mo_contact"></td>
                                 </tr>
                                 <tr>
                                     <td>휴대전화번호</td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" id="mo_contact_phone"></td>
                                     <td>비고</td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" id="mo_memo"></td>
                                 </tr>
                                 <tr>
                                     <td>요청사항</td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" id="mo_request"></td>
                                     <td>총금액</td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" id="mo_amount"></td>
                                 </tr>         
                             </tbody>
                         </table>
@@ -5904,13 +5904,13 @@
                             <td>
                                 <div class="mainbody_51_1_list_radio">
                                     <div class="mainbody_51_1_list_radio01">
-                                        <input type="radio"  id="go_taxation" name="taxation" value="과세">과세
+                                        <input type="radio"  class="go_taxation" name="taxation" value="과세">과세
                                     </div>
                                     <div class="mainbody_51_1_list_radio02">
-                                        <input type="radio"  id="go_taxation" name="taxation" value="영세">영세
+                                        <input type="radio"  class="go_taxation" name="taxation" value="영세">영세
                                     </div>
                                     <div class="mainbody_51_1_list_radio03">
-                                        <input type="radio"  id="go_taxation" name="taxation" value="면세">면세
+                                        <input type="radio"  class="go_taxation" name="taxation" value="면세">면세
                                     </div>
                                 </div>
                             </td>
@@ -7351,7 +7351,12 @@
     
     // 생산관리 -> 생산 일보
     $('#produc_daliy').click(function () {
-        document.getElementById("main_title").innerHTML = "생산 관리&nbsp; > &nbsp;생산 일보"
+    	show_m03_product_admin_td04_select_txt_list();
+    	show_process();
+    	show_user();
+    	show_work_order();
+    	show_goods();
+    	document.getElementById("main_title").innerHTML = "생산 관리&nbsp; > &nbsp;생산 일보"
         $(".main_top_bar").css("display", "flex");
         $(".mainbody_13").css("display", "flex");
         $(".mainbody_00").css("display", "none");
@@ -7801,6 +7806,7 @@
     // 주문관리 -> 주문 내역 조회
     $('#proOrder_li').click(function () {
     	show_goodsOrder();
+    	show_goods();
         document.getElementById("main_title").innerHTML = "주문 관리&nbsp; > &nbsp;주문 내역 조회"
         $(".main_top_bar").css("display", "flex");
         $(".mainbody_52").css("display", "flex");
