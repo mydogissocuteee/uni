@@ -15130,7 +15130,7 @@ width : 100%;
     display: none;
 }
 .material_order_tb_02 tbody tr{
-    display: table;
+    display: none;
     width: 100%;
 }
 .material_order_tb_02 tr th:nth-child(1){

@@ -5107,12 +5107,12 @@
                         <tbody>
                             <tr>
                               <td><input type="checkbox"></td>
-                              <td></td>
+                              <td class="process_order_tb_03_01"></td>
                               <td>
                                 <div class="process_order_tb_03_div01">
                                     <div class="process_order_tb_03_div01_select">
                                         <div class="process_order_tb_03_div01_txt">&nbsp;</div>
-                                        <ul>
+                                        <ul class="process_order_tb_03_div01_ul_01">
                                             <li class="option">
                                                 1
                                             </li>
@@ -5136,7 +5136,7 @@
                                 <div class="process_order_tb_03_div02">
                                     <div class="process_order_tb_03_div02_select">
                                         <div class="process_order_tb_03_div02_txt">&nbsp;</div>
-                                        <ul>
+                                        <ul class="process_order_tb_03_div01_ul_02">
                                             <li class="option">
                                                 1
                                             </li>
@@ -5160,7 +5160,7 @@
                                 <div class="process_order_tb_03_div03">
                                     <div class="process_order_tb_03_div03_select">
                                         <div class="process_order_tb_03_div03_txt">&nbsp;</div>
-                                        <ul>
+                                        <ul class="process_order_tb_03_div01_ul_03">
                                             <li class="option">
                                                 1
                                             </li>
@@ -5220,7 +5220,7 @@
                             <tbody>
                                 <tr>
                                     <td>발주번호</td>
-                                    <td>자동으로 부여됩니다.</td>
+                                    <td id="mo_num">자동으로 부여됩니다.</td>
                                     <td>업체명</td>
                                     <td>
                                         <div class="m21_admin_td_09_01_select">
@@ -7239,6 +7239,7 @@
     	show_product_plan();
     	show_process();
     	show_client();
+    	show_goods();
         document.getElementById("main_title").innerHTML = "생산 관리&nbsp; > &nbsp;작업 지시"
         $(".main_top_bar").css("display", "flex");
         $(".mainbody_11").css("display", "flex");
@@ -7393,7 +7394,9 @@
 
     // 자재관리 -> 자재 발주
     $('#material_li').click(function () {
-        document.getElementById("main_title").innerHTML = "자재 관리&nbsp; > &nbsp;자재 발주"
+        show_material();
+        show_client();
+    	document.getElementById("main_title").innerHTML = "자재 관리&nbsp; > &nbsp;자재 발주"
         $(".main_top_bar").css("display", "flex");
         $(".mainbody_21").css("display", "flex");
         $(".mainbody_00").css("display", "none");
@@ -7427,7 +7430,8 @@
 
     // 자재관리 -> 자재 발주 조회
     $('#materialView_li').click(function () {
-        document.getElementById("main_title").innerHTML = "자재 관리&nbsp; > &nbsp;자재 발주 조회"
+    	show_material_order();
+    	document.getElementById("main_title").innerHTML = "자재 관리&nbsp; > &nbsp;자재 발주 조회"
         $(".main_top_bar").css("display", "flex");
         $(".mainbody_22").css("display", "flex");
         $(".mainbody_00").css("display", "none");
@@ -8702,6 +8706,8 @@
 
     function user_group_input_modal_bt() {
         $('.user_group_input_modal_window').fadeOut();
+        setTimeout(function(){$('.user_group_input_modal_mid').text("사용자 그룹이 저장되었습니다.");}, 1000);
+        
     }
     
 
@@ -11062,7 +11068,6 @@ document.addEventListener("click", function (g) {
     //생산관리 > 생산일보 > 투입자재 및 반제품 저장
      $('.process_order_tb_01 tbody tr td:nth-child(2)').click(function () {
         $(".mainbody_13_03_left").css("display", "flex");
-        
     })
     function work_order_btn_08() {
         $('.m13_work_order_btn_08_modal_window').fadeIn();

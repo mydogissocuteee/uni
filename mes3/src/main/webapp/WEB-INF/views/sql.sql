@@ -352,43 +352,54 @@ insert into PRODUCT_PLAN(pp_goods_num, company) values('d', 'd')
 
 create table product_item(
 pi_num number, --시퀀스
-pi_date varchar2(100),
-pi_process varchar2(100),
-pi_process_type varchar2(100),
-pi_client varchar2(100),
-pi_material varchar2(100),
-pi_material_count varchar2(100),
-pi_material_unit varchar2(100),
-pi_content varchar2(100),
-pi_start_date varchar2(100),
-pi_end_date varchar2(100),
-pi_move varchar2(100),
-pi_move_name varchar2(100),
-pi_move_address varchar2(100),
-pi_memo varchar2(100),
-company varchar2(100)
+pi_date varchar2(1000),
+pi_process varchar2(1000),
+pi_process_type varchar2(0100),
+pi_client varchar2(1000),
+pi_material varchar2(1000),
+pi_material_count varchar2(1000),
+pi_material_unit varchar2(1000),
+pi_content varchar2(1000),
+pi_start_date varchar2(1000),
+pi_end_date varchar2(1000),
+pi_move varchar2(1000),
+pi_move_name varchar2(1000),
+pi_move_address varchar2(1000),
+pi_memo varchar2(1000),
+company varchar2(1000)
 )
 select MAX(pi_num) from product_item
 create sequence pi_num;
 select * from product_item;
+drop table product_item;
 
 create table work_order(
-wo_num varchar2(1000), --시퀀스
-wo_process varchar2(1000),
-wo_process_type varchar2(1000),
-wo_goods_num varchar2(1000),
-wo_goods_name varchar2(1000),
-wo_spec_name varchar2(1000),
-wo_count varchar2(1000),
-wo_client varchar2(1000),
-wo_date varchar2(1000),
-wo_start_date varchar2(1000),
-wo_end_date varchar2(1000),
+wo_num varchar2(1000),
+--------추가
+wo_production_num varchar2(1000), --주문(생산계획)번호
+wo_client_order_num varchar2(1000), --고객발주번호
+wo_goodsnum varchar2(1000), --품목번호
+wo_goodsname varchar2(1000), --품목이름
+wo_unit varchar2(1000), --단위
+wo_countt varchar2(1000), --수량
+wo_production_date varchar2(1000), --생산일자 ---추가
+----------
+wo_process varchar2(1000), --공정
+wo_process_type varchar2(1000), --공정구분
+wo_goods_num varchar2(1000), --품번
+wo_goods_name varchar2(1000), --품명
+wo_spec_name varchar2(1000), --단위
+wo_count varchar2(1000), --수량
+wo_client varchar2(1000), --거래처
+wo_date varchar2(1000), --납기일자
+wo_start_date varchar2(1000), --시작요청일
+wo_end_date varchar2(1000), --완료요청일
 company varchar2(100)
 )
 select wo_num('now') from DUAL;
 select * from work_order;
 drop sequence wo_num;
+create sequence wo_num;
 
 drop table work_order;
 -----------------------------------------
@@ -416,6 +427,17 @@ mo_contact_phone varchar2(1000), --전화
 mo_memo varchar2(1000), --비고
 mo_request varchar2(1000), --요청
 mo_amount varchar2(1000), --총금액
+mo_material_num varchar2(1000), --품번
+mo_material_name varchar2(1000), --품명
+mo_material_standard varchar2(1000), --규격
+mo_material_family varchar2(1000), --사양
+mo_material_unit varchar2(1000), --단위
+mo_material_price varchar2(1000), --단가
+mo_material_count varchar2(1000), --발주수량
+mo_material_discount varchar2(1000), --할인율
+mo_material_tax varchar2(1000), --부가세
+mo_material_fprice varchar2(1000), --공급가액
+mo_material_sum varchar2(1000), --합계
 company varchar2(1000) --회사
 );
 create sequence mat_seq;

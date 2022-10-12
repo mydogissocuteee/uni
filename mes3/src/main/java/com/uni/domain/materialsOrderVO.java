@@ -19,5 +19,16 @@ public class materialsOrderVO {
 	private String mo_memo;
 	private String mo_request;
 	private String mo_amount;
+	private String mo_material_num;
+	private String mo_material_name;
+	private String mo_material_standard;
+	private String mo_material_family;
+	private String mo_material_unit;
+	private String mo_material_price;
+	private String mo_material_count;
+	private String mo_material_discount;
+	private String mo_material_tax;
+	private String mo_material_fprice;
+	private String mo_material_sum;
 	private String company;
 }

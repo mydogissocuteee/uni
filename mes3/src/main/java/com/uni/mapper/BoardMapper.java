@@ -320,8 +320,12 @@ public interface BoardMapper {
 	@Select("select * from work_order where company='${company}'")
 	public List<workOrderVO> workOrderSelect(@Param("company") String company);
 	
+	@Select("select * from work_order where wo_num='${wo_num}'")
+	public workOrderVO workOrderSelectSequence(@Param("wo_num") String wo_num);
+	
 	// 추가
-	@Insert("insert into work_order values(ZBF_GET_WO_NUM('now'), '${vo.wo_process}', '${vo.wo_process_type}', '${vo.wo_goods_num}', '${vo.wo_goods_name}', "
+	@Insert("insert into work_order values(ZBF_GET_WO_NUM('now'), '${vo.wo_production_num}', '${vo.wo_client_order_num}', '${vo.wo_goodsnum}', '${vo.wo_goodsname}', "
+			+ " '${vo.wo_unit}', '${vo.wo_countt}', '${vo.wo_production_date}', '${vo.wo_process}','${vo.wo_process_type}','${vo.wo_goods_num}', '${vo.wo_goods_name}', "
 			+ " '${vo.wo_spec_name}', '${vo.wo_count}','${vo.wo_client}','${vo.wo_date}','${vo.wo_start_date}', "
 			+ " '${vo.wo_end_date}', '${vo.company}' )")
 	public void workOrderInsert(@Param("vo") workOrderVO vo);
@@ -331,10 +335,11 @@ public interface BoardMapper {
 	public void workOrderDelete(@Param("wo_num") String wo_num);
 	
 	// 수정
-	@Update("update work_order set pi_date='${vo.pi_date}', pi_process='${vo.pi_process}', pi_process_type='${vo.pi_process_type}', pi_client='${vo.pi_client}', pi_material='${vo.pi_material}', "
-			+ "	pi_material_count='${vo.pi_material_count}', pi_material_unit='${vo.pi_material_unit}', pi_content='${vo.pi_content}', pi_start_date='${vo.pi_start_date}', pi_end_date='${vo.pi_end_date}', "
-			+ "	pi_move='${vo.pi_move}', pi_move_name='${vo.pi_move_name}', pi_move_address='${vo.pi_move_address}', pi_memo='${vo.pi_memo}', "
-			+ "	 WHERE wo_num=${vo.wo_num}")
+	@Update("update work_order set wo_production_num='${vo.wo_production_num}', wo_client_order_num='${vo.wo_client_order_num}', wo_goodsnum='${vo.wo_goodsnum}', wo_goodsname='${vo.wo_goodsname}', wo_unit='${vo.wo_unit}', "
+			+ "	wo_countt='${vo.wo_countt}', wo_production_date='${vo.wo_production_date}', wo_process='${vo.wo_process}', wo_process_type='${vo.wo_process_type}', wo_goods_num='${vo.wo_goods_num}', "
+			+ "	wo_goods_name='${vo.wo_goods_name}', wo_spec_name='${vo.wo_spec_name}', wo_count='${vo.wo_count}', wo_client='${vo.wo_client}', wo_date='${vo.wo_date}', "
+			+ "	wo_start_date='${vo.wo_start_date}', wo_end_date='${vo.wo_end_date}' "
+			+ "	 WHERE wo_num='${vo.wo_num}'")
 	public void workOrderUpdate(@Param("vo") workOrderVO vo);
 	
 	////////자재관리//////////
@@ -342,21 +347,29 @@ public interface BoardMapper {
 	@Select("select * from materials_order where company='${company}'")
 	public List<materialsOrderVO> materialsOrderSelect(@Param("company") String company);
 	
+	@Select("select * from materials_order where mo_num='${mo_num}'")
+	public materialsOrderVO materialsOrderSelectSequence(@Param("mo_num") String mo_num);
+	
 	// 추가
 	@Insert("insert into materials_order values(ZBF_GET_MO_NUM('now'), '${vo.mo_client}', '${vo.mo_orderDate}', '${vo.mo_dueDate}', '${vo.mo_place}', "
 			+ " '${vo.mo_effectivedate}', '${vo.mo_conditions}','${vo.mo_address}','${vo.mo_charger}','${vo.mo_contact}', "
-			+ " '${vo.mo_contact_phone}', '${vo.mo_memo}', '${vo.mo_request}', '${vo.mo_amount}', '${vo.company}' )")
+			+ " '${vo.mo_contact_phone}', '${vo.mo_memo}', '${vo.mo_request}', '${vo.mo_amount}', '${vo.mo_material_num}', "
+			+ " '${vo.mo_material_name}', '${vo.mo_material_standard}', '${vo.mo_material_family}', '${vo.mo_material_unit}', '${vo.mo_material_price}', "
+			+ " '${vo.mo_material_count}', '${vo.mo_material_discount}', '${vo.mo_material_tax}', '${vo.mo_material_fprice}', '${vo.mo_material_sum}', "
+			+ " '${vo.company}' )")
 	public void materialsOrderInsert(@Param("vo") materialsOrderVO vo);
 	
 	// 삭제
-	@Delete("DELETE FROM materials_order WHERE mo_num=${mo_num}")
+	@Delete("DELETE FROM materials_order WHERE mo_num='${mo_num}'")
 	public void materialsOrderDelete(@Param("mo_num") String mo_num);
 	
 	// 수정
 	@Update("update materials_order set mo_client='${vo.mo_client}', mo_orderDate='${vo.mo_orderDate}', mo_dueDate='${vo.mo_dueDate}', mo_place='${vo.mo_place}', mo_effectivedate='${vo.mo_effectivedate}', "
 			+ "	mo_conditions='${vo.mo_conditions}', mo_address='${vo.mo_address}', mo_charger='${vo.mo_charger}', mo_contact='${vo.mo_contact}', mo_contact_phone='${vo.mo_contact_phone}', "
-			+ "	mo_memo='${vo.mo_memo}', mo_request='${vo.mo_request}', mo_amount='${vo.mo_amount}' "
-			+ "	 WHERE mo_num=${vo.mo_num}")
+			+ "	mo_memo='${vo.mo_memo}', mo_request='${vo.mo_request}', mo_amount='${vo.mo_amount}', mo_material_num='${vo.mo_material_num}', mo_material_name='${vo.mo_material_name}', "
+			+ "	mo_material_standard='${vo.mo_material_standard}', mo_material_family='${vo.mo_material_family}', mo_material_unit='${vo.mo_material_unit}', mo_material_price='${vo.mo_material_price}', mo_material_count='${vo.mo_material_count}', "
+			+ "	mo_material_discount='${vo.mo_material_discount}', mo_material_tax='${vo.mo_material_tax}', mo_material_fprice='${vo.mo_material_fprice}', mo_material_sum='${vo.mo_material_sum}' "
+			+ "	WHERE mo_num='${vo.mo_num}'")
 	public void materialsOrderUpdate(@Param("vo") materialsOrderVO vo);
 	
 	/////////////////

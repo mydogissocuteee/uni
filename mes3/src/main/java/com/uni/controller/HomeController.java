@@ -604,7 +604,6 @@ public class HomeController {
 	public List<productPlanVO> productPlanSelect(String company) {
 		List<productPlanVO> data = boardmapper.productPlanSelect(company);
 		System.out.println(company+"회사의 생산 계획 리스트");
-		System.out.println(data.size());
 		return data;
 	}
 	
@@ -682,6 +681,13 @@ public class HomeController {
 		return data;
 	}
 	
+	@ResponseBody
+	@RequestMapping("/workOrderSelectSequence.do")
+	public workOrderVO workOrderSelectSequence(String wo_num) {
+		workOrderVO data = boardmapper.workOrderSelectSequence(wo_num);
+		return data;
+	}
+	
 	//입력
 	@ResponseBody
 	@RequestMapping("/workOrderInsert.do")
@@ -715,6 +721,13 @@ public class HomeController {
 	public List<materialsOrderVO> materialsOrderSelect(String company) {
 		List<materialsOrderVO> data = boardmapper.materialsOrderSelect(company);
 		System.out.println(company+"회사의 생산 계획 리스트");
+		return data;
+	}
+	@ResponseBody
+	@RequestMapping("/materialsOrderSelectSequence.do")
+	public materialsOrderVO materialsOrderSelectSequence(String mo_num) {
+		materialsOrderVO data = boardmapper.materialsOrderSelectSequence(mo_num);
+		System.out.println(data);
 		return data;
 	}
 	

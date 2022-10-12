@@ -49,7 +49,7 @@ function ajaxHtml(data){
 		view3+='<tr>';
 		view3+='<td class="m13_work_plus_Search_td_00">'+(index+1)+'</td>';
 		view3+='<td class="m13_work_plus_Search_td_00"><input type="hidden" name="num" value="'+obj.num+'">'+obj.num+'</td>';
-		view3+='<td class="m13_work_plus_Search_td_00"><input type="hidden" name="routing" value="1">'+obj.username+'</td>';
+		view3+='<td class="m13_work_plus_Search_td_00"><input type="hidden" name="department" value="'+obj.department+'">'+obj.username+'</td>';
 		view3+='</tr>';
 	  })
   view2+='</tbody>';
@@ -265,7 +265,7 @@ function processHtml(data){
 		view2+='<td><input type="hidden" name="pr_seq_num" value="'+obj.pr_seq_num+'">'+obj.pr_num+'</td>';
 		view2+='<td><input type="hidden" name="routing" value="1">'+obj.pr_name+'</td>';
 		view2+='</tr>';
-		view3+='<li class="option">'+obj.pr_name+'</li>';
+		view3+='<li class="option"><input type="hidden" name="pr_sortation" value="'+obj.pr_sortation+'">'+obj.pr_name+'</li>';
 		view4+='<tr>';
 		view4+='<td>'+(index+1)+'</td>';
 		view4+='<td><input type="hidden" name="pr_seq_num" value="'+obj.pr_seq_num+'">'+obj.pr_num+'</td>';
@@ -533,6 +533,7 @@ function clientHtml(data){
 		var view4="";
 		var view5="";
 		var view6="";
+		var view7="";
 		 view+='<thead><tr>';
 	     view+='<td></td>';
 	     view+='<td>품목번호</td>';
@@ -585,6 +586,7 @@ function clientHtml(data){
 	     view6+='<td class="m13_product_plus_Search_td_00">'+obj.gs_seq_num+'</td>';
 	     view6+='<td class="m13_product_plus_Search_td_00">'+obj.gs_name+'</td>';
 	     view6+='</tr>';
+	     view7+='<li class="option"><input type="hidden" name="gs_unit" value="'+obj.gs_unit+'">'+obj.gs_name+'</li>';
 	})
 	     view+='</tbody>';
 	  $( '#product_admin_tb_02' ).html(view);
@@ -593,6 +595,7 @@ function clientHtml(data){
 	  $( '.m051_product_choice_tbody' ).html(view4);
 	  $( '.m12_plan_productSearch_content_tbody' ).html(view5);
 	  $( '.m13_product_plus_Search_tb tbody' ).html(view6);
+	  $( '#m11_produc_plus_content_01_table_div04_list' ).html(view7);
 	}
 	
 	
@@ -655,7 +658,7 @@ function clientHtml(data){
 			 view4+='<tr>';
 		     view4+='<td><input type="checkbox" value="'+obj.ml_seq_num+'"></td>';
 		     view4+='<td>'+obj.ml_seq_num+'</td>';
-		     view4+='<td>'+obj.ml_seq_name+'</td>';
+		     view4+='<td>'+obj.ml_name+'</td>';
 		     view4+='<td>'+obj.ml_standard+'</td>';
 		     view4+='<td>'+obj.ml_family+'</td>';
 		     view4+='<td>'+obj.ml_uni+'</td>';
@@ -871,10 +874,13 @@ function clientHtml(data){
 		
 		function ajaxHtml8(data){
 			var view="";
+			var view2="";
 		  $.each(data,function(index, obj){	//반복문
 		     view+='<li class="option">'+obj.cc_name+'</li>';
+		     view2+='<li class="option">'+obj.cc_name+'</li>';
 		})
 		  $( '#mainbody_05_02_left_bott_tb_table_txt_list' ).html(view);
+		  $( '.process_order_tb_03_div01_ul_01' ).html(view);
 		}
 		
 		$.ajax({
@@ -995,13 +1001,13 @@ function clientHtml(data){
 		
 		function ajaxHtml13(data){
 			var view="";
-			var num=1;
 		  $.each(data,function(index, obj){	//반복문
 		     view+='<li class="option">'+obj.cc_name+'</li>';
 		})
 		  $( '#m08_location_select_txt_list' ).html(view);
 		  $( '#m08_corr_location_select_txt_list' ).html(view);
 		}
+		
 		$.ajax({
 	  		url:"codeSelect.do",
 	  		type:"get",
@@ -1017,7 +1023,6 @@ function clientHtml(data){
 		
 		function ajaxHtml14(data){
 			var view4="";
-			var num=1;
 			view4+='<tr>';
 			view4+='<td></td>';
 			view4+='<td>번호</td>';
@@ -1033,8 +1038,30 @@ function clientHtml(data){
 		  $( '.m12_equipSearch_content_tb tbody' ).html(view4);
 		}
 		
+		$.ajax({
+	  		url:"codeSelect.do",
+	  		type:"get",
+	  		async: false,
+	  		data : {"company":'fourever',
+	   			"className":'시프트'},
+	  		success:ajaxHtml15,
+	  		error:function(data){ 
+	  			let str = JSON.stringify(data);
+	  			console.log(str);
+	  		}
+	  	});
+		
+		function ajaxHtml15(data){
+			var view="";
+		  $.each(data,function(index, obj){	//반복문
+		    view+='<li class="option">'+obj.cc_name+'</li>';
+		})
+		  $( '.m12_equipSearch_content_tb tbody' ).html(view);
+		}
+		
 	}
 	
+	//코드 끝
 	// 공정관리 - 검사항목 저장 클릭
 
 
@@ -2506,7 +2533,6 @@ var processVO = {
 		function processinputHtml(data){
 			var view="";
 			$.each(data,function(index, obj){
-		console.log("주문"+go_num);
 			     if(obj.go_num==go_num){
 			    	 $('#wo_go_num').text(obj.go_num);
 					 $('.mainbody_11_01_top_04_01').text("");
@@ -2598,12 +2624,12 @@ var processVO = {
 		console.log(work_order_tb_02_list);
 		work_order_tb_02_list+='<tr>';
 		work_order_tb_02_list+='<td><input type="checkbox" name="product_item_delete"></td>';
-		work_order_tb_02_list+='<td>'+productItemVO.pi_date+'</td>';
-		work_order_tb_02_list+='<td>'+indexx+'</td>';
+		work_order_tb_02_list+='<td class="wo_production_date">'+productItemVO.pi_date+'</td>';
+		work_order_tb_02_list+='<td>자동으로 부여됩니다.</td>';
 		work_order_tb_02_list+='<td class="wo_process">'+productItemVO.pi_process+'</td>';
 		work_order_tb_02_list+='<td class="wo_process_type">'+productItemVO.pi_process_type+'</td>';
-		work_order_tb_02_list+='<td class="var wo_goods_name">'+productItemVO.pi_material+'</td>';
-		work_order_tb_02_list+='<td>'+productItemVO.pi_material_unit+'</td>';
+		work_order_tb_02_list+='<td class="wo_goods_name">'+productItemVO.pi_material+'</td>';
+		work_order_tb_02_list+='<td class="wo_spec_name">'+productItemVO.pi_material_unit+'</td>';
 		work_order_tb_02_list+='<td class="wo_count">'+productItemVO.pi_material_count+'</td>';
 		work_order_tb_02_list+='<td class="wo_start_date">'+productItemVO.pi_start_date+'</td>';
 		work_order_tb_02_list+='<td class="wo_end_date">'+productItemVO.pi_end_date+'</td>';
@@ -2612,19 +2638,46 @@ var processVO = {
 		$(".work_order_tb_02 tbody").html(work_order_tb_02_list);
 		}
 		indexx+=1;
+		
+		m11_produc_plus_Close();
 	})	
+	
+	$(document).on('click', '#m11_produc_plus_content_01_table_div02_list li', function(e) {
+		var hi = $(this).find("input").val()
+		$(".m11_produc_plus_content_01_table_div02_1").text(hi);
+	})
+	$(document).on('click', '#m11_produc_plus_content_01_table_div04_list li', function(e) {
+		var hi = $(this).find("input").val()
+		$(".m11_produc_plus_content_01_table_div0_1").text(hi);
+	})
 	
 	// 작업 지시 입력
 	$(document).on('click', '.mainbody_11_01_top_btn_02', function(e) {
 		var num = 0;
+		var wo_production_date = "";
+		var wo_client_order_num = "";
+		var wo_goodsnum = "";
+		var wo_goodsname = "";
+		var wo_unit = "";
+		var wo_countt = "";
 		var wo_process = "";
 		var wo_process_type = "";
 		var wo_goods_num = "";
 		var wo_goods_name = "";
+		var wo_spec_name = "";
 		var wo_count = "";
 		var wo_start_date = "";
 		var wo_end_date = "";
 		
+		num = 0;
+		$(".wo_production_date").each(function(e){
+			if(num===0){
+				wo_production_date+=$(this).text();
+			}else {
+				wo_production_date+="<br>";
+				wo_production_date+=$(this).text();
+			}num=1;
+		})
 		num = 0;
 		$(".wo_process").each(function(e){
 			if(num===0){
@@ -2632,6 +2685,15 @@ var processVO = {
 			}else {
 				wo_process+="<br>";
 				wo_process+=$(this).text();
+			}num=1;
+		})
+		num = 0;
+		$(".wo_process_type").each(function(e){
+			if(num===0){
+				wo_process_type+=$(this).text();
+			}else {
+				wo_process_type+="<br>";
+				wo_process_type+=$(this).text();
 			}num=1;
 		})
 		num = 0;
@@ -2650,6 +2712,15 @@ var processVO = {
 			}else {
 				wo_goods_name+="<br>";
 				wo_goods_name+=$(this).text();
+			}num=1;
+		})
+		num = 0;
+		$(".wo_spec_name").each(function(e){
+			if(num===0){
+				wo_spec_name+=$(this).text();
+			}else {
+				wo_spec_name+="<br>";
+				wo_spec_name+=$(this).text();
 			}num=1;
 		})
 		num = 0;
@@ -2682,11 +2753,18 @@ var processVO = {
 		
 		var workOrderVO = {
 		company : "fourever",
+		wo_production_date : wo_production_date,
+		wo_production_num : $("#wo_go_num").text(),
+		wo_client_order_num : $("#wo_go_place").text(),
+		wo_goodsnum : $("#wo_go_goods_seq").text(),
+		wo_goodsname : $("#wo_go_goods_name").text(),
+		wo_unit : "", //없음
+		wo_countt : $("#wo_pp_performance_quantity").text(),
 		wo_process : wo_process,
 		wo_process_type : wo_process_type,
 		wo_goods_num : wo_goods_num,
 		wo_goods_name : wo_goods_name,
-		wo_spec_name : $("#go_orderDate").val(),
+		wo_spec_name : wo_spec_name,
 		wo_count : wo_count,
 		wo_client : $("#wo_go_client").text(),
 		wo_date : $("#wo_go_dueDate").text(),
@@ -2747,7 +2825,7 @@ var processVO = {
 			     view+='</tr>';
 				 view2+='<tr>';
 			     view2+='<td><input type="checkbox" name="work_order_daily" value="'+obj.wo_num+'"></td>';
-			     view2+='<td>'+obj.wo_num+'</td>';
+			     view2+='<td id="show_mainbody_13_03_left">'+obj.wo_num+'</td>';
 			     view2+='<td>'+obj.wo_goods_num+'</td>';
 			     view2+='<td>'+obj.wo_goods_name+'</td>';
 			     view2+='<td>'+obj.wo_spec_name+'</td>';
@@ -3244,8 +3322,8 @@ var processVO = {
     
 	// 주문 내역 수정
     $(document).on("click", ".mainbody_51_1_top_btn_02_update", function(){
-      
-         $(".user_group_input_modal_mid").text("주문이 등록되었습니다.");
+      $('.user_group_input_modal_window').fadeIn();
+      $('.user_group_input_modal_mid').text("주문이 수정되었습니다.");
 
          var go_goods_seq = "";
          var go_goods_name = "";
@@ -3346,6 +3424,31 @@ var processVO = {
 	
 	$(document).on("click", ".mainbody_21_top_btn_02", function(){
 		console.log("durls")
+		var mo_material_num = "";
+		var mo_material_name = "";
+		var mo_material_standard = "";
+		var mo_material_family = "";
+		var mo_material_unit = "";
+		var mo_material_price = "";
+		var mo_material_count = "";
+		var mo_material_discount = "";
+		var mo_material_tax = "";
+		var mo_material_fprice = "";
+		var mo_material_sum = "";
+		$('.selectedMaterial').each(function() {
+			mo_material_num += $(this).find("td:eq(1)").text()+",";
+			mo_material_name += $(this).find("td:eq(2)").text()+",";
+			mo_material_standard += $(this).find("td:eq(3)").text()+",";
+			mo_material_family += $(this).find("td:eq(4)").text()+",";
+			mo_material_unit += $(this).find("td:eq(5)").text()+",";
+			mo_material_price += $(this).find("td:eq(6)").text()+",";
+			mo_material_count += $(this).find("input[class=mo_count]").val()+",";
+			mo_material_discount += $(this).find("input[class=mo_discount]").val()+",";
+			mo_material_tax += $(this).find("input[class=mo_tax]").val()+",";
+			mo_material_fprice += $(this).find("td:eq(10)").text()+",";
+			mo_material_sum += $(this).find("td:eq(11)").text()+",";
+			console.log(mo_material_num);
+		})
 	var materialsOrderVO = {
 		company : "fourever",
 		mo_client : $("#m21_admin_td_09_01_select_01").text(),
@@ -3360,7 +3463,18 @@ var processVO = {
 		mo_contact_phone : $("#mo_contact_phone").val(),
 		mo_memo : $("#mo_memo").val(),
 		mo_request : $("#mo_request").val(),
-		mo_amount : $("#mo_amount").val()
+		mo_amount : $("#mo_amount").val(),
+		mo_material_num : mo_material_num,
+		mo_material_name : mo_material_name,
+		mo_material_standard : mo_material_standard,
+		mo_material_family : mo_material_family,
+		mo_material_unit : mo_material_unit,
+		mo_material_price : mo_material_price,
+		mo_material_count : mo_material_count,
+		mo_material_discount : mo_material_discount,
+		mo_material_tax : mo_material_tax,
+		mo_material_fprice : mo_material_fprice,
+		mo_material_sum : mo_material_sum,
 	};
 		$.ajax({
 				url : "materialsOrderInsert.do",
@@ -3377,11 +3491,533 @@ var processVO = {
 	})
 	
 	
+	$(document).on('click', '.m021_product_choice_tb tr', function(e){
+		var selectedMaterialNum = $(this).find("td:eq(0)").text();
+		$(".material_order_tb_02 tr").each(function(e){
+	        var goinputvalue = $(this).find("td:eq(1)").text();
+			if(selectedMaterialNum==goinputvalue){
+				$(this).css("display", "table");
+				$(this).find("td:eq(6)").attr("class", "material_price");
+				$(this).attr("class", "selectedMaterial");
+			}
+	    })
+		m21_product_choice_Close();
+	})
 	
 	
+	// 자재 발주 가져오기
+	function show_material_order() {
+		$.ajax({
+	  		url:"materialsOrderSelect.do",
+	  		type:"get",
+	  		async: false,
+	  		data: {company :"fourever"},
+	  		success:html,
+	  		error:function(data){ 
+	  			let str = JSON.stringify(data);
+	  			console.log(str);
+	  		}
+	  	});
+	
+		function html(data){
+			var view="";
+			  $.each(data,function(index, obj){	//반복문
+			     view+='<tr>';
+			     view+='<td>';
+		    	 view+='<input autocomplete="off" type="checkbox" name="mo_num" value="'+obj.mo_num+'">'
+	   			 view+='</td>';
+				 view+='<td>'+obj.mo_num+'</td>';
+				 view+='<td>'+obj.mo_orderDate+'</td>';
+				 view+='<td>'+obj.mo_dueDate+'</td>';
+				 view+='<td>'+obj.mo_client+'</td>';
+				 view+='<td>'+obj.mo_amount+'</td>';
+				 view+='<td>'+obj.mo_material_name+'</td>';
+				 view+='<td>'+obj.mo_material_count+'</td>';
+				 view+='<td></td>';
+				 view+='</tr>';
+			  })
+		  $( '.material_order_view_tb tbody' ).html(view);
+		};
+	}
+	
+	// 자재 발주 삭제
+	$(document).on('click', '.mainbody_22_01_top_btn_03', function(e) {
+	var len = $("input[name='mo_num']:checked").length;
+				console.log(len);
+	if(len == 1){
+		var value = $("input[name='mo_num']:checked").val();
+		$.ajax({
+			url : "materialsOrderDelete.do",
+			type : "GET",
+			async:false,
+			data : {mo_num:value},
+			success : function(){
+				$("input[name='mo_num']:checked").parent().parent().remove();
+				console.log(" 삭제 success");},
+			error : function(request, status, error){
+			    console.log("삭제 error");}
+		});
+		}else { //개수를 체크하고 2개부터는 each함수를 통해 각각 가져온다.
+		    $("input[name='mo_num']:checked").each(function(e){
+	        var value = $(this).val();
+			console.log(value);
+			$.ajax({
+				url : "materialsOrderDelete.do",
+				type : "GET",
+				async:false,
+				data : {mo_num:value},
+				success : function(){
+					console.log(" 삭제 success");},
+				error : function(request, status, error){
+				    console.log("삭제 error");}
+				});
+		
+		    })
+		}	
+		show_material_order();
+	})
+	
+	// 자재발주 공급가액 계산
+	// 발주수량 입력 시
+	$(document).on('keyup', '.mo_count', function(e) {
+		var price = $(this).parent().prev().text();
+		console.log("단가price"+price);
+		var num1 = parseInt($(this).val());
+		console.log("발주수량" +num1);
+		var num2 = $(this).parent().next().find("input");
+		var num3 = num2.parent().next().next();
+		num2 = 1-(parseInt(num2.val())*0.01);
+		console.log("할인율"+num2);
+		console.log(num3);
+		this.value = this.value.replace(/[^0-9]/g, '');
+		num3.text(Math.floor(price*num1*num2));
+		
+		var go_price = 0;
+		$('.mo_supplyValue').each(function() {
+			go_price+=parseInt($(this).val());
+			if (isNaN(this.value) || this.value === '') {
+				$(this).val(0);
+			}
+		})
+		$(".mo_supplyValue").val(go_price);
+	})
+	
+	// 자재발주 공급가액 계산
+	// 할인율 입력 시
+	$(document).on('keyup', '.mo_discount', function(e) {
+		var price = $(this).parent().prev().prev().text();
+		console.log("단가price"+price);
+		var num1 = $(this).parent().prev().find("input");
+		num1 = parseInt(num1.val());
+		console.log("발주수량" +num1);
+		var num2 = $(this).val();
+		console.log(num2);
+		var num3 = $(this).parent().next().next();
+		num2 = 1-(parseInt(num2)*0.01);
+		console.log("할인율"+num2);
+		console.log(num3);
+		this.value = this.value.replace(/[^0-9]/g, '');
+		num3.text(Math.floor(price*num1*num2));
+	})
+	
+	// 자재발주 합계 계산
+	// 부가세 입력 시
+	$(document).on('keyup', '.mo_tax', function(e) {
+		var price = $(this).parent().next().text();
+		console.log("단가price"+price);
+		var num1 = $(this).parent().prev().find("input");
+		num1 = parseInt(num1.val());
+		num1 = 1+(parseInt(num1)*0.01);
+		console.log("부가세" +num1);
+		var num3 = $(this).parent().next().next();
+		console.log(num3);
+		this.value = this.value.replace(/[^0-9]/g, '');
+		num3.text(Math.floor(price*num1));
+		
+			var sum = 0;
+			var s = "123" ;
+			var chkStyle = /\d/ ;
+		$(".mo_sum").each(function(e){
+			if(chkStyle.test($(this).text())){
+			console.log($(this).text());
+			sum += parseInt($(this).text());}
+		})
+		$("#mo_amount").val(sum)
+	})
+	
+	// 작업 지시 더블클릭
+	$(document).on("dblclick", ".process_order_view_tb tr", function(){
+		var work_order_delete = $(this).find("input[name=work_order_delete]").val();
+		console.log(work_order_delete);
+		
+		$('.mainbody_11_01_top_btn_02').attr('class','mainbody_11_01_top_btn_02_update');
+		show_goodsOrder();
+    	show_goods();
+		show_product_plan();
+        document.getElementById("main_title").innerHTML = "생산 관리&nbsp; > &nbsp;작업 지시"
+        $(".main_top_bar").css("display", "flex");
+        $(".mainbody_11").css("display", "flex");
+        $(".mainbody_14").css("display", "none");
+        $(".mainbody_11_01_top_01_00").text(work_order_delete);
+		
+		$.ajax({
+	         url : "workOrderSelectSequence.do",
+	         type : "GET",
+	         async:false,
+	         data : {wo_num: work_order_delete},
+	         success : hhhtttmmmllll,
+	         error : function(request, status, error){
+	             console.log("bom 조회 error");}
+      	});
+
+		function hhhtttmmmllll(data){
+			$("#wo_go_num").text(data.wo_production_num);
+			$("#wo_go_place").text(data.wo_client_order_num);
+			$("#wo_go_goods_seq").text(data.wo_goodsnum);
+			$("#wo_go_goods_name").text(data.wo_goodsname);
+			$("#wo_pp_performance_quantity").text(data.wo_countt);
+			$("#wo_go_client").text(data.wo_client);
+			$("#wo_go_dueDate").text(data.wo_date);
+			var tr = "";
+			tr+='<tr>';
+			tr+='<td><input type="checkbox" name="product_item_delete"></td>';
+			tr+='<td class="wo_production_date">'+data.wo_production_date+'</td>';
+			tr+='<td>자동으로 부여됩니다.</td>';
+			tr+='<td class="wo_process">'+data.wo_process+'</td>';
+			tr+='<td class="wo_process_type">'+data.wo_process_type+'</td>';
+			tr+='<td class="wo_goods_name">'+data.wo_goods_name+'</td>';
+			tr+='<td class="wo_spec_name">'+data.wo_spec_name+'</td>';
+			tr+='<td class="wo_count">'+data.wo_count+'</td>';
+			tr+='<td class="wo_start_date">'+data.wo_start_date+'</td>';
+			tr+='<td class="wo_end_date">'+data.wo_end_date+'</td>';
+			tr+='<td></td>';
+		    tr+='</tr>';
+			$(".work_order_tb_02 tbody").html(tr);
+			
+		}
+		
+    })
 	
 	
+	// 작업 지시 수정
+	$(document).on('click', '.mainbody_11_01_top_btn_02_update', function(e) {
+		var num = 0;
+		var wo_production_date = "";
+		var wo_client_order_num = "";
+		var wo_goodsnum = "";
+		var wo_goodsname = "";
+		var wo_unit = "";
+		var wo_countt = "";
+		var wo_process = "";
+		var wo_process_type = "";
+		var wo_goods_num = "";
+		var wo_goods_name = "";
+		var wo_spec_name = "";
+		var wo_count = "";
+		var wo_start_date = "";
+		var wo_end_date = "";
+		
+		num = 0;
+		$(".wo_production_date").each(function(e){
+			if(num===0){
+				wo_production_date+=$(this).text();
+			}else {
+				wo_production_date+="<br>";
+				wo_production_date+=$(this).text();
+			}num=1;
+		})
+		num = 0;
+		$(".wo_process").each(function(e){
+			if(num===0){
+				wo_process+=$(this).text();
+			}else {
+				wo_process+="<br>";
+				wo_process+=$(this).text();
+			}num=1;
+		})
+		num = 0;
+		$(".wo_process_type").each(function(e){
+			if(num===0){
+				wo_process_type+=$(this).text();
+			}else {
+				wo_process_type+="<br>";
+				wo_process_type+=$(this).text();
+			}num=1;
+		})
+		num = 0;
+		$(".wo_goods_num").each(function(e){
+			if(num===0){
+				wo_goods_num+=$(this).text();
+			}else {
+				wo_goods_num+="<br>";
+				wo_goods_num+=$(this).text();
+			}num=1;
+		})
+		num = 0;
+		$(".wo_goods_name").each(function(e){
+			if(num===0){
+				wo_goods_name+=$(this).text();
+			}else {
+				wo_goods_name+="<br>";
+				wo_goods_name+=$(this).text();
+			}num=1;
+		})
+		num = 0;
+		$(".wo_spec_name").each(function(e){
+			if(num===0){
+				wo_spec_name+=$(this).text();
+			}else {
+				wo_spec_name+="<br>";
+				wo_spec_name+=$(this).text();
+			}num=1;
+		})
+		num = 0;
+		$(".wo_count").each(function(e){
+			if(num===0){
+				wo_count+=$(this).text();
+			}else {
+				wo_count+="<br>";
+				wo_count+=$(this).text();
+			}num=1;
+		})
+		num = 0;
+		$(".wo_start_date").each(function(e){
+			if(num===0){
+				wo_start_date+=$(this).text();
+			}else {
+				wo_start_date+="<br>";
+				wo_start_date+=$(this).text();
+			}num=1;
+		})
+		num = 0;
+		$(".wo_end_date").each(function(e){
+			if(num===0){
+				wo_end_date+=$(this).text();
+			}else {
+				wo_end_date+="<br>";
+				wo_end_date+=$(this).text();
+			}num=1;
+		})
+		
+		var workOrderVO = {
+		company : "fourever",
+		wo_num : $(".mainbody_11_01_top_01_00").text(),
+		wo_production_date : wo_production_date,
+		wo_production_num : $("#wo_go_num").text(),
+		wo_client_order_num : $("#wo_go_place").text(),
+		wo_goodsnum : $("#wo_go_goods_seq").text(),
+		wo_goodsname : $("#wo_go_goods_name").text(),
+		wo_unit : "", //없음
+		wo_countt : $("#wo_pp_performance_quantity").text(),
+		wo_process : wo_process,
+		wo_process_type : wo_process_type,
+		wo_goods_num : wo_goods_num,
+		wo_goods_name : wo_goods_name,
+		wo_spec_name : wo_spec_name,
+		wo_count : wo_count,
+		wo_client : $("#wo_go_client").text(),
+		wo_date : $("#wo_go_dueDate").text(),
+		wo_start_date : wo_start_date,
+		wo_end_date : wo_end_date
+		};
+		$.ajax({
+				url : "workOrderUpdate.do",
+				type : "GET",
+				async:false,
+				data : workOrderVO,
+				// dataType : "json",
+				success : function(){
+					console.log("success");
+					},
+				error : function(request, status, error){
+				    console.log("주문 입력 error");
+					}
+			});
 	
+	
+	})
+	
+	//생산관리 > 생산일보 > 투입자재 및 반제품 저장
+	$(document).on('click', '.process_order_tb_01 tbody tr td:nth-child(2)', function(e) {
+        $(".mainbody_13_03_left").css("display", "flex");
+    })
+	
+	//작업자 추가
+	$(document).on('click', '.m13_work_plus_Search_tb tbody tr', function(e) {
+		var tr = $(".process_order_tb_03 tbody").html();
+		tr += '<tr>';
+		tr += '<td><input type="checkbox"></td>';
+		tr += '<td>'+$(this).find("td:eq(2)").text()+'</td>';
+		tr += '<td>';
+		tr += '<div class="process_order_tb_03_div01">';
+		tr += '<div class="process_order_tb_03_div01_select">';
+		tr += '<div class="process_order_tb_03_div01_txt">&nbsp;</div>';
+		tr += '<ul class="process_order_tb_03_div01_ul_01"></ul>';
+		tr += '</div></div></td>';
+		tr += '<td>';
+		tr += '<div class="process_order_tb_03_div02">';
+		tr += '<div class="process_order_tb_03_div02_select">';
+		tr += '<div class="process_order_tb_03_div02_txt">&nbsp;</div>';
+		tr += '<ul class="process_order_tb_03_div01_ul_02"></ul>';
+		tr += '</div></div></td>';
+		tr += '<td>';
+		tr += '<div class="process_order_tb_03_div03">';
+		tr += '<div class="process_order_tb_03_div03_select">';
+		tr += '<div class="process_order_tb_03_div03_txt">&nbsp;</div>';
+		tr += '<ul class="process_order_tb_03_div01_ul_03"></ul>';
+		tr += '</div></div></td>';
+		tr += '<td><input type="time"></td>';
+		tr += '<td><input type="time"></td>';
+		tr += '</tr>';
+		
+		$(".process_order_tb_03 tbody").html(tr)
+		m13_work_plus_Close();
+    })
+	
+	//자재발주 수정
+	$(document).on('dblclick', '.material_order_view_tb tr', function(e) {
+		console.log("더블클릭")
+		var value = $(this).find("td:eq(1)").text()
+		console.log(value)
+		show_material();
+		show_client();
+		document.getElementById("main_title").innerHTML = "자재 관리&nbsp; > &nbsp;자재 발주"
+		$(".main_top_bar").css("display", "flex");
+        $(".mainbody_21").css("display", "flex");
+        $(".mainbody_22").css("display", "none");
+
+		$.ajax({
+	  		url:"materialsOrderSelectSequence.do",
+	  		type:"get",
+	  		async: false,
+	  		data: {mo_num :value},
+	  		success:html,
+	  		error:function(data){ 
+	  			let str = JSON.stringify(data);
+	  			console.log(str);
+	  		}
+	  	});
+	
+		function html(data){
+			$(".mainbody_21_top_btn_02").attr("class","mainbody_21_top_btn_02_update")
+			$("#mo_num").text(data.mo_num)
+			$("#m21_admin_td_09_01_select_01").text(data.mo_client)
+			$("#mo_orderDate").val(data.mo_orderDate)
+			$("#mo_dueDate").val(data.mo_dueDate)
+			$("#mo_place").val(data.mo_place)
+			$("#mo_effectivedate").val(data.mo_effectivedate)
+			$("#mo_conditions").val(data.mo_conditions)
+			$("#mo_address").val(data.mo_address)
+			$("#mo_charger").val(data.mo_charger)
+			$("#mo_contact").val(data.mo_contact)
+			$("#mo_contact_phone").val(data.mo_contact_phone)
+			$("#mo_memo").val(data.mo_memo)
+			$("#mo_request").val(data.mo_request)
+			$("#mo_amount").val(data.mo_amount)
+			
+			var value = data.mo_material_num;
+			if (value.includes(',')){
+				value = value.split(",")
+				var material_count = data.mo_material_count;
+				material_count = material_count.split(",")
+				var material_discount = data.mo_material_discount;
+				material_discount = material_discount.split(",")
+				var material_tax = data.mo_material_tax;
+				material_tax = material_tax.split(",")
+				var material_fprice = data.mo_material_fprice;
+				material_fprice = material_fprice.split(",")
+				var material_sum = data.mo_material_sum;
+				material_sum = material_sum.split(",")
+				$(".material_order_tb_02 tbody tr").each(function(e){
+					for(i in value){
+				    	if( $(this).find("td:eq(1)").text()==value[i] ){
+							$(this).css("display", "table")
+							$(this).find("input[class=mo_count]").val(material_count[i])
+							$(this).find("input[class=mo_discount]").val(material_discount[i])
+							$(this).find("input[class=mo_tax]").val(material_tax[i])
+							$(this).find(".mo_supplyValue").text(material_fprice[i])
+							$(this).find(".mo_sum").text(material_sum[i])
+							$(this).attr("class", "selectedMaterial");
+						}
+					}
+		    	})
+			}
+		};
+	})
+	
+	$(document).on('click', '.m21_customerSearch_tb tr', function(e) {
+		$("#m21_admin_td_09_01_select_01").text($(this).find("td:eq(2)").text())
+		m21_customerClose();
+	})
+	
+	
+	$(document).on("click", ".mainbody_21_top_btn_02_update", function(){
+		var mo_material_num = "";
+		var mo_material_name = "";
+		var mo_material_standard = "";
+		var mo_material_family = "";
+		var mo_material_unit = "";
+		var mo_material_price = "";
+		var mo_material_count = "";
+		var mo_material_discount = "";
+		var mo_material_tax = "";
+		var mo_material_fprice = "";
+		var mo_material_sum = "";
+		$('.selectedMaterial').each(function() {
+			mo_material_num += $(this).find("td:eq(1)").text()+",";
+			mo_material_name += $(this).find("td:eq(2)").text()+",";
+			mo_material_standard += $(this).find("td:eq(3)").text()+",";
+			mo_material_family += $(this).find("td:eq(4)").text()+",";
+			mo_material_unit += $(this).find("td:eq(5)").text()+",";
+			mo_material_price += $(this).find("td:eq(6)").text()+",";
+			mo_material_count += $(this).find("input[class=mo_count]").val()+",";
+			mo_material_discount += $(this).find("input[class=mo_discount]").val()+",";
+			mo_material_tax += $(this).find("input[class=mo_tax]").val()+",";
+			mo_material_fprice += $(this).find("td:eq(10)").text()+",";
+			mo_material_sum += $(this).find("td:eq(11)").text()+",";
+			console.log(mo_material_num);
+		})
+	var materialsOrderVO = {
+		company : "fourever",
+		mo_num : $("#mo_num").text(),
+		mo_client : $("#m21_admin_td_09_01_select_01").text(),
+		mo_orderDate : $("#mo_orderDate").val(),
+		mo_dueDate : $("#mo_dueDate").val(),
+		mo_place : $("#mo_place").val(),
+		mo_effectivedate : $("#mo_effectivedate").val(),
+		mo_conditions : $("#mo_conditions").val(),
+		mo_address : $("#mo_address").val(),
+		mo_charger : $("#mo_charger").val(),
+		mo_contact : $("#mo_contact").val(),
+		mo_contact_phone : $("#mo_contact_phone").val(),
+		mo_memo : $("#mo_memo").val(),
+		mo_request : $("#mo_request").val(),
+		mo_amount : $("#mo_amount").val(),
+		mo_material_num : mo_material_num,
+		mo_material_name : mo_material_name,
+		mo_material_standard : mo_material_standard,
+		mo_material_family : mo_material_family,
+		mo_material_unit : mo_material_unit,
+		mo_material_price : mo_material_price,
+		mo_material_count : mo_material_count,
+		mo_material_discount : mo_material_discount,
+		mo_material_tax : mo_material_tax,
+		mo_material_fprice : mo_material_fprice,
+		mo_material_sum : mo_material_sum,
+	};
+		$.ajax({
+				url : "materialsOrderUpdate.do",
+				type : "GET",
+				async:false,
+				data : materialsOrderVO,
+				// dataType : "json",
+				success : function(){
+					console.log("자재발주 수정 success");},
+				error : function(request, status, error){
+				    console.log("자재발주 입력 error");}
+			});
+			
+	})
 	
 	
 	

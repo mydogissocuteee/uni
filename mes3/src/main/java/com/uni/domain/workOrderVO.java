@@ -5,6 +5,15 @@ import lombok.Data;
 @Data
 public class workOrderVO {
 	private String wo_num;
+	///////추가
+	private String wo_production_num;
+	private String wo_client_order_num;
+	private String wo_goodsnum;
+	private String wo_goodsname;
+	private String wo_unit;
+	private String wo_countt;	
+	private String wo_production_date;	
+	/////////
 	private String wo_process;
 	private String wo_process_type;
 	private String wo_goods_num;
