@@ -2137,7 +2137,7 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <ul>
+                                            <ul id="m1_user_input_table_04_ul">
                                                 <li class="option">1</li>
                                                 <li class="option">2</li>
                                                 <li class="option">3</li>
@@ -4904,7 +4904,33 @@
                           <td>시프트</td>
                           <td>
                             <div class="produce_date_tb_01_shift">
-                              &nbsp;
+                                <div class="produce_date_tb_01_shift_select">
+                                    <div class="produce_date_tb_01_shift_txt">
+                                        &nbsp;
+                                    </div>
+                                    <div class="produce_date_tb_01_shift_btn">
+                                        <button class="produce_date_tb_01_shift_btn_cls" onclick="produce_date_tb_01_shift_btn_cls()">
+                                            <img src="./resources/img/제품관리/엑스.png">
+                                        </button>
+                                    </div>
+                                    <ul id="produce_date_tb_01_ul">
+                                        <li class="option">
+                                            1
+                                        </li>
+                                        <li class="option">
+                                            2
+                                        </li>
+                                        <li class="option">
+                                            3
+                                        </li>
+                                        <li class="option">
+                                            4
+                                        </li>
+                                        <li class="option">
+                                            5
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                           </td>
                         </tr>
@@ -4947,7 +4973,7 @@
                           <td></td>
                           <td></td>
                           <td></td>
-                          <td>No.1123123</td>
+                          <td></td>
                         </tr>
                       </table>
                       <table class="worker_tb">
@@ -4956,11 +4982,11 @@
                         </tr>
                         <tr>
                           <td>부서명:</td>
-                          <td>관리부</td>
+                          <td id="userdepartment">관리부</td>
                         </tr>
                         <tr>
                           <td>작성자 명:</td>
-                          <td>유니컴퍼니1</td>
+                          <td id="usercompany">유니컴퍼니1</td>
                         </tr>
                       </table>
                     </div>
@@ -5465,7 +5491,7 @@
                                 <tbody>
                                     <tr>
                                         <td><input type="checkbox"></td>
-                                        <td>22-09-19</td>
+                                        <td><input type="date"></td>
                                         <td>원부자재입고</td>
                                         <td><input type="text" autocomplete="off"></td>
                                         <td><input type="text" autocomplete="off"></td>
@@ -6647,6 +6673,7 @@
     	show_user();
     	show_department();
     	show_user_group();
+    	show_process();
         document.getElementById("main_title").innerHTML = "기준정보&nbsp; > &nbsp;사용자 관리"
         $(".main_top_bar").css("display", "flex");
         $(".mainbody_01").css("display", "flex");
@@ -7465,6 +7492,8 @@
 
     // 자재관리 -> 자재 입고 현황
     $('#materialArrival_li').click(function () {
+    	show_material_order();
+    	show_material()
         document.getElementById("main_title").innerHTML = "자재 관리&nbsp; > &nbsp;자재 입고 현황"
         $(".main_top_bar").css("display", "flex");
         $(".mainbody_23").css("display", "flex");
@@ -8469,7 +8498,55 @@
     }
 
 
+
     // div select custom
+
+    const m13_newtest01_selectBoxElements = document.querySelectorAll(".produce_date_tb_01_shift");
+
+   function  m13_newtest01_toggleSelectBox(selectBox) {
+   selectBox.classList.toggle("active");
+   }
+
+   function m13_newtest01_selectOption(optionElement) {
+   const selectBox = optionElement.closest(".produce_date_tb_01_shift");
+   const selectedElement = selectBox.querySelector(".produce_date_tb_01_shift_txt");
+   selectedElement.textContent = optionElement.textContent;
+   }
+
+   m13_newtest01_selectBoxElements.forEach(selectBoxElement => {
+   selectBoxElement.addEventListener("click", function (e) {
+       const targetElement = e.target;
+       const isOptionElement = targetElement.classList.contains("option");
+
+       if (isOptionElement) {
+           console.log("here");
+           m13_newtest01_selectOption(targetElement);
+       }
+
+       m13_newtest01_toggleSelectBox(selectBoxElement);
+   });
+   });
+
+   document.addEventListener("click", function (e) {
+   const targetElement = e.target;
+   const isSelect = targetElement.classList.contains(".produce_date_tb_01_shift") || targetElement.closest(".produce_date_tb_01_shift_txt");
+
+   if (isSelect) {
+       return;
+   }
+
+   const  m13_newtest01_allSelectBoxElements = document.querySelectorAll(".produce_date_tb_01_shift");
+
+   m13_newtest01_allSelectBoxElements.forEach(boxElement => {
+       boxElement.classList.remove("active");
+   });
+   });
+
+
+
+   function produce_date_tb_01_shift_btn_cls() {
+       $(".produce_date_tb_01_shift_txt").text('\u00A0');
+   }
     const m1_04_selectBoxElements = document.querySelectorAll(".m1_user_input_table_04");
 
     function m1_04_toggleSelectBox(selectBox) {
@@ -8893,7 +8970,7 @@
        	  	$.each(data,function(index, obj){	//반복문
        			view+='<tr>';
        			view+='<td>'+num+'</td>';
-       			view+='<td>'+obj.cc_value+'</td>';
+       			view+='<td>'+String(num).padStart(4, '0');+'</td>';
        			view+='<td>'+obj.cc_name+'</td>';
        			view+='<td>'+obj.cc_expln+'</td>';
        			view+='<td><button class="m2_r_bot_bottom_table_del_bt" name="ugrDeleteNum" value="'+obj.cc_num+'"><img src="./resources/img/휴지통.png"></button></td>';

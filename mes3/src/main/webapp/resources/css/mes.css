@@ -10352,6 +10352,84 @@ color: white !important; background-color: #999999;
     height: 80%;
     padding: 0 0 0 1px;
     border: 1px solid #d1d6de;
+    display: flex;
+    align-items: center;
+}
+
+.produce_date_tb_01_shift_select{
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+
+.produce_date_tb_01_shift_txt{
+    width:100%;
+    height:100%;
+    font-size: 0.8vw;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.produce_date_tb_01_shift_btn{
+    font-size: 0;
+    padding: 0;
+    margin: 0;
+    top: 50%;
+    transform: translate(-10px, -50%);
+    right: 0;
+    position: absolute;
+}
+
+.produce_date_tb_01_shift ul li:hover{
+    background-color: rgba(168, 156, 235, 0.35);
+}
+
+.produce_date_tb_01_shift ul li{
+    font-size: 0.8vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    background-color: white;
+    height: 4vh;
+}
+
+.produce_date_tb_01_shift.active ul{
+    display: block;
+}
+
+.produce_date_tb_01_shift ul{
+    display: none;
+}
+.produce_date_tb_01_shift ul{
+    transform: translateX(-1px);
+    background-color: white;
+    z-index: 2;
+    margin: 0;
+    width: 100%;
+    border: 1px solid #d1d6de;
+    color: black;
+    border-top: none;
+    position: absolute;
+    cursor: pointer;
+    list-style-type: none;
+    padding: 0;
+}
+
+.produce_date_tb_01_shift_btn_cls{
+    padding: 0;
+    border: 0;
+    font-size: 0;
+    line-height: 0;
+    margin: 0;
+    background-color: transparent;
 }
 
 .mainbody_13_03_left_top_01 img {
@@ -10699,7 +10777,7 @@ color: white !important; background-color: #999999;
     display: none;
 }
 .process_order_tb_01 tbody tr{
-    display: table;
+    display: none;
     width: 100%;
 }
 
