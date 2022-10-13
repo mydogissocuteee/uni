@@ -5096,7 +5096,7 @@
                                 <td></td>
                                 <td>00000000</td>
                                 <td></td>
-                                <td><input type="text" autocomplete="off"></td>
+                                <td>(자동 부여)</td>
                                 <td><input type="text" autocomplete="off"></td>
                                 <td><input type="text" autocomplete="off"></td> 
                               </tr>
@@ -11144,7 +11144,9 @@ document.addEventListener("click", function (g) {
 
     //생산관리 > 생산일보 > 투입자재 및 반제품 저장
      $('.process_order_tb_01 tbody tr td:nth-child(2)').click(function () {
-        $(".mainbody_13_03_left").css("display", "flex");
+    	 if($(this)!=" "){
+        	$(".mainbody_13_03_left").css("display", "flex");
+    	 }
     })
     function work_order_btn_08() {
         $('.m13_work_order_btn_08_modal_window').fadeIn();

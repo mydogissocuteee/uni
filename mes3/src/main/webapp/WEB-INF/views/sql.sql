@@ -402,8 +402,51 @@ drop sequence wo_num;
 create sequence wo_num;
 
 drop table work_order;
------------------------------------------
 
+-------------------
+-------------생산 일보
+create table daily (
+da_num number, --시퀀스
+da_date varchar2(1000), --생산일자
+da_shift varchar2(1000), --시프트
+da_input_time varchar2(1000), --입력시간
+da_pr_name varchar2(1000), --공정명
+da_pr_num varchar2(1000), --공정번
+da_fa_name varchar2(1000), --설비명
+da_fa_num varchar2(1000), --설비번
+da_dep varchar2(1000), --부서명
+da_writer varchar2(1000), --작성자명
+da_wo_num varchar2(1000), --작업지시번호
+da_wo_goods_num varchar2(1000), --품번
+da_wo_goods_name varchar2(1000), --품명
+da_wo_goods_stan varchar2(1000), --규격
+da_pro_lot varchar2(1000), --생산LOT번호
+da_plan_qntty varchar2(1000), --계획수량
+da_per_qntty varchar2(1000), --실적수량
+da_good_qntty varchar2(1000), --양품수량
+da_bad_qntty varchar2(1000), --불량수량
+da_bad_code varchar2(1000), --불량코드
+da_bad_per varchar2(1000), --불량율
+da_goods_one varchar2(1000), --품목구분
+da_goods_two varchar2(1000), --품목번호
+da_goods_three varchar2(1000), --품목명
+da_goods_four varchar2(1000), --투입lot
+da_goods_five varchar2(1000), --소요량
+da_goods_six varchar2(1000), --투입량
+da_worker varchar2(1000), --작업자
+da_work_sort varchar2(1000), --작업구분
+da_work_code varchar2(1000), --작업코드
+da_work_num varchar2(1000), --작업지시번호
+da_work_time varchar2(1000), --시작시간
+da_end_time varchar2(1000), --종료시간
+company varchar2(100)
+)
+select da_num('now') from DUAL;
+select * from daily;
+drop sequence da_num;
+create sequence da_num;
+
+drop table daily;
 
 
 
@@ -448,83 +491,6 @@ select * from materials_order;
 
 
 
-
---출고 관리
-create table goods_out (
-go_no varchar2(100), --출고지시번호
-go_client varchar2(100), --발주업체
-go_dateOrder varchar2(100), --발주일
-go_date varchar2(100), --납품일
-go_amount varchar2(50), --총금
-go_delivery varchar2(50), --배송처
-go_charge varchar2(50), --담당자
-go_contact varchar2(50), --연락처
-go_count varchar2(50), --발주수량
-go_pro_num varchar2(50), --제품번
-company varchar2(100)
-);
-create sequence goods_out_seq;
-select * from ct_goods_out_bound
-drop table ct_goods_out_bound
-insert into ct_goods_out_bound(out_no) VALUES (goods_out_seq.nextval||'hi')
-
-
-
-
-
---bad 품질
-create table bad_goods(
-bg_num number,
-bg_check varchar2(100),
-bg_inspection varchar2(100),
-bg_count varchar2(100),
-bg_date varchar2(100),
-bg_shift varchar2(100),
-bg_process varchar2(100),
-bg_facilities varchar2(100),
-bg_worker varchar2(100),
-bg_payer varchar2(100),
-bg_pro varchar2(100), --선택한 제품의 이름
-bg_dstrb varchar2(100), --물류 머들어가지..
-company varchar2(100)
-);
-
-create sequence bg_seq;
-drop table bg
-
-select * from bg;
-
-select * from bg where company='fourever' and bg_check='o'
-
-
---생산일보
-create table daily_product(
-da_num number,
-da_date varchar2(100),
-da_shift varchar2(100),
-da_time varchar2(100),
-da_process varchar2(100),
-da_facilities varchar2(100),
-company varchar2(100)
-)
-
-create sequence daily_seq;
-
-
-create table out_order(
-oo_num number,
-oo_goods varchar2(100),
-oo_company varchar2(100),
-oo_count varchar2(100),
-oo_orderdate varchar2(100),
-oo_outdate varchar2(100),
-oo_address varchar2(100),
-oo_manager varchar2(100),
-oo_tel varchar2(100),
-oo_amount varchar2(100),
-oo_state varchar2(100),
-company varchar2(100)
-)
 
 
 

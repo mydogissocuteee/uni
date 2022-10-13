@@ -593,11 +593,11 @@ function clientHtml(data){
 	     view7+='<li class="option"><input type="hidden" name="gs_unit" value="'+obj.gs_unit+'">'+obj.gs_name+'</li>';
 	     view8+='<tr>';
 	     view8+='<td><input type="checkbox" name="work_order_daily_product" value="'+obj.gs_seq_num+'"></td>';
-	     view8+='<td id="show_mainbody_13_03_left"></td>';
+	     view8+='<td id="show_mainbody_13_03_left"> </td>';
 	     view8+='<td>'+obj.gs_seq_num+'</td>';
 	     view8+='<td>'+obj.gs_name+'</td>';
 	     view8+='<td>'+obj.gs_standard+'</td>';
-	     view8+='<td><input type="text" autocomplete="off" class="lotNum"></td>';
+	     view8+='<td>(자동 부여)</td>';
 	     view8+='<td><input type="text" autocomplete="off" class="plannedQuantity"></td>';
 	     view8+='<td><input type="text" autocomplete="off" class="performanceQuantity"></td>';
 	     view8+='<td><input type="text" autocomplete="off" class="goodQuantity"></td>';
@@ -2856,7 +2856,7 @@ var processVO = {
 			     view2+='<td>'+obj.wo_goods_num+'</td>';
 			     view2+='<td>'+obj.wo_goods_name+'</td>';
 			     view2+='<td>'+obj.wo_spec_name+'</td>';
-			     view2+='<td><input type="text" autocomplete="off" class="lotNum"></td>';
+			     view2+='<td>(자동 부여)</td>';
 			     view2+='<td><input type="text" autocomplete="off" class="plannedQuantity"></td>';
 			     view2+='<td><input type="text" autocomplete="off" class="performanceQuantity"></td>';
 			     view2+='<td><input type="text" autocomplete="off" class="goodQuantity"></td>';
@@ -4113,11 +4113,61 @@ var processVO = {
 			}
 		})
 		$(".receiving_goods_tb tbody")
-		m13_work_order_plus_Close();
+		m13_product_plus_Close();
 	})
 	
+	// 생산일보
+	function userInsert() {
+		var dailyVO = {
+				company : "fourever",
+				da_date : $("#u_input_id").val(),
+				da_shift : $("#u_input_name").val(),
+				da_input_time : $("#u_input_pw").val(),
+				da_pr_name : $("#m1_user_input_table_04_select_txt").text(),
+				da_pr_num : $("#m1_user_input_table_05_select_txt").text(),
+				da_fa_name : $("#m1_user_input_table_06_select_txt").text(),
+				da_fa_num : $("#u_input_phonenum").val(),
+				da_dep : $("#u_input_phonenum").val(),
+				da_writer : $("#u_input_phonenum").val(),
+				da_wo_num : $("#u_input_phonenum").val(),
+				da_wo_goods_num : $("#u_input_phonenum").val(),
+				da_wo_goods_name : $("#u_input_phonenum").val(),
+				da_wo_goods_stan : $("#u_input_phonenum").val(),
+				da_pro_lot : $("#u_input_phonenum").val(),
+				da_plan_qntty : $("#u_input_phonenum").val(),
+				da_per_qntty : $("#u_input_phonenum").val(),
+				da_good_qntty : $("#u_input_phonenum").val(),
+				da_bad_qntty : $("#u_input_phonenum").val(),
+				da_bad_code : $("#u_input_phonenum").val(),
+				da_bad_per : $("#u_input_phonenum").val(),
+				da_goods_one : $("#u_input_phonenum").val(),
+				da_goods_two : $("#u_input_phonenum").val(),
+				da_goods_three : $("#u_input_phonenum").val(),
+				da_goods_four : $("#u_input_phonenum").val(),
+				da_goods_five : $("#u_input_phonenum").val(),
+				da_goods_six : $("#u_input_phonenum").val(),
+				da_worker : $("#u_input_phonenum").val(),
+				da_work_sort : $("#u_input_phonenum").val(),
+				da_work_code : $("#u_input_phonenum").val(),
+				da_work_num : $("#u_input_phonenum").val(),
+				da_work_time : $("#u_input_phonenum").val(),
+				da_end_time : $("#u_input_phonenum").val()
+		};
 	
-	
+		$.ajax({
+			url : "dailyInsert.do",
+			type : "GET",
+			async:false,
+			data : dailyVO,
+			// dataType : "json",
+			success : function(){
+				console.log("success");},
+			error : function(request, status, error){
+			    console.log("error");
+				}
+		});
+		
+	}
 	
 	
 	
