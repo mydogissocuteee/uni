@@ -1,6 +1,7 @@
 /**
  * 
  */
+
 var company = "";
 $(function() {
 	company = $(".mainbar_logo").text();
@@ -48,7 +49,7 @@ function ajaxHtml(data){
 
          view2+='<tr>';
          view2+='<td class="m13_work_plus_Search_td_00">'+(index+1)+'</td>';
-         view2+='<td class="m13_work_plus_Search_td_00">'+obj.num+'</td>';
+         view2+='<td class="m13_work_plus_Search_td_00">'+obj.contact+'</td>';
          view2+='<td class="m13_work_plus_Search_td_00">'+obj.username+'</td>';
          view2+='</tr>';
 
@@ -60,7 +61,7 @@ function ajaxHtml(data){
 		
 		view4+='<tr>';
          view4+='<td>'+(index+1)+'</td>';
-         view4+='<td>'+obj.num+'</td>';
+         view4+='<td>'+obj.contact+'</td>';
          view4+='<td>'+obj.username+'</td>';
          view4+='</tr>';
 	  })
@@ -455,37 +456,6 @@ function clientHtml(data){
 }
 
 
-	function clientInsert(){
-		console.log("durls")
-	var clientVO = {
-				company : company,
-				ct_mutual : $("#m06_l_mutual_input").val(),
-				ct_sortation : $("input[name=account]:checked").val(),
-				ct_repName : $("#m06_l_name_input").val(),
-				ct_businessNumber : $("#m06_l_bsnum_input").val(),
-				ct_chrgName : $("#m06_l_person_name_input").val(),
-				ct_postalCode : $("#m06_l_post_input").val(),
-				ct_address : $("#m06_l_address_input").val(),
-				ct_condition : $("#m06_l_bs01_input").val(),
-				ct_industry : $("#m06_l_bs02_input").val(),
-				ct_contact : $("#m06_l_phone_input").val(),
-				ct_fax : $("#m06_l_fax_input").val(),
-				ct_email : $("#m06_l_email_input").val()
-		};
-		$.ajax({
-				url : "clientInsert.do",
-				type : "GET",
-				async:false,
-				data : clientVO,
-				// dataType : "json",
-				success : function(){
-					console.log("거래처 입력 success");},
-				error : function(request, status, error){
-				    console.log("거래처 입력 error");}
-			});
-			
-		  	show_client();
-	}
 
  function clientDelete() {
 	var len = $("input[name='clientNum']:checked").length;
@@ -592,13 +562,13 @@ function clientHtml(data){
 	     view3+='</tr>';
 		 view4+='<tr>';
 	     view4+='<td class="product_admin_tb_line">'+(index+1)+'</td>';
-	     view4+='<td class="product_admin_tb_line">'+obj.gs_seq_num+'</td>';
+	     view4+='<td class="product_admin_tb_line">'+obj.gs_num+'</td>';
 	     view4+='<td class="product_admin_tb_line">'+obj.gs_name+'</td>';
 	     view4+='</tr>';
  		 view5+='<tr>';
 	     view5+='<td class="product_admin_tb_line">'+(index+1)+'</td>';
 	     view5+='<td class="product_admin_tb_line">'+obj.gs_name+'</td>';
-	     view5+='<td class="product_admin_tb_line">'+obj.gs_seq_num+'</td>';
+	     view5+='<td class="product_admin_tb_line">'+obj.gs_num+'</td>';
 	     view5+='</tr>';
 		 view6+='<tr>';
 	     view6+='<td class="m13_product_plus_Search_td_00">'+(index+1)+'</td>';
@@ -1190,7 +1160,7 @@ function clientHtml(data){
 	
 	
 	   // clientInsert()
-    $(document).on("click", ".mainbody_06_btn3", function(){
+    $(document).off("click").on("click", ".m06_processAdmin_btn_img_03", function(){
       $('.customer_input_modal_window').fadeIn();
       var TEXT01 = $('#m06_l_mutual_input').val();
       console.log(TEXT01);
@@ -1224,6 +1194,7 @@ function clientHtml(data){
             ct_fax : $("#m06_l_fax_input").val(),
             ct_email : $("#m06_l_email_input").val()
          };
+console.log("ajax 접근")
          $.ajax({
             url : "clientInsert.do",
             type : "GET",
@@ -1238,6 +1209,8 @@ function clientHtml(data){
          
            show_client();
       }
+	if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+    else event.isImmediatePropagationEnabled = false;
    });
 
 
@@ -1368,6 +1341,8 @@ function clientHtml(data){
          });
          
            show_goods();
+	if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+    else event.isImmediatePropagationEnabled = false;
       }
    })
 	
@@ -1420,6 +1395,8 @@ function clientHtml(data){
          
            show_material();
       }
+if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+    else event.isImmediatePropagationEnabled = false;
    })
 
 	// 공정 관리 수정 하기
@@ -2117,7 +2094,8 @@ var processVO = {
 		
 		$('.m5_newtest_window').fadeOut();
 		show_inspection();
-	
+	if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+    else event.isImmediatePropagationEnabled = false;
 	}
 	
 		
@@ -2224,6 +2202,8 @@ var processVO = {
                   }
             });
       }
+	if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+    else event.isImmediatePropagationEnabled = false;
    })
 		
 	function show_goodsOrder(){
@@ -2437,6 +2417,8 @@ var processVO = {
 		});
 		
 		show_product_plan();
+		if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+    	else event.isImmediatePropagationEnabled = false;
 	})	
 	$(document).on('click', '.m12_plan_productSearch_content_tbody tr', function(e) {
 		$("#pp_goods_name").text($(this).find("td:eq(1)").text());
@@ -2687,6 +2669,8 @@ var processVO = {
 		indexx+=1;
 		
 		m11_produc_plus_Close();
+		if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+    	else event.isImmediatePropagationEnabled = false;
 	})	
 	
 	$(document).on('click', '#m11_produc_plus_content_01_table_div02_list li', function(e) {
@@ -2832,7 +2816,8 @@ var processVO = {
 					}
 			});
 	
-	
+	if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+    else event.isImmediatePropagationEnabled = false;
 	})
 	
 	
@@ -2986,6 +2971,8 @@ var processVO = {
 	
 	$(document).on('click', '.routing_modal_body_top_save_btn', function(e) {
 		routingInsert();
+		if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+   		else event.isImmediatePropagationEnabled = false;
 		
 	})
 	
@@ -3158,7 +3145,8 @@ var processVO = {
 			error : function(request, status, error){
 			    console.log("로케이션 삽입 error");}
 		});
-	
+	if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+    else event.isImmediatePropagationEnabled = false;
 	})
 	
 	//로케이션 명을 선택했을때
@@ -3190,7 +3178,8 @@ var processVO = {
 			error : function(request, status, error){
 			    console.log("로케이션 삽입 error");}
 		});
-	
+	if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+    else event.isImmediatePropagationEnabled = false;
 	})
 	
 	////////BOM 관리//////////
@@ -3280,7 +3269,8 @@ var processVO = {
 	         error : function(request, status, error){
 	             console.log("공정 입력 error");}
 	      });
-		
+	if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+    else event.isImmediatePropagationEnabled = false;
 	})
 	
 	function show_bom(){
@@ -3588,7 +3578,8 @@ var processVO = {
 				error : function(request, status, error){
 				    console.log("자재발주 입력 error");}
 			});
-			
+		if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+    else event.isImmediatePropagationEnabled = false;	
 	})
 	
 	

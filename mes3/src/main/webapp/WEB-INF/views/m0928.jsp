@@ -9974,12 +9974,6 @@ $(function() {
         // user_input_modal_mid에 text가 사용자가 추가되었습니다. 면 DB에 저장
     }
 
-
-    function user_group_input_modal_bt() {
-        $('.user_group_input_modal_window').fadeOut();
-        setTimeout(function(){$('.user_group_input_modal_mid').text("사용자 그룹이 저장되었습니다.");}, 1000);
-        
-    }
     
 
     function enterkey() {
@@ -13291,17 +13285,12 @@ document.addEventListener("click", function (g) {
             $('.product_input_modal_window').fadeIn();
             $('.product_input_modal_window').css('z-index','1005');
         }
-        function user_group_input_modal_bt() {
-            $('.product_input_modal_window').fadeOut();
-        }
 
         // *1006 품질 관리 -> 품질 검사 내역 입력 -> 저장 알림창
         function mainbody_41_01_r_btn_01() {
             $('.product_input_modal_window').fadeIn();
         }
-        function user_group_input_modal_bt() {
-            $('.product_input_modal_window').fadeOut();
-        }
+
 
         // *1006 품질 관리 -> 품질 검사 내역 입력 : 품목 정보 -> 품목 추가 모달창 
         function mainbody_41_product_plus_btn() {
@@ -13335,9 +13324,6 @@ document.addEventListener("click", function (g) {
         // *1006 품질 관리 -> 공정 불량 현황 -> 저장 알림창
         function mainbody_43_01_top_btn_04() {
             $('.product_input_modal_window').fadeIn();
-        }
-        function user_group_input_modal_bt() {
-            $('.product_input_modal_window').fadeOut();
         }
 
 

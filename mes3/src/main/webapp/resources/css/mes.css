@@ -8232,17 +8232,7 @@ color: white !important; background-color: #999999;
     width: 2.9vw;
 }
 
-.product_admin_td_09_01_select {
-    align-items: center;
-    display: flex;
-    margin: 0 auto;
-    padding: 1px 2px;
-    width: 87.2%;
-    height: 64.2%;
-    border: 1px solid #d1d6de;
-    color: #999999;
-    font-size: 1vw;
-}
+
 
 .mainbody_11_02_bott_01 input[type="file"] {
     position: absolute;
