@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -17,6 +18,10 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/036f0eb301.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./resources/js/m0926.js?ver=1436233245"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script> 
+    <script type="text/javascript" src="./resources/js/m0926.js?ver=1436233245"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
 <body>
@@ -1105,15 +1110,12 @@
             <div class="m051_product_choice_content_01">
                 <div class="m51_product_choice_content_01_01">
                     <input type="text">
-                    <button class="m51_product_choice_Modal_search_btn01">
-                        <img src="./resources/img/제품관리/검색.png" class="m51_product_choice_Modal_search_btn_02">
-                    </button>
                 </div>
             </div>
             <div class="m051_product_choice_content_02">
                 <table class="m051_product_choice_tb">
                     <thead>
-                        <tr class="m021_product_choice_tr">
+                        <tr class="m051_product_choice_tr">
                             <th class="m051_product_choice_td_01"></th>
                             <th class="m051_product_choice_td_02">번호</th>
                             <th class="m051_product_choice_td_03">명</th>
@@ -1976,20 +1978,246 @@
         </div>
       </div>
     
+        <!-- *1006 품질 관리 > 품질 검사 내역 입력 : 공정 검색 모달창 -->
+    <div class="m41_productModal" id="m41_productSearchModal">
+        <div class="m41_productSearchModal_body">
+          <div class="m41_productSearchModal_head">공정 검색<button type="button" class="m41_productModalClose"
+              onclick="m41_productModalClose()">X</button></div>
+          <div class="m41_productSearch_content_01">
+            <div class="m41_productSearch_content_01_01">
+                <input class="m41_productModal_search_input" type="text">
+            </div>
+          </div>
+          <div class="m41_productSearch_content_02">
+            <table class="m41_productSearch_content_tb">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>공정명</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1500285233421</td>
+                        <td>사출조립공정</td>
+                    </tr>
+                    <tr>
+                        <td>52</td>
+                        <td>사출조립공정</td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+
+    <!--*1006 품질 관리 > 품질 검사 내역 입력 : 검사 기준 모달창-->
+    <div class="m41_Modal" id="m41_Modal">
+        <div class="m41_Modal_body">
+          <div class="m41_Modal_head">품질 검사 기준<button type="button" class="m41_ModalClose"
+              onclick="m41_ModalClose()">X</button></div>
+          <div class="m41_content_01">
+            <div class="m41_content_01_01">
+                <input class="m41_Modal_search_input" type="text" placeholder="제품명을 검색하세요.">
+            </div>
+          </div>
+          <div class="m41_content_02">
+            <div class="m41_content_02_btn_zip">
+                <div class="m41_content_02_btn">
+                    <button><img src="./resources/img/생산관리/엑셀.png"></button>
+                </div>
+            </div>
+            <table class="m41_content_tb">
+                <thead>
+                    <tr>
+                        <th>품목번호</th>
+                        <th>품목명</th>                        
+                        <th>제품군</th>
+                        <th>라우팅</th>
+                        <th>대분류</th>
+                        <th>소분류</th>
+                        <th>단위</th>
+                        <th>규격</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1500285233421</td>
+                        <td>사출조립공정</td>
+                        <td>1500285233421</td>
+                        <td>사출조립공정</td>
+                        <td>1500285233421</td>
+                        <td>사출조립공정</td>
+                        <td>kg</td>
+                        <td>사출조립공정</td>
+                    </tr>
+                    <tr>
+                        <td>52</td>
+                        <td>사출조립공정</td>
+                        <td>52</td>
+                        <td>사출조립공정</td>
+                        <td>52</td>
+                        <td>사출조립공정</td>
+                        <td>52</td>
+                        <td>사출조립공정</td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+          <div class="m41_content_03">
+            <div class="m41_content_03_zip">
+                <div class="m41_content_03_01">
+                    <button class="m41_content_03_01_btn" onclick="m41_content_03_01_btn()"><img src="./resources/img/자재관리/새항목추가.png"></button>
+                </div>
+                <div class="m41_content_03_02">
+                    <button onclick="m41_content_03_02_btn()"><img src="./resources/img/생산관리/저장.png"></button>
+                </div>
+                <div class="m41_content_03_03">
+                    <button><img src="./resources/img/생산관리/엑셀.png"></button>
+                </div>
+                <div class="m41_content_03_04">
+                    <button><img src="./resources/img/생산관리/삭제.png"></button>
+                </div>
+            </div>
+            <table class="m41_content_tb_1" id="m41_content_tb_1">
+                <thead>
+                    <tr>
+                        <th>공정</th>
+                        <th>대분류</th>                        
+                        <th>중분류</th>
+                        <th>소분류</th>
+                        <th>검사항목명</th>
+                        <th>입력값구분</th>
+                        <th>검사기준</th>
+                        <th>검사방법</th>
+                        <th>최댓값</th>
+                        <th>최솟값</th>
+                        <th>입력단위</th>
+                        <th>시료수</th>
+                        <th>정렬순서</th>
+                        <th>자주검사</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" value="조립"></td>
+                        <td><input type="text" value="차량"></td>
+                        <td><input type="text" value="품검면제"></td>
+                        <td><input type="text" value="수출"></td>
+                        <td><input type="text" value="모듈검사"></td>
+                        <td><input type="text" value="수치입력"></td>
+                        <td><input type="text" value="36.5"></td>
+                        <td><input type="text" value="관능검사"></td>
+                        <td><input type="text" value="65.5"></td>
+                        <td><input type="text" value="15.5"></td>
+                        <td><input type="text" value="kg"></td>
+                        <td><input type="text" value="3"></td>
+                        <td><input type="text" value="1"></td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+
+    <!-- *1006 품질 관리 > 품질 검사 내역 입력 : 품목 정보 검색 모달창 -->
+    <div class="m41_product_choice_Modal" id="m41_product_choice_SearchModal">
+        <div class="m41_product_choice_modal_body">
+            <div class="m41_product_choice_Modal_head">품목 선택
+                <button type="button" class="m41_product_choice_Close_btn" onclick="m41_product_choice_Close()">X</button>
+            </div>
+            <div class="m041_product_choice_content_01">
+                <div class="m041_product_choice_content_01_01">
+                    <input type="text">
+                </div>
+            </div>
+            <div class="m041_product_choice_content_02">
+                <table class="m041_product_choice_tb">
+                    <thead>
+                        <tr>
+                            <th>품목번호</th>
+                            <th>품목명</th>
+                            <th>품목구분</th>
+                            <th>제품군</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>15457835886</td>
+                            <td>ASJHD</td>
+                            <td>완제품</td>
+                            <td>MD</td>
+                        </tr>
+                        <tr>
+                            <td>18386</td>
+                            <td>dsfae</td>
+                            <td>반제품</td>
+                            <td>MD</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- *1006 품질 관리 > 품질 검사 내역 조회 : 승인 확인 모달창 -->
+    <div class="m42_input_modal_window">
+        <div class="m42_input_modal">
+            <div class="m42_input_modal_top">
+                확인
+            </div>
+            <div class="m42_input_modal_mid">
+                승인되었습니다.
+            </div>
+            <div class="m42_input_modal_bot">
+                <button class="m42_input_modal_bt" onclick="m42_input_modal_bt()">
+                    <img src="./resources/img/팝업창_확인.png">
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- *1006 X-R 관리도 : 품목 검색 모달창 -->
+    <div class="m61_product_search_Modal" id="m61_product_choice_SearchModal">
+        <div class="m61_product_search_modal_body">
+            <div class="m61_product_search_Modal_head">품목 검색
+                <button type="button" class="m61_product_search_Close_btn" onclick="m61_product_search_Close()">X</button>
+            </div>
+            <div class="m61_product_search_content_01">
+                <div class="m61_product_search_content_01_01">
+                    <input type="text">
+                </div>
+            </div>
+            <div class="m61_product_search_content_02">
+                <table class="m61_product_search_tb">
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>품목명</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>13564</td>
+                            <td>wnklef</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <!-- 메인 탑 네비게이션 바 -->
     <div class="mainbar">
-        <div class="mainbar_logo">
-            <img src="./resources/img/logo_fourever.png">
-
-        </div>
+        <div class="mainbar_logo" style="color:white;">${company }</div>
         <div class="solution_logo">
             <img src="./resources/img/mes_logo.png">
 
         </div>
         <ul class="user_box">
-            <a class="typing-txt">fourever01님, 환영합니다</a>
-            <button class="logout">
+            <a class="typing-txt">${username }님, 환영합니다</a>
+            <button class="logout" onclick="location.href='logout.do'">
                 <img src="./resources/img/logout.png">
             </button>
 
@@ -2098,9 +2326,60 @@
             </div>
 
             <!-- 메인 바디 -> 오른쪽 화면 -> 기본 화면 -->
+            <!-- *1006 메인페이지 -->
             <div class="mainbody_00">
-                <span>00</span>
+                <div class="mainbody_00_graph">
+                    <div class="main_graph_00_1">
+                        <div class="main_graph_00_1_zip">
+                            <div class="main_graph_00_1_head">
+                                <div class="main_1_head_txt1">금월 생산 및 불량수</div>
+                                <div class="main_1_head_txt2">Total : 111,222개</div>
+                            </div>
+                            <div class="main_graph_00_1_body">
+                                <div class="main_graph_00_1_body_1">
+                                    <div id="m00_month_product"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main_graph_00_2">
+                        <div class="main_graph_00_2_zip">
+                            <div class="main_graph_00_2_head">
+                                <div class="main_2_head_txt1">주문대비 납기율</div>
+                                <div class="main_2_head_txt2">Total :</div>
+                            </div>
+                            <div class="main_graph_00_2_body">
+                                <div class="main_graph_00_2_body_1">
+                                    <div id="m00_day_product"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main_graph_00_3">
+                        <div class="main_graph_00_3_zip">
+                            <div class="main_graph_00_3_head">
+                                <div class="main_3_head_txt1">금일 생산 및 불량수</div>
+                                <div class="main_3_head_txt2">Total : 100%</div>
+                            </div>
+                            <div class="main_graph_00_3_body">
+                                <div id="m00_order"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main_graph_00_4">
+                        <div class="main_graph_00_4_zip">
+                            <div class="main_graph_00_4_head">
+                                <div class="main_4_head_txt1">불량률 현황</div>
+                                <div class="main_4_head_txt2">Total : 5%</div>
+                            </div>
+                            <div class="main_graph_00_4_body">
+                                <div id="m00_Defective"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
 
 
             <!-- 기준정보 > 사용자관리 -->
@@ -3254,7 +3533,7 @@
                     <div class="mainbody_03_02">
                         <div class="mainbody_03_02_01">
                             <div class="mainbody_03_02_01_search">
-                                <input autocomplete='off' class="product_admin_searchInput" placeholder="검색어를 입력하세요">
+                                <input autocomplete='off' class="product_admin_searchInput" placeholder="검색어를 입력하세요" onkeyup="enterkey4()">
                             </div>
                             <div class="mainbody_03_02_01_del">
                                 <button class="mainbody_03_02_01_del_bt">
@@ -3574,7 +3853,7 @@
                     <div class="mainbody_04_02">
                         <div class="mainbody_04_02_01">
                             <div class="mainbody_04_02_01_search">
-                                <input autocomplete='off' class="m04_goods_admin_searchInput" placeholder="검색어를 입력하세요">
+                                <input autocomplete='off' class="m04_goods_admin_searchInput" placeholder="검색어를 입력하세요" onkeyup="enterkey5()">
                             </div>
                             <div class="mainbody_04_02_01_del">
                                 <button class="mainbody_04_02_01_del_bt">
@@ -4019,7 +4298,7 @@
                     <div class="mainbody_07_02_right">
                         <div class="mainbody_07_02_r_top">
                             <div class="m07_bom_search">
-                                <input autocomplete='off' class="m07_b_s_input" type="text" placeholder="검색어를 입력하세요">
+                                <input autocomplete='off' class="m07_b_s_input" type="text" placeholder="검색어를 입력하세요" onkeyup="enterkey6()">
                             </div>
                         </div>
                         <div class="mainbody_07_02_r_bottom">
@@ -4097,47 +4376,10 @@
                                     <tbody class="m07_le_bom_list_tbody">
                                         <!--bom table 메인-->
                                         <tr class="m07_cate_name_10 main">
-                                            <td class="m07_cate_main_name_11">&nbsp;― [완제품]에코클린매트</td>
-                                            <td class="m07_cate_main_name_12">000000000000</td>
-                                            <td class="m07_cate_main_name_13">100</td>
-                                            <td class="m07_cate_main_name_14">50*50</td>
-                                            <td class="m07_cate_main_name_15">kg</td>
-                                            <td class="m07_cate_main_name_16">
-                                                <div class="m07_bom_list_tbody_btn_02_01">
-                                                    <button class="m07_bom_list_tbody_btn_02_02" onclick="m07_bom_list_tbody_btn_02_02()">
-                                                        <img src="./resources/img/BOM/부품추가.png">
-                                                    </button>
-                                                </div>
-                                            </td>
-                                            <td class="m07_cate_main_name_17">
-                                                <div class="m07_bom_list_tbody_btn_03_01">
-                                                    <button class="m07_bom_list_tbody_btn_03_02">
-                                                        <img src="./resources/img/BOM/네이비_휴지통.png">
-                                                    </button>
-                                                </div>
-                                            </td>
                                         </tr>
                                         <!--bom table 반제품 영역-->
                                         <tr class="m07_cate_name_10 mid">
-                                            <td class="m07_cate_mid_name_10_01">&nbsp;&nbsp;&nbsp;&nbsp;└ [반제품]에코클린매트</td>
-                                            <td class="m07_cate_mid_name_10_02">313000</td>
-                                            <td class="m07_cate_mid_name_10_03">100</td>
-                                            <td class="m07_cate_mid_name_10_04">50*50</td>
-                                            <td class="m07_cate_mid_name_10_05">kg</td>
-                                            <td class="m07_cate_mid_name_10_06">
-                                                <div class="m07_bom_list_tbody_btn_02_01">
-                                                    <button class="m07_bom_list_tbody_btn_02_02">
-                                                        <img src="./resources/img/BOM/부품추가.png">
-                                                    </button>
-                                                </div>
-                                            </td>
-                                            <td class="m07_cate_sub_name_10_07">
-                                                <div class="m07_bom_list_tbody_btn_03_01">
-                                                    <button class="m07_bom_list_tbody_btn_03_02">
-                                                        <img src="./resources/img/BOM/네이비_휴지통.png">
-                                                    </button>
-                                                </div>
-                                            </td>
+
                                         </tr>
                                         <!--bom table 부품 영역-->
                                         <tr class="m07_cate_name_10 sub">
@@ -4898,7 +5140,7 @@
                         </tr>
                         <tr> 
                           <td>생산일자</td>
-                          <td><input type="date"></td>
+                          <td><input type="date" id="da_date"></td>
                         </tr>
                         <tr>
                           <td>시프트</td>
@@ -4937,7 +5179,7 @@
                         <tr>
                           <td>입력시간</td>
                           <td>
-                            <input type="time">
+                            <input type="time" id="da_input_time">
                           </td>
                         </tr>
                       </table>
@@ -4968,12 +5210,6 @@
                           </td>
                           <td id="dailyFacilitiesName"></td>
                           <td id="dailyFacilitiesNum"></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
                         </tr>
                       </table>
                       <table class="worker_tb">
@@ -5851,24 +6087,784 @@
             </div>
             
             
-            <!-- 품질관리 > 불량수량입력 -->
+            <!-- *1006 품질 관리 > 품질 검사 내역 입력 -->
             <div class="mainbody_41">
-                <span>41</span>
+                <div class="mainbody_41_00">
+                    <div class="mainbody_41_wrapp">
+                        <div class="mainbody_41_01">
+                            <div class="mainbody_41_01_l">
+                                <div class="mainbody_41_01_l_01">
+                                    <div class="mainbody_41_01_l_01_1">
+                                        <input type="radio" name="mainbody_41_test"> 샘플링검사
+                                    </div>
+                                    <div class="mainbody_41_01_l_01_2">
+                                        <input type="radio" name="mainbody_41_test"> 전수검사
+                                    </div>
+                                    <div class="mainbody_41_01_l_01_3">
+                                        <input type="number" placeholder="수량입력">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mainbody_41_01_r">
+                                <div class="mainbody_41_01_r_04">
+                                    <button class="mainbody_41_01_r_btn_04" onclick="mainbody_41_01_r_btn_04()">
+                                        <img src="./resources/img/품질관리/검사기준.png">
+                                    </button>
+                                </div>
+                                <div class="mainbody_41_01_r_01">
+                                    <button class="mainbody_41_01_r_btn_01" onclick="mainbody_41_01_r_btn_01()">
+                                        <img src="./resources/img/공정관리/저장.png">
+                                    </button>
+                                </div>
+                                <div class="mainbody_41_01_r_02">
+                                    <button class="mainbody_41_01_r_btn_02">
+                                        <img src="./resources/img/생산관리/엑셀.png">
+                                    </button>
+                                </div>
+                                <div class="mainbody_41_01_r_03">
+                                    <button class="mainbody_41_01_r_btn_03">
+                                        <img src="./resources/img/생산관리/삭제.png">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mainbody_41_02">
+                            <div class="mainbody_41_02_01">
+                                <div class="mainbody_41_02_01_head">
+                                    <div class="mainbody_41_02_01_text">&nbsp;생산일자 및 시프트</div>
+                                </div>
+                                <div class="mainbody_41_02_01_content">
+                                    <table class="mainbody_41_02_01_content_tb">
+                                        <tbody>
+                                            <tr>
+                                                <td>검사일자</td>
+                                                <td><input type="date"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>시프트</td>
+                                                <td>
+                                                    <input type="text">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="mainbody_41_02_02">
+                                <div class="mainbody_41_02_02_head">
+                                    <div class="mainbody_41_02_02_text">&nbsp;공정
+                                        <div class="mainbody_41_02_02_search_btn">
+                                            <button onclick="mainbody_41_process_btnOpen()"><img src="./resources/img/품질관리/돋보기.png"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mainbody_41_02_02_content">
+                                    <table class="mainbody_41_02_02_content_tb">
+                                        <tbody>
+                                            <tr>
+                                                <td>공정 :</td>
+                                                <td>
+                                                    <div class="mainbody_41_02_02_process_div">
+                                                        <div class="mainbody_41_02_02_content_tb_btn1"></div>
+                                                        <div class="mainbody_41_02_02_content_tb_btn2"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="mainbody_41_02_03">
+                                <div class="mainbody_41_02_03_head">
+                                    <div class="mainbody_41_02_03_text">&nbsp;작업자</div>
+                                </div>
+                                <div class="mainbody_41_02_03_content">
+                                    <table class="mainbody_41_02_03_content_tb">
+                                        <tbody>
+                                            <tr>
+                                                <td>부서명 :</td>
+                                                <td>ㅎ롱</td>
+                                            </tr>
+                                            <tr>
+                                                <td>작성자명 :</td>
+                                                <td>ㅇㄹ호</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="mainbody_41_02_04">
+                                <div class="mainbody_41_02_04_head">
+                                    <div class="mainbody_41_02_04_text">&nbsp;결재</div>
+                                </div>
+                                <div class="mainbody_41_02_04_content">
+                                    <div class="mainbody_41_02_04_content_text">fdg<!--결제자 불러오기--></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mainbody_41_03">
+                            <div class="mainbody_41_03_l">
+                                <div class="mainbody_41_03_l_head">
+                                    <div class="mainbody_41_03_l_text">&nbsp;품목정보
+                                        <div class="mainbody_41_03_l_search_btn">
+                                            <button onclick="mainbody_41_product_plus_btn()"><img src="./resources/img/품질관리/돋보기.png"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mainbody_41_03_01_content">
+                                    <table class="mainbody_41_03_01_content_tb">
+                                        <tbody>
+                                            <tr class="m41_product_information_1">
+                                                <td>품목 번호 :</td>
+                                                <td class="m41_product_information_1_1"></td>
+                                                <td>품목명 :</td>
+                                                <td class="m41_product_information_1_2"></td>
+                                            </tr>
+                                            <tr class="m41_product_information_2">
+                                                <td>품목구분 :</td>
+                                                <td class="m41_product_information_2_1"></td>
+                                                <td>제품군 :</td>
+                                                <td class="m41_product_information_2_2"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="mainbody_41_03_r">
+                                <div class="mainbody_41_03_r_head">
+                                    <div class="mainbody_41_03_r_text">&nbsp;물류정보</div>
+                                </div>
+                                <div class="mainbody_41_03_02_content">
+                                    <table class="mainbody_41_03_02_content_tb">
+                                        <tbody>
+                                            <tr>
+                                                <td>생산 LOT번호 :</td>
+                                                <td>156843158432132</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mainbody_41_04">
+                            <div class="mainbody_41_04_r">
+                                <button class="mainbody_41_04_r_btn_01">
+                                    <img src="./resources/img/생산관리/삭제.png">
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mainbody_41_05">
+                                <table class="mainbody_41_05_tb">
+                                    <thead>
+                                        <tr class="mainbody_41_05_tb_tr1">
+                                            <th rowspan="2"></th>
+                                            <th colspan="3">검사 항목 분류</th>
+                                            <th rowspan="2">검사 항목명</th>
+                                            <th rowspan="2">검사기준</th>
+                                            <th rowspan="2">검사방법</th>
+                                            <th rowspan="2">시료</th>
+                                            <th rowspan="2">결과</th>
+                                            <th rowspan="2">판정</th>
+                                        </tr>
+                                        <tr class="mainbody_41_05_tb_tr2">
+                                            <th>대분류</th>
+                                            <th>중분류</th>
+                                            <th>소분류</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
             </div>
 
-            <!-- 품질관리 > 품질검사내역조회 -->
+            <!-- *1006 품질 관리 > 품질 검사 내역 조회 -->
             <div class="mainbody_42">
-                <span>42</span>
+                <div class="mainbody_42_00">
+                    <div class="mainbody_42_01">
+                        <div class="mainbody_42_01_top">
+                            <div class="mainbody_24_01_top_l">
+                              <div class="mainbody_42_01_top_l_01">체크시트 작성일</div>
+                              <div class="mainbody_42_01_top_l_02"><input type="date">&nbsp~&nbsp</div>
+                              <div class="mainbody_42_01_top_l_03"><input type="date"></div>
+                              <div class="mainbody_42_01_top_l_05">
+                                <button class="mainbody_42_01_top_btn_01">
+                                  <img src="./resources/img/생산관리/검색.png">
+                                </button>
+                              </div>
+                           </div>
+              
+                           <div class="mainbody_42_01_top_r">
+                            <div class="mainbody_42_01_top_l_04"><input type="text" placeholder="검색어를 입력하세요"></div>
+                            <div class="mainbody_42_01_top_r_03">
+                                <button class="mainbody_42_01_top_btn_04" onclick="mainbody_42_01_top_btn_04()">
+                                  <img src="./resources/img/품질관리/승인.png">
+                                </button>
+                              </div>
+                            <div class="mainbody_42_01_top_r_01">
+                              <button class="mainbody_42_01_top_btn_02">
+                                <img src="./resources/img/생산관리/엑셀.png">
+                              </button>
+                            </div>
+                            <div class="mainbody_42_01_top_r_02">
+                              <button class="mainbody_42_01_top_btn_03">
+                                <img src="./resources/img/생산관리/삭제.png">
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                    <div class="mainbody_42_bott">
+                        <table class="quality_inspection_tb">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>검사일</th>
+                                    <th>시프트</th>
+                                    <th>공정명</th>
+                                    <th>품목번호</th>
+                                    <th>품목명</th>
+                                    <th>제품 LOT번호</th>
+                                    <th>부서</th>
+                                    <th>판정</th>
+                                    <th>작성자</th>
+                                    <th>승인자</th>
+                                    <th>조회</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>22.08.02</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td> <!--조회버튼 클릭 시 품질 검사 내역 입력페이지로 이동-->
+                                        <div class="quality_inspection_tb_btn">
+                                            <button><img src="./resources/img/자재관리/돋보기.png"></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-
-            <!-- 품질관리 > 공정불량현황 -->
+            </div>
+            <!-- *1006 품질 관리 > 공정 불량 현황 -->
             <div class="mainbody_43">
-                <span>43</span>
+                <div class="mainbody_43_00">
+                    <div class="mainbody_43_01">
+                        <div class="mainbody_42_01_top">
+                            <div class="mainbody_43_01_top_l">
+                              <div class="mainbody_43_01_top_l_01">체크시트 작성일</div>
+                              <div class="mainbody_43_01_top_l_02"><input type="date">&nbsp~&nbsp</div>
+                              <div class="mainbody_43_01_top_l_03"><input type="date"></div>
+                              <div class="mainbody_43_01_top_l_05">
+                                <button class="mainbody_42_01_top_btn_01">
+                                  <img src="./resources/img/생산관리/검색.png">
+                                </button>
+                              </div>
+                           </div>
+              
+                           <div class="mainbody_43_01_top_r">
+                            <div class="mainbody_43_01_top_l_04"><input type="text" placeholder="검색어를 입력하세요"></div>
+                            <div class="mainbody_43_01_top_r_03">
+                                <button class="mainbody_43_01_top_btn_04" onclick="mainbody_43_01_top_btn_04()">
+                                  <img src="./resources/img/생산관리/저장.png">
+                                </button>
+                              </div>
+                            <div class="mainbody_43_01_top_r_01">
+                              <button class="mainbody_43_01_top_btn_02">
+                                <img src="./resources/img/생산관리/엑셀.png">
+                              </button>
+                            </div>
+                            <div class="mainbody_43_01_top_r_02">
+                              <button class="mainbody_43_01_top_btn_03">
+                                <img src="./resources/img/생산관리/삭제.png">
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mainbody_43_bott">
+                            <table class="process_defect_status_tb">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>검사일</th>
+                                        <th>시프트</th>
+                                        <th>공정명</th>
+                                        <th>품목번호</th>
+                                        <th>품목명</th>
+                                        <th>제품 LOT번호</th>
+                                        <th>부서</th>
+                                        <th>작성자</th>
+                                        <th>조회</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td> <!--조회버튼 클릭 시 품질 검사 내역 입력페이지로 이동-->     
+                                            <div class="process_defect_status_tb_btn">
+                                                <button><img src="./resources/img/자재관리/돋보기.png"></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- 품질관리 > 불량률조회 -->
+            <!-- *1006 품질 관리 > 불량률 조회 -->
             <div class="mainbody_44">
-                <span>44</span>
+                <div class="mainbody_44_00">
+                    <div class="mainbody_44_01">
+                        <div class="mainbody_44_01_top">
+                            <div class="mainbody_44_01_top_l">
+                              <div class="mainbody_44_01_top_l_01">품질 검사일</div>
+                              <div class="mainbody_44_01_top_l_02"><input type="date">&nbsp~&nbsp</div>
+                              <div class="mainbody_44_01_top_l_03"><input type="date"></div>
+                              <div class="mainbody_44_01_top_l_05">
+                                <button class="mainbody_44_01_top_btn_01">
+                                  <img src="./resources/img/생산관리/검색.png">
+                                </button>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="mainbody_44_mid">
+                            <div class="mainbody_44_mid_l">
+                                <div class="mainbody_44_mid_r_head">
+                                    <div class="mainbody_44_mid_l_head_text">라인별 불량현황</div>
+                                </div>
+                            <div class="mainbody_44_mid_l_wrapp">
+                                <table id="tblBackground" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <div id="divHeadScroll">
+                                                <table id="tblHead" border="0" >
+                                                    <colgroup>
+                                                        <col style="width:15%;" />
+                                                        <col style="width:10%;" />
+                                                        <col style="width:15%;" />
+                                                        <col style="width:10%;" />
+                                                        <col style="width:10%;" />
+                                                        <col style="width:10%;" />
+                                                        <col style="width:10%;" />
+                                                        <col style="width:10%;" />
+                                                        <col style="width:10%;" />
+                                                        <col style="width:10%;" />
+                                                        <col style="width:10%;" />
+                                                    </colgroup>
+                                                    <tr>
+                                                        <td class="m44_title_sticky">공정라인</td>
+                                                        <td class="m44_title">불량수량</td>
+                                                        <td class="m44_title">불량점유</td>
+                                                        <td class="m44_title">양품수량</td>
+                                                        <td class="m44_title">불량률</td>
+                                                        <td class="m44_title">불량 1</td>
+                                                        <td class="m44_title">불량 2</td>
+                                                        <td class="m44_title">불량 3</td>
+                                                        <td class="m44_title">불량 4</td>
+                                                        <td class="m44_title">불량 5</td>
+                                                        <td class="m44_title">불량 6</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div id="divBodyScroll">
+                                                <table id="tblBody" border="0">
+                                                    <colgroup>
+                                                        <col style="width:15%;" class="right_border" />
+                                                        <col style="width:10%;" class="right_border" />
+                                                        <col style="width:15%;" class="right_border" />
+                                                        <col style="width:10%;" class="right_border" />
+                                                        <col style="width:10%;" class="right_border" />
+                                                        <col style="width:10%;" class="right_border" />
+                                                        <col style="width:10%;" class="right_border" />
+                                                        <col style="width:10%;" class="right_border" />
+                                                        <col style="width:10%;" class="right_border" />
+                                                        <col style="width:10%;" class="right_border" />
+                                                        <col style="width:10%;" class="right_border" />
+                                                    </colgroup>
+                                                    <tr>
+                                                        <td class="m44_content_sticky right_border" >A 000001</td>
+                                                        <td class="m44_content right_border" >320</td>
+                                                        <td class="m44_content right_border" >0.00%</td>
+                                                        <td class="m44_content right_border" >150개</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="m44_content_sticky right_border" >A 000001</td>
+                                                        <td class="m44_content right_border" >320</td>
+                                                        <td class="m44_content right_border" >0.00%</td>
+                                                        <td class="m44_content right_border" >150개</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="m44_content_sticky right_border" >A 000001</td>
+                                                        <td class="m44_content right_border" >320</td>
+                                                        <td class="m44_content right_border" >0.00%</td>
+                                                        <td class="m44_content right_border" >150개</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="m44_content_sticky right_border" >A 000001</td>
+                                                        <td class="m44_content right_border" >320</td>
+                                                        <td class="m44_content right_border" >0.00%</td>
+                                                        <td class="m44_content right_border" >150개</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="m44_content_sticky right_border" >A 000001</td>
+                                                        <td class="m44_content right_border" >320</td>
+                                                        <td class="m44_content right_border" >0.00%</td>
+                                                        <td class="m44_content right_border" >150개</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="m44_content_sticky right_border" >A 000001</td>
+                                                        <td class="m44_content right_border" >320</td>
+                                                        <td class="m44_content right_border" >0.00%</td>
+                                                        <td class="m44_content right_border" >150개</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="m44_content_sticky right_border" >A 000001</td>
+                                                        <td class="m44_content right_border" >320</td>
+                                                        <td class="m44_content right_border" >0.00%</td>
+                                                        <td class="m44_content right_border" >150개</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="m44_content_sticky right_border" >A 000001</td>
+                                                        <td class="m44_content right_border" >320</td>
+                                                        <td class="m44_content right_border" >0.00%</td>
+                                                        <td class="m44_content right_border" >150개</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="m44_content_sticky right_border" >A 000001</td>
+                                                        <td class="m44_content right_border" >320</td>
+                                                        <td class="m44_content right_border" >0.00%</td>
+                                                        <td class="m44_content right_border" >150개</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                        <td class="m44_content right_border" >0</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="mainbody_44_mid_r">
+                                <div class="mainbody_44_mid_r_head">
+                                    <div class="mainbody_44_mid_l_head_text">일(Day)별 불량현황</div>
+                                </div>
+                                <div class="mainbody_44_mid_r_wrapp">
+                                    <table class="mainbody_44_mid_r_tbl">
+                                      <tbody><tr>
+                                          <td>
+                                              <div class="mainbody_44_mid_tb_head">
+                                                  <table class="daily_faulty_tb_01">
+                                                      <thead>
+                                                          <tr>
+                                                              <th>공정라인</th>
+                                                              <th>합계</th>
+                                                              <th>1</th>
+                                                              <th>2</th>
+                                                              <th>3</th>
+                                                              <th>4</th>
+                                                              <th>5</th>
+                                                              <th>6</th>
+                                                              <th>7</th>
+                                                          </tr>
+                                                          </thead>
+                                                  </table>
+                                              </div>
+                                              <div class="mainbody_44_mid_tb_body_01">
+                                                  <table class="daily_faulty_tb_02">
+                                                      <tbody>
+                                                          <tr>
+                                                              <td>A 000001</td>
+                                                              <td>50%</td>
+                                                              <td>50</td>
+                                                              <td>50</td>
+                                                              <td>50</td>
+                                                              <td>50</td>
+                                                              <td>50</td>
+                                                              <td>50</td>
+                                                              <td>50</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>A 000001</td>
+                                                            <td>100</td>
+                                                            <td>100</td>
+                                                            <td>100</td>
+                                                            <td>100</td>
+                                                            <td>100</td>
+                                                            <td>100</td>
+                                                            <td>100</td>
+                                                            <td>100</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>A 000001</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>A 000001</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>A 000001</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>A 000001</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>A 000001</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>A 000001</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>A 000001</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>A 000001</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>A 000001</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>A 000001</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>A 000001</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>A 000001</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>A 000001</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                  </tbody>
+                                                  </table>
+                                              </div>
+                                          </td>
+                                      </tr>
+                                    </tbody></table>
+                                  </div>
+                        </div>
+                    </div>
+                        <div class="mainbody_44_bott">
+                                <div class="mainbody_44_bott_l">
+                                    <div class="mainbody_44_bott_l_head">
+                                        <div class="mainbody_44_bott_l_head_text">라인별 불량현황 그래프</div>
+                                    </div>
+                                    <div class="mainbody_44_bott_l_content">
+                                        <div class="mainbody_44_bott_l_content_graph_01">
+                                            <div id="canvas"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mainbody_44_bott_r">
+                                    <div class="mainbody_44_bott_r_head">
+                                        <div class="mainbody_44_bott_r_head_text">월(Month)별 불량현황 그래프</div>
+                                    </div>
+                                    <div class="mainbody_44_bott_r_content">
+                                            <div class="mainbody_44_bott_r_content_graph_02">
+                                                <div id="monthGraph"></div>
+                                            </div>
+                                    </div>
+                                </div>
+                        </div>
+                </div>
+            </div>
             </div>
 
             <!-- 주문관리 > 주문관리 -->
@@ -6030,7 +7026,7 @@
                      </div>
         
                      <div class="mainbody_52_01_top_r">
-                      <div class="mainbody_52_01_top_l_04"><input type="text" placeholder="검색어를 입력하세요" onkeyup="enterkey4()"></div>
+                      <div class="mainbody_52_01_top_l_04"><input class="mainbody_52_01_top_l_04_search_enter" type="text" placeholder="주문번호 또는 거래처를 입력하세요" onkeyup="enterkey7()"></div>
                       <div class="mainbody_52_01_top_r_01">
                         <button class="mainbody_52_01_top_btn_02">
                           <img src="./resources/img/주문관리/인쇄.png">
@@ -6080,9 +7076,205 @@
               </div>
 
 
-            <!-- X-R 관리도 -->
+            <!-- *1006 X-R 관리도 -->
             <div class="mainbody_61">
-                <span>61</span>
+                <div class="mainbody_61_wrapp">
+                    <div class="mainbody_61_00">
+                        <div class="mainbody_61_01">
+                            <div class="mainbody_61_01_00">
+                                <div class="mainbody_61_01_01">검사일</div>
+                                <div class="mainbody_61_01_02"><input type="date"><a class="mainbody_61_01_a">&nbsp;~&nbsp;</a></div>
+                                <div class="mainbody_61_01_03"><input type="date"></div>
+                                <div class="mainbody_61_01_04">
+                                    <div><input type="radio">&nbsp;자주검사</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mainbody_61_02">
+                            <div class="mainbody_61_02_00">
+                                <div class="mainbody_61_02_00_l">
+                                    <div class="mainbody_61_02_03">
+                                        <button class="mainbody_61_02_btn" onclick="m61_product_search_Open()">
+                                            <img src="./resources/img/생산관리/품목추가.png">
+                                        </button>
+                                    </div>
+                                    <div class="mainbody_61_02_02">
+                                        <div class="mainbody_61_02_02_select_01"><input type="text" id="m61_seleted_product_value" placeholder="품목을 선택하세요"></div>
+                                    </div>
+                            </div>
+                            <div class="mainbody_61_02_00_r">
+                            <div class="mainbody_61_02_r_01">검사기준(수치):&nbsp;</div>
+                            <div class="mainbody_61_02_r_02">
+                                <div class="mainbody_61_02_04_search"><input type="text" placeholder="품목을 먼저 선택하세요"></div>
+                            </div>
+                            <div class="mainbody_61_02_r_03">
+                                <button class="mainbody_61_02_05_btn" >
+                                    <img src="./resources/img/생산관리/검색.png">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                        <div class="mainbody_61_03">
+                            <div class="mainbody_61_03_l">
+                                <div class="mainbody_61_03_l_head">
+                                    <div class="mainbody_61_03_l_text">X bar 관리도</div>
+                                </div>
+                                <div class="mainbody_61_03_l_content">
+                                    <div id="xbaradmin_graph" style="width: 90%;"></div>
+                                </div>
+                            </div>
+                            <div class="mainbody_61_03_r">
+                                <div class="mainbody_61_03_r_head">
+                                    <div class="mainbody_61_03_r_text">히스토그램</div>
+                                </div>
+                                <div class="mainbody_61_03_r_content">
+                                    <div id="histogram_graph" style="width: 90%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mainbody_61_04">
+                            <div class="mainbody_61_04_l">
+                                <div class="mainbody_61_04_l_head">
+                                    <div class="mainbody_61_04_l_text">R 관리도</div>
+                                </div>
+                                <div class="mainbody_61_04_l_content">
+                                    <div class="mainbody_61_04_l_content_top">
+                                        <div id="radmin_graph" style="width: 90%;"></div>
+                                    </div>
+                                    <div class="mainbody_61_04_l_content_bott">
+                                        <table class="rAdmin_tb">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>검사일자</th>
+                                                    <th>군 평균(X)</th>
+                                                    <th>범위(R)</th>
+                                                    <th>샘플</th>
+                                                    <th>값</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>2022-05-25</td>
+                                                    <td>36.545</td>
+                                                    <td>0.10</td>
+                                                    <td>1</td>
+                                                    <td>36,500</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>2022-06-10</td>
+                                                    <td>24.65</td>
+                                                    <td>0.05</td>
+                                                    <td>1</td>
+                                                    <td>25,500</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mainbody_61_04_r">
+                                <div class="mainbody_61_04_r_01">
+                                <div class="mainbody_61_04_r_head_01">
+                                    <div class="mainbody_61_04_r_text">X bar/R</div>
+                                </div>
+                                <div class="mainbody_61_04_r_content_01">
+                                    <table class="Xbar_r_tb"> 
+                                        <tbody>
+                                            <tr>
+                                                <th></th>
+                                                <th>--X bar--</th>
+                                                <th>--R--</th>
+                                            </tr>
+                                            <tr>
+                                                <th>평균:</th>
+                                                <td>95%</td>
+                                                <td>90%</td>
+                                            </tr>
+                                            <tr>
+                                                <th>UCL:</th>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th>CL:</th>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th>LCL:</th>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th>관리한계이탈수:</th>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th>최대 런 길이:</th>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                            <div class="mainbody_61_04_r_02">
+                                <div class="mainbody_61_04_r_head_02">
+                                    <div class="mainbody_61_04_r_text">통계/공정지수(cpk)</div>
+                                </div>
+                                <div class="mainbody_61_04_r_content_02">
+                                    <table class="statistics_tb">
+                                        <tbody>
+                                            <tr>
+                                                <th>규격 상한:</th>
+                                                <td>55,500</td>
+                                            </tr>
+                                            <tr>
+                                                <th>규격 하한:</th>
+                                                <td>35,500</td>
+                                            </tr>
+                                            <tr>
+                                                <th>총 시료수(n):</th>
+                                                <td>56</td>
+                                            </tr>
+                                            <tr>
+                                                <th>표준편차:</th>
+                                                <td>19,815</td>
+                                            </tr>
+                                            <tr>
+                                                <th>최대 값:</th>
+                                                <td>46,000</td>
+                                            </tr>
+                                            <tr>
+                                                <th>최소 값:</th>
+                                                <td>-16,000</td>
+                                            </tr>
+                                            <tr>
+                                                <th>공정능력(Cp):</th>
+                                                <td>0.017</td>
+                                            </tr>
+                                            <tr>
+                                                <th>치우침(k):</th>
+                                                <td>9.189</td>
+                                            </tr>
+                                            <tr>
+                                                <th>공정능력지수:</th>
+                                                <td>0.000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
            <!-- LOT > LOT 추적 -->
@@ -6668,6 +7860,10 @@
 
 <!-- 사이드바 화면 변경 스크립트 -->
 <script>
+$(function() {
+	company = $(".mainbar_logo").text();
+	console.log(company)
+})
     // 기준정보 -> 사용자 관리
     $('#user_li').click(function () {
     	show_user();
@@ -6760,9 +7956,7 @@
   		$(this).parent().css("background-color","#999999");
   		$(this).css("color","white");
 	group_name = $(this).text();
-	var company = 'fourever';
 	var userGroupRightVO = {
-			// company : "fourever",
 			group_name : group_name
 	};
 		$.ajax({
@@ -6790,7 +7984,7 @@
 			async:false,
 			data : {"ugr_id":value,
 			group_name:group_name,
-			company : 'fourever'},
+			company : company},
 			// dataType : "json",
 			success : function(){
 				console.log(" 삭제 success");},
@@ -6809,7 +8003,7 @@
 			async:false,
 			data : {"ugr_id":value,
 			group_name:group_name,
-			company : 'fourever'},
+			company : company},
 			// dataType : "json",
 			success : function(){
 				console.log(" 삭제 success");},
@@ -6846,7 +8040,7 @@
 					group_name : groupname,
 					ugr_name : ugr_name,
 					ugr_use : ugr_use,
-					company : 'fourever'
+					company : company
 			};
 			$.ajax({
 				url : "userGroupRightUpdate.do",
@@ -6856,7 +8050,7 @@
 					group_name : groupname,
 					ugr_name : ugr_name,
 					ugr_use : ugr_use,
-					company : 'fourever'
+					company : company
 			},
 				success : function(){
 					console.log("사용자 그룹 저장 success");},
@@ -8742,7 +9936,7 @@
     		$(".user_input_modal_mid").text("사용자의 정보가 수정되었습니다.");
 	    	var MemberVO = {
 	    			num : usernum,
-	    			company : "fourever",
+	    			company : company,
 	    			userid : $("#u_input_id").val(),
 	    			username : $("#u_input_name").val(),
 	    			userpw : $("#u_input_pw").val(),
@@ -8869,7 +10063,12 @@
 	        	$('.list_d_7').eq(fromIndex7).parent().css('display','flex');
 	            fromIndex7 = textArray7.indexOf(input, fromIndex7+1);
 	        }
-
+	    	if(input==""){
+		        var arr = $('.list_bundle_data').length;
+		        for (i=0 ; i<arr ; i++){
+		        	$('.list_bundle_data').eq(i+1).css('display','flex');
+		        }
+	    	}
     	}
 	}
 </script>
@@ -8889,7 +10088,7 @@
         codeSelect();
         function codeInsert(){
         	var codeVO = {
-    				company : "fourever",
+    				company : company,
     				cc_class : userid,
     				cc_value : 001,
     				cc_use : 1,
@@ -8945,7 +10144,7 @@
    	  		url:"codeSelect.do",
    	  		type:"get",
    	  		async: false,
-   			data : {"company":'fourever',
+   			data : {"company":company,
    			"className":userid},
    	  		success:codeHtml,
    	  		error:function(data){ 
@@ -9054,6 +10253,13 @@ function enterkey2() {
         fromIndex3 = textArray3.indexOf(input, fromIndex3+1);
         }
 
+    	if(input==""){
+            var arr2 = $('.processAdmin_tb_02 tbody tr').length;
+            
+            for (i=0 ; i<arr2 ; i++){
+            	$('.processAdmin_tb_02 tbody tr').eq(i).css('display','table');
+            }
+    	}
         
 	}
 	
@@ -9607,7 +10813,7 @@ function m5_newtest_window_main_bnt_cls_five() {
 <script>
 	function enterkey3() {
 		if (window.event.keyCode == 13) {
-			console.log("공정 관리 엔터");
+			console.log("거래처 관리 엔터");
 	
 			var input= $('.m06_c_s_input').val();
 			
@@ -9661,7 +10867,13 @@ function m5_newtest_window_main_bnt_cls_five() {
 	        fromIndex4 = textArray3.indexOf(input, fromIndex4+1);
 	        }
 	
-	        
+	    	if(input==""){
+		        var arr2 = $('.m06_cus_list_table tbody tr').length;
+		        
+		        for (i=0 ; i<arr2 ; i++){
+		        	$('.m06_cus_list_table tbody tr').eq(i).css('display','table');
+		        }
+	    	}
 		}
 		
 		
@@ -10257,11 +11469,141 @@ function m08_corr_location_select_btn_cls() {
 
     }
 
+    function enterkey4() {
+    	if (window.event.keyCode == 13) {
+    		console.log("제품 관리 엔터");
 
+    		var input= $('.product_admin_searchInput').val();
+    		
+            var arr = $('.product_admin_tb_02 tbody tr').length;
+            
+            for (i=0 ; i<arr ; i++){
+            	$('.product_admin_tb_02 tbody tr').eq(i).css('display','none');
+            }
+            
+            var textArray1 = []
+            for (i=0 ; i<arr ; i++){
+                textArray1.push($('.product_admin_tb_02 tbody tr td:nth-child(2)').eq(i).text());
+            }
+
+            let fromIndex1 = textArray1.indexOf(input);
+            while(fromIndex1 != -1)  {
+                $('.product_admin_tb_02 tbody tr td:nth-child(2)').eq(fromIndex1).parent().css('display','table-row');
+            fromIndex1 = textArray1.indexOf(input, fromIndex1+1);
+            }
+            
+            var textArray2 = []
+            for (i=0 ; i<arr ; i++){
+                textArray2.push($('.product_admin_tb_02 tbody tr td:nth-child(3)').eq(i).text());
+            }
+
+            let fromIndex2 = textArray2.indexOf(input);
+            while(fromIndex2 != -1)  {
+                $('.product_admin_tb_02 tbody tr td:nth-child(3)').eq(fromIndex2).parent().css('display','table-row');
+            fromIndex2 = textArray2.indexOf(input, fromIndex2+1);
+            }
+            
+            var textArray3 = []
+            for (i=0 ; i<arr ; i++){
+                textArray3.push($('.product_admin_tb_02 tbody tr td:nth-child(4)').eq(i).text());
+            }
+
+            let fromIndex3 = textArray3.indexOf(input);
+            while(fromIndex3 != -1)  {
+                $('.product_admin_tb_02 tbody tr td:nth-child(4)').eq(fromIndex3).parent().css('display','table-row');
+            fromIndex3 = textArray3.indexOf(input, fromIndex3+1);
+            }
+            
+            var textArray4 = []
+            for (i=0 ; i<arr ; i++){
+                textArray4.push($('.product_admin_tb_02 tbody tr td:nth-child(5)').eq(i).text());
+            }
+
+            let fromIndex4 = textArray4.indexOf(input);
+            while(fromIndex4 != -1)  {
+                $('.product_admin_tb_02 tbody tr td:nth-child(5)').eq(fromIndex4).parent().css('display','table-row');
+            fromIndex4 = textArray4.indexOf(input, fromIndex4+1);
+            }
+            
+	    	if(input==""){
+	            var arr2 = $('.product_admin_tb_02 tbody tr').length;
+	            
+	            for (i=0 ; i<arr2 ; i++){
+	            	$('.product_admin_tb_02 tbody tr').eq(i).css('display','table-row');
+	            }
+	            
+	    	}
+    	}
+    }
 </script>
 
 <!--기준정보 -> 자재 관리-->
 <script>
+
+function enterkey5() {
+	if (window.event.keyCode == 13) {
+		console.log("자재 관리 엔터");
+
+		var input= $('.m04_goods_admin_searchInput').val();
+		
+        var arr = $('.m04_goods_admin_tb_02 tbody tr').length;
+        
+        for (i=0 ; i<arr ; i++){
+        	$('.m04_goods_admin_tb_02 tbody tr').eq(i).css('display','none');
+        }
+        
+        var textArray1 = []
+        for (i=0 ; i<arr ; i++){
+            textArray1.push($('.m04_goods_admin_tb_02 tbody tr td:nth-child(2)').eq(i).text());
+        }
+
+        let fromIndex1 = textArray1.indexOf(input);
+        while(fromIndex1 != -1)  {
+            $('.m04_goods_admin_tb_02 tbody tr td:nth-child(2)').eq(fromIndex1).parent().css('display','table-row');
+        fromIndex1 = textArray1.indexOf(input, fromIndex1+1);
+        }
+        
+        var textArray2 = []
+        for (i=0 ; i<arr ; i++){
+            textArray2.push($('.m04_goods_admin_tb_02 tbody tr td:nth-child(3)').eq(i).text());
+        }
+
+        let fromIndex2 = textArray2.indexOf(input);
+        while(fromIndex2 != -1)  {
+            $('.m04_goods_admin_tb_02 tbody tr td:nth-child(3)').eq(fromIndex2).parent().css('display','table-row');
+        fromIndex2 = textArray2.indexOf(input, fromIndex2+1);
+        }
+        
+        var textArray3 = []
+        for (i=0 ; i<arr ; i++){
+            textArray3.push($('.m04_goods_admin_tb_02 tbody tr td:nth-child(4)').eq(i).text());
+        }
+
+        let fromIndex3 = textArray3.indexOf(input);
+        while(fromIndex3 != -1)  {
+            $('.m04_goods_admin_tb_02 tbody tr td:nth-child(4)').eq(fromIndex3).parent().css('display','table-row');
+        fromIndex3 = textArray3.indexOf(input, fromIndex3+1);
+        }
+        
+        var textArray4 = []
+        for (i=0 ; i<arr ; i++){
+            textArray4.push($('.m04_goods_admin_tb_02 tbody tr td:nth-child(5)').eq(i).text());
+        }
+
+        let fromIndex4 = textArray4.indexOf(input);
+        while(fromIndex4 != -1)  {
+            $('.m04_goods_admin_tb_02 tbody tr td:nth-child(5)').eq(fromIndex4).parent().css('display','table-row');
+        fromIndex4 = textArray4.indexOf(input, fromIndex4+1);
+        }
+    	if(input==""){
+            var arr2 = $('.m04_goods_admin_tb_02 tbody tr').length;
+            
+            for (i=0 ; i<arr2 ; i++){
+            	$('.m04_goods_admin_tb_02 tbody tr').eq(i).css('display','table-row');
+            }
+    	}
+	}
+}
 
     
     // div select custom
@@ -10699,6 +12041,72 @@ function m08_corr_location_select_btn_cls() {
 
 <!--기준정보 -> BOM 관리-->
 <script>
+
+function enterkey6() {
+	if (window.event.keyCode == 13) {
+		console.log("BOM 관리 엔터");
+
+		var input= $('.m07_b_s_input').val();
+		
+        var arr = $('.m07_bom_list_table tbody tr').length;
+        
+        for (i=0 ; i<arr ; i++){
+        	$('.m07_bom_list_table tbody tr').eq(i).css('display','none');
+        }
+        
+        var textArray1 = []
+        for (i=0 ; i<arr ; i++){
+            textArray1.push($('.m07_bom_list_table tbody tr td:nth-child(1)').eq(i).text());
+        }
+
+        let fromIndex1 = textArray1.indexOf(input);
+        while(fromIndex1 != -1)  {
+            $('.m07_bom_list_table tbody tr td:nth-child(1)').eq(fromIndex1).parent().css('display','table-row');
+        fromIndex1 = textArray1.indexOf(input, fromIndex1+1);
+        }
+        
+        var textArray2 = []
+        for (i=0 ; i<arr ; i++){
+            textArray2.push($('.m07_bom_list_table tbody tr td:nth-child(2)').eq(i).text());
+        }
+
+        let fromIndex2 = textArray2.indexOf(input);
+        while(fromIndex2 != -1)  {
+            $('.m07_bom_list_table tbody tr td:nth-child(2)').eq(fromIndex2).parent().css('display','table-row');
+        fromIndex2 = textArray2.indexOf(input, fromIndex2+1);
+        }
+        
+        var textArray3 = []
+        for (i=0 ; i<arr ; i++){
+            textArray3.push($('.m07_bom_list_table tbody tr td:nth-child(3)').eq(i).text());
+        }
+
+        let fromIndex3 = textArray3.indexOf(input);
+        while(fromIndex3 != -1)  {
+            $('.m07_bom_list_table tbody tr td:nth-child(3)').eq(fromIndex3).parent().css('display','table-row');
+        fromIndex3 = textArray3.indexOf(input, fromIndex3+1);
+        }
+        
+        var textArray4 = []
+        for (i=0 ; i<arr ; i++){
+            textArray4.push($('.m07_bom_list_table tbody tr td:nth-child(4)').eq(i).text());
+        }
+
+        let fromIndex4 = textArray4.indexOf(input);
+        while(fromIndex4 != -1)  {
+            $('.m07_bom_list_table tbody tr td:nth-child(4)').eq(fromIndex4).parent().css('display','table-row');
+        fromIndex4 = textArray4.indexOf(input, fromIndex4+1);
+        }
+        
+    	if(input==""){
+            var arr = $('.m07_bom_list_table tbody tr').length;
+            
+            for (i=0 ; i<arr ; i++){
+            	$('.m07_bom_list_table tbody tr').eq(i).css('display','table-row');
+            }
+    	}
+	}
+}
     // 부품 메인 구성 클릭 재미용
     $(".m07_le_bom_list_tbody tr.main td:nth-child(1)").click(function () {
         var tr = $(this).attr('class');
@@ -11657,6 +13065,1178 @@ document.addEventListener("click", function (g) {
     }
 
 
+</script>
+    <script>
+    ////////////  라인별 불량현황 그래프 /////////////
+     var options = {
+            colors: ['#5DBA8E', '#FFCB1C', '#FF9100','#3F8FD1'],
+            series: [{
+            name: "A Line",
+            data: [45, 52, 38, 24,38,65,35,95]
+            },
+            {
+            name: "B Line",
+            data: [35, 41, 62, 42,35,86,52,38]
+            },
+            {
+            name: 'C Line',
+            data: [87, 57, 74, 99,45,35,68,42]
+            },{
+            name: 'D Line',
+            data: [64, 52, 13, 35,5,87,35,25]
+            }
+        ],
+            chart: {
+            height: '95%',
+            type: 'line',
+            zoom: {
+            enabled: false
+            },
+            toolbar: {
+            show: false // 다운로드 툴바 없애기
+            }
+        },
+        responsive: [{
+            breakpoint: 550,
+            options: {
+                legend: {
+                    position: 'bottom',
+                    offsetX: -10,
+                    offsetY: 0
+                }}
+        }],
+        dataLabels: {
+            enabled: false, // 데이터 값 보이게
+        },
+        stroke: {
+            width: [2, 2, 2, 2],
+            curve: 'straight',
+        },
+        xaxis: {
+            labels: {
+            show: false
+            },
+            axisTicks: {
+            show: false
+            },
+            axisBorder: { // x 기본축 설정
+                show: true,
+                color: '#707070',
+                height: '0.2%',
+            }
+        },
+        yaxis: {
+            labels: {
+            show: false
+            },
+            axisBorder: {
+                width: '0.2%',
+                show: true,
+                color: "#707070"
+            }
+        },
+        grid: {
+            xaxis: {
+                lines: {
+                    show: true,
+                }},
+            yaxis: {
+                lines: {show: false}
+                }}, 
+            tooltip: { //  hover시, 데이터 값 안보이게
+                intersect: true,
+                shared: false,
+            },
+            legend:{
+                position : 'bottom',
+                offsetY: 5, // 범례 아래로 내리기
+                // itemMargin: { horizontal: 5, vertical: 0 }, // 범례 간격
+            }};
+            var chart = new ApexCharts(document.querySelector("#canvas"), options);
+            chart.render();
+
+            ////////////  월별 불량현황 그래프 /////////////
+            var option = {
+              colors: ['#5DBA8E', '#FFCB1C', '#FF9100','#3F8FD1'],
+              series: [{
+                name: "불량1",
+                data: [45, 52, 38, 24,63,54,24,57]
+              },
+              {
+                name: "불량2",
+                data: [35, 41, 62, 42,24,84,35,76]
+              },
+              {
+                name: '불량3',
+                data: [87, 57, 74, 99,42,95,13]
+              },{
+                name: '기타',
+                data: [64, 52, 13, 35,66,31,49,65]
+              }
+            ],
+              chart: {
+              height: '95%',
+              width:'100%',
+              type: 'line',
+              zoom: {
+                enabled: false
+              },
+              toolbar: {
+                show: false // 다운로드 툴바 없애기
+              }
+            },
+            responsive: [{ 
+              breakpoint: 550,
+              options: {
+                legend: {
+                  position: 'bottom',
+                  offsetX: -10,
+                }
+              }
+            }],
+            xaxis: {
+        labels: {show: false },// x축 값 표시여부
+        axisTicks: {show: false },// x축 눈금선 표시여부
+        axisBorder: { // x 기본축 선
+              show: true,
+              color: '#707070',
+              height: '0.2%',
+        },
+          lines: {
+            show: false,
+        }},
+        yaxis: {
+            labels: {
+            show: false
+            },
+            lines: {
+            show: false,
+            },
+            axisBorder: {
+            width: '0.2%',
+            show: true,
+            color: "#707070"
+            },
+        },
+        dataLabels: { enabled: false}, // 데이터 값 보이게
+        stroke: {
+            width: [2, 2, 2, 2],
+            curve: 'straight',  //dashArray: [0, 0, 0,]  점선 간격
+        },
+        grid: {
+            xaxis: {
+                lines: {show: true}
+                },
+            yaxis: {
+                lines: {show: false}
+            }}, 
+            tooltip: { //  hover시, 데이터 값 안보이게
+                intersect: true,
+                shared: false,
+            },
+            legend:{
+                position : 'bottom',
+                offsetY: 5, // 범례 아래로 내리기
+                // itemMargin: { horizontal: 5, vertical: 0 }, // 범례 간격
+            }};
+            var chart2 = new ApexCharts(document.querySelector("#monthGraph"), option);
+            chart2.render();
+
+            $(function () {
+    		$('.mainbody_44_mid_tb_body').scroll(function () {
+    			var xPoint = $('.mainbody_44_mid_tb_body').scrollLeft();
+    			$('.mainbody_44_mid_tb_head').scrollLeft(xPoint);
+    		});
+    		
+    	});
+
+        // *1006 품질 관리 -> 품질 검사 내역 입력 -> 공정 검색 모달창
+        function mainbody_41_process_btnOpen() {
+            $('.m41_productModal').fadeIn();
+        }
+
+        function m41_productModalClose() {
+            $('.m41_productModal').fadeOut();
+        }
+
+        $(document).on('click', '.m41_productSearch_content_tb tbody tr', function(e){ 
+            console.log($(this).children().eq(0));
+            $('.m41_productModal').fadeOut();
+            $(".mainbody_41_02_02_content_tb_btn1").text($(this).children().eq(0).text()).val();
+            $(".mainbody_41_02_02_content_tb_btn2").text($(this).children().eq(1).text()).val();
+
+        });
+
+        // *1006 품질 관리 -> 품질 검사 내역 입력 -> 검사 기준 모달창 
+        function mainbody_41_01_r_btn_04() {
+            $('.m41_Modal').fadeIn();
+        }
+        function m41_ModalClose() {
+            $('.m41_Modal').fadeOut();
+        }
+
+        // *1006 품질 관리 -> 품질 검사 내역 입력 -> 검사 기준 모달창 : 행추가
+        function m41_content_03_01_btn() {
+            var tableData = document.getElementById('m41_content_tb_1');
+            var row = tableData.insertRow(tableData.rows.length);
+
+            $(".m41_content_tb_1").append('<tr><td><input type="text"></td>'+'<td><input type="text"></td>'+'<td><input type="text"></td>'
+                +'<td><input type="text"></td>'+'<td><input type="text"></td>'+'<td><input type="text"></td>'+'<td><input type="text"></td>'
+                +'<td><input type="text"></td>'+'<td><input type="text"></td>'+'<td><input type="text"></td>'+'<td><input type="text"></td>'
+                +'<td><input type="text"></td>'+'<td><input type="text"></td>'+'<td><input type="checkbox"></td></tr>');
+        }
+
+        // *1006 품질 관리 -> 품질 검사 내역 입력 -> 검사 기준 저장 알림창
+        function m41_content_03_02_btn() {
+            $('.product_input_modal_window').fadeIn();
+            $('.product_input_modal_window').css('z-index','1005');
+        }
+        function user_group_input_modal_bt() {
+            $('.product_input_modal_window').fadeOut();
+        }
+
+        // *1006 품질 관리 -> 품질 검사 내역 입력 -> 저장 알림창
+        function mainbody_41_01_r_btn_01() {
+            $('.product_input_modal_window').fadeIn();
+        }
+        function user_group_input_modal_bt() {
+            $('.product_input_modal_window').fadeOut();
+        }
+
+        // *1006 품질 관리 -> 품질 검사 내역 입력 : 품목 정보 -> 품목 추가 모달창 
+        function mainbody_41_product_plus_btn() {
+            $('.m41_product_choice_Modal').fadeIn();
+        }
+
+        function m41_product_choice_Close() {
+            $('.m41_product_choice_Modal').fadeOut();
+        }
+
+        $(document).on('click', '.m041_product_choice_tb tbody tr', function(e){ 
+            console.log($(this).children().eq(0));
+            $('.m41_product_choice_Modal').fadeOut();
+            $('.mainbody_41_03_01_content_plus_btn').css("display", "none");
+            $('.mainbody_41_03_01_content_tb').css("display", "inline-table");
+            $(".m41_product_information_1_1").text($(this).children().eq(0).text()).val();
+            $(".m41_product_information_1_2").text($(this).children().eq(1).text()).val();        
+            $(".m41_product_information_2_1").text($(this).children().eq(2).text()).val();
+            $(".m41_product_information_2_2").text($(this).children().eq(3).text()).val();
+
+        });
+
+        // *1006 품질 관리 -> 품질 검사 내역 조회 -> 승인 확인 모달창
+        function mainbody_42_01_top_btn_04() {
+            $('.m42_input_modal_window').fadeIn();
+        }
+        function m42_input_modal_bt() {
+            $('.m42_input_modal_window').fadeOut();
+        }
+
+        // *1006 품질 관리 -> 공정 불량 현황 -> 저장 알림창
+        function mainbody_43_01_top_btn_04() {
+            $('.product_input_modal_window').fadeIn();
+        }
+        function user_group_input_modal_bt() {
+            $('.product_input_modal_window').fadeOut();
+        }
+
+
+    </script>
+
+
+
+    <script>
+                                         ////////////  *1006 X bar 관리도 /////////////
+        var option_xbar = {
+                colors: ['#5DBA8E', '#FFCB1C', '#FF9100','#3F8FD1'],
+                series: [{
+                        name: "X bar",
+                        data: [0.0,0.3,-0.1,0.4,0.3]
+                    },
+                    {
+                        name: "CL",
+                        data:  [-0.2,-0.4,0.0,-0.15,0.4]
+                    },
+                    {
+                        name: 'UCL',
+                        data:  [0.0,-0.1,0.24,0.2,-0.1]
+                    },
+                    {
+                        name: 'LCL',
+                        data:  [0.1,-0.2,-0.2,0.3,0.1]
+                    }
+                ],
+                chart: {
+                    height: "100%", // *그래프 전체 높이
+                    width: "100%",
+                    offsetY: -5,
+                    type: 'line',
+                    zoom: {enabled: false},
+                    toolbar: {
+                    show: false // 다운로드 툴바 없애기
+                    }
+                },
+        
+                xaxis: {
+                    axisBorder: { // x 기본축 선
+                        show: true,
+                        color: '#000000',
+                        height: '0.2%',
+                    },
+                    labels: {
+                            show: false
+                    },
+                    lines: {
+                        show: false,
+                    },
+                    axisTicks: {
+                        show: true,
+                        color: '#707070',
+                    },
+                    },
+                yaxis: {
+                        axisTicks: {
+                            show: true,
+                            color: '#707070' 
+                        },
+                        lines: {
+                            show: false,
+                        },
+                        axisBorder: {
+                            width: '0.2%',
+                            show: true,
+                            color: "#000000"
+                        },
+                    },
+                    responsive: [
+                    { // 반응형 세로형일때 
+                        breakpoint: 720, 
+                        options: {            
+                            chart:{
+                                height:'90%',
+                                },
+                            legend: {
+                                position: "bottom"
+                                }
+                            }
+                    },{ // 반응형 가로형일때
+                        breakpoint: 1000,
+                        options: {
+                            chart:{
+                                height:'90%',
+                                offsetY: -10
+                            },
+                            legend: {
+                                position: "bottom"
+                            }
+                        }
+                        }
+                    ],
+                stroke: { 
+                    width: [2, 2, 2, 2], // 선 두께
+                    curve: 'straight',  //dashArray: [0, 0, 0,]  점선 간격
+                    },
+                grid: {
+                    xaxis: {
+                        lines: {show: false}
+                        },
+                    yaxis: {
+                        lines: {show: false}
+                    }}, 
+                    tooltip: { //  hover시, 데이터 값 안보이게
+                        intersect: true,
+                        shared: false,
+                    },
+                    legend:{
+                        position : 'bottom',
+                    }};
+        
+            var chart3 = new ApexCharts(document.querySelector("#xbaradmin_graph"), option_xbar);
+            chart3.render();
+
+
+
+
+        
+                                         ////////////  R 관리도 /////////////
+            var option_r = {
+                colors: ['#5DBA8E', '#FFCB1C', '#FF9100','#3F8FD1'],
+                series: [{
+                    name: "R",
+                    data: [0.2,0.3,0.1,0.2]
+                    },
+                    {
+                    name: "CL",
+                    data:  [0.1,-0.4,0.3,0.1]
+                    },
+                    {
+                    name: 'UCL',
+                    data:  [-0.2,0.1,-0.2,0.4]
+                    },{
+                    name: 'LCL',
+                    data:  [0.1,-0.2,0.2,0.4]
+                    }
+                ],
+                chart: {
+                    height: "100%", // *그래프 전체 높이
+                    width: "100%",
+                    offsetY:-10,
+                    type: 'line',
+                    zoom: {enabled: false},
+                    toolbar: {show: false} // 다운로드 툴바 없애기
+                },
+                responsive: [
+                    {
+                        breakpoint: 720,
+                        options: {
+                            chart:{
+                                height:"90%", 
+                            },
+                            legend: {
+                                position: "bottom"
+                            }
+                        }
+                    },
+                    {
+                        breakpoint: 1000,
+                        options: {
+                        chart:{
+                            height:"100%", // *반응형 그래프 전체 높이
+                            offsetY: -10
+                        },
+                        legend: {
+                            position: "bottom"
+                        }
+                        }
+                    }
+                    ],
+                    xaxis: {
+                        axisBorder: { // x 기본축 선
+                                show: true,
+                                color: '#000000',
+                                height: '0.2%',
+                            },
+                            labels: {
+                                    show: false
+                                    },
+                        lines: {
+                                show: false,
+                            },
+                        axisTicks: {
+                                    show: true,
+                                    color: '#707070'
+                                },
+                        },
+                        yaxis: {
+                            axisTicks: {
+                                show: true,
+                                color: '#707070'
+                                },
+                            lines: {
+                                show: false,
+                            },
+                            axisBorder: {
+                                width: '0.2%',
+                                show: true,
+                                color: "#000000"
+                            },
+                        },
+                        dataLabels: { enabled: false}, // 데이터 값 보이게
+                        stroke: {
+                                width: [2, 2, 2, 2], // 선 두께
+                                curve: 'straight' 
+                                },
+                        grid: {
+                            xaxis: {
+                                lines: {show: false}
+                                },
+                            yaxis: {
+                                lines: {show: false}
+                            }}, 
+                        tooltip: { //  hover시, 데이터 값 안보이게
+                            intersect: true,
+                            shared: false,
+                        },
+                        legend:{
+                            position : 'bottom',
+                            offsetY: -5
+                        }};
+                var chart4 = new ApexCharts(document.querySelector("#radmin_graph"), option_r);
+                chart4.render();
+            
+
+                                     ////////////  히스토그램 /////////////
+
+        var option_histogram = {
+            colors: ['#FFE18E', '#3F8FD1'],
+            series: [{
+                name: 'Income',
+                type: 'column',
+                data: [1.4, 2, 3.5, 1, 2.5, 2, 5, 1.6]
+                },  {
+                name: 'Revenue',
+                type: 'line',
+                opposite: true,
+                data: [2.6, 1.5, 0.6, 1.2, 1.9, 3.7, 4.2, 3.1],
+                }],
+            chart: {
+                    height: "95%", // *그래프 전체 높이
+                    offsetY: -1,
+                    type: 'line',
+                    zoom: {enabled: false},
+                    toolbar: {show: false}, // 다운로드 툴바 없애기
+                    },
+            dataLabels: {enabled: false},
+            stroke: {
+                width: [1, 4] // 선의 굵기
+            },
+            xaxis: {
+                categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016], // x축 라벨
+                labels: {
+                show: false
+                },
+                axisTicks: {
+                    show: true,
+                    color: '#707070'
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#707070'
+                },
+            },
+            yaxis: [
+                {
+                    axisTicks: {
+                        show: true,
+                        color: '#707070'
+                    },
+                    axisBorder: {
+                        show: true,
+                        color: '#707070'
+                        },
+                    tooltip: {enabled:false} // hover시, 툴팁 안나오게
+                },
+                {
+                    seriesName: 'Income',
+                    opposite: true,
+                    axisTicks: {
+                        show: true,
+                        color: '#707070'
+                    },
+                    axisBorder: {
+                        show: true,
+                        color: '#707070'
+                    },
+                    dataLabels: {
+                        enabled: false, // 데이터 값 보이게
+                    },
+                },
+                
+            ],
+            responsive: [
+                        {
+                        breakpoint: 720,
+                        options: {
+                            chart:{
+                                height:'100%',
+                            },
+                            legend: {
+                                position: "bottom",
+                            },
+                            markers:{
+                                size:3
+                            },
+                            stroke: {
+                                width: [1, 2] // 선의 굵기
+                            },
+                            xaxis: {
+                                    axisTicks: {
+                                        show: false,
+                                        color: '#707070'
+                                    }}
+                        }
+                        }, 
+                        { 
+                        breakpoint: 900,
+                        options: {
+                            chart:{
+                                height:'100%',
+                                offsetY: -10
+                            },
+                            legend: {
+                                position: "right",
+                            },
+                            markers:{size:4}
+                            }
+                        }],
+            markers: {
+                size: 5,
+                shape: "circle",
+                radius: 2,
+            },
+            dataLabels: {
+            enabled: false, // 데이터 값 보이게
+            },
+            tooltip: { //  hover시, 데이터 값 안보이게
+                enabled:false,
+                intersect: false,
+                shared: false,
+            },
+            grid: {
+                xaxis: {
+                    lines: {show: false}
+                    },
+                yaxis: {
+                    lines: {show: false}
+                    }
+                },
+            legend: {
+                horizontalAlign: "center"
+                },
+            };
+        var chart5 = new ApexCharts(document.querySelector("#histogram_graph"), option_histogram);
+        chart5.render();
+        
+
+
+           // X-R 관리도 : 품목 검색 모달창
+           function m61_product_search_Open() {
+               $('.m61_product_search_Modal').fadeIn();
+           }
+           function m61_product_search_Close() {
+               $('.m61_product_search_Modal').fadeOut();
+           }
+           $(function(){
+                $(".m61_product_search_Modal table tr").click(function(){
+                    var txt = $(this).find('td').eq(1).html();
+                    $('#m61_seleted_product_value').val(txt);
+                    $('.m61_product_search_Modal').fadeOut();
+                    });
+            });
+        
+        </script>
+            <script type="text/javascript">
+                $(function () {
+                    // divBodyScroll의 스크롤이 동작할때에 함수를 불러옵니다.
+                    $('#divBodyScroll').scroll(function () {
+                        // divBodyScroll의 x좌표가 움직인 거리를 가져옵니다.
+                        var xPoint = $('#divBodyScroll').scrollLeft();
+
+                        // 가져온 x좌표를 divHeadScroll에 적용시켜 같이 움직일수 있도록 합니다.
+                        $('#divHeadScroll').scrollLeft(xPoint);
+                    });
+                });
+            </script>
+
+    <script>
+        // 메인페이지 금월 생산수량 및 불량수량 // 
+        var month_product = {
+                colors: ['#FFE18E', '#3F8FD1'], 
+                series: [{
+                    name: '생산수량',
+                    type: 'column',
+                    data: [14, 20, 35, 10, 25, 20, 15, 16]
+                    },  {
+                    name: '불량수량',
+                    type: 'column',
+                    opposite: true,
+                    data: [26, 15, 6, 12, 19, 37, 4, 31],
+                    }],
+                chart: {
+                        height: "95%", // *그래프 전체 높이
+                        offsetY: -1,
+                        type: 'line',
+                        zoom: {enabled: false},
+                        toolbar: {show: false}, // 다운로드 툴바 없애기
+                        },
+                dataLabels: {enabled: false},
+                stroke: {
+                    width: [1, 4] // 선의 굵기
+                },
+                xaxis: {
+                    categories: ['제품명', '제품명', '제품명', '제품명', '제품명', '제품명', '제품명', '제품명'], // x축 라벨
+                    labels: {
+                    show: false
+                    },
+                    axisTicks: {
+                        show: true,
+                        color: '#707070'
+                    },
+                    axisBorder: {
+                        show: true,
+                        color: '#707070'
+                    },
+                },
+                yaxis: [
+                    {
+                        axisTicks: {
+                            show: true,
+                            color: '#707070'
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#707070'
+                            },
+                        tooltip: {enabled:false} // hover시, 툴팁 안나오게
+                    },
+                    {
+                        seriesName: 'Income',
+                        opposite: true,
+                        axisTicks: {
+                            show: true,
+                            color: '#707070'
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#707070'
+                        },
+                        dataLabels: {
+                            enabled: true, // 데이터 값 보이게
+                        },
+                    },
+                    
+                ],
+                responsive: [
+                            {
+                            breakpoint: 720,
+                            options: {
+                                chart:{
+                                    height:'100%',
+                                },
+                                legend: {
+                                    position: "bottom",
+                                },
+                                markers:{
+                                    size:3
+                                },
+                                stroke: {
+                                    width: [1, 2] // 선의 굵기
+                                },
+                                xaxis: {
+                                        axisTicks: {
+                                            show: false,
+                                            color: '#707070'
+                                        }}
+                            }
+                            }, 
+                            { 
+                            breakpoint: 900,
+                            options: {
+                                chart:{
+                                    height:'100%',
+                                    offsetY: -10
+                                },
+                                legend: {
+                                    position: "right",
+                                },
+                                markers:{size:4}
+                                }
+                            }],
+                markers: {
+                    size: 5,
+                    shape: "circle",
+                    radius: 2,
+                },
+                dataLabels: {
+                enabled: false, // 데이터 값 보이게
+                },
+                tooltip: { //  hover시, 데이터 값 안보이게
+                    enabled:true,
+                    intersect: false,
+                    shared: false,
+                },
+                grid: {
+                    xaxis: {
+                        lines: {show: false}
+                        },
+                    yaxis: {
+                        lines: {show: false}
+                        }
+                    },
+                legend: {
+                    horizontalAlign: "center"
+                    },
+                };
+            var chart_m00_1 = new ApexCharts(document.querySelector("#m00_month_product"), month_product);
+            chart_m00_1.render();    
+
+    </script>
+
+    <script>
+    // 메인페이지 금일 생산수량 및 불량수량 // 
+    var m00_order = {
+                colors: ['#FFE18E', '#3F8FD1'],
+                series: [{
+                    name: '생산수량',
+                    type: 'column',
+                    data: [14, 2, 35, 1, 25, 2, 5, 16]
+                    },  {
+                    name: '불량수량',
+                    type: 'column',
+                    opposite: true,
+                    data: [26, 15, 06, 12, 19, 37, 42, 31],
+                    }],
+                chart: {
+                        height: "95%", // *그래프 전체 높이
+                        offsetY: -1,
+                        type: 'line',
+                        zoom: {enabled: false},
+                        toolbar: {show: false}, // 다운로드 툴바 없애기
+                        },
+                dataLabels: {enabled: false},
+                stroke: {
+                    width: [1, 4] // 선의 굵기
+                },
+                xaxis: {
+                    categories: ['제품명', '제품명', '제품명', '제품명', '제품명', '제품명', '제품명', '제품명'], // x축 라벨
+                    labels: {
+                    show: false
+                    },
+                    axisTicks: {
+                        show: true,
+                        color: '#707070'
+                    },
+                    axisBorder: {
+                        show: true,
+                        color: '#707070'
+                    },
+                },
+                yaxis: [
+                    {
+                        axisTicks: {
+                            show: true,
+                            color: '#707070'
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#707070'
+                            },
+                        tooltip: {enabled:false} // hover시, 툴팁 안나오게
+                    },
+                    {
+                        seriesName: 'Income',
+                        opposite: true,
+                        axisTicks: {
+                            show: true,
+                            color: '#707070'
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#707070'
+                        },
+                        dataLabels: {
+                            enabled: true, // 데이터 값 보이게
+                        },
+                    },
+                    
+                ],
+                responsive: [
+                            {
+                            breakpoint: 720,
+                            options: {
+                                chart:{
+                                    height:'100%',
+                                },
+                                legend: {
+                                    position: "bottom",
+                                },
+                                markers:{
+                                    size:3
+                                },
+                                stroke: {
+                                    width: [1, 2] // 선의 굵기
+                                },
+                                xaxis: {
+                                        axisTicks: {
+                                            show: false,
+                                            color: '#707070'
+                                        }}
+                            }
+                            }, 
+                            { 
+                            breakpoint: 900,
+                            options: {
+                                chart:{
+                                    height:'100%',
+                                    offsetY: -10
+                                },
+                                legend: {
+                                    position: "right",
+                                },
+                                markers:{size:4}
+                                }
+                            }],
+                markers: {
+                    size: 5,
+                    shape: "circle",
+                    radius: 2,
+                },
+                dataLabels: {
+                enabled: false, // 데이터 값 보이게
+                },
+                tooltip: { //  hover시, 데이터 값 안보이게
+                    enabled:true,
+                    intersect: false,
+                    shared: false,
+                },
+                grid: {
+                    xaxis: {
+                        lines: {show: false}
+                        },
+                    yaxis: {
+                        lines: {show: false}
+                        }
+                    },
+                legend: {
+                    horizontalAlign: "center"
+                    },
+                };
+      
+
+            var chart_m00_3 = new ApexCharts(document.querySelector("#m00_order"), m00_order);
+            chart_m00_3.render();  
+
+
+    //  메인페이지 주문대비 납기율 //
+        var day_product = {
+                colors: ['#FFE18E', '#3F8FD1'],
+                series: [{
+                    name: '주문수량',
+                    type: 'column',
+                    data: [1.4, 2, 3.5, 1, 2.5, 2, 5, 1.6]
+                    },  {
+                    name: '납기율',
+                    type: 'line',
+                    opposite: true,
+                    data: [2.6, 1.5, 0.6, 1.2, 1.9, 3.7, 4.2, 3.1],
+                    }],
+                chart: {
+                        height: "95%", // *그래프 전체 높이
+                        offsetY: -1,
+                        type: 'line',
+                        zoom: {enabled: false},
+                        toolbar: {show: false}, // 다운로드 툴바 없애기
+                        },
+                dataLabels: {enabled: false},
+                stroke: {
+                    width: [1, 4] // 선의 굵기
+                },
+                xaxis: {
+                    categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016], // x축 라벨
+                    labels: {
+                    show: false
+                    },
+                    axisTicks: {
+                        show: true,
+                        color: '#707070'
+                    },
+                    axisBorder: {
+                        show: true,
+                        color: '#707070'
+                    },
+                },
+                yaxis: [
+                    {
+                        axisTicks: {
+                            show: true,
+                            color: '#707070'
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#707070'
+                            },
+                        tooltip: {enabled:false} // hover시, 툴팁 안나오게
+                    },
+                    {
+                        seriesName: 'Income',
+                        opposite: true,
+                        axisTicks: {
+                            show: true,
+                            color: '#707070'
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#707070'
+                        },
+                        dataLabels: {
+                            enabled: true, // 데이터 값 보이게
+                        },
+                    },
+                    
+                ],
+                responsive: [
+                            {
+                            breakpoint: 720,
+                            options: {
+                                chart:{
+                                    height:'100%',
+                                },
+                                legend: {
+                                    position: "bottom",
+                                },
+                                markers:{
+                                    size:3
+                                },
+                                stroke: {
+                                    width: [1, 2] // 선의 굵기
+                                },
+                                xaxis: {
+                                        axisTicks: {
+                                            show: false,
+                                            color: '#707070'
+                                        }}
+                            }
+                            }, 
+                            { 
+                            breakpoint: 900,
+                            options: {
+                                chart:{
+                                    height:'100%',
+                                    offsetY: -10
+                                },
+                                legend: {
+                                    position: "right",
+                                },
+                                markers:{size:4}
+                                }
+                            }],
+                markers: {
+                    size: 5,
+                    shape: "circle",
+                    radius: 2,
+                },
+                dataLabels: {
+                enabled: false, // 데이터 값 보이게
+                },
+                tooltip: { //  hover시, 데이터 값 안보이게
+                    enabled:true,
+                    intersect: false,
+                    shared: false,
+                },
+                grid: {
+                    xaxis: {
+                        lines: {show: false}
+                        },
+                    yaxis: {
+                        lines: {show: false}
+                        }
+                    },
+                legend: {
+                    horizontalAlign: "center"
+                    },
+                };
+            var chart_m00_2 = new ApexCharts(document.querySelector("#m00_day_product"), day_product);
+            chart_m00_2.render();  
+
+
+    //  메인페이지 불량률 현황 그래프  //
+            var m00_Defective = {
+                colors: ['#5DBA8E', '#FFCB1C', '#FF9100','#3F8FD1'],
+                series: [{
+                    name: "A공정라인",
+                    data: [0.2,0.3,0.1,0.2]
+                    },
+                    {
+                    name: "B공정라인",
+                    data:  [0.1,-0.4,0.3,0.1]
+                    },
+                    {
+                    name: 'C공정라인',
+                    data:  [-0.2,0.1,-0.2,0.4]
+                    },{
+                    name: 'D공정라인',
+                    data:  [0.1,-0.2,0.2,0.4]
+                    }
+                ],
+                chart: {
+                    height: "100%", // *그래프 전체 높이
+                    width: "100%",
+                    offsetY: -10,
+                    type: 'line',
+                    zoom: {enabled: true},
+                    toolbar: {show: false} // 다운로드 툴바 없애기
+                },
+                responsive: [
+                    {
+                        breakpoint: 720,
+                        options: {
+                            chart:{
+                                height:"90%", 
+                            },
+                            legend: {
+                                position: "bottom"
+                            }
+                        }
+                    },
+                    {
+                        breakpoint: 1000,
+                        options: {
+                        chart:{
+                            height:"100%", // *반응형 그래프 전체 높이
+                            offsetY: -10
+                        },
+                        legend: {
+                            position: "bottom"
+                        }
+                        }
+                    }
+                    ],
+                    xaxis: {
+                        axisBorder: { // x 기본축 선
+                                show: true,
+                                color: '#000000',
+                                height: '0.2%',
+                            },
+                            labels: {
+                                    show: false
+                                    },
+                        lines: {
+                                show: true,
+                            },
+                        axisTicks: {
+                                    show: true,
+                                    color: '#707070'
+                                },
+                        },
+                        yaxis: {
+                            axisTicks: {
+                                show: true,
+                                color: '#707070'
+                                },
+                            lines: {
+                                show: false,
+                            },
+                            axisBorder: {
+                                width: '0.2%',
+                                show: true,
+                                color: "#000000"
+                            },
+                        },
+                        dataLabels: { enabled: false}, // 데이터 값 보이게
+                        stroke: {
+                                width: [2, 2, 2, 2], // 선 두께
+                                curve: 'straight' 
+                                },
+                        grid: {
+                            xaxis: {
+                                lines: {show: false}
+                                },
+                            yaxis: {
+                                lines: {show: false}
+                            }}, 
+                        tooltip: { //  hover시, 데이터 값 안보이게
+                            intersect: true,
+                            shared: false,
+                        },
+                        legend:{
+                            position : 'bottom',
+                            offsetY: -5
+                        }};
+                        
+            var chart_m00_4 = new ApexCharts(document.querySelector("#m00_Defective"), m00_Defective);
+            chart_m00_4.render();
+
+            </script>
 
     
 </script>

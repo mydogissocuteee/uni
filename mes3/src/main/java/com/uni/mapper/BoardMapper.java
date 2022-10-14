@@ -47,7 +47,7 @@ public interface BoardMapper {
 	public void userInsert(@Param("vo") MemberVO vo);
 	
 	// 삭제
-	@Delete("DELETE FROM member WHERE num=${num} and company='fourever'")
+	@Delete("DELETE FROM member WHERE num=${num}")
 	public void userDelete(@Param("num") String num);
 	
 	// 수정
@@ -121,7 +121,7 @@ public interface BoardMapper {
 	// 추가
 	@Insert("insert into process values(pr_seq_num.nextval, '${vo.pr_num}', '${vo.pr_name}', '${vo.pr_sortation}', '${vo.pr_facilities}', '${vo.pr_reviewer}', "
 			+ " '${vo.pr_approver}', '${vo.pr_memo}', '${vo.company}' )")
-	public void processInsert(@Param("vo") processVO vo, @Param("company") String company);
+	public void processInsert(@Param("vo") processVO vo);
 	
 	// 삭제
 	@Delete("DELETE FROM process WHERE pr_seq_num=${vo.pr_seq_num} and company='${vo.company}'")
@@ -155,7 +155,7 @@ public interface BoardMapper {
 	@Insert("insert into client values('C'||to_char(LPAD(client_seq.nextval, 4, '0')), '${vo.ct_mutual}', '${vo.ct_sortation}', '${vo.ct_repName}', '${vo.ct_businessNumber}',"
 			+ " '${vo.ct_chrgName}', '${vo.ct_postalCode}', '${vo.ct_address}', '${vo.ct_condition}', '${vo.ct_industry}',"
 			+ " '${vo.ct_contact}', '${vo.ct_fax}', '${vo.ct_email}', '${vo.company}')")
-	public void clientInsert(@Param("vo") clientVO vo, @Param("company") String company);
+	public void clientInsert(@Param("vo") clientVO vo);
 	
 	// 삭제
 	@Delete("DELETE FROM client WHERE ct_num='${ct_num}'")

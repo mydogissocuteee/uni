@@ -106,7 +106,7 @@ public class HomeController {
 			System.out.println("사용자가 입력한 id의 회사: " + company);
 			
 			// mainjsp를 회사별로 만들고 해당 mainjsp로 가게 만들기
-			return "redirect:/main0923.do";
+			return "redirect:/mainjsp.do";
 		}
 		else {
 			loginid = "로그인 실패";
@@ -123,6 +123,7 @@ public class HomeController {
 	@RequestMapping("/mainjsp.do")
 	public String mainjsp(HttpSession session) {
 		System.out.println("메인");
+		System.out.println(session.getAttribute("company"));
 		//사용자관리 가져오기
 		try {
 			//List<MemberVO> memberlist = boardmapper.userSelect(company);
@@ -140,21 +141,16 @@ public class HomeController {
 	
 	@ResponseBody
 	@RequestMapping("/userInsert.do")
-	public void userInsert(MemberVO vo, HttpSession session) {
-		System.out.println(vo.getCompany());
-		String company = (String) session.getAttribute("company");
-		session.setAttribute("page","user");
-		//vo.setCompany("fourever");
-		vo.setDepartment(vo.getDepartment().replace(" ", ""));
+	public void userInsert(MemberVO vo) {
 		boardmapper.userInsert(vo);
-		System.out.println("---회원가입");
+		System.out.println(vo+"---회원가입");
 	}
 	
 	@ResponseBody
 	@RequestMapping("/userSelect.do")
-	public List<MemberVO> userSelect() {
-		List<MemberVO> data = boardmapper.userSelect("fourever");
-		System.out.println("회사의 회원리스트");
+	public List<MemberVO> userSelect(String company) {
+		List<MemberVO> data = boardmapper.userSelect(company);
+		System.out.println(company+"회사의 회원리스트");
 		return data;
 	}
 	
@@ -347,19 +343,19 @@ public class HomeController {
 	// 공정 관리
 	@ResponseBody
 	@RequestMapping("/processSelect.do")
-	public List<processVO> processSelect() {
-		List<processVO> data = boardmapper.processSelect("fourever");
+	public List<processVO> processSelect(String company) {
+		List<processVO> data = boardmapper.processSelect(company);
 		System.out.println("공정관리리스트");
 		return data;
 	}
 	
 	@ResponseBody
 	@RequestMapping("/processInsert.do")
-	public void processInsert(processVO vo, String company) {
+	public void processInsert(processVO vo) {
 		vo.setPr_facilities(vo.getPr_facilities().replace(" ", ""));
 		vo.setPr_reviewer(vo.getPr_reviewer().replace(" ", ""));
 		vo.setPr_approver(vo.getPr_approver().replace(" ", ""));
-		boardmapper.processInsert(vo, "fourever");
+		boardmapper.processInsert(vo);
 		System.out.println("---공정입력");
 	}
 	
@@ -429,16 +425,16 @@ public class HomeController {
 	// 거래처 관리
 	@ResponseBody
 	@RequestMapping("/clientSelect.do")
-	public List<clientVO> clientSelect() {
-		List<clientVO> data = boardmapper.clientSelect("fourever");
-		System.out.println("거래처 리스트");
+	public List<clientVO> clientSelect(String company) {
+		List<clientVO> data = boardmapper.clientSelect(company);
+		System.out.println(company+"거래처 리스트");
 		return data;
 	}
 	
 	@ResponseBody
 	@RequestMapping("/clientInsert.do")
-	public void clientInsert(clientVO vo, String company) {
-		boardmapper.clientInsert(vo, "fourever");
+	public void clientInsert(clientVO vo) {
+		boardmapper.clientInsert(vo);
 		System.out.println("---거래처 입력");
 	}
 	
@@ -459,8 +455,8 @@ public class HomeController {
 	// 제품 관리
 	@ResponseBody
 	@RequestMapping("/goodsSelect.do")
-	public List<goodsVO> goodsSelect() {
-		List<goodsVO> data = boardmapper.goodsSelect("fourever");
+	public List<goodsVO> goodsSelect(String company) {
+		List<goodsVO> data = boardmapper.goodsSelect(company);
 		System.out.println("제품 리스트");
 		return data;
 	}
@@ -490,7 +486,6 @@ public class HomeController {
 	@ResponseBody
 	@RequestMapping("/materialSelect.do")
 	public List<materialVO> materialSelect(String company) {
-		company="fourever";
 		List<materialVO> data = boardmapper.materialSelect(company);
 		System.out.println(company+"회사의 자재 리스트");
 		return data;

@@ -5,24 +5,27 @@
 --사용자
 create table member(
 num number not null,
-company varchar2(100) not null,
-userid varchar2(100) not null,
-username varchar2(100) not null,
-userpw varchar2(100) not null,
-mainProcess varchar2(100) not null,
-userRight varchar2(100) not null,
-department varchar2(100),
-contact varchar2(100),
-email varchar2(100)
+company varchar2(1000) not null,
+userid varchar2(1000) not null,
+username varchar2(1000) not null,
+userpw varchar2(1000) not null,
+mainProcess varchar2(1000) not null,
+userRight varchar2(1000) not null,
+department varchar2(1000),
+contact varchar2(1000),
+email varchar2(1000)
 );
+insert into member values(1, '쿼츠시그널','쿼츠1', '쿼츠1', '1234', '공정','권한', '부서', '연락처', '이메일');
+insert into member values(2, '(주)크는나무','나무1', '나무1', '1234', '공정','권한', '부서', '연락처', '이메일');
+insert into member values(3, '포에버','포에버1', '포에버1', '1234', '공정','권한', '부서', '연락처', '이메일');
+insert into member values(4, 'fourever','test', 'test', '1234', '공정','권한', '부서', '연락처', '이메일');
 
-DELETE FROM member_mes WHERE userRight='slc1'
+DELETE FROM member WHERE company='test'
 
 update member set userid='gaga', username='nana', userpw='d', mainProcess='x',userRight='x', department='', contact='', email=''where num='272'
 
 create sequence mem_seq;
-
-
+select * from member order by num;
 drop table member;
 
 create table user_group(

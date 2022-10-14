@@ -1,14 +1,19 @@
 /**
  * 
  */
-
+var company = "";
+$(function() {
+	company = $(".mainbar_logo").text();
+})
 
 /** 사용자 관리 */
 function show_user(){
+	console.log(company)
 	$.ajax({
 	  		url:"userSelect.do",
 	  		type:"get",
 	  		async: false,
+			data: {company : company},
 	  		success:ajaxHtml,
 	  		error:function(data){ 
 	  			let str = JSON.stringify(data);
@@ -25,6 +30,7 @@ function ajaxHtml(data){
          view2+='<thead> <tr> <th></th> <th>번호</th> <th>사용자 명</th> </tr> </thead>'; 
          view2+='<tbody>';  
 	var view3="";
+	var view4="";
 	  $.each(data,function(index, obj){	//반복문
 	     view+='<div class="list_bundle_data" name="'+obj.num+'" id="list_bundle_data">';
          view+='<div class="list_d_1">';
@@ -41,7 +47,7 @@ function ajaxHtml(data){
          view+='</div>'; 
 
          view2+='<tr>';
-         view2+='<td class="m13_work_plus_Search_td_00">'+index+'</td>';
+         view2+='<td class="m13_work_plus_Search_td_00">'+(index+1)+'</td>';
          view2+='<td class="m13_work_plus_Search_td_00">'+obj.num+'</td>';
          view2+='<td class="m13_work_plus_Search_td_00">'+obj.username+'</td>';
          view2+='</tr>';
@@ -51,11 +57,18 @@ function ajaxHtml(data){
 		view3+='<td class="m13_work_plus_Search_td_00">'+obj.num+'</td>';
 		view3+='<td class="m13_work_plus_Search_td_00">'+obj.username+'</td>';
 		view3+='</tr>';
+		
+		view4+='<tr>';
+         view4+='<td>'+(index+1)+'</td>';
+         view4+='<td>'+obj.num+'</td>';
+         view4+='<td>'+obj.username+'</td>';
+         view4+='</tr>';
 	  })
   view2+='</tbody>';
   $( '#list_Data' ).html(view);
   $( '#userSearch_content_tb' ).html(view2);
   $( '.m13_work_plus_Search_tb tbody' ).html(view3);
+  $( '.userSearch_content02_tb tbody' ).html(view4);
 }
 
 /** 사용자 관리 끝 */
@@ -68,7 +81,7 @@ function ajaxHtml(data){
 	/** $('.user_input_modal_window').fadeIn();
 	*/
 	var MemberVO = {
-			company : "fourever",
+			company : company,
 			userid : $("#u_input_id").val(),
 			username : $("#u_input_name").val(),
 			userpw : $("#u_input_pw").val(),
@@ -142,7 +155,7 @@ function show_user_group(){
   		url:"userGroupSelect.do",
   		type:"get",
   		async: false,
-		data:{'company':'fourever'},
+		data:{'company':company},
   		success:userGroupHtml,
   		error:function(data){ 
   			let str = JSON.stringify(data);
@@ -157,7 +170,7 @@ function userGroupInsert(){
   		type:"get",
   		async: false,
 		data:{'ug_name':$('#group_popup_search_input').val(),
-			company : 'fourever'},
+			company : company},
   		success:userGroupHtml,
   		error:function(data){ 
   			let str = JSON.stringify(data);
@@ -171,7 +184,7 @@ function userGroupInsert(){
   		type:"get",
   		async: false,
 		data:{'group_name':$('#group_popup_search_input').val(),
-			company : 'fourever',
+			company : company,
 			ugr_use : 0
 			},
   		success:console.log("권한까지 들어감"),
@@ -225,6 +238,7 @@ function show_process(){
 	  		url:"processSelect.do",
 	  		type:"get",
 	  		async: false,
+	  		data:{company:company},
 	  		success:processHtml,
 	  		error:function(data){ 
 	  			let str = JSON.stringify(data);
@@ -299,7 +313,7 @@ function processHtml(data){
 	   }else {
 	       $(".process_input_modal_mid").text("공정이 추가되었습니다.");
 	      var processVO = {
-	         company : "fourever",
+	         company : company,
 	         pr_num : $("#processAdmin_tb_01_num").val(),
 	         pr_name : $("#processAdmin_tb_01_name").val(),
 	         pr_sortation : $("#mainbody_05_02_left_bott_tb_table_txt").text(),
@@ -332,7 +346,7 @@ function processHtml(data){
 	if(len == 1){
 		var value = $("input[name='processNum']:checked").val();
 		var processVO = {"pr_seq_num":value,
-				company:'fourever'}
+				company:company}
 		$.ajax({
 			url : "processDelete.do",
 			type : "GET",
@@ -348,7 +362,7 @@ function processHtml(data){
 		    $("input[name='processNum']:checked").each(function(e){
 	        var value = $(this).val();
 			var processVO = {"pr_seq_num":value,
-			company:'fourever'};
+			company:company};
 			console.log(value);
 			$.ajax({
 				url : "processDelete.do",
@@ -373,6 +387,7 @@ function show_client(){
 	  		url:"clientSelect.do",
 	  		type:"get",
 	  		async: false,
+	  		data:{company:company},
 	  		success:clientHtml,
 	  		error:function(data){ 
 	  			let str = JSON.stringify(data);
@@ -428,22 +443,22 @@ function clientHtml(data){
 		view4+='<td class="m21_customerSearch_td_00">'+obj.ct_sortation+'</td>';
 		view4+='<input type=hidden value="'+obj.ct_address+'">';
 		view4+='</tr>';
-})
-		view+='</tbody>';
-		view+='</table>';
-  $( '.m06_cus_list_table' ).html(view);
-  $( '#customer_tbody' ).html(view2);
-  $( '#goods_customer_num_tbody' ).html(view2);
-  $( '#m51_Order_customer_num_tbody' ).html(view2);
-  $( '#m11_produc_plus_content_01_table_div03_list' ).html(view3);
-  $( '.m21_customerSearch_tb tbody').html(view4);
+	})
+	view+='</tbody>';
+	view+='</table>';
+	$( '.m06_cus_list_table' ).html(view);
+	$( '#customer_tbody' ).html(view2);
+	$( '#goods_customer_num_tbody' ).html(view2);
+	$( '#m51_Order_customer_num_tbody' ).html(view2);
+	$( '#m11_produc_plus_content_01_table_div03_list' ).html(view3);
+	$( '.m21_customerSearch_tb tbody').html(view4);
 }
 
 
 	function clientInsert(){
 		console.log("durls")
 	var clientVO = {
-				company : "fourever",
+				company : company,
 				ct_mutual : $("#m06_l_mutual_input").val(),
 				ct_sortation : $("input[name=account]:checked").val(),
 				ct_repName : $("#m06_l_name_input").val(),
@@ -520,7 +535,7 @@ function clientHtml(data){
 	  		url:"goodsSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data: {company:'fourever'},
+	  		data: {company:company},
 	  		success:goodsHtml,
 	  		error:function(data){ 
 	  			let str = JSON.stringify(data);
@@ -624,7 +639,7 @@ function clientHtml(data){
 	  		url:"materialSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data: {company:'fourever'},
+	  		data: {company:company},
 	  		success:materialHtml,
 	  		error:function(data){ 
 	  			let str = JSON.stringify(data);
@@ -710,7 +725,7 @@ function clientHtml(data){
 	  		url:"codeSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data : {"company":'fourever',
+	  		data : {"company":company,
 	   			"className":'부서'},
 	  		success:departmentHtml,
 	  		error:function(data){ 
@@ -734,7 +749,7 @@ function clientHtml(data){
 	  		url:"codeSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data : {"company":'fourever',
+	  		data : {"company":company,
 	   			"className":'품목단위'},
 	  		success:ajaxHtml,
 	  		error:function(data){ 
@@ -756,7 +771,7 @@ function clientHtml(data){
 	  		url:"codeSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data : {"company":'fourever',
+	  		data : {"company":company,
 	   			"className":'제품군'},
 	  		success:ajaxHtml2,
 	  		error:function(data){ 
@@ -778,7 +793,7 @@ function clientHtml(data){
 	  		url:"codeSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data : {"company":'fourever',
+	  		data : {"company":company,
 	   			"className":'품목대분류'},
 	  		success:ajaxHtml3,
 	  		error:function(data){ 
@@ -801,7 +816,7 @@ function clientHtml(data){
 		  		url:"codeSelect.do",
 		  		type:"get",
 		  		async: false,
-		  		data : {"company":'fourever',
+		  		data : {"company":company,
 		   			"className":'품목소분류'},
 		  		success:ajaxHtml4,
 		  		error:function(data){ 
@@ -824,7 +839,7 @@ function clientHtml(data){
 	  		url:"codeSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data : {"company":'fourever',
+	  		data : {"company":company,
 	   			"className":'품목단위'},
 	  		success:ajaxHtml5,
 	  		error:function(data){ 
@@ -847,7 +862,7 @@ function clientHtml(data){
 	  		url:"codeSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data : {"company":'fourever',
+	  		data : {"company":company,
 	   			"className":'설비'},
 	  		success:ajaxHtml6,
 	  		error:function(data){ 
@@ -868,7 +883,7 @@ function clientHtml(data){
 	  		url:"codeSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data : {"company":'fourever',
+	  		data : {"company":company,
 	   			"className":'설비'},
 	  		success:ajaxHtml7,
 	  		error:function(data){ 
@@ -889,7 +904,7 @@ function clientHtml(data){
 	  		url:"codeSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data : {"company":'fourever',
+	  		data : {"company":company,
 	   			"className":'작업구분'},
 	  		success:ajaxHtml8,
 	  		error:function(data){ 
@@ -913,7 +928,7 @@ function clientHtml(data){
 	  		url:"codeSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data : {"company":'fourever',
+	  		data : {"company":company,
 	   			"className":'검사방법'},
 	  		success:ajaxHtml9,
 	  		error:function(data){ 
@@ -934,7 +949,7 @@ function clientHtml(data){
 		  		url:"codeSelect.do",
 		  		type:"get",
 		  		async: false,
-		  		data : {"company":'fourever',
+		  		data : {"company":company,
 		   			"className":'검사기준대분류'},
 		  		success:ajaxHtml10,
 		  		error:function(data){ 
@@ -955,7 +970,7 @@ function clientHtml(data){
 	  		url:"codeSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data : {"company":'fourever',
+	  		data : {"company":company,
 	   			"className":'검사기준소분류'},
 	  		success:ajaxHtml11,
 	  		error:function(data){ 
@@ -976,7 +991,7 @@ function clientHtml(data){
 	  		url:"codeSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data : {"company":'fourever',
+	  		data : {"company":company,
 	   			"className":'재고로케이션분류'},
 	  		success:ajaxHtml12,
 	  		error:function(data){ 
@@ -1016,7 +1031,7 @@ function clientHtml(data){
 	  		url:"codeSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data : {"company":'fourever',
+	  		data : {"company":company,
 	   			"className":'재고로케이션유형'},
 	  		success:ajaxHtml13,
 	  		error:function(data){ 
@@ -1038,7 +1053,7 @@ function clientHtml(data){
 	  		url:"codeSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data : {"company":'fourever',
+	  		data : {"company":company,
 	   			"className":'설비'},
 	  		success:ajaxHtml14,
 	  		error:function(data){ 
@@ -1068,7 +1083,7 @@ function clientHtml(data){
 	  		url:"codeSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data : {"company":'fourever',
+	  		data : {"company":company,
 	   			"className":'시프트'},
 	  		success:ajaxHtml15,
 	  		error:function(data){ 
@@ -1195,7 +1210,7 @@ function clientHtml(data){
       }else {
          $(".customer_input_modal_mid").text("거래처가 추가되었습니다.");
          var clientVO = {
-            company : "fourever",
+            company : company,
             ct_mutual : $("#m06_l_mutual_input").val(),
             ct_sortation : $("input[name=account]:checked").val(),
             ct_repName : $("#m06_l_name_input").val(),
@@ -1323,7 +1338,7 @@ function clientHtml(data){
       }else {
          $(".product_input_modal_mid").text("제품이 추가되었습니다.");
          var goodsVO = {
-            company : "fourever",
+            company : company,
             gs_num : $("#m3_l_itemnum_input").val(),
             gs_name : $("#m3_l_itemname_input").val(),
             gs_sortation : $("#product_admin_td_03_select_txt").text(),
@@ -1374,7 +1389,7 @@ function clientHtml(data){
       }else {
          $(".goods_input_modal_mid").text("자재가 저장되었습니다.");
          var materialVO = {
-            company : "fourever",
+            company : company,
             ml_num : $("#m4_l_itemnum_input").val(),
             ml_name : $("#m4_l_itemname_input").val(),
             ml_sortation : $("#m04_goods_admin_td_03_select_txt").text(),
@@ -1417,6 +1432,7 @@ function clientHtml(data){
 	  		url:"processSelect.do",
 	  		type:"get",
 	  		async: false,
+	  		data:{company:company},
 	  		success:processinputHtml,
 	  		error:function(data){ 
 	  			let str = JSON.stringify(data);
@@ -1448,7 +1464,7 @@ function processUpdate(){
 	$('.process_input_modal_window').fadeIn();
 	console.log("공정입력");
 var processVO = {
-			company : "fourever",
+			company : company,
 			pr_seq_num : processUpdateNum,
 			pr_num : $("#processAdmin_tb_01_num").val(),
 			pr_name : $("#processAdmin_tb_01_name").val(),
@@ -1484,6 +1500,7 @@ var processVO = {
 	  		url:"clientSelect.do",
 	  		type:"get",
 	  		async: false,
+	  		data:{company:company},
 	  		success: clientinputHtml,
 	  		error:function(data){ 
 	  			let str = JSON.stringify(data);
@@ -1533,7 +1550,7 @@ var processVO = {
 		$('.process_input_modal_window').fadeIn();
 		console.log("공정입력");
 		var clientVO = {
-			company : "fourever",
+			company : company,
 			ct_num : clientUpdateNum,
 			ct_mutual : $("#m06_l_mutual_input").val(),
 			ct_sortation : $("input[name=account]:checked").val(),
@@ -1572,6 +1589,7 @@ var processVO = {
 	  		url:"goodsSelect.do",
 	  		type:"get",
 	  		async: false,
+	  		data:{company:company},
 	  		success: goodsinputHtml,
 	  		error:function(data){ 
 	  			let str = JSON.stringify(data);
@@ -1627,7 +1645,7 @@ var processVO = {
          }else {
             $(".product_input_modal_mid").text("제품이 수정되었습니다.");
             var goodsVO = {
-               company : "fourever",
+               company : company,
                gs_seq_num : goodsUpdateNum,
                gs_num : $("#m3_l_itemnum_input").val(),
                gs_name : $("#m3_l_itemname_input").val(),
@@ -1671,6 +1689,7 @@ var processVO = {
 	  		url:"materialSelect.do",
 	  		type:"get",
 	  		async: false,
+			data:{company:company},
 	  		success: goodsinputHtml,
 	  		error:function(data){ 
 	  			let str = JSON.stringify(data);
@@ -1725,7 +1744,7 @@ var processVO = {
          }else {
             $(".goods_input_modal_mid").text("자재가 수정되었습니다.");
             var materialVO = {
-               company : "fourever",
+               company : company,
                ml_seq_num : materialUpdateNum,
                ml_num : $("#m4_l_itemnum_input").val(),
                ml_name : $("#m4_l_itemname_input").val(),
@@ -1774,12 +1793,13 @@ var processVO = {
 	
 	// 로케이션
 	function show_location(){
+	console.log(company)
 		$.ajax({
 			url : "locationSelect.do",
 			type : "GET",
 			async:false,
 			data : {locationClassName: selectedLocationClass,
-			 company: 'fourever'},
+			 company: company},
 			// dataType : "json",
 			success : locationHtml,
 			error : function(request, status, error){
@@ -2065,7 +2085,7 @@ var processVO = {
 			in_self_check = "O";
 		};
 		var inspectionVO = {
-			company : "fourever",
+			company : company,
 			pr_num : processSelectedNum,
 			in_code_a : $("#in_code_a").text(),
 			in_code_c : $("#in_code_c").text(),
@@ -2171,7 +2191,7 @@ var processVO = {
          })
             console.log(go_goods_name);
          var goodsOrderVO = {
-         company : "fourever",
+         company : company,
          go_num : $("#go_num").text(),
          go_goods_seq : go_goods_seq,
          go_goods_name : go_goods_name,
@@ -2211,7 +2231,7 @@ var processVO = {
 	  		url:"goodsOrderSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data: {company: 'fourever'},
+	  		data: {company: company},
 	  		success:goodsOrderHtml,
 	  		error:function(data){ 
 	  			let str = JSON.stringify(data);
@@ -2386,7 +2406,7 @@ var processVO = {
 		if ($(this).val()=="영세"||$(this).val()=="면세"){
 			$("#go_amount").val($("#go_price").val());
 		}else{
-			$("#go_amount").val(parseInt($("#go_price").val())*1.1);
+			$("#go_amount").val(parseInt(Math.floor($("#go_price").val())*1.1));
 		}
 		
 	})
@@ -2394,7 +2414,7 @@ var processVO = {
 	$(document).on('click', '.process_plan_btn_02', function(e) {
 		        $('.user_input_modal_window').fadeIn();
 		var productPlanVO = {
-			company : "fourever",
+			company : company,
 			pp_date : $("#pp_date").val(),
 			pp_goods_name : $("#pp_goods_name").text(),
 			pp_goods_num : $("#pp_goods_num").text(),
@@ -2416,7 +2436,7 @@ var processVO = {
 				}
 		});
 		
-		
+		show_product_plan();
 	})	
 	$(document).on('click', '.m12_plan_productSearch_content_tbody tr', function(e) {
 		$("#pp_goods_name").text($(this).find("td:eq(1)").text());
@@ -2431,7 +2451,7 @@ var processVO = {
 		  		url:"productPlanSelect.do",
 		  		type:"get",
 		  		async: false,
-				data: {company: 'fourever'},
+				data: {company: company},
 		  		success:ajaxHtml,
 		  		error:function(data){ 
 		  			let str = JSON.stringify(data);
@@ -2513,7 +2533,7 @@ var processVO = {
 	  		url:"productPlanSelect.do",
 	  		type:"get",
 	  		async: false,
-			data : {company: 'fourever'},
+			data : {company: company},
 	  		success:processinputHtml,
 	  		error:function(data){ 
 	  			let str = JSON.stringify(data);
@@ -2549,7 +2569,7 @@ var processVO = {
 	  		url:"goodsOrderSelect.do",
 	  		type:"get",
 	  		async: false,
-			data : {company: 'fourever'},
+			data : {company: company},
 	  		success:processinputHtml,
 	  		error:function(data){ 
 	  			let str = JSON.stringify(data);
@@ -2584,7 +2604,7 @@ var processVO = {
 	  		url:"productPlanSelect.do",
 	  		type:"get",
 	  		async: false,
-			data : {company: 'fourever'},
+			data : {company: company},
 	  		success:processinputHtml,
 	  		error:function(data){ 
 	  			let str = JSON.stringify(data);
@@ -2617,7 +2637,7 @@ var processVO = {
 	// 생산품목 입력
 	$(document).on('click', '.m11_produc_plus_content_01_table_btn', function(e) {
 		var productItemVO = {
-			company : "fourever",
+			company : company,
 			pi_date : $("#pi_date").val(),
 			pi_process : $(".m11_produc_plus_content_01_table_div02_txt").text(),
 			pi_process_type : $(".m11_produc_plus_content_01_table_div02_1").text(),
@@ -2701,7 +2721,7 @@ var processVO = {
 			if(num===0){
 				wo_production_date+=$(this).text();
 			}else {
-				wo_production_date+="<br>";
+				wo_production_date+=",";
 				wo_production_date+=$(this).text();
 			}num=1;
 		})
@@ -2710,7 +2730,7 @@ var processVO = {
 			if(num===0){
 				wo_process+=$(this).text();
 			}else {
-				wo_process+="<br>";
+				wo_process+=",";
 				wo_process+=$(this).text();
 			}num=1;
 		})
@@ -2719,7 +2739,7 @@ var processVO = {
 			if(num===0){
 				wo_process_type+=$(this).text();
 			}else {
-				wo_process_type+="<br>";
+				wo_process_type+=",";
 				wo_process_type+=$(this).text();
 			}num=1;
 		})
@@ -2728,7 +2748,7 @@ var processVO = {
 			if(num===0){
 				wo_goods_num+=$(this).text();
 			}else {
-				wo_goods_num+="<br>";
+				wo_goods_num+=",";
 				wo_goods_num+=$(this).text();
 			}num=1;
 		})
@@ -2737,7 +2757,7 @@ var processVO = {
 			if(num===0){
 				wo_goods_name+=$(this).text();
 			}else {
-				wo_goods_name+="<br>";
+				wo_goods_name+=",";
 				wo_goods_name+=$(this).text();
 			}num=1;
 		})
@@ -2746,7 +2766,7 @@ var processVO = {
 			if(num===0){
 				wo_spec_name+=$(this).text();
 			}else {
-				wo_spec_name+="<br>";
+				wo_spec_name+=",";
 				wo_spec_name+=$(this).text();
 			}num=1;
 		})
@@ -2755,7 +2775,7 @@ var processVO = {
 			if(num===0){
 				wo_count+=$(this).text();
 			}else {
-				wo_count+="<br>";
+				wo_count+=",";
 				wo_count+=$(this).text();
 			}num=1;
 		})
@@ -2764,7 +2784,7 @@ var processVO = {
 			if(num===0){
 				wo_start_date+=$(this).text();
 			}else {
-				wo_start_date+="<br>";
+				wo_start_date+=",";
 				wo_start_date+=$(this).text();
 			}num=1;
 		})
@@ -2773,13 +2793,13 @@ var processVO = {
 			if(num===0){
 				wo_end_date+=$(this).text();
 			}else {
-				wo_end_date+="<br>";
+				wo_end_date+=",";
 				wo_end_date+=$(this).text();
 			}num=1;
 		})
 		
 		var workOrderVO = {
-		company : "fourever",
+		company : company,
 		wo_production_date : wo_production_date,
 		wo_production_num : $("#wo_go_num").text(),
 		wo_client_order_num : $("#wo_go_place").text(),
@@ -2821,7 +2841,7 @@ var processVO = {
 	  		url:"workOrderSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data: {company:'fourever'},
+	  		data: {company:company},
 	  		success:materialHtml,
 	  		error:function(data){ 
 	  			let str = JSON.stringify(data);
@@ -2985,7 +3005,7 @@ var processVO = {
 			prr_name : $('#prr_name').val(),
 			prr_left : prr_left,
 			prr_right : prr_right,
-			company : 'fourever'
+			company : company
 		}
 		console.log(processRoutingVO.prr_name);
 		$.ajax({
@@ -3006,7 +3026,7 @@ var processVO = {
 				url : "processRoutingSelect.do",
 				type : "GET",
 				async:false,
-				data : {company: 'fourever'},
+				data : {company: company},
 				success : routingHtml,
 				error : function(request, status, error){
 				    console.log(" error");}
@@ -3026,12 +3046,25 @@ var processVO = {
 	
 	
 	
-	 function enterkey4() {
+	 function enterkey7() {
       if (window.event.keyCode == 13) {
+	    	console.log("주문 내역 조회 엔터");
+
+    		var input= $('.mainbody_52_01_top_l_04_search_enter').val();
+    		
+            var arr = $('.m52_output_view_tb tbody tr').length;
+            
+            for (i=0 ; i<arr ; i++){
+            	$('.m52_output_view_tb tbody tr').eq(i).css('display','none');
+            }
+
             for(i=0; i<$("#m52_output_view_tb_tbody tr").length; i++){
                 num = i+1;
 				if($('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(2)').text().length >9){
 	               $('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(2)').text($('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(2)').text().substr(2));
+	            }
+				if($('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(9)').text().length >9){
+	               $('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(9)').text($('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(9)').text().substr(2));
 	            }
                 if($('#m52_output_view_tb_tbody tr:nth-child('+num+') td:nth-child(5)').text().match(",")){
                     console.log("품목이 2개 이상");
@@ -3055,6 +3088,35 @@ var processVO = {
                     }
                 }
             }
+
+            var textArray2 = []
+            for (i=0 ; i<arr ; i++){
+                textArray2.push($('.m52_output_view_tb tbody tr td:nth-child(3)').eq(i).text());
+            }
+
+            let fromIndex2 = textArray2.indexOf(input);
+            while(fromIndex2 != -1)  {
+                $('.m52_output_view_tb tbody tr td:nth-child(3)').eq(fromIndex2).parent().css('display','table');
+            fromIndex2 = textArray2.indexOf(input, fromIndex2+1);
+            }
+            
+            var textArray3 = []
+            for (i=0 ; i<arr ; i++){
+                textArray3.push($('.m52_output_view_tb tbody tr td:nth-child(4)').eq(i).text());
+            }
+
+            let fromIndex3 = textArray3.indexOf(input);
+            while(fromIndex3 != -1)  {
+                $('.m52_output_view_tb tbody tr td:nth-child(4)').eq(fromIndex3).parent().css('display','table');
+            	fromIndex3 = textArray3.indexOf(input, fromIndex3+1);
+            }
+			
+	    	if(input==""){
+				var arr2 = $('.m52_output_view_tb tbody tr').length;
+				for (i=0 ; i<arr2 ; i++){
+	            	$('.m52_output_view_tb tbody tr').eq(i).css('display','table');
+	            }
+	    	}
         }
     }
 	
@@ -3072,7 +3134,7 @@ var processVO = {
 	//로케이션 분류를 클릭했을 때
 	    $(document).on('click', '#m08_localtion_content_01_01_btn_01', function(e){
 		var locationVO = {
-			company : "fourever",
+			company : company,
 			lc_class : selectedLocationClass,
 			lc_parent : $("#m08_loca_text_01").text(),
 			lc_name : '└&nbsp;'+$("#lc_name").val(),
@@ -3104,7 +3166,7 @@ var processVO = {
 		var name_space = parentLocation.split("└");
 		name_space = "&nbsp;&nbsp;&nbsp;"+name_space[0]+"└&nbsp;";
 		var locationVO = {
-			company : "fourever",
+			company : company,
 			lc_class : selectedLocationClass,
 			lc_parent : parentLocation,
 			lc_name : name_space+$("#lc_name").val(), //부모를 가져와서 공백 3개 더하기
@@ -3140,6 +3202,7 @@ var processVO = {
 	  		url:"goodsSelect.do",
 	  		type:"get",
 	  		async: false,
+	  		data:{company:company},
 	  		success: goodsinputHtml,
 	  		error:function(data){ 
 	  			let str = JSON.stringify(data);
@@ -3204,7 +3267,7 @@ var processVO = {
 			b_count: 0,
 			b_standard: b_standard,
 			b_unit: b_unit,
-			company: 'fourever'
+			company: company
 		}
 		$.ajax({
 	         url : "bomInsert.do",
@@ -3398,7 +3461,7 @@ var processVO = {
          })
             console.log(go_goods_name);
          var goodsOrderVO = {
-         company : "fourever",
+         company : company,
          go_num : $("#go_num").text(),
          go_goods_seq : go_goods_seq,
          go_goods_name : go_goods_name,
@@ -3476,8 +3539,19 @@ var processVO = {
 			mo_material_sum += $(this).find("td:eq(11)").text()+",";
 			console.log(mo_material_num);
 		})
+		mo_material_num = mo_material_num.slice(0, -1);
+		mo_material_name = mo_material_name.slice(0, -1);
+		mo_material_standard = mo_material_name.slice(0, -1);
+		mo_material_family = mo_material_name.slice(0, -1);
+		mo_material_unit = mo_material_name.slice(0, -1);
+		mo_material_price = mo_material_name.slice(0, -1);
+		mo_material_count = mo_material_name.slice(0, -1);
+		mo_material_discount = mo_material_name.slice(0, -1);
+		mo_material_tax = mo_material_name.slice(0, -1);
+		mo_material_fprice = mo_material_name.slice(0, -1);
+		mo_material_sum = mo_material_name.slice(0, -1);
 	var materialsOrderVO = {
-		company : "fourever",
+		company : company,
 		mo_client : $("#m21_admin_td_09_01_select_01").text(),
 		mo_orderDate : $("#mo_orderDate").val(),
 		mo_dueDate : $("#mo_dueDate").val(),
@@ -3538,7 +3612,7 @@ var processVO = {
 	  		url:"materialsOrderSelect.do",
 	  		type:"get",
 	  		async: false,
-	  		data: {company :"fourever"},
+	  		data: {company :company},
 	  		success:html,
 	  		error:function(data){ 
 	  			let str = JSON.stringify(data);
@@ -3558,7 +3632,7 @@ var processVO = {
 				 view+='<td>'+obj.mo_orderDate+'</td>';
 				 view+='<td>'+obj.mo_dueDate+'</td>';
 				 view+='<td>'+obj.mo_client+'</td>';
-				 view+='<td>'+obj.mo_amount+'</td>';
+				 view+='<td>'+obj.mo_material_sum+'</td>';
 				 view+='<td>'+obj.mo_material_name+'</td>';
 				 view+='<td>'+obj.mo_material_count+'</td>';
 				 view+='<td></td>';
@@ -3837,7 +3911,7 @@ var processVO = {
 		})
 		
 		var workOrderVO = {
-		company : "fourever",
+		company : company,
 		wo_num : $(".mainbody_11_01_top_01_00").text(),
 		wo_production_date : wo_production_date,
 		wo_production_num : $("#wo_go_num").text(),
@@ -3912,7 +3986,7 @@ var processVO = {
 		//$(".process_order_tb_03 tbody").html(tr)
 		$(".process_order_tb_03_01").text(name)
 		$("#userdepartment").text(userdepartment)
-		$("#usercompany").text('fourever')
+		$("#usercompany").text(company)
 		m13_work_plus_Close();
     })
 	
@@ -4020,7 +4094,7 @@ var processVO = {
 			console.log(mo_material_num);
 		})
 		var materialsOrderVO = {
-			company : "fourever",
+			company : company,
 			mo_num : $("#mo_num").text(),
 			mo_client : $("#m21_admin_td_09_01_select_01").text(),
 			mo_orderDate : $("#mo_orderDate").val(),
@@ -4117,18 +4191,18 @@ var processVO = {
 	})
 	
 	// 생산일보
-	function userInsert() {
+	function d() {
 		var dailyVO = {
-				company : "fourever",
-				da_date : $("#u_input_id").val(),
-				da_shift : $("#u_input_name").val(),
-				da_input_time : $("#u_input_pw").val(),
-				da_pr_name : $("#m1_user_input_table_04_select_txt").text(),
-				da_pr_num : $("#m1_user_input_table_05_select_txt").text(),
-				da_fa_name : $("#m1_user_input_table_06_select_txt").text(),
-				da_fa_num : $("#u_input_phonenum").val(),
-				da_dep : $("#u_input_phonenum").val(),
-				da_writer : $("#u_input_phonenum").val(),
+				company : company,
+				da_date : $("#da_date").val(),
+				da_shift : $(".produce_date_tb_01_shift_txt").text(),
+				da_input_time : $("#da_input_time").val(),
+				da_pr_name : $("#dailyProcessName").text(),
+				da_pr_num : $("#dailyProcessNum").text(),
+				da_fa_name : $("#dailyFacilitiesName").text(),
+				da_fa_num : $("#dailyFacilitiesNum").text(),
+				da_dep : $("#userdepartment").text(),
+				da_writer : $("#usercompany").text(),
 				da_wo_num : $("#u_input_phonenum").val(),
 				da_wo_goods_num : $("#u_input_phonenum").val(),
 				da_wo_goods_name : $("#u_input_phonenum").val(),
@@ -4169,11 +4243,21 @@ var processVO = {
 		
 	}
 	
+	$(document).on("click", ".logout", function(){
+		$.ajax({
+			url : "logout.do",
+			type : "GET",
+			async:false,
+			// dataType : "json",
+			success : function(){
+				console.log("success");},
+			error : function(request, status, error){
+			    console.log("error");
+				}
+		});
 	
 	
-	
-	
-	
+	})
 	
 	
 	
