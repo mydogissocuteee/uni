@@ -561,7 +561,7 @@ function clientHtml(data){
 	     view3+='<td><input type="text" autocomplete="off" class="goodsamount" id="total_'+obj.gs_seq_num+'" name="go_goods_price" value="0"></td>'; //금액
 	     view3+='</tr>';
 		 view4+='<tr>';
-	     view4+='<td class="product_admin_tb_line">'+(index+1)+'</td>';
+	     view4+='<td class="product_admin_tb_line"><input type="hidden" value="'+obj.gs_seq_num+'">'+(index+1)+'</td>';
 	     view4+='<td class="product_admin_tb_line">'+obj.gs_num+'</td>';
 	     view4+='<td class="product_admin_tb_line">'+obj.gs_name+'</td>';
 	     view4+='</tr>';
@@ -2293,14 +2293,18 @@ var processVO = {
 	}
 	
 	$(document).on('click', '.m051_product_choice_tbody tr', function(e){
-		var selectedgoodsNum = $(this).find("td:eq(1)").text();
+		var selectedgoodsNum = $(this).find("input").val();
+		console.log("zmf"+selectedgoodsNum)
 		$("#mainbody_51_2_table_tbody tr").each(function(e){
 	        var goinputvalue = $(this).find("input").val();
+		console.log(goinputvalue)
 			if(selectedgoodsNum==goinputvalue){
 				$(this).css("display", "table");
 				$(this).find("td:eq(1)").attr("class", "product_name");
 			}
 	    })
+if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+    else event.isImmediatePropagationEnabled = false;
 	})
 	
 	//주문 관리 거래처 클릭하면 추가
