@@ -120,6 +120,7 @@ public class HomeController {
 		session.invalidate();
 		return "loginMES";
 	}
+	
 	@RequestMapping("/mainjsp.do")
 	public String mainjsp(HttpSession session) {
 		System.out.println("메인");
@@ -131,7 +132,6 @@ public class HomeController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
 		
 		return "m0928";
 	}

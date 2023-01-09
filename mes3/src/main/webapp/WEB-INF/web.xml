@@ -31,7 +31,8 @@
 	</servlet-mapping>
 	
 	<welcome-file-list>
-		<welcom-fil>index.jsp</welcom-fil>
+	<!-- welcom 을 welcome으로 수정 -->
+		<welcome-fil>index.jsp</welcome-fil>
 	</welcome-file-list>
 <filter> 
     <filter-name>encodingFilter</filter-name> 
