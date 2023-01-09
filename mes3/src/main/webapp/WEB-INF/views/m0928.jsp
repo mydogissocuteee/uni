@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/036f0eb301.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/mes.css" type="text/css">
+    <link rel="stylesheet" href="./resources/css/mes.css?v=3" type="text/css">
     <title>bar</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
