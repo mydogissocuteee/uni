@@ -31,8 +31,9 @@
 	</servlet-mapping>
 	
 	<welcome-file-list>
-	<!-- welcom 을 welcome으로 수정 -->
-		<welcome-fil>index.jsp</welcome-fil>
+	<!-- 시작페이지 -->
+		<welcome-fil>/WEB-INF/views/loginMES.jsp</welcome-fil>
+		<welcome-fil>/WEB-INF/views/m0928.jsp</welcome-fil>
 	</welcome-file-list>
 <filter> 
     <filter-name>encodingFilter</filter-name> 

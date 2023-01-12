@@ -110,7 +110,7 @@ public class HomeController {
 		}
 		else {
 			loginid = "로그인 실패";
-			System.out.println("fail");
+			System.out.println("해당 사용자가 존재하지 않습니다.");
 			return "loginMES";
 		}
 	}
