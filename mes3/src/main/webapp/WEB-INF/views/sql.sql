@@ -20,6 +20,8 @@ insert into member values(2, '(주)크는나무','나무1', '나무1', '1234', '
 insert into member values(3, '포에버','포에버1', '포에버1', '1234', '공정','권한', '부서', '연락처', '이메일');
 insert into member values(4, 'fourever','test', 'test', '1234', '공정','권한', '부서', '연락처', '이메일');
 
+insert into member values(mem_seq.nextval, '서연주식회사','sy', '서연주식회사', 'sy', '공정','권한', '부서', '연락처', '이메일');
+
 DELETE FROM member WHERE company='test'
 
 update member set userid='gaga', username='nana', userpw='d', mainProcess='x',userRight='x', department='', contact='', email=''where num='272'
