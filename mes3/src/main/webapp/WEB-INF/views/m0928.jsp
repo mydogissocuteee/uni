@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/036f0eb301.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./resources/css/mes.css?v=3" type="text/css">
-    <title>bar</title>
+    <title>MES</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
@@ -10262,6 +10262,10 @@ function enterkey2() {
     // 검토자 선택
     function mainbody_05_03_left_bott_tb_table_select_bt02() {
         $('.userModal').fadeIn();
+    }
+    
+    function user_group_input_modal_bt() {
+        $('.user_group_input_modal_window').fadeOut();
     }
 
     function userModalClose() {

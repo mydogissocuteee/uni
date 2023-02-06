@@ -43,7 +43,7 @@ public interface BoardMapper {
 	public List<MemberVO> userSelect(@Param("company") String company);
 	
 	// 추가
-	@Insert("insert into member values(mes_seq.nextval, '${vo.company}', '${vo.userid}', '${vo.username}', '${vo.userpw}', '${vo.mainProcess}', '${vo.userRight}', '${vo.department}', '${vo.contact}', '${vo.email}')")
+	@Insert("insert into member values(mem_seq.nextval, '${vo.company}', '${vo.userid}', '${vo.username}', '${vo.userpw}', '${vo.mainProcess}', '${vo.userRight}', '${vo.department}', '${vo.contact}', '${vo.email}')")
 	public void userInsert(@Param("vo") MemberVO vo);
 	
 	// 삭제
