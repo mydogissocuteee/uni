@@ -39,7 +39,7 @@ select * from user_group;
 drop table user_group;
 insert into user_group values(ug_seq.nextval, '시스템 사용자', 'fourever');
 insert into user_group values(ug_seq.nextval, '시스템 관리자', 'fourever');
-DELETE FROM user_group WHERE ug_name='sfda'
+DELETE FROM user_group WHERE ug_name='d'
 
 create sequence ug_seq;
 
