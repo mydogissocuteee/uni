@@ -22,7 +22,7 @@ insert into member values(4, 'fourever','test', 'test', '1234', '공정','권한
 
 insert into member values(mem_seq.nextval, '서연주식회사','sy', '서연주식회사', 'sy', '공정','권한', '부서', '연락처', '이메일');
 
-DELETE FROM member WHERE company='test'
+DELETE FROM member WHERE username='d'
 
 update member set userid='gaga', username='nana', userpw='d', mainProcess='x',userRight='x', department='', contact='', email=''where num='272'
 
@@ -217,7 +217,7 @@ select * from client
 select ct_num from client 
 drop table client
 drop sequence client_seq
-DELETE FROM client_forever WHERE sortation='매출처'
+DELETE FROM client WHERE CT_NUM='C0001'
 
 select ZBF_GET_BATCHKEY('now') from DUAL;
 

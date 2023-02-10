@@ -1765,9 +1765,6 @@ var processVO = {
 	})
 	
 	
-
-	
-	
 	// 로케이션
 	function show_location(){
 	console.log(company)
