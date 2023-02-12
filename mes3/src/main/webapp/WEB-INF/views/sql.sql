@@ -252,6 +252,7 @@ select * from client_production where company='fourever' order by pro_name
 
 DELETE FROM client_production WHERE pro_family='slc1';
 
+
 select * from goods;
 
 drop table goods
